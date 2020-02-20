@@ -18,7 +18,7 @@
 
    [从私有仓库拉取镜像.md](云原生/Kubernetes/从私有仓库拉取镜像.md) 
 
-   [公开外部IP地址以访问集群中应用程序.md](云原生/Kubernetes/公开外部 IP 地址以访问集群中应用程序.md) 
+   [公开外部IP地址以访问集群中应用程序.md](云原生/Kubernetes/公开外部IP地址以访问集群中应用程序.md) 
 
    [将 Pod 分配给节点.md](云原生/Kubernetes/将 Pod 分配给节点.md) 
 
