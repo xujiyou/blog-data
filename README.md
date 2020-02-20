@@ -36,7 +36,7 @@
 
    [使用 CronJob 运行自动化任务.md](云原生/Kubernetes/使用CronJob运行自动化任务.md) 
 
-   [使用 PodPreset 将信息注入 Pods.md](云原生/Kubernetes/使用PodPreset将信息注入 Pods.md) 
+   [使用 PodPreset 将信息注入 Pods.md](云原生/Kubernetes/使用PodPreset将信息注入Pods.md) 
 
    [使用 Secret 安全地分发凭证.md](云原生/Kubernetes/使用Secret安全地分发凭证.md) 
 
