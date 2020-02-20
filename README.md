@@ -20,33 +20,33 @@
 
    [公开外部IP地址以访问集群中应用程序.md](云原生/Kubernetes/公开外部IP地址以访问集群中应用程序.md) 
 
-   [将 Pod 分配给节点.md](云原生/Kubernetes/将 Pod 分配给节点.md) 
+   [将 Pod 分配给节点.md](云原生/Kubernetes/将Pod分配给节点.md) 
 
-   [配置 Pod 初始化.md](云原生/Kubernetes/配置 Pod 初始化.md) 
+   [配置 Pod 初始化.md](云原生/Kubernetes/配置Pod初始化.md) 
 
-   [配置 Pod 的服务质量.md](云原生/Kubernetes/配置 Pod 的服务质量.md) 
+   [配置 Pod 的服务质量.md](云原生/Kubernetes/配置Pod的服务质量.md) 
 
-   [配置 Pod 使用投射卷作存储.md](云原生/Kubernetes/配置 Pod 使用投射卷作存储.md) 
+   [配置 Pod 使用投射卷作存储.md](云原生/Kubernetes/配置Pod使用投射卷作存储.md) 
 
-   [配置 Pod 以使用卷进行存储.md](云原生/Kubernetes/配置 Pod 以使用卷进行存储.md) 
+   [配置 Pod 以使用卷进行存储.md](云原生/Kubernetes/配置Pod以使用卷进行存储.md) 
 
    [配置存活、就绪和启动探测器.md](云原生/Kubernetes/配置存活、就绪和启动探测器.md) 
 
-   [使用 ConfigMap 配置 Pod.md](云原生/Kubernetes/使用 ConfigMap 配置 Pod.md) 
+   [使用 ConfigMap 配置 Pod.md](云原生/Kubernetes/使用ConfigMap配置Pod.md) 
 
-   [使用 CronJob 运行自动化任务.md](云原生/Kubernetes/使用 CronJob 运行自动化任务.md) 
+   [使用 CronJob 运行自动化任务.md](云原生/Kubernetes/使用CronJob运行自动化任务.md) 
 
-   [使用 PodPreset 将信息注入 Pods.md](云原生/Kubernetes/使用 PodPreset 将信息注入 Pods.md) 
+   [使用 PodPreset 将信息注入 Pods.md](云原生/Kubernetes/使用PodPreset将信息注入 Pods.md) 
 
-   [使用 Secret 安全地分发凭证.md](云原生/Kubernetes/使用 Secret 安全地分发凭证.md) 
+   [使用 Secret 安全地分发凭证.md](云原生/Kubernetes/使用Secret安全地分发凭证.md) 
 
    [使用扩展进行并行处理.md](云原生/Kubernetes/使用扩展进行并行处理.md) 
 
    [使用ConfigMap来配置Redis.md](云原生/Kubernetes/使用ConfigMap来配置Redis.md) 
 
-   [示例：使用 Persistent Volumes 部署 WordPress 和 MySQL.md](云原生/Kubernetes/示例：使用 Persistent Volumes 部署 WordPress 和 MySQL.md) 
+   [示例：使用 Persistent Volumes 部署 WordPress 和 MySQL.md](云原生/Kubernetes/示例：使用PV部署WordPress和MySQL.md) 
 
-   [示例：使用 Redis 部署 PHP 留言板应用程序.md](云原生/Kubernetes/示例：使用 Redis 部署 PHP 留言板应用程序.md) 
+   [示例：使用 Redis 部署 PHP 留言板应用程序.md](云原生/Kubernetes/示例：使用Redis部署PHP留言板应用程序.md) 
 
    [通过环境变量将Pod信息呈现给容器.md](云原生/Kubernetes/通过环境变量将Pod信息呈现给容器.md) 
 
@@ -58,7 +58,7 @@
 
    [为容器设置启动时要执行的命令及其入参.md](云原生/Kubernetes/为容器设置启动时要执行的命令及其入参.md) 
 
-   [在 Pod 中的容器之间共享进程命名空间.md](云原生/Kubernetes/在 Pod 中的容器之间共享进程命名空间.md) 
+   [在 Pod 中的容器之间共享进程命名空间.md](云原生/Kubernetes/在Pod中的容器之间共享进程命名空间.md) 
 
    [k8s网络原理.md](云原生/Kubernetes/k8s网络原理.md)
 
@@ -72,11 +72,11 @@
 
 - Docker
 
-   [Docker 错误汇总.md](云原生/Docker/Docker 错误汇总.md) 
+   [Docker 错误汇总.md](云原生/Docker/Docker错误汇总.md) 
 
-   [Docker 更换储存位置.md](云原生/Docker/Docker 更换储存位置.md) 
+   [Docker 更换储存位置.md](云原生/Docker/Docker更换储存位置.md) 
 
-   [Docker 远程连接.md](云原生/Docker/Docker 远程连接.md) 
+   [Docker 远程连接.md](云原生/Docker/Docker远程连接.md) 
 
    [Docker镜像相关.md](云原生/Docker/Docker镜像相关.md) 
 
@@ -92,17 +92,17 @@
 
    [Istio安装教程.md](云原生/Istio/Istio安装教程.md) 
 
-   [Istio UI.md](云原生/Istio/Istio UI.md) 
+   [Istio UI.md](云原生/Istio/Istio-UI.md) 
 
-   [Istio Hello-world 教程.md](云原生/Istio/Istio Hello-world 教程.md) 
+   [Istio Hello-world 教程.md](云原生/Istio/Istio之Hello-world 教程.md) 
 
-   [Istio 错误记录.md](云原生/Istio/Istio 错误记录.md) 
+   [Istio 错误记录.md](云原生/Istio/Istio错误记录.md) 
 
    
 
 - Jaeger
 
-   [Jaeger 入门.md](云原生/jaeger/Jaeger 入门.md) 
+   [Jaeger 入门.md](云原生/jaeger/Jaeger入门.md) 
 
    
 
@@ -114,11 +114,11 @@
 
 - Rook
 
-   [Rook-Ceph 块储存.md](云原生/Rook/Rook-Ceph 块储存.md) 
+   [Rook-Ceph 块储存.md](云原生/Rook/Rook-Ceph块储存.md) 
 
-   [Rook-Ceph 对象储存.md](云原生/Rook/Rook-Ceph 对象储存.md) 
+   [Rook-Ceph 对象储存.md](云原生/Rook/Rook-Ceph对象储存.md) 
 
-   [Deph mgr 密码.md](云原生/Rook/Deph mgr 密码.md) 
+   [Deph mgr 密码.md](云原生/Rook/Deph-mgr密码.md) 
 
    
 
@@ -184,11 +184,11 @@ CDH 开始收费了，怎么说。。。
 
    [Spark入门教程.md](大数据/Spark/Spark入门教程.md) 
 
-   [Spark RDD及编程接口的学习.md](大数据/Spark/Spark RDD及编程接口的学习.md) 
+   [Spark RDD及编程接口的学习.md](大数据/Spark/Spark-RDD及编程接口的学习.md) 
 
    [Spark-Streaming学习指南.md](大数据/Spark/Spark-Streaming学习指南.md) 
 
-   [Spark SQL入门教程.md](大数据/Spark/Spark SQL入门教程.md) 
+   [Spark SQL入门教程.md](大数据/Spark/Spark-SQL入门教程.md) 
 
 - YARN
 
@@ -292,7 +292,7 @@ CDH 开始收费了，怎么说。。。
 
 - Flutter
 
-   [Flutter 小技巧.md](前端/Flutter/Flutter 小技巧.md) 
+   [Flutter 小技巧.md](前端/Flutter/Flutter小技巧.md) 
 
 - Vue.js
 
@@ -320,7 +320,7 @@ CDH 开始收费了，怎么说。。。
 
    [Kibana发现页.md](DevOps/Kibana/Kibana发现页.md)
 
-   [Kibana 错误记录.md](DevOps/Kibana/Kibana 错误记录.md) 
+   [Kibana 错误记录.md](DevOps/Kibana/Kibana错误记录.md) 
 
 - Logstash
 
@@ -410,7 +410,7 @@ CDH 开始收费了，怎么说。。。
 
  [Elasticsearch分析大乐透.md](项目/Elasticsearch分析大乐透.md) 
 
- [IDEA插件开发之 K8s-Client.md](项目/IDEA插件开发之 K8s-Client.md) 
+ [IDEA插件开发之 K8s-Client.md](项目/IDEA插件开发之K8s-Client.md) 
 
 
 
