@@ -630,7 +630,7 @@ $ kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=
 
 访问 http://localhost:15032/ ，选择代码中设置的 Service，会发现刚才的埋点已经起作用了：
 
-![image-20200210132839664](./resource/image-20200210132839664.png)
+![image-20200210132839664](../../resource/image-20200210132839664.png)
 
 
 

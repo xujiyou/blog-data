@@ -35,7 +35,7 @@ $ ./build/install/examples/bin/hello-world-client
 
 在我的 Mac 中，我安装了一个 gRPC 的 GUI Client，叫 BloomRPC，可以打开，导入 examples 项目里面的 helloworld.ptoto 。然后输入服务端的地址，再运行，就可以看到输出了。
 
-![image-20200220125045132](/Users/jiyouxu/Documents/me/blog/云原生/Istio/resource/image-20200220125045132.png) 
+![image-20200220125045132](../../resource/image-20200220125045132.png) 
 
 
 
@@ -90,7 +90,7 @@ private class GreeterImpl extends GreeterGrpc.GreeterImplBase {
 
 然后打开 BloomRPC，刷新之前导入的 helloworld.proto 文件，会看到新加入的 sayHelloAgain 方法，访问这个方法会看到对应的输出：
 
-![image-20200220125751904](/Users/jiyouxu/Documents/me/blog/云原生/Istio/resource/image-20200220125751904.png)
+![image-20200220125751904](../../resource/image-20200220125751904.png)
 
 
 
@@ -283,7 +283,7 @@ public class XujiyouServer {
 
 打开 BloomRPC，访问服务：
 
-![image-20200220135844796](/Users/jiyouxu/Documents/me/blog/云原生/Istio/resource/image-20200220135844796.png)
+![image-20200220135844796](../../resource/image-20200220135844796.png)
 
 
 
