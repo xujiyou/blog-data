@@ -94,7 +94,7 @@
 
    [Istio UI.md](云原生/Istio/Istio-UI.md) 
 
-   [Istio Hello-world 教程.md](云原生/Istio/Istio之Hello-world 教程.md) 
+   [Istio Hello-world 教程.md](云原生/Istio/Istio之Hello-world教程.md) 
 
    [Istio 错误记录.md](云原生/Istio/Istio错误记录.md) 
 
