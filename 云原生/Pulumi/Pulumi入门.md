@@ -16,7 +16,7 @@ $ brew install pulumi
 
 这里我推荐使用 TypeScript，因为 TS 原生支持 Json ，写起来方便，并且是强类型，语法提示不会出错，方便编写重构。
 
-在使用 Pulumi 前，还要在本地配置好 `kubectl` 和 kubernetes 的配置文件。
+在使用 Pulumi 前，还要在本地配置好 `kubectl` 和 kubernetes 的配置文件（默认是 ~/.kube/config）。
 
 创建项目：
 
