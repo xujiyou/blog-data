@@ -86,7 +86,9 @@
 
    [Helm入门文档.md](云原生/Helm/Helm入门文档.md) 
 
+- Pulumi
 
+   [Pulumi入门.md](云原生/Pulumi/Pulumi入门.md) 
 
 - Istio
 
