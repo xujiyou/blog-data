@@ -1,0 +1,280 @@
+# Helm Chart Template 手册
+
+在这篇教程中，我们将创建一个 chart ，并添加一个template 。
+
+官方文档地址：https://helm.sh/docs/chart_template_guide/getting_started/
+
+
+
+---
+
+
+
+## 创建Chart
+
+教程开始
+
+### 目录结构
+
+Helm Chart 的目录结构如下：
+
+```
+mychart/
+  Chart.yaml
+  values.yaml
+  charts/
+  templates/
+  ...
+```
+
+- `templates/` 目录用于存放模版文件，当 Helm 构建 Chart 时，Helm 会解析这个目录中的文件，并将结果发送到 Kubernetes。
+
+- `values.yaml` 包含了templates/ 目录中使用的默认值，在 `helm install` 或 `helm upgrarde` 期间，用户可能会覆盖这些值。
+
+- `Chart.yaml` 文件包含对 Chart 的描述，可以在 templates/ 目录中访问这个文件。
+
+- `charts/`目录可能包含其他 Chart（称为 subcharts）
+
+### 创建项目
+
+可以使用命令生成项目：
+
+```bash
+$ helm create mychart
+```
+
+也可以使用 IDEA 的 kubernetes 插件来创建一个 Helm Chart。
+
+---
+
+### `templates/` 目录
+
+先来看下 这个目录
+
+![image-20200223112104975](../../resource/image-20200223112104975.png)
+
+- `NOTES.txt` 这个文件是 Chart 的帮助文本，会在 `helm install` 之后显示
+- `deployment.yaml` Kubernetes 的 Deployment 部署文件
+- `service.yaml` Kubernetes 的 Service 部署文件
+- `ingress.yaml` Kubernetes 的 Ingress 部署文件
+- `serviceaccount` Kubernetes 的 ServiceAccount 部署文件
+- `_helpers.tpl` 放置可在整个图表中重复使用的常量的地方
+
+第一次创建 Chart ，为了学习，将删除这些文件。当然，平常留着这些文件，可以提升开发速度。
+
+---
+
+### 第一个模版
+
+我们要创建的第一个模板将是`ConfigMap`。
+
+configmap.yaml：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mychart-configmap
+data:
+  myvalue: "Hello World"
+```
+
+创建好这个 yaml 文件后，就可以用 Helm 安装了：
+
+```bash
+$ helm install myname ./xujiyou/
+NAME: myname
+LAST DEPLOYED: Sun Feb 23 11:46:02 2020
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+```
+
+使用 Helm 命令，也可以检索并查看已加载的模版：
+
+```bash
+$ helm list
+NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
+myname  default         1               2020-02-23 11:46:02.008166 +0800 CST    deployed        xujiyou-0.1.0   1.16.0 
+$ helm get manifest myname
+---
+# Source: xujiyou/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mychart-configmap
+data:
+  myvalue: "Hello World"
+
+```
+
+使用 Kubectl 查看刚才创建的 ConfigMap：
+
+```bash
+$ kubectl get ConfigMap mychart-configmap
+NAME                DATA   AGE
+mychart-configmap   1      2m47s
+```
+
+卸载刚才的 Chart：
+
+```bash
+$ helm uninstall myname
+```
+
+---
+
+### 添加一个简单的模版调用
+
+我们将 name 抽取出来，提取成变量。
+
+修改 configmap.yaml：
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  myvalue: "Hello World"
+```
+
+模板指令包含在`{{`和`}}`块中，具体语法要参考 go template。
+
+该`Release`对象是Helm的内置对象之一。
+
+再按照上边的方法部署以下，再看一下生成的模版：
+
+```bash
+$ helm get manifest myname
+---
+# Source: xujiyou/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: myname-configmap
+data:
+    myvalue: "Hello World"
+```
+
+---
+
+### 调试方式
+
+上边的命令没次修改了代码之后都需要重装，可以使用 `--debug` 和 `--dry-run` 参数来调试，而不必没次都重装：
+
+```bash
+$ helm install myname ./xujiyou --debug --dry-run
+install.go:158: [debug] Original chart version: ""
+install.go:175: [debug] CHART PATH: /Users/jiyouxu/IdeaProjects/helm/xujiyou
+
+NAME: myname
+LAST DEPLOYED: Sun Feb 23 12:02:57 2020
+NAMESPACE: default
+STATUS: pending-install
+REVISION: 1
+TEST SUITE: None
+USER-SUPPLIED VALUES:
+{}
+
+COMPUTED VALUES:
+affinity: {}
+fullnameOverride: ""
+image:
+  pullPolicy: IfNotPresent
+  repository: nginx
+imagePullSecrets: []
+ingress:
+  annotations: {}
+  enabled: false
+  hosts:
+  - host: chart-example.local
+    paths: []
+  tls: []
+nameOverride: ""
+nodeSelector: {}
+podSecurityContext: {}
+replicaCount: 1
+resources: {}
+securityContext: {}
+service:
+  port: 80
+  type: ClusterIP
+serviceAccount:
+  annotations: {}
+  create: true
+  name: null
+tolerations: []
+
+HOOKS:
+MANIFEST:
+---
+# Source: xujiyou/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: myname-configmap
+data:
+    myvalue: "Hello World"
+```
+
+
+
+---
+
+
+
+## 内置对象
+
+搞定了部署过程之后，下面就来看一哈 Helm 有哪些内置对象。
+
+内置对象一定是首字母大写的，
+
+`Release`：此对象描述发行版本身。它内部有几个对象：
+
+- `Release.Name`：发行名称
+- `Release.Namespace`：要释放到的名称空间（如果清单未覆盖）
+- `Release.IsUpgrade`：如果当前操作是升级或回滚，则为 true。
+- `Release.IsInstall`：如果当前操作是安装，则为 true。
+- `Release.Revision`：此版本的修订号。在安装时，该值为1，并且每次升级和回滚时都会增加。
+- `Release.Service`：呈现当前模板的服务。在Helm上，这始终是`Helm`。
+
+`Values`：从`values.yaml`文件和用户提供的文件传递到模板的值。默认情况下`Values`为空。
+
+`Chart`：`Chart.yaml`文件的内容。`Chart.yaml`输入的任何数据都可以用此内置变量访问。例如`{{ .Chart.Name }}-{{ .Chart.Version }}`将打印出`mychart-0.1.0`。
+
+- 可用字段在“ [图表指南”](https://helm.sh/docs/topics/charts/#the-chartyaml-file)中列出
+
+`Files`：这提供对图表中所有非特殊文件的访问。虽然您不能使用它来访问模板，但是可以使用它来访问图表中的其他文件。有关更多信息，请参见“ *访问文件* ”部分。
+
+- `Files.Get`是用于通过名称（`.Files.Get config.ini`）获取文件的功能
+- `Files.GetBytes`是用于以字节数组而不是字符串形式获取文件内容的函数。这对于诸如图像之类的东西很有用。
+- `Files.Glob` 是一个函数，该函数返回名称与给定的Shell Glob模式匹配的文件列表。
+- `Files.Lines`是一种逐行读取文件的功能。这对于遍历文件中的每一行很有用。
+- `Files.AsSecrets` 是将文件主体作为Base 64编码的字符串返回的函数。
+- `Files.AsConfig` 是一个将文件正文作为YAML映射返回的函数。
+
+`Capabilities`：这提供了有关Kubernetes集群支持哪些功能的信息。
+
+- `Capabilities.APIVersions` 是一组版本号。
+- `Capabilities.APIVersions.Has $version`指示版本（例如 `batch/v1`）或资源（例如`apps/v1/Deployment`）在群集上是否可用。
+- `Capabilities.KubeVersion`并且`Capabilities.KubeVersion.Version`是Kubernetes版本。
+- `Capabilities.KubeVersion.Major` 是Kubernetes的主要版本。
+- `Capabilities.KubeVersion.Minor` 是Kubernetes的次要版本。
+
+`Template`：包含有关正在执行的当前模板的信息
+
+- `Name`：当前模板的命名空间文件路径（例如 `mychart/templates/mytemplate.yaml`）
+- `BasePath`：当前图表的模板目录的命名空间路径（例如`mychart/templates`）。
+
+就这些内置变量。
+
+
+
+---
+
+
+
+## values.yaml
+
