@@ -16,6 +16,8 @@
 
    [核心组件运行原理.md](云原生/Kubernetes/核心组件运行原理.md) 
 
+   [深入分析集群安全机制.md](云原生/Kubernetes/深入分析集群安全机制.md) 
+
    [创建PV及PVC.md](云原生/Kubernetes/创建PV及PVC.md) 
 
    [从私有仓库拉取镜像.md](云原生/Kubernetes/从私有仓库拉取镜像.md) 
