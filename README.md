@@ -14,6 +14,8 @@
 
 - Kubernetes
 
+   [核心组件运行原理.md](云原生/Kubernetes/核心组件运行原理.md) 
+
    [创建PV及PVC.md](云原生/Kubernetes/创建PV及PVC.md) 
 
    [从私有仓库拉取镜像.md](云原生/Kubernetes/从私有仓库拉取镜像.md) 
@@ -71,6 +73,8 @@
    
 
 - Docker
+
+    [Docker基础.md](云原生/Docker/Docker基础.md) 
 
    [Docker 错误汇总.md](云原生/Docker/Docker错误汇总.md) 
 
