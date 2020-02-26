@@ -276,5 +276,496 @@ data:
 
 
 
-## values.yaml
+# Values Files
+
+上一节说了 `Values` 全局对象，其内容有多种来源：
+
+- values.yaml 中的值。
+- 父 Chart 中的 values.yaml
+- 值文件（如果传入`helm install`或`helm upgrade`带有`-f` 标志（`helm install -f myvals.yaml ./mychart`）
+- 使用 --set 传入的参数。
+
+上边的排列是有顺序的，下面会覆盖上边的。
+
+删除中的默认设置后`values.yaml`，然后只设置一个参数：
+
+```yaml
+favoriteDrink: coffee
+```
+
+修改 configmap.yaml 如下：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: {{ .Release.Name }}-configmap
+data:
+    myvalue: "Hello World"
+    drink: {{ .Values.favoriteDrink }}
+```
+
+运行下边的命令看效果：
+
+```bash
+$ helm install xujiyou --dry-run --debug ./xujiyou
+```
+
+通过 --set 参数改变值，并测试：
+
+```bash
+$ helm install xujiyou --dry-run --debug --set favoriteDrink=slurm ./xujiyou 
+```
+
+values.yaml 也可以包含结构化的内容：
+
+```yaml
+favorite:
+  drink: coffee
+  food: pizza
+```
+
+修改 configmap.yaml 如下：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  myvalue: "Hello World"
+  drink: {{ .Values.favorite.drink }}
+  food: {{ .Values.favorite.food }}
+```
+
+
+
+---
+
+
+
+## Template Functions and Pipelines
+
+这个功能用来转换数据。下面来看看如何使用模版函数：
+
+修改 configmap.yaml 如下：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  myvalue: "Hello World"
+  drink: {{ quote .Values.favorite.drink }}
+  food: {{ quote .Values.favorite.food }}
+```
+
+quote 用于给字符串加一个引号，结果如下：
+
+```yaml
+# Source: xujiyou/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xujiyou-configmap
+data:
+  myvalue: "Hello World"
+  drink: "coffee"
+  food: "pizza"
+```
+
+
+
+Helm 有60多种函数，其中一些是 go 模版语言自身定义的，其他大部分是 [sprig](https://masterminds.github.io/sprig/) 库中的函数。
+
+模版语言还有另外一种功能 --- 管道，类似 Linux 命令行中的管道
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  myvalue: "Hello World"
+  drink: {{ .Values.favorite.drink | quote }}
+  food: {{ .Values.favorite.food | upper | quote }}
+```
+
+
+
+repeat 函数有两个参数：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  myvalue: "Hello World"
+  drink: {{ .Values.favorite.drink | repeat 5 | quote }}
+  food: {{ .Values.favorite.food | upper | quote }}
+```
+
+
+
+默认值，需要用到 default 函数
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  myvalue: "Hello World"
+  drink: {{ .Values.favorite.drink | default "tea" | quote }}
+  food: {{ .Values.favorite.food | upper | quote }}
+```
+
+
+
+---
+
+
+
+## 流程控制
+
+Helm 模版语言来源于 go 模版语言。Helm 模版语言提供了以下控制结构：
+
+- if / else
+- with 制定范围
+- range 迭代
+
+除此之外，还提供了一些声明和使用变量的操作：
+
+- define 声明变量
+- template 导入命名模版
+- block 声明一种特殊的可填充模版区域
+
+本节，其他的将在 命名模版 部分介绍。
+
+**if / else**
+
+如果值为以下内容，则为 false：
+
+- 布尔值 false
+- 数字 0
+- 一个空字符串
+- nil
+- 空集合`map`，`slice`，`tuple`，`dict`，`array`）
+
+体验：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  myvalue: "Hello World"
+  drink: {{ .Values.favorite.drink | default "tea" | quote }}
+  food: {{ .Values.favorite.food | upper | quote }}
+  {{ if eq .Values.favorite.drink "coffee" }}mug: true{{ end }}
+```
+
+工作完美。
+
+规整代码：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  myvalue: "Hello World"
+  drink: {{ .Values.favorite.drink | default "tea" | quote }}
+  food: {{ .Values.favorite.food | upper | quote }}
+  {{- if eq .Values.favorite.drink "coffee" }}
+  mug: true
+  {{- end }}
+```
+
+这里的小减号代表去掉 if 和 end 这两个空白行，如果不加入这俩减号，则会引入空行！！！
+
+还有，缩进一定按照 yaml 格式来，IDEA 会给出提示的，不用过度担心。
+
+
+
+**with**
+
+with 的作用就是提取变量：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  myvalue: "Hello World"
+  {{- with .Values.favorite }}
+  drink: {{ .drink | default "tea" | quote }}
+  food: {{ .food | upper | quote }}
+  {{- end }}
+  {{- if eq .Values.favorite.drink "coffee" }}
+  mug: true
+  {{- end }}
+```
+
+但有个坑就是，使用了 with 之后，里面就不能使用其他变量了，有点鸡肋。
+
+
+
+**range**
+
+range 就是迭代操作：
+
+values.yaml：
+
+```yaml
+favorite:
+  drink: coffee
+  food: pizza
+pizzaToppings:
+  - mushrooms
+  - cheese
+  - peppers
+  - onions
+```
+
+ configmap.yaml :
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  myvalue: "Hello World"
+  {{- with .Values.favorite }}
+  drink: {{ .drink | default "tea" | quote }}
+  food: {{ .food | upper | quote }}
+  {{- end }}
+  toppings: |-
+    {{- range .Values.pizzaToppings }}
+    - {{ . | title | quote }}
+    {{- end }}
+```
+
+结果如下：
+
+```yaml
+# Source: xujiyou/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xujiyou-configmap
+data:
+  myvalue: "Hello World"
+  drink: "coffee"
+  food: "PIZZA"
+  toppings: |-
+    - "Mushrooms"
+    - "Cheese"
+    - "Peppers"
+    - "Onions"
+```
+
+
+
+## 变量
+
+上面说到使用 with 时，里面不能使用其他对象，这里可以定义变量来解决这一问题：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  myvalue: "Hello World"
+  {{- $relname := .Release.Name -}}
+  {{- with .Values.favorite }}
+  drink: {{ .drink | default "tea" | quote }}
+  food: {{ .food | upper | quote }}
+  release: {{ $relname }}
+  {{- end }}
+```
+
+注意 `$relname := .Release.Name` 这句
+
+range 中也可以定义变量：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  myvalue: "Hello World"
+  {{- $relname := .Release.Name -}}
+  {{- with .Values.favorite }}
+  drink: {{ .drink | default "tea" | quote }}
+  food: {{ .food | upper | quote }}
+  release: {{ $relname }}
+  {{- end }}
+  toppings: |-
+    {{- range $index, $topping := .Values.pizzaToppings }}
+    {{ $index }}: {{ $topping }}
+  {{- end }}
+```
+
+也可遍历 map：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  myvalue: "Hello World"
+  {{- range $key, $val := .Values.favorite }}
+  {{ $key }}: {{ $val | quote }}
+  {{- end }}
+```
+
+
+
+---
+
+
+
+## 命名模版
+
+这节来学习 define、template 和 block
+
+看下面的文件：
+
+```yaml
+{{- define "mychart.labels" }}
+  labels:
+    generator: helm
+    date: {{ now | htmlDate }}
+{{- end }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+  {{- template "mychart.labels" }}
+data:
+  myvalue: "Hello World"
+  {{- range $key, $val := .Values.favorite }}
+  {{ $key }}: {{ $val | quote }}
+  {{- end }}
+```
+
+不多 bb，一个文件就看懂怎么用了，模版定义一般会放在 `_helpers.tpl` 中。
+
+在模版中使用全局对象：
+
+```yaml
+{{- define "mychart.labels" }}
+  labels:
+    generator: helm
+    date: {{ now | htmlDate }}
+    chart: {{ .Chart.Name }}
+    version: {{ .Chart.Version }}
+{{- end }}
+```
+
+再引入时会发现出错了。因为如果想使用全局变量，需要在 template 中声明，像下面这样引入：
+
+```
+{{- template "mychart.labels" .}}
+```
+
+可以看到，加了一个点。
+
+### 使用 include 及 indent
+
+template 是一个动作而不是一个函数，所以无法处理缩进，只能在 _helpers.tpl 中定义好缩进，如果我想在 _helpers.tpl 随意定义缩进怎么办那，可以使用下边的方法：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+{{- include "mychart.labels" . | indent 2}}
+data:
+  myvalue: "Hello World"
+  {{- range $key, $val := .Values.favorite }}
+  {{ $key }}: {{ $val | quote }}
+  {{- end }}
+```
+
+
+
+---
+
+
+
+## Accessing Files Inside Templates
+
+有时不想引入模版，而是想引入文件，怎么办那。
+
+Helm 提供了 Files 全局对象。
+
+Files 对象无法访问以下文件：
+
+- templates/ 目录下的文件
+- .helmignore
+
+还有就是注意 Chart 最大不得大于 1M 。
+
+下面通过例子来学习：
+
+config1.toml：
+
+```
+message = Hello from config 1
+```
+
+config2.toml:
+
+```
+message = This is config 2
+```
+
+config3.toml:
+
+```
+message = Goodbye from config 3
+```
+
+使用这三个文件：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  {{- $files := .Files }}
+  {{- range tuple "config1.toml" "config2.toml" "config3.toml" }}
+  {{ . }}: |-
+    {{ $files.Get . }}
+  {{- end }}
+```
+
+结果：
+
+```yaml
+# Source: xujiyou/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xujiyou-configmap
+data:
+  config1.toml: |-
+    message = Hello from config 1
+  config2.toml: |-
+    message = This is config 2
+  config3.toml: |-
+    message = Goodbye from config 3
+```
 
