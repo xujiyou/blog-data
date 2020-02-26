@@ -18,6 +18,12 @@
 
    [深入分析集群安全机制.md](云原生/Kubernetes/深入分析集群安全机制.md) 
 
+   [k8s网络原理.md](云原生/Kubernetes/k8s网络原理.md)
+
+   [共享储存原理.md](云原生/Kubernetes/共享储存原理.md) 
+
+   
+
    [创建PV及PVC.md](云原生/Kubernetes/创建PV及PVC.md) 
 
    [从私有仓库拉取镜像.md](云原生/Kubernetes/从私有仓库拉取镜像.md) 
@@ -63,8 +69,6 @@
    [为容器设置启动时要执行的命令及其入参.md](云原生/Kubernetes/为容器设置启动时要执行的命令及其入参.md) 
 
    [在 Pod 中的容器之间共享进程命名空间.md](云原生/Kubernetes/在Pod中的容器之间共享进程命名空间.md) 
-
-   [k8s网络原理.md](云原生/Kubernetes/k8s网络原理.md)
 
    [K8sFAQ.md](云原生/Kubernetes/K8sFAQ.md) 
 
