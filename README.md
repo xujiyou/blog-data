@@ -26,6 +26,8 @@
 
    [kubectl命令行参考.md](云原生/Kubernetes/kubectl命令行参考.md) 
 
+   [Kubernetes-Operator教程.md](云原生/Kubernetes/Kubernetes-Operator教程.md) 
+
    
 
    [创建PV及PVC.md](云原生/Kubernetes/创建PV及PVC.md) 
@@ -98,9 +100,11 @@
 
    [Helm入门文档.md](云原生/Helm/Helm入门文档.md) 
 
-    [Helm命令.md](云原生/Helm/Helm命令.md) 
+   [Helm命令.md](云原生/Helm/Helm命令.md) 
 
-    [Helm Chart Template手册.md.md](云原生/Helm/Helm-Chart-Template手册.md) 
+   [Helm Chart Template手册.md.md](云原生/Helm/Helm-Chart-Template手册.md) 
+
+   [Helm最佳实践.md](云原生/Helm/Helm最佳实践.md) 
 
    
 
@@ -179,6 +183,10 @@
 - Kubeless
 
    [Kubeless入门.md](云原生/Kubeless/Kubeless入门.md) 
+
+- Vault
+
+   [Vault简介及入门.md](云原生/Vault/Vault简介及入门.md) 
 
 
 
