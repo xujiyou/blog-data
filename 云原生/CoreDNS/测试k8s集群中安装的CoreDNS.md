@@ -20,6 +20,8 @@ spec:
   restartPolicy: Always
 ```
 
+注意要使用 <= 1.28.4 版本的 busybox ，否则会有错误。
+
 查看pods：
 
 ```bash
