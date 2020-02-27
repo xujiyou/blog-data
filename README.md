@@ -160,6 +160,8 @@
 
 - CoreDNS
 
+    [测试k8s集群中安装的CoreDNS.md](云原生/CoreDNS/测试k8s集群中安装的CoreDNS.md) 
+
 - Vitess
 
   
@@ -167,6 +169,8 @@
 - Knative
 
    [Knative安装.md](云原生/Knative/Knative安装.md) 
+
+   
 
 - Kubeless
 
