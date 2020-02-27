@@ -22,7 +22,9 @@
 
    [共享储存原理.md](云原生/Kubernetes/共享储存原理.md) 
 
-    [pause容器作用.md](云原生/Kubernetes/pause容器作用.md) 
+   [pause容器作用.md](云原生/Kubernetes/pause容器作用.md) 
+
+   [kubectl命令行参考.md](云原生/Kubernetes/kubectl命令行参考.md) 
 
    
 

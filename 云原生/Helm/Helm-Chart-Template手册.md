@@ -769,3 +769,65 @@ data:
     message = Goodbye from config 3
 ```
 
+
+
+---
+
+
+
+## NOTES.txt
+
+NOTES.txt：
+
+```
+Thank you for installing {{ .Chart.Name }}.
+
+Your release is named {{ .Release.Name }}.
+
+To learn more about the release, try:
+
+  $ helm status {{ .Release.Name }}
+  $ helm get {{ .Release.Name }}
+```
+
+注意这个文件是在 templates/ 目录下的。
+
+运行之后，看到效果：
+
+```
+NOTES:
+Thank you for installing xujiyou.
+
+Your release is named xujiyou.
+
+To learn more about the release, try:
+
+  $ helm status xujiyou
+  $ helm get xujiyou
+```
+
+
+
+---
+
+
+
+## .helmignore
+
+`.helmignore`文件用于指定不想包含在 Chart 中的文件。
+
+这可以帮助避免在 Chart 中添加不必要或敏感的文件或目录。
+
+
+
+---
+
+
+
+## 调试
+
+`helm get manifest xujiyou` 用户查看已部署 Chart 的详细信息
+
+`helm lint` 可以检查语法是否正确。
+
+`helm template --debug ./` 和 `helm install --dry-run --debug` 可以查看渲染结果，而不会真正的部署。
