@@ -22,6 +22,8 @@
 
    [共享储存原理.md](云原生/Kubernetes/共享储存原理.md) 
 
+    [pause容器作用.md](云原生/Kubernetes/pause容器作用.md) 
+
    
 
    [创建PV及PVC.md](云原生/Kubernetes/创建PV及PVC.md) 
