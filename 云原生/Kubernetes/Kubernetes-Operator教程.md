@@ -197,7 +197,7 @@ spec:
 $ kubectl apply -f deploy/crds/cache.example.com_v1alpha1_memcached_cr.yaml
 ```
 
-再查看效果，Pod 变成 4 个了：
+再查看效果，Pod 变成 4 个了，这就达到了通过修改资源文件来操作 Pod 的目的。
 
 ```bash
 [admin@fueltank-1 ~]$ kubectl get pods
