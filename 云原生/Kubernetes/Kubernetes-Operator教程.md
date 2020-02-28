@@ -10,6 +10,8 @@ Operator Hub：https://operatorhub.io/
 
 需要写 Golang 代码，要了亲命了。。。
 
+关于 Helm 和 Operator 的对比：https://blog.51cto.com/12462495/2084517
+
 下面把我的一次操作过程记录一下。
 
 ## 创建项目

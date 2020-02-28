@@ -80,3 +80,13 @@ Address 1: 10.43.203.169 rook-ceph-mgr-dashboard.rook-ceph.svc.cluster.local
 ```
 
 可以看到使用 nslookup 查询出来的 service 地址和 `kubectl get svc` 得到的 CLUSTER-IP 是一模一样的，证明工作完美。
+
+查看集群中 CoreDNS 的服务地址：
+
+```bash
+$ kubectl get svc -n kube-system
+NAME             TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)                  AGE
+kube-dns         ClusterIP   10.43.0.10     <none>        53/UDP,53/TCP,9153/TCP   20d
+```
+
+可以看到，和上边的服务地址是一样的。

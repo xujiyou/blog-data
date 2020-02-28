@@ -187,6 +187,14 @@
 - Vault
 
    [Vault简介及入门.md](云原生/Vault/Vault简介及入门.md) 
+   
+   [部署vault-operator.md](云原生/Vault/部署vault-operator.md) 
+
+- Fluentd
+
+   [Fluentd安装.md](云原生/Fluentd/Fluentd安装.md) 
+
+   [Fluentd配置.md](云原生/Fluentd/Fluentd配置.md) 
 
 
 
