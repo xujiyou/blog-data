@@ -360,6 +360,8 @@ CDH 开始收费了，怎么说。。。
 
     [Golang协程入门.md](编程语言/Golang/Golang协程入门.md) 
 
+     [摆脱GOPATH.md](编程语言/Golang/摆脱GOPATH.md) 
+
 - Swift
 
 - Python
