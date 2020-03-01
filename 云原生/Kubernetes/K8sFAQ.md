@@ -95,3 +95,15 @@ vim  ~/.bash_profile:
 
 
 
+## kubectl exec 选择容器
+
+当 Pod 中有多个容器时，可以使用下面的命令进入Pod 中的某一个容器：
+
+参考：https://kubernetes.io/zh/docs/tasks/debug-application-cluster/get-shell-running-container/
+
+```bash
+$ kubectl exec -i -t prometheus-server-6f7c8bbb88-xzrr8 --container prometheus-server  /bin/sh -n prometheus
+```
+
+
+

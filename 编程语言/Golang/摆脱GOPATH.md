@@ -10,7 +10,7 @@ GOPATH 这东西坑的一批，究其原因，主要是 golang 的模块化并�
 
 先干掉 GOPATH
 
-用 Goland 创建项目，选 Go Modules(vgo)，选好项目目录，注意，这里随便选，随便选，不选选到 $GOPATH/src 低下。然后点 create。
+用 Goland 创建项目，选 Go Modules(vgo)，选好项目目录，注意，这里随便选，随便选，不必选到 $GOPATH/src 低下。然后点 create。
 
 项目创建完成后，在项目低下创建 main 目录，然后随便写个文件，这个文件里面就可以写 main 方法了。
 
