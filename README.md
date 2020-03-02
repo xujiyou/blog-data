@@ -230,6 +230,8 @@
 
    [Prometheus客户端.md](云原生/Prometheus/Prometheus客户端.md) 
 
+   [Prometheus架构.md](云原生/Prometheus/Prometheus架构.md) 
+
 - Grafana
 
    [Grafana入门.md](云原生/Grafana/Grafana入门.md) 
