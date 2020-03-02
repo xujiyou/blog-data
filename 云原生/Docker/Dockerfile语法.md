@@ -149,3 +149,142 @@ CMD  /code/run-extras
 
 ## RUN
 
+RUN 有两种形式
+
+- `RUN `（*shell*形式，命令在shell中运行，默认情况下`/bin/sh -c`或`cmd /S /C`Windows 上运行）
+- `RUN ["executable", "param1", "param2"]`
+
+`RUN`指令将在当前 Image 顶部的新层中执行所有命令，并提交结果。
+
+```
+RUN /bin/bash -c 'source $HOME/.bashrc; \
+echo $HOME'
+```
+
+它们在一起等效于以下这一行：
+
+```
+RUN /bin/bash -c 'source $HOME/.bashrc; echo $HOME'
+```
+
+
+
+## CMD
+
+`CMD`指令具有三种形式：
+
+- `CMD ["executable","param1","param2"]`（*exec*形式，这是首选形式）
+- `CMD ["param1","param2"]`（作为*ENTRYPOINT的默认参数*）
+- `CMD command param1 param2`（ shell 形式）
+
+一个 Dockerfile 中只能有一个 CMD，如果列出多个，则只会有最后一个生效。
+
+CMD 的目的是为容器提供默认值，这些默认值可以包含可执行文件，也可以省略可执行文件，这种情况下，必须指定一条 ENTRYPOINT 指令。
+
+**注意**：请勿`RUN`与混淆`CMD`。`RUN`实际上运行命令并提交结果；`CMD`在生成时不执行任何操作，但指定映像的预期命令。
+
+RUN 与 CMD 的区别如下：
+
+RUN
+RUN命令是创建Docker镜像（image）的步骤，RUN命令对Docker容器（ container）造成的改变是会被反映到创建的Docker镜像上的。一个Dockerfile中可以有许多个RUN命令。
+
+CMD
+CMD命令是当Docker镜像被启动后Docker容器将会默认执行的命令。一个Dockerfile中只能有一个CMD命令。通过执行docker run \$image $other_command启动镜像可以重载CMD命令。
+
+
+
+## LABEL
+
+`LABEL`指令将元数据添加到镜像，LABEL 是一个键值对，
+
+如：
+
+```dockerfile
+LABEL "com.example.vendor"="ACME Incorporated"
+LABEL com.example.label-with-value="foo"
+LABEL version="1.0"
+LABEL description="This text illustrates \
+that label-values can span multiple lines."
+```
+
+
+
+## EXPOSE
+
+EXPOSE 用于导出端口
+
+默认情况下，`EXPOSE`假定为TCP。您还可以指定UDP：
+
+```Dockerfile
+EXPOSE 80/udp
+```
+
+
+
+## ADD
+
+`ADD`指令从中复制新文件，将它们添加到镜像的文件系统中。
+
+```dockerfile
+ADD --chown=55:mygroup files* /somedir/
+ADD --chown=bin files* /somedir/
+ADD --chown=1 files* /somedir/
+ADD --chown=10:11 files* /somedir/
+```
+
+除了不能用在 multistage 的场景下，ADD 命令可以完成 COPY 命令的所有功能，并且还可以完成两类超酷的功能：
+
+- 解压压缩文件并把它们添加到镜像中
+- 从 url 拷贝文件到镜像中
+
+
+
+## COPY
+
+同 ADD
+
+
+
+## ENTRYPOINT
+
+最后一条是 `ENTRYPOINT` 指令`Dockerfile`才会生效。
+
+您可以使用*exec*形式的`ENTRYPOINT`设置相当稳定的默认命令和参数，然后使用这两种形式的`CMD`设置其他默认值。
+
+```dockerfile
+FROM ubuntu
+ENTRYPOINT ["top", "-b"]
+CMD ["-c"]
+```
+
+
+
+## VOLUME
+
+
+
+## USER
+
+
+
+## WORKDIR
+
+
+
+## ARG
+
+
+
+## ONBUILD
+
+
+
+## STOPSIGNAL
+
+
+
+## HEALTHCHECK
+
+
+
+## SHELL

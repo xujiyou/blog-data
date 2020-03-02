@@ -104,6 +104,8 @@
 
     [Docker-Api.md](云原生/Docker/Docker-Api.md) 
 
+   
+
 - Helm
 
    [Helm入门文档.md](云原生/Helm/Helm入门文档.md) 
@@ -137,6 +139,8 @@
 - Jaeger
 
    [Jaeger 入门.md](云原生/jaeger/Jaeger入门.md) 
+
+   [Jaeger-Operator.md](云原生/jaeger/Jaeger-Operator.md) 
 
    
 
@@ -178,6 +182,8 @@
 
     [测试k8s集群中安装的CoreDNS.md](云原生/CoreDNS/测试k8s集群中安装的CoreDNS.md) 
 
+    
+
 - Vitess
 
   
@@ -191,6 +197,8 @@
 - Kubeless
 
    [Kubeless入门.md](云原生/Kubeless/Kubeless入门.md) 
+
+   
 
 - Vault
 
