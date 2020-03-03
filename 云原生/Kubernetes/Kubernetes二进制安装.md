@@ -242,6 +242,7 @@ DNS.1 = kubernetes
 DNS.2 = kubernetes.default
 DNS.3 = kubernetes.default.svc
 DNS.4 = kubernetes.default.svc.cluster.local
+DNS.5 = fueltank-1
 IP.1 = 172.20.20.162
 IP.2 = 172.20.20.179
 IP.3 = 172.20.20.145
@@ -374,9 +375,15 @@ KUBE_CONTROLLER_MANAGER_ARGS=" \
 
 启动服务：
 
-```
+```bash
 $ sudo systemctl enable kube-controller-manager.service
 $ sudo systemctl start kube-controller-manager.service
+```
+
+检查：
+
+```bash
+$ sudo systemctl status kube-controller-manager.service
 ```
 
 
@@ -387,7 +394,7 @@ kube-scheduler 也是运行在 master 上的。
 
 先把 kube-scheduler 放到 PATH：
 
-```
+```bash
 $ sudo cp kube-scheduler /usr/bin/
 ```
 
@@ -423,14 +430,103 @@ KUBE_SCHEDULER_ARGS=" \
 
 启动服务：
 
-```
+```bash
 $ sudo systemctl enable kube-scheduler.service
 $ sudo systemctl start kube-scheduler.service
 ```
 
+检查：
+
+```bash
+$ sudo systemctl status kube-scheduler.service 
+```
 
 
-## 第五步：安装 kubelet
+
+## 第五步：配置 kubeconfig
+
+先创建 admin 用户的证书及私钥
+
+```bash
+$ cd k8s-cluster/cert && mkdir admin && cd admin
+
+$ vim openssl.cnf
+[req]
+req_extensions = v3_req
+distinguished_name = req_distinguished_name
+[req_distinguished_name]
+[ v3_req ]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+subjectAltName = @alt_names
+[alt_names]
+IP.1 = 127.0.0.1
+IP.2 = 0.0.0.0
+
+$ openssl genrsa -out admin-key.pem 2048
+$ openssl req -new -key admin-key.pem -out admin.csr -subj "/CN=admin" -config openssl.cnf
+$ openssl x509 -req -in admin.csr -CA ../ca.pem -CAkey ../ca-key.pem -CAcreateserial -out admin.pem -days 365 -extensions v3_req -extfile openssl.cnf
+
+```
+
+将 kubectl 放入到 PATH：
+
+```bash
+$ sudo cp kubectl /usr/bin/
+```
+
+下面需要指定该证书的 Group 为 `system:masters`，而 `RBAC` 预定义的 `ClusterRoleBinding` 将 Group `system:masters` 与 ClusterRole `cluster-admin` 绑定，这就赋予了kubectl**所有集群权限**
+
+```bash
+$ kubectl describe clusterrolebinding cluster-admin
+Name:         cluster-admin
+Labels:       kubernetes.io/bootstrapping=rbac-defaults
+Annotations:  rbac.authorization.kubernetes.io/autoupdate: true
+Role:
+  Kind:  ClusterRole
+  Name:  cluster-admin
+Subjects:
+  Kind   Name            Namespace
+  ----   ----            ---------
+  Group  system:masters 
+```
+
+使用`kubectl config` 生成 kubeconfig ，这会自动保存到 ~/.kube/config，生成后 `cat ~/.kube/config`可以验证配置文件包含 kube-apiserver 地址、证书、用户名等信息:
+
+```bash
+$ kubectl config set-cluster fueltank --certificate-authority=/home/admin/k8s-cluster/cert/ca.pem --embed-certs=true --server=https://fueltank-1:6443
+$ kubectl config set-credentials admin --client-certificate=/home/admin/k8s-cluster/cert/admin/admin.pem --embed-certs=true --client-key=/home/admin/k8s-cluster/cer
+t/admin/admin-key.pem
+$ kubectl config set-context fueltank --cluster=fueltank --user=admin
+$ kubectl config use-context fueltank
+$ cat .kube/config
+```
+
+这时候检查组件，但是会出一个错误：
+
+```bash
+$ kubectl get componentstatus
+Error from server (Forbidden): componentstatuses is forbidden: User "admin" cannot list resource "componentstatuses" in API group "" at the cluster scope
+```
+
+怎么解决呐？解决方法在：https://github.com/kelseyhightower/kubernetes-the-hard-way/issues/197
+
+```bash
+$ mv .kube/config .kube/config1
+$ kubectl create clusterrolebinding root-cluster-admin-binding --clusterrole=cluster-admin --user=admin
+$ mv .kube/config1 .kube/config
+$ kubectl get componentstatus
+NAME                 STATUS    MESSAGE             ERROR
+scheduler            Healthy   ok                  
+controller-manager   Healthy   ok                  
+etcd-0               Healthy   {"health":"true"}
+```
+
+OK，完美。
+
+
+
+## 第六步：安装 kubelet
 
 kubelet 是运行在 node 节点的，不过这里为了节约机器，先把它安装在 master 节点。
 
@@ -461,10 +557,138 @@ KillMode=process
 WantedBy=multi-user.target
 ```
 
-创建配置文件，kubelet 的配置可以参考：https://kubernetes.io/zh/docs/reference/command-line-tools-reference/kubelet/
+
+
+再创建配置文件，kubelet 的配置可以参考：https://kubernetes.io/zh/docs/reference/command-line-tools-reference/kubelet/
 
 ```
 $ sudo vim /etc/kubernetes/kubelet
+KUBELET_ARGS=" \
+--address=0.0.0.0 \
+--hostname-override=fueltank-1 \
+--kubeconfig=/home/admin/.kube/config \
+--cgroup-driver=systemd \
+"
+```
+
+启动服务：
 
 ```
+$ sudo systemctl enable kubelet.service
+$ sudo systemctl start kubelet.service
+```
+
+检查：
+
+```bash
+$ sudo systemctl status kubelet.service
+$ kubectl get nodes
+NAME         STATUS   ROLES    AGE   VERSION
+fueltank-1   Ready    <none>   24m   v1.17.3
+```
+
+
+
+## 第七步：安装 kube-proxy
+
+先生成 kube-proxy.kubeconfig 配置文件。
+
+生成配置文件使用的证书：
+
+```bash
+$ cd k8s-cluster/cert && mkdir kube-proxy && cd kube-proxy
+
+$ vim openssl.cnf
+[req]
+req_extensions = v3_req
+distinguished_name = req_distinguished_name
+[req_distinguished_name]
+[ v3_req ]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+subjectAltName = @alt_names
+[alt_names]
+DNS.5 = fueltank-1
+IP.1 = 127.0.0.1
+IP.2 = 0.0.0.0
+
+$ openssl genrsa -out kube-proxy-key.pem 2048
+$ openssl req -new -key kube-proxy-key.pem -out kube-proxy.csr -subj "/CN=kube-proxy" -config openssl.cnf
+$ openssl x509 -req -in kube-proxy.csr -CA ../ca.pem -CAkey ../ca-key.pem -CAcreateserial -out kube-proxy.pem -days 365 -extensions v3_req -extfile openssl
+.cnf
+```
+
+#### 生成 kube-proxy.kubeconfig
+
+使用`kubectl config` 生成kubeconfig 自动保存到 kube-proxy.kubeconfig
+
+```bash
+$ kubectl config set-cluster fueltank --certificate-authority=/home/admin/k8s-cluster/cert/ca.pem --embed-certs=true --server=https://fueltank-1:6443 --kubeconfig=kube-proxy.kubeconfig
+$ kubectl config set-credentials kube-proxy --client-certificate=/home/admin/k8s-cluster/cert/kube-proxy/kube-proxy.pem --embed-certs=true --client-key=/home/admin/k8s-cluster/cert/kube-proxy/kube-proxy-key.pem --kubeconfig=kube-proxy.kubeconfig
+$ kubectl config set-context default --cluster=fueltank --user=kube-proxy --kubeconfig=kube-proxy.kubeconfig
+$ kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
+```
+
+运行完成后，会在当前目录生成一个 kube-proxy.kubeconfig 文件，下面需要把它放到 /etc/kubernetes 下：
+
+```bash
+$ sudo mv kube-proxy.kubeconfig /etc/kubernetes/
+```
+
+OK，下面来配置运行 kube-proxy
+
+kube-proxy 也是运行在 master 上的，
+
+将 kube-proxy 放入 PATH 中。
+
+```bash
+$ sudo cp kube-proxy /usr/bin/
+```
+
+创建 service ：
+
+```
+$ sudo vim /usr/lib/systemd/system/kube-proxy.service
+[Unit]
+Description=Kubernetes Kube-Proxy Server
+Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+After=network.target
+
+[Service]
+EnvironmentFile=/etc/kubernetes/kube-proxy
+ExecStart=/usr/bin/kube-proxy $KUBE_PROXY_ARGS
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
+```
+
+创建配置文件：
+
+```
+$ sudo vim /etc/kubernetes/kube-proxy
+KUBE_PROXY_ARGS=" \
+--bind-address=0.0.0.0 \
+--cluster-cidr=10.42.0.0/16 \
+--hostname-override=fueltank-1 \
+--kubeconfig=/etc/kubernetes/kube-proxy.kubeconfig \
+"
+```
+
+启动：
+
+```
+$ sudo systemctl enable kube-proxy.service
+$ sudo systemctl start kube-proxy.service
+```
+
+检查：
+
+```
+$ systemctl status kube-proxy
+```
+
+
 
