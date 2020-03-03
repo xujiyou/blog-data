@@ -14,6 +14,8 @@
 
 - Kubernetes
 
+   [Kubernetes二进制安装.md](云原生/Kubernetes/Kubernetes二进制安装.md) 
+
    [核心组件运行原理.md](云原生/Kubernetes/核心组件运行原理.md) 
 
    [深入分析集群安全机制.md](云原生/Kubernetes/深入分析集群安全机制.md) 
@@ -176,7 +178,11 @@
 
 - Etcd
 
-   
+    [etcd配置详解.md](云原生/Etcd/etcd配置详解.md) 
+
+    [etcdctl详解.md](云原生/Etcd/Etcdctl详解.md) 
+
+    
 
 - CoreDNS
 

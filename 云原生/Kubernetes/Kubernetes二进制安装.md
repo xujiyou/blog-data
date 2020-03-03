@@ -26,6 +26,9 @@ CentOS Linux release 7.6.1810 (Core)
 
 $ uname -a
 Linux fueltank-1.cloud.bbdops.com 3.10.0-957.27.2.el7.x86_64 #1 SMP Mon Jul 29 17:46:05 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+
+$ docker --version
+Docker version 19.03.5, build 633a0ea
 ```
 
 
@@ -142,13 +145,24 @@ $ sudo systemctl start etcd
 
 验证集群：
 
-```
+```bash
 $ etcdctl put foo bar --cacert=/etc/etcd/cert/ca.pem
 OK
 $ etcdctl get foo --cacert=/etc/etcd/cert/ca.pem
 foo
 bar
 ```
+
+查看 etcd 成员：
+
+```bash
+$ etcdctl member list --cacert=/etc/etcd/cert/ca.pem
+87664c3cc645be22, started, fueltank-1, http://172.20.20.162:2380, https://172.20.20.162:2379
+8cf2a5bef867d7cf, started, fueltank-2, http://172.20.20.179:2380, https://172.20.20.179:2379
+a8070c86c64102fa, started, fueltank-3, http://172.20.20.145:2380, https://172.20.20.145:2379
+```
+
+
 
 完美！！！
 
@@ -172,11 +186,285 @@ etcd 集群搞定之后，下一步安装 k8s 的各个组件，最后安装 Cal
 
 
 
-## 部署 kube-apiserver
+## 第二步：安装 kube-apiserver
+
+目前 yum 还不能很好的安装这些组件。只能自己动手，丰衣足食了。
+
+先下载各项组件：https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.17.md#downloads-for-v1173
+
+分别下载 server，node，client 三个压缩包。下载完成解压。
+
+将 kube-apiserver 加入 PATH：
+
+```bash
+$ cp kube-apiserver /usr/bin/kube-apiserver
+```
+
+编辑 systemd 服务文件：
+
+```
+$ sudo vim /usr/lib/systemd/system/kube-apiserver.service
+[Unit]
+Description=Kubernetes API Server
+After=etcd.service
+Wants=etcd.service
+
+[Service]
+EnvironmentFile=/etc/kubernetes/apiserver
+ExecStart=/usr/bin/kube-apiserver $KUBE_API_ARGS
+Restart=on-failure
+Type=notify
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
+```
+
+生成 kube-apiserver 的证书及私钥，参考：https://github.com/coreos/coreos-kubernetes/blob/master/Documentation/openssl.md
+
+```bash
+$ openssl genrsa -out ca-key.pem 2048
+$ openssl req -x509 -new -nodes -key ca-key.pem -days 10000 -out ca.pem -subj "/CN=kube-ca"
+
+# 生成 kube-apiserver 的证书及私钥
+$ mkdir kube-apiserver & cd kube-apiserver
+$ vim openssl.cnf
+[req]
+req_extensions = v3_req
+distinguished_name = req_distinguished_name
+[req_distinguished_name]
+[ v3_req ]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+subjectAltName = @alt_names
+[alt_names]
+DNS.1 = kubernetes
+DNS.2 = kubernetes.default
+DNS.3 = kubernetes.default.svc
+DNS.4 = kubernetes.default.svc.cluster.local
+IP.1 = 172.20.20.162
+IP.2 = 172.20.20.179
+IP.3 = 172.20.20.145
+
+$ openssl genrsa -out apiserver-key.pem 2048
+$ openssl req -new -key apiserver-key.pem -out apiserver.csr -subj "/CN=kube-apiserver" -config openssl.cnf
+$ openssl x509 -req -in apiserver.csr -CA ../ca.pem -CAkey ../ca-key.pem -CAcreateserial -out apiserver.pem -days 365 -extensions v3_req -extfile openssl.cnf
+
+# 生成 kubelet 的证书及私钥
+$ cd ../
+$ mkdir kubelet & cd kubelet
+$ vim openssl.cnf
+[req]
+req_extensions = v3_req
+distinguished_name = req_distinguished_name
+[req_distinguished_name]
+[ v3_req ]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+subjectAltName = @alt_names
+[alt_names]
+IP.1 = 127.0.0.1
+IP.2 = 172.20.20.162
+IP.3 = 172.20.20.179
+IP.4 = 172.20.20.145
+
+$ openssl genrsa -out kubelet-key.pem 2048
+$ openssl req -new -key kubelet-key.pem -out kubelet.csr -subj "/CN=kubelet" -config openssl.cnf
+$ openssl x509 -req -in kubelet.csr -CA ../ca.pem -CAkey ../ca-key.pem -CAcreateserial -out kubelet.pem -days 365 -extensions v3_req -extfile openssl.cnf
+```
+
+编辑配置文件：
+
+```
+$ sudo vim /etc/kubernetes/apiserver
+KUBE_API_ARGS=" \
+--admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota,NodeRestriction,MutatingAdmissionWebhook,ValidatingAdmissionWebhook \
+--apiserver-count=1 \
+--allow-privileged=true \
+--audit-log-maxage=30 \
+--audit-log-maxbackup=3 \
+--audit-log-maxsize=100 \
+--audit-log-path=/mnt/vde/kube-apiserver \
+--authorization-mode=Node,RBAC \
+--anonymous-auth=false \
+--etcd-cafile=/etc/etcd/cert/ca.pem \
+--etcd-certfile=/etc/etcd/cert/etcd.pem \
+--etcd-keyfile=/etc/etcd/cert/etcd-key.pem \
+--etcd-servers=https://127.0.0.1:2379 \
+--kubelet-https=true \
+--kubelet-certificate-authority=/home/admin/k8s-cluster/cert/ca.pem \
+--kubelet-client-certificate=/home/admin/k8s-cluster/cert/kubelet/kubelet.pem \
+--kubelet-client-key=/home/admin/k8s-cluster/cert/kubelet/kubelet-key.pem \
+--enable-swagger-ui=true \
+--client-ca-file=/home/admin/k8s-cluster/cert/ca.pem \
+--tls-cert-file=/home/admin/k8s-cluster/cert/kube-apiserver/apiserver.pem \
+--tls-private-key-file=/home/admin/k8s-cluster/cert/kube-apiserver/apiserver-key.pem \
+--enable-aggregator-routing=true \
+"
+```
+
+关于 kube-apiserver 的配置：https://kubernetes.io/zh/docs/reference/command-line-tools-reference/kube-apiserver/
+
+我数了下，配置项也不多，也就 96 个的样子。。。
+
+启动服务：
+
+```
+$ sudo systemctl enable kube-apiserver.service
+$ sudo systemctl start kube-apiserver.service
+```
+
+检查 kube-apiserver 运行状态：
+
+```
+$ sudo systemctl status kube-apiserver
+```
 
 
 
+## 第三步：安装 kube-controller-manager
+
+kube-controller-manager 也是安装在 master 节点的。
+
+将 kube-controller-manager  放到 PATH 中：
+
+```bash
+$ sudo cp kube-controller-manager /usr/bin/
+```
+
+创建 service 文件：
+
+```
+$ sudo vim /usr/lib/systemd/system/kube-controller-manager.service
+[Unit]
+Description=Kubernetes Controller Manager
+After=kube-apiserver.service
+Wants=kube-apiserver.service
+
+[Service]
+EnvironmentFile=/etc/kubernetes/kube-controller-manager
+ExecStart=/usr/bin/kube-controller-manager $KUBE_CONTROLLER_MANAGER_ARGS
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+```
+
+kube-controller-manager 的配置参考：https://kubernetes.io/zh/docs/reference/command-line-tools-reference/kube-controller-manager/
+
+编写配置文件：
+
+```
+$ sudo vim /etc/kubernetes/kube-controller-manager
+KUBE_CONTROLLER_MANAGER_ARGS=" \
+--address=127.0.0.1 \
+--master=http://127.0.0.1:8080 \
+--allocate-node-cidrs=true \
+--service-cluster-ip-range=10.43.0.0/16 \
+--cluster-cidr=10.42.0.0/16 \
+--cluster-name=kubernetes \
+--cluster-signing-cert-file=/home/admin/k8s-cluster/cert/ca.pem \
+--cluster-signing-key-file=/home/admin/k8s-cluster/cert/ca-key.pem \
+--service-account-private-key-file=/home/admin/k8s-cluster/cert/ca-key.pem \
+--root-ca-file=/home/admin/k8s-cluster/cert/ca.pem \
+--leader-elect=true \
+"
+```
+
+启动服务：
+
+```
+$ sudo systemctl enable kube-controller-manager.service
+$ sudo systemctl start kube-controller-manager.service
+```
 
 
 
+## 第四步：安装 kube-scheduler
+
+kube-scheduler 也是运行在 master 上的。
+
+先把 kube-scheduler 放到 PATH：
+
+```
+$ sudo cp kube-scheduler /usr/bin/
+```
+
+创建 service 文件：
+
+```
+$ sudo vim /usr/lib/systemd/system/kube-scheduler.service
+[Unit]
+Description=Kubernetes Scheduler
+After=kube-apiserver.service
+Wants=kube-apiserver.service
+
+[Service]
+EnvironmentFile=/etc/kubernetes/kube-scheduler
+ExecStart=/usr/bin/kube-scheduler $KUBE_SCHEDULER_ARGS
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+```
+
+创建配置文件，可参考官方配置：https://kubernetes.io/zh/docs/reference/command-line-tools-reference/kube-scheduler/
+
+```
+$ sudo vim /etc/kubernetes/kube-scheduler
+KUBE_SCHEDULER_ARGS=" \
+--address=127.0.0.1 \
+--master=http://127.0.0.1:8080 \
+--leader-elect=true \
+"
+```
+
+启动服务：
+
+```
+$ sudo systemctl enable kube-scheduler.service
+$ sudo systemctl start kube-scheduler.service
+```
+
+
+
+## 第五步：安装 kubelet
+
+kubelet 是运行在 node 节点的，不过这里为了节约机器，先把它安装在 master 节点。
+
+先把 kubelet 放到 PATH 之中：
+
+```bash
+$ sudo cp kubelet /usr/bin/
+```
+
+创建 service：
+
+```
+$ sudo vim /usr/lib/systemd/system/kubelet.service
+[Unit]
+Description=Kubernetes Kubelet Server
+Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+After=docker.service
+Requires=docker.service
+ 
+[Service]
+EnvironmentFile=/etc/kubernetes/kubelet
+ExecStart=/usr/bin/kubelet $KUBELET_ARGS
+Restart=on-failure
+RestartSec=5
+KillMode=process
+ 
+[Install]
+WantedBy=multi-user.target
+```
+
+创建配置文件，kubelet 的配置可以参考：https://kubernetes.io/zh/docs/reference/command-line-tools-reference/kubelet/
+
+```
+$ sudo vim /etc/kubernetes/kubelet
+
+```
 
