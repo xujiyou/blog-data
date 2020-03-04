@@ -1,6 +1,6 @@
 
 
-# Kubernetes 二进制安装
+# Kubernetes-1.17.3 二进制安装
 
 首先，集群中每个节点 Docker 是安装好的，并且其储存也是挂在一个外部的盘中的，并且没有正在运行中的容器。
 
@@ -32,6 +32,8 @@ Linux fueltank-1.cloud.bbdops.com 3.10.0-957.27.2.el7.x86_64 #1 SMP Mon Jul 29 1
 $ docker --version
 Docker version 19.03.5, build 633a0ea
 ```
+
+ 下面将使用纯二进制的方式来打造一个坚固的 k8s 集群，k8s 各组件版本均为 1.17.3
 
  
 
