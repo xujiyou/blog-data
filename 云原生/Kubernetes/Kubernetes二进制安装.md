@@ -1,3 +1,5 @@
+
+
 # Kubernetes 二进制安装
 
 首先，集群中每个节点 Docker 是安装好的，并且其储存也是挂在一个外部的盘中的，并且没有正在运行中的容器。
@@ -31,11 +33,15 @@ $ docker --version
 Docker version 19.03.5, build 633a0ea
 ```
 
+ 
 
+ 
 
 ---
 
+ 
 
+ 
 
 ### 第一步：安装 etcd 集群（静态发现）
 
@@ -45,7 +51,11 @@ kuberntes 集群使用 etcd 存储所有数据，是最重要的组件之一，�
 
 只能东拼西凑一下了，回头详细学习下 etcd 官方文档。
 
+ 
+
 ---
+
+ 
 
 以下每个节点都要做。
 
@@ -75,45 +85,71 @@ etcdctl version: 3.3.11
 API version: 3.3
 ```
 
-yum 帮我们做了很多事情，比如说 etcd 的证书和私钥文件在 yum 安装时就生成好了：
+下一步需要自建 etcd 的证书，自建前，先创建 CA，之后的每一个证书都使用这一个  CA 。
 
 ```bash
-$ ls /etc/etcd/cert/
-ca.pem  etcd-key.pem  etcd.pem
+$ cd ~/k8s-cluster/cert
+$ openssl genrsa -out ca-key.pem 2048
+$ openssl req -x509 -new -nodes -key ca-key.pem -days 10000 -out ca.pem -subj "/CN=kube-ca"
 ```
 
-同时，yum 也帮我们创建了一个名为 etcd 的用户：
+然后创建 etcd 证书。
+
+```bash
+$ mkdir etcd && cd etcd
+
+$ vim openssl.cnf
+[req]
+req_extensions = v3_req
+distinguished_name = req_distinguished_name
+[req_distinguished_name]
+[ v3_req ]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+subjectAltName = @alt_names
+[alt_names]
+DNS.1 = fueltank-1
+DNS.2 = fueltank-2
+DNS.3 = fueltank-3
+IP.1 = 127.0.0.1
+IP.2 = 172.20.20.162
+IP.3 = 172.20.20.179
+IP.4 = 172.20.20.145
+
+$ openssl genrsa -out etcd-key.pem 2048
+$ openssl req -new -key etcd-key.pem -out etcd.csr -subj "/CN=etcd" -config openssl.cnf
+$ openssl x509 -req -in etcd.csr -CA ../ca.pem -CAkey ../ca-key.pem -CAcreateserial -out etcd.pem -days 365 -extensions v3_req -extfile openssl.cnf
+
+```
+
+yum 在安装时，已经帮我们创建了一个名为 etcd 的用户，etcd 在运行时就是用的这个用户：
 
 ```bash
 $ cat /etc/passwd | grep etcd
 etcd:x:998:995:etcd user:/var/lib/etcd:/sbin/nologin
 ```
 
-下面创建 etcd 的储存目录，把数据放在外挂盘上，并配置新目录的权限，然后把 etcd 用户加入到 admin 用户组：
+因为上面生成的证书是在家目录生成的，etcd 用户没权访问，所以要将上面的证书、私钥和CA文件都放到 /etc 目录中，并配置好权限。这里我为了方便，把 etcd 用户加入到 admin 用户组了：
+
+```bash
+$ sudo usermod -aG admin etcd
+```
+
+为了保证数据的安全，下面为 etcd 单独创建储存目录，并配置好权限：
 
 ```bash
 $ sudo mkdir /mnt/vde/etcd
 $ sudo chown -R admin:admin /mnt/vde/etcd
 $ sudo chmod 775 /mnt/vde/etcd
-$ sudo usermod -aG admin etcd
-```
-
-同时，对俩密钥文件也需要更改权限，让 etcd 用户可以访问：
-
-```bash
-$ sudo chown -R admin:admin /etc/etcd/cert
-$ sudo chmod 664 /etc/etcd/cert/etcd-key.pem
-$ sudo chmod 664 /etc/etcd/cert/etcd.pem 
-$ sudo chmod 664 /etc/etcd/cert/ca.pem
 ```
 
 
 
-关于配置，官网并没有讲 yum 方式的配置，但是官网推荐通过 yum 方式安装。
+关于 etcd 的配置，官网并没有讲 yum 方式的配置，但是官网推荐通过 yum 方式安装。
 
-发现这篇讲配置讲的不错：https://medium.com/@uzzal2k5/etcd-etcd-cluster-configuration-for-kubernetes-779455337db6
+另外，发现这篇讲配置讲的不错：https://medium.com/@uzzal2k5/etcd-etcd-cluster-configuration-for-kubernetes-779455337db6
 
-修改 etcd 配置文件 `/etc/etcd/etcd.conf` ,以 fueltank-1 为例，其他两台以同样的套路修改。
+下面修改 etcd 配置文件 `/etc/etcd/etcd.conf` ，以 fueltank-1 为例，其他两台以同样的套路修改。
 
 注意，这里只能是 IP 地址，不能是域名或 hostname
 
@@ -130,6 +166,7 @@ ETCD_INITIAL_CLUSTER="fueltank-1=http://172.20.20.162:2380,fueltank-2=http://172
 #[Security]
 ETCD_CERT_FILE="/etc/etcd/cert/etcd.pem"
 ETCD_KEY_FILE="/etc/etcd/cert/etcd-key.pem"
+ETCD_TRUSTED_CA_FILE="/etc/etcd/cert/etcd/ca.pem"
 ```
 
 可以看到，2379 端口都使用了 https，2380都使用的是 http。这是让客户端访问时用 https，集群之间访问时用 http。
@@ -141,16 +178,19 @@ $ sudo systemctl enable etcd
 $ sudo systemctl start etcd
 ```
 
-如果出错了，可以用 `sudo journalctl -xe` 查看原因。
+如果出错了，可以用 `sudo journalctl -xe`  或 `sudo journalctl -u etcd` 查看原因，一般会出错都是出在文件权限问题上。
 
 验证集群：
 
 ```bash
-$ etcdctl put foo bar --cacert=/etc/etcd/cert/ca.pem
+$ etcdctl put foo bar --cacert=/etc/etcd/cert/etcd/ca.pem
 OK
-$ etcdctl get foo --cacert=/etc/etcd/cert/ca.pem
+$ etcdctl get foo --cacert=/etc/etcd/cert/etcd/ca.pem
 foo
 bar
+$ curl --cacert /etc/etcd/cert/etcd/ca.pem --cert /etc/etcd/cert/etcd/etcd.pem --key /etc/etcd/cert/etcd/etcd-key.pem https://fueltank-2:2379/v2/keys/aaa -XPUT -d value=bbb -v
+$ curl --cacert /etc/etcd/cert/etcd/ca.pem --cert /etc/etcd/cert/etcd/etcd.pem --key /etc/etcd/cert/etcd/etcd-key.pem https://fueltank-2:2379/v2/keys/aaa
+
 ```
 
 查看 etcd 成员：
@@ -161,8 +201,6 @@ $ etcdctl member list --cacert=/etc/etcd/cert/ca.pem
 8cf2a5bef867d7cf, started, fueltank-2, http://172.20.20.179:2380, https://172.20.20.179:2379
 a8070c86c64102fa, started, fueltank-3, http://172.20.20.145:2380, https://172.20.20.145:2379
 ```
-
-
 
 完美！！！
 
@@ -180,11 +218,15 @@ etcd 集群搞定之后，下一步安装 k8s 的各个组件，最后安装 Cal
 
 关于 k8s 各组件的作用可以参考  [核心组件运行原理.md](核心组件运行原理.md) 
 
+ 
 
+ 
 
 ---
 
+ 
 
+ 
 
 ## 第二步：安装 kube-apiserver
 
@@ -192,7 +234,7 @@ etcd 集群搞定之后，下一步安装 k8s 的各个组件，最后安装 Cal
 
 先下载各项组件：https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.17.md#downloads-for-v1173
 
-分别下载 server，node，client 三个压缩包。下载完成解压。
+分别下载 server，node，client，src 四个压缩包。下载完成解压，server，node，client这三个在一块解压即可，src 要解压到单独的目录。 
 
 将 kube-apiserver 加入 PATH：
 
@@ -202,7 +244,7 @@ $ cp kube-apiserver /usr/bin/kube-apiserver
 
 编辑 systemd 服务文件：
 
-```
+```bash
 $ sudo vim /usr/lib/systemd/system/kube-apiserver.service
 [Unit]
 Description=Kubernetes API Server
@@ -223,11 +265,10 @@ WantedBy=multi-user.target
 生成 kube-apiserver 的证书及私钥，参考：https://github.com/coreos/coreos-kubernetes/blob/master/Documentation/openssl.md
 
 ```bash
-$ openssl genrsa -out ca-key.pem 2048
-$ openssl req -x509 -new -nodes -key ca-key.pem -days 10000 -out ca.pem -subj "/CN=kube-ca"
 
 # 生成 kube-apiserver 的证书及私钥
-$ mkdir kube-apiserver & cd kube-apiserver
+$ cd ~/k8s-cluster/cert && mkdir kube-apiserver & cd kube-apiserver
+
 $ vim openssl.cnf
 [req]
 req_extensions = v3_req
@@ -243,40 +284,22 @@ DNS.2 = kubernetes.default
 DNS.3 = kubernetes.default.svc
 DNS.4 = kubernetes.default.svc.cluster.local
 DNS.5 = fueltank-1
-IP.1 = 172.20.20.162
-IP.2 = 172.20.20.179
-IP.3 = 172.20.20.145
-
-$ openssl genrsa -out apiserver-key.pem 2048
-$ openssl req -new -key apiserver-key.pem -out apiserver.csr -subj "/CN=kube-apiserver" -config openssl.cnf
-$ openssl x509 -req -in apiserver.csr -CA ../ca.pem -CAkey ../ca-key.pem -CAcreateserial -out apiserver.pem -days 365 -extensions v3_req -extfile openssl.cnf
-
-# 生成 kubelet 的证书及私钥
-$ cd ../
-$ mkdir kubelet & cd kubelet
-$ vim openssl.cnf
-[req]
-req_extensions = v3_req
-distinguished_name = req_distinguished_name
-[req_distinguished_name]
-[ v3_req ]
-basicConstraints = CA:FALSE
-keyUsage = nonRepudiation, digitalSignature, keyEncipherment
-subjectAltName = @alt_names
-[alt_names]
+DNS.6 = fueltank-2
+DNS.7 = fueltank-3
 IP.1 = 127.0.0.1
 IP.2 = 172.20.20.162
 IP.3 = 172.20.20.179
 IP.4 = 172.20.20.145
+IP.5 = 10.0.0.1
 
-$ openssl genrsa -out kubelet-key.pem 2048
-$ openssl req -new -key kubelet-key.pem -out kubelet.csr -subj "/CN=kubelet" -config openssl.cnf
-$ openssl x509 -req -in kubelet.csr -CA ../ca.pem -CAkey ../ca-key.pem -CAcreateserial -out kubelet.pem -days 365 -extensions v3_req -extfile openssl.cnf
+$ openssl genrsa -out apiserver-key.pem 2048
+$ openssl req -new -key apiserver-key.pem -out apiserver.csr -subj "/CN=kube-apiserver" -config openssl.cnf
+$ openssl x509 -req -in apiserver.csr -CA ../ca.pem -CAkey ../ca-key.pem -CAcreateserial -out apiserver.pem -days 365 -extensions v3_req -extfile openssl.cnf
 ```
 
 编辑配置文件：
 
-```
+```bash
 $ sudo vim /etc/kubernetes/apiserver
 KUBE_API_ARGS=" \
 --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota,NodeRestriction,MutatingAdmissionWebhook,ValidatingAdmissionWebhook \
@@ -288,19 +311,17 @@ KUBE_API_ARGS=" \
 --audit-log-path=/mnt/vde/kube-apiserver \
 --authorization-mode=Node,RBAC \
 --anonymous-auth=false \
---etcd-cafile=/etc/etcd/cert/ca.pem \
---etcd-certfile=/etc/etcd/cert/etcd.pem \
---etcd-keyfile=/etc/etcd/cert/etcd-key.pem \
---etcd-servers=https://127.0.0.1:2379 \
+--etcd-cafile=/etc/etcd/cert/etcd/ca.pem \
+--etcd-certfile=/etc/etcd/cert/etcd/etcd.pem \
+--etcd-keyfile=/etc/etcd/cert/etcd/etcd-key.pem \
+--etcd-servers=https://fueltank-1:2379,https://fueltank-2:2379,https://fueltank-3:2379 \
 --kubelet-https=true \
---kubelet-certificate-authority=/home/admin/k8s-cluster/cert/ca.pem \
---kubelet-client-certificate=/home/admin/k8s-cluster/cert/kubelet/kubelet.pem \
---kubelet-client-key=/home/admin/k8s-cluster/cert/kubelet/kubelet-key.pem \
 --enable-swagger-ui=true \
 --client-ca-file=/home/admin/k8s-cluster/cert/ca.pem \
 --tls-cert-file=/home/admin/k8s-cluster/cert/kube-apiserver/apiserver.pem \
 --tls-private-key-file=/home/admin/k8s-cluster/cert/kube-apiserver/apiserver-key.pem \
 --enable-aggregator-routing=true \
+--service-account-key-file=/home/admin/k8s-cluster/cert/kube-apiserver/apiserver-key.pem \
 "
 ```
 
@@ -308,20 +329,36 @@ KUBE_API_ARGS=" \
 
 我数了下，配置项也不多，也就 96 个的样子。。。
 
+etcd 的地址和证书是要正确配置的
+
+- `--audit-log-path` 用来配置日志地址。
+- `--authorization-mode` 配置中是一定要包含 RBAC 的，否则逼格不够。
+- `--kubelet-https` 默认是 true，但是不必加 kubelet 的证书及私钥。
+- `--client-ca-file` 、`--tls-cert-file` 、`--tls-private-key-file` 一定要配置，否则启动不起来 ，客户端访问 kube-apiserver 都是要加密的。
+- `--service-account-key-file` 也是一定要配的，不配的话会影响 ServiceAccount 的使用，这个值和 `--tls-private-key-file ` 一样即可，被这个参数坑了半天。
+
 启动服务：
 
-```
+```bash
 $ sudo systemctl enable kube-apiserver.service
 $ sudo systemctl start kube-apiserver.service
 ```
 
 检查 kube-apiserver 运行状态：
 
-```
+```bash
 $ sudo systemctl status kube-apiserver
 ```
 
+ 
 
+ 
+
+---
+
+ 
+
+ 
 
 ## 第三步：安装 kube-controller-manager
 
@@ -335,7 +372,7 @@ $ sudo cp kube-controller-manager /usr/bin/
 
 创建 service 文件：
 
-```
+```bash
 $ sudo vim /usr/lib/systemd/system/kube-controller-manager.service
 [Unit]
 Description=Kubernetes Controller Manager
@@ -356,7 +393,7 @@ kube-controller-manager 的配置参考：https://kubernetes.io/zh/docs/referenc
 
 编写配置文件：
 
-```
+```bash
 $ sudo vim /etc/kubernetes/kube-controller-manager
 KUBE_CONTROLLER_MANAGER_ARGS=" \
 --address=127.0.0.1 \
@@ -370,6 +407,7 @@ KUBE_CONTROLLER_MANAGER_ARGS=" \
 --service-account-private-key-file=/home/admin/k8s-cluster/cert/ca-key.pem \
 --root-ca-file=/home/admin/k8s-cluster/cert/ca.pem \
 --leader-elect=true \
+--service-account-private-key-file=/home/admin/k8s-cluster/cert/kube-apiserver/apiserver-key.pem \
 "
 ```
 
@@ -386,7 +424,15 @@ $ sudo systemctl start kube-controller-manager.service
 $ sudo systemctl status kube-controller-manager.service
 ```
 
+ 
 
+ 
+
+---
+
+ 
+
+ 
 
 ## 第四步：安装 kube-scheduler
 
@@ -400,7 +446,7 @@ $ sudo cp kube-scheduler /usr/bin/
 
 创建 service 文件：
 
-```
+```bash
 $ sudo vim /usr/lib/systemd/system/kube-scheduler.service
 [Unit]
 Description=Kubernetes Scheduler
@@ -419,7 +465,7 @@ WantedBy=multi-user.target
 
 创建配置文件，可参考官方配置：https://kubernetes.io/zh/docs/reference/command-line-tools-reference/kube-scheduler/
 
-```
+```bash
 $ sudo vim /etc/kubernetes/kube-scheduler
 KUBE_SCHEDULER_ARGS=" \
 --address=127.0.0.1 \
@@ -441,14 +487,22 @@ $ sudo systemctl start kube-scheduler.service
 $ sudo systemctl status kube-scheduler.service 
 ```
 
+ 
 
+ 
+
+---
+
+ 
+
+ 
 
 ## 第五步：配置 kubeconfig
 
 先创建 admin 用户的证书及私钥
 
 ```bash
-$ cd k8s-cluster/cert && mkdir admin && cd admin
+$ cd ~/k8s-cluster/cert && mkdir admin && cd admin
 
 $ vim openssl.cnf
 [req]
@@ -475,7 +529,7 @@ $ openssl x509 -req -in admin.csr -CA ../ca.pem -CAkey ../ca-key.pem -CAcreatese
 $ sudo cp kubectl /usr/bin/
 ```
 
-下面需要指定该证书的 Group 为 `system:masters`，而 `RBAC` 预定义的 `ClusterRoleBinding` 将 Group `system:masters` 与 ClusterRole `cluster-admin` 绑定，这就赋予了kubectl**所有集群权限**
+下面需要指定该证书的 Group 为 `system:masters`，而 `RBAC` 预定义的 `ClusterRoleBinding` 将 Group `system:masters` 与 ClusterRole `cluster-admin` 绑定，这就赋予了kubectl **所有集群权限**
 
 ```bash
 $ kubectl describe clusterrolebinding cluster-admin
@@ -511,6 +565,10 @@ Error from server (Forbidden): componentstatuses is forbidden: User "admin" cann
 
 怎么解决呐？解决方法在：https://github.com/kelseyhightower/kubernetes-the-hard-way/issues/197
 
+这是为什么呐？因为没有为 admin 用户创建 ClusterRoleBinding 。
+
+创建 ClusterRoleBinding ，ClusterRole 是 cluster-admin ，绑定的是用户 admin，这就赋予了kubectl **所有集群权限**
+
 ```bash
 $ mv .kube/config .kube/config1
 $ kubectl create clusterrolebinding root-cluster-admin-binding --clusterrole=cluster-admin --user=admin
@@ -524,7 +582,22 @@ etcd-0               Healthy   {"health":"true"}
 
 OK，完美。
 
+检查权限：
 
+```bash
+$ kubectl auth can-i list endpoints
+$ kubectl auth can-i list endpoints --as admin
+```
+
+ 
+
+ 
+
+---
+
+ 
+
+ 
 
 ## 第六步：安装 kubelet
 
@@ -538,7 +611,7 @@ $ sudo cp kubelet /usr/bin/
 
 创建 service：
 
-```
+```bash
 $ sudo vim /usr/lib/systemd/system/kubelet.service
 [Unit]
 Description=Kubernetes Kubelet Server
@@ -557,23 +630,28 @@ KillMode=process
 WantedBy=multi-user.target
 ```
 
-
-
 再创建配置文件，kubelet 的配置可以参考：https://kubernetes.io/zh/docs/reference/command-line-tools-reference/kubelet/
 
-```
+```bash
 $ sudo vim /etc/kubernetes/kubelet
 KUBELET_ARGS=" \
 --address=0.0.0.0 \
 --hostname-override=fueltank-1 \
 --kubeconfig=/home/admin/.kube/config \
 --cgroup-driver=systemd \
+--pod-infra-container-image=registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:3.1 \
+--cluster-dns=10.0.0.2 \
+--cluster-domain=cluster.fueltank. \
 "
 ```
 
+这里 `--pod-infra-container-image` 修改了 pause 镜像，因为国内无法获取默认的谷歌的 pause 镜像。
+
+`--cluster-dns` 指定了 dns ip，`--cluster-domain` 制指定了集群名称，这两个配置一会要在 CoreDNS 中使用。
+
 启动服务：
 
-```
+```bash
 $ sudo systemctl enable kubelet.service
 $ sudo systemctl start kubelet.service
 ```
@@ -587,13 +665,21 @@ NAME         STATUS   ROLES    AGE   VERSION
 fueltank-1   Ready    <none>   24m   v1.17.3
 ```
 
+ 
 
+ 
+
+---
+
+ 
+
+ 
 
 ## 第七步：安装 kube-proxy
 
-先生成 kube-proxy.kubeconfig 配置文件。
+为了让 kube-proxy 有权访问 kube-apiserver ，需要先生成 kube-proxy.kubeconfig 配置文件。
 
-生成配置文件使用的证书：
+生成 kube-proxy 用户需要使用的证书：
 
 ```bash
 $ cd k8s-cluster/cert && mkdir kube-proxy && cd kube-proxy
@@ -608,25 +694,29 @@ basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 subjectAltName = @alt_names
 [alt_names]
-DNS.5 = fueltank-1
+DNS.1 = fueltank-1
 IP.1 = 127.0.0.1
 IP.2 = 0.0.0.0
+IP.3 = 172.20.20.162
 
 $ openssl genrsa -out kube-proxy-key.pem 2048
 $ openssl req -new -key kube-proxy-key.pem -out kube-proxy.csr -subj "/CN=kube-proxy" -config openssl.cnf
-$ openssl x509 -req -in kube-proxy.csr -CA ../ca.pem -CAkey ../ca-key.pem -CAcreateserial -out kube-proxy.pem -days 365 -extensions v3_req -extfile openssl
-.cnf
+$ openssl x509 -req -in kube-proxy.csr -CA ../ca.pem -CAkey ../ca-key.pem -CAcreateserial -out kube-proxy.pem -days 365 -extensions v3_req -extfile openssl.cnf
 ```
 
-#### 生成 kube-proxy.kubeconfig
-
-使用`kubectl config` 生成kubeconfig 自动保存到 kube-proxy.kubeconfig
+使用`kubectl config` 生成 kubeconfig 并保存到 kube-proxy.kubeconfig
 
 ```bash
 $ kubectl config set-cluster fueltank --certificate-authority=/home/admin/k8s-cluster/cert/ca.pem --embed-certs=true --server=https://fueltank-1:6443 --kubeconfig=kube-proxy.kubeconfig
 $ kubectl config set-credentials kube-proxy --client-certificate=/home/admin/k8s-cluster/cert/kube-proxy/kube-proxy.pem --embed-certs=true --client-key=/home/admin/k8s-cluster/cert/kube-proxy/kube-proxy-key.pem --kubeconfig=kube-proxy.kubeconfig
-$ kubectl config set-context default --cluster=fueltank --user=kube-proxy --kubeconfig=kube-proxy.kubeconfig
-$ kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
+$ kubectl config set-context fueltank --cluster=fueltank --user=kube-proxy --kubeconfig=kube-proxy.kubeconfig
+$ kubectl config use-context fueltank --kubeconfig=kube-proxy.kubeconfig
+```
+
+为用户 kube-proxy 创建 ClusterRoleBinding ，ClusterRole 是 system:node-proxier。
+
+```
+$ kubectl create clusterrolebinding root-cluster-proxy-binding --clusterrole=system:node-proxier --user=kube-proxy
 ```
 
 运行完成后，会在当前目录生成一个 kube-proxy.kubeconfig 文件，下面需要把它放到 /etc/kubernetes 下：
@@ -635,9 +725,15 @@ $ kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
 $ sudo mv kube-proxy.kubeconfig /etc/kubernetes/
 ```
 
+ 
+
+---
+
+ 
+
 OK，下面来配置运行 kube-proxy
 
-kube-proxy 也是运行在 master 上的，
+kube-proxy 也是运行在 node 上的，
 
 将 kube-proxy 放入 PATH 中。
 
@@ -647,7 +743,7 @@ $ sudo cp kube-proxy /usr/bin/
 
 创建 service ：
 
-```
+```bash
 $ sudo vim /usr/lib/systemd/system/kube-proxy.service
 [Unit]
 Description=Kubernetes Kube-Proxy Server
@@ -667,7 +763,7 @@ WantedBy=multi-user.target
 
 创建配置文件：
 
-```
+```bash
 $ sudo vim /etc/kubernetes/kube-proxy
 KUBE_PROXY_ARGS=" \
 --bind-address=0.0.0.0 \
@@ -677,18 +773,152 @@ KUBE_PROXY_ARGS=" \
 "
 ```
 
+- `--hostname-override` 要和 kubelet 中配置的一样
+- `--kubeconfig` 使用刚才配置的配置文件
+
 启动：
 
-```
+```bash
 $ sudo systemctl enable kube-proxy.service
 $ sudo systemctl start kube-proxy.service
 ```
 
 检查：
 
-```
+```bash
 $ systemctl status kube-proxy
 ```
 
+ 
 
+ 
+
+---
+
+ 
+
+所有组件安装完成后，还需要安装一些插件，最重要的就是网络插件和 CoreDNS。网络插件这里我选的是 Calico。
+
+
+
+---
+
+ 
+
+ 
+
+## 第八步：安装 Calico
+
+Calico 安装官方文档：https://docs.projectcalico.org/getting-started/kubernetes/installation/calico#installing-with-the-kubernetes-api-datastore50-nodes-or-less
+
+Calico 的官方文档还是比较坑的，简直坑的一逼。
+
+先下载 yaml 文件：
+
+```bash
+$ curl https://docs.projectcalico.org/manifests/calico-etcd.yaml -o calico-etcd.yaml
+```
+
+这里让 calico 使用 etcd 储存。
+
+修改 calico-etcd.yaml 文件。
+
+首先修改名为 calico-etcd-secrets 的 Secret，注释中有说明怎么使用 CA，证书及私钥。
+
+使用命令 `cat <file> | base64 -w 0` 来编码 etcd 的 CA，证书及私钥。然后将生成的代码填充到 calico-etcd.yaml 的响应的位置即可。
+
+![image-20200304173322079](../../resource/image-20200304173322079.png)
+
+然后修改名为 calico-config 的 ConfigMap，按注释修改即可：
+
+![image-20200304174031434](../../resource/image-20200304174031434.png)
+
+然后修改 CALICO_IPV4POOL_CIDR：
+
+![image-20200304174616246](../../resource/image-20200304174616246.png)
+
+全部修改完成后，部署：
+
+```bash
+$ kubectl apply -f calico-etcd.yaml
+```
+
+查看结果：
+
+```bash
+$ kubectl get pods -n kube-system
+NAME                                       READY   STATUS    RESTARTS   AGE
+calico-kube-controllers-577b58d8d8-tcdjn   1/1     Running   0          2m
+calico-node-xvb64                          1/1     Running   0          2m
+```
+
+如果遇到错误，可以使用 `kubectl describe pod` 和 `kubectl logs` 来查看错误，一般都是 etcd 连接 和 kube-apiserver 连接的错误。
+
+etcd 连接出错要看 `calico-etcd.yaml` 中的 etcd 配置是否正确。
+
+如果是 kube-apiserver 连接错误，可能错误出在 kube-proxy 组件中 ，也可能出在权限没配好。
+
+ 
+
+ 
+
+---
+
+ 
+
+ 
+
+## CoreDNS
+
+https://www.jianshu.com/p/57d7c9e9f125
+
+在上边，下载并解压了 kubernetes-src 目录，进入这个目录。
+
+然后进入：
+
+```bash
+$ cd cluster/addons/dns/coredns/
+```
+
+编辑  transforms2sed.sed ：
+
+```
+s/__PILLAR__DNS__SERVER__/10.0.0.2/g
+s/__PILLAR__DNS__DOMAIN__/cluster.fueltank./g
+s/__PILLAR__CLUSTER_CIDR__/10.42.0.0\/16/g
+s/__PILLAR__DNS__MEMORY__LIMIT__/200Mi/g
+s/__MACHINE_GENERATED_WARNING__/Warning: This is a file generated from the base underscore template file: __SOURCE_FILENAME__/g
+```
+
+然后生成部署coreDNS所需的coredns.yaml文件：
+
+```bash
+$ sed -f transforms2sed.sed coredns.yaml.base > coredns.yaml
+```
+
+替换镜像，将 `k8s.gcr.io/coredns:1.6.5` 替换成`coredns/coredns:1.6.5`
+
+![image-20200304175910478](../../resource/image-20200304175910478.png)
+
+部署dns：
+
+```bash
+$ kubectl apply -f coredns.yam
+```
+
+检查：
+
+```bash
+$ kubectl get pods -n kube-system
+NAME                                       READY   STATUS    RESTARTS   AGE
+calico-kube-controllers-577b58d8d8-tcdjn   1/1     Running   0          113m
+calico-node-xvb64                          1/1     Running   0          113m
+coredns-7556c4b876-dtd5p                   1/1     Running   0          114m
+```
+
+测试 DNS 看这个链接：
+
+ [测试k8s集群中安装的CoreDNS.md](../CoreDNS/测试k8s集群中安装的CoreDNS.md) 
+
+我测试的是可以运行的。
 

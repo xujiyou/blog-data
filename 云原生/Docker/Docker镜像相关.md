@@ -20,6 +20,13 @@ $ sudo docker save quay.io/kiali/kiali:v1.9 -o  ./kiali1.9.tar
 $ sudo docker load < kiali1.9.tar
 ```
 
+由于 `gcr.io/google-samples/node-hello:1.0` 被墙，需要另想他法：
+
+```
+$ docker pull gcr.azk8s.cn/google-samples/node-hello:1.0
+$ docker tag gcr.azk8s.cn/google-samples/node-hello:1.0 gcr.io/google-samples/node-hello:1.0
+```
+
 
 
 ## 阿里云代理
