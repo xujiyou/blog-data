@@ -40,3 +40,8 @@ EOF
 ```
 
 重启docker
+
+
+
+## Docker 使用本机代理
+

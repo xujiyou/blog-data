@@ -30,6 +30,8 @@
 
    [Kubernetes-Operator教程.md](云原生/Kubernetes/Kubernetes-Operator教程.md) 
 
+    [Kubernetes-Ingress-Controller.md](云原生/Kubernetes/Kubernetes-Ingress-Controller.md) 
+
    
 
    [创建PV及PVC.md](云原生/Kubernetes/创建PV及PVC.md) 
