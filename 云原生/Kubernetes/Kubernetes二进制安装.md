@@ -324,6 +324,7 @@ KUBE_API_ARGS=" \
 --tls-private-key-file=/home/admin/k8s-cluster/cert/kube-apiserver/apiserver-key.pem \
 --enable-aggregator-routing=true \
 --service-account-key-file=/home/admin/k8s-cluster/cert/kube-apiserver/apiserver-key.pem \
+--allow-privileged=true \
 "
 ```
 
@@ -338,6 +339,7 @@ etcd 的地址和证书是要正确配置的
 - `--kubelet-https` 默认是 true，但是不必加 kubelet 的证书及私钥。
 - `--client-ca-file` 、`--tls-cert-file` 、`--tls-private-key-file` 一定要配置，否则启动不起来 ，客户端访问 kube-apiserver 都是要加密的。
 - `--service-account-key-file` 也是一定要配的，不配的话会影响 ServiceAccount 的使用，这个值和 `--tls-private-key-file ` 一样即可，被这个参数坑了半天。
+- `--allow-privileged` 一定要为 true ，因为后边的 calico 需要特权模式。
 
 启动服务：
 
@@ -648,6 +650,7 @@ KUBELET_ARGS=" \
 --cluster-dns=10.0.0.2 \
 --cluster-domain=cluster.fueltank. \
 --root-dir=/mnt/vde/kubelet \
+--network-plugin=cni \
 "
 ```
 
