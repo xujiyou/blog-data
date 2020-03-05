@@ -18,7 +18,7 @@ cp -rf /docker /<目标路径>/
 3.建立软连接
 
 ```
-sudo ln -s /mnt/vde/docker/ /var/lib/
+sudo ln -s /mnt/vde/docker/ /var/lib/docker
 ```
 
 4.重启docker服务

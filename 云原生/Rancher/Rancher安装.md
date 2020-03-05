@@ -37,7 +37,7 @@ $ sudo rm /etc/yum.repos.d/docker-ce.repo
 $ sudo yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
-$ sudo yum install docker-ce docker-ce-cli containerd.io
+$ sudo yum install docker-ce docker-ce-cli containerd.io -y
 ```
 
 启动 Docker，并加入开机启动：
@@ -52,7 +52,9 @@ $ sudo systemctl start docker
 ```bash
 $ sudo docker ps
 $ sudo docker images
+$ sudo docker volume ls
 $ sudo docker stop $(sudo docker ps -q)  # 停止全部容器
+$ # sudo docker volume rm $(sudo docker volume ls -q) #删除所有的数据卷
 $ #sudo docker rmi --force $(sudo docker images -q) # 删除全部镜像,可不做
 ```
 
@@ -70,14 +72,24 @@ $ #sudo docker rmi --force $(sudo docker images -q) # 删除全部镜像,可不�
 
 ```json
 {
-    "group": "docker"
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2",
+  "storage-opts": [
+    "overlay2.override_kernel_check=true"
+  ],
+  "group": "docker",
+  "registry-mirrors": ["https://4vra6qzb.mirror.aliyuncs.com"]
 }
 ```
 
 然后将需要运行 docker 的用户（非root，我这里是 admin）加入到 `docker` 用户组，保证普通用户可以运行 docker 命令。
 
 ```bash
-$ usermod -aG docker admin
+$ sudo usermod -aG docker admin
 ```
 
 这里有个坑：更改用户组之后，需要重启服务器，或者重新登录账号，才会生效！！！！

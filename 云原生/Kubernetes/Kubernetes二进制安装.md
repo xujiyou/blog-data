@@ -241,7 +241,7 @@ etcd 集群搞定之后，下一步安装 k8s 的各个组件，最后安装 Cal
 将 kube-apiserver 加入 PATH：
 
 ```bash
-$ cp kube-apiserver /usr/bin/kube-apiserver
+$ sudo cp kube-apiserver /usr/bin/
 ```
 
 编辑 systemd 服务文件：
@@ -525,10 +525,13 @@ $ openssl x509 -req -in admin.csr -CA ../ca.pem -CAkey ../ca-key.pem -CAcreatese
 
 ```
 
-将 kubectl 放入到 PATH：
+将 kubectl 放入到 PATH，并配置命令自动补全(CentOS，Bash)：
 
 ```bash
 $ sudo cp kubectl /usr/bin/
+$ yum install bash-completion -y
+$ source <(kubectl completion bash)
+$ echo "source <(kubectl completion bash)" >> ~/.bashrc
 ```
 
 下面需要指定该证书的 Group 为 `system:masters`，而 `RBAC` 预定义的 `ClusterRoleBinding` 将 Group `system:masters` 与 ClusterRole `cluster-admin` 绑定，这就赋予了kubectl **所有集群权限**
@@ -644,12 +647,15 @@ KUBELET_ARGS=" \
 --pod-infra-container-image=registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:3.1 \
 --cluster-dns=10.0.0.2 \
 --cluster-domain=cluster.fueltank. \
+--root-dir=/mnt/vde/kubelet \
 "
 ```
 
 这里 `--pod-infra-container-image` 修改了 pause 镜像，因为国内无法获取默认的谷歌的 pause 镜像。
 
 `--cluster-dns` 指定了 dns ip，`--cluster-domain` 制指定了集群名称，这两个配置一会要在 CoreDNS 中使用。
+
+`--root-dir` 将 kubelet 的数据保存到自定义目录中。
 
 启动服务：
 
@@ -827,7 +833,7 @@ $ curl https://docs.projectcalico.org/manifests/calico-etcd.yaml -o calico-etcd.
 
 首先修改名为 calico-etcd-secrets 的 Secret，注释中有说明怎么使用 CA，证书及私钥。
 
-使用命令 `cat <file> | base64 -w 0` 来编码 etcd 的 CA，证书及私钥。然后将生成的代码填充到 calico-etcd.yaml 的响应的位置即可。
+使用命令 `cat <file> | base64 -w 0` 来编码 etcd 的 CA，证书及私钥。然后将生成的代码填充到 calico-etcd.yaml 的相应的位置即可。
 
 ![image-20200304173322079](../../resource/image-20200304173322079.png)
 
@@ -924,13 +930,91 @@ coredns-7556c4b876-dtd5p                   1/1     Running   0          114m
 
 我测试的是可以运行的。
 
-
-
-
-
-
-
 如果想修改配置，可以这样子：
 
 ![企业微信截图_54f99652-f801-43f7-9d17-f94bc84b2d80](../../resource/54f99652-f801-43f7-9d17-f94bc84b2d80.png)
+
+停止服务脚本：
+
+```bash
+#!/usr/bin/env bash
+
+sudo systemctl stop kube-proxy
+sudo systemctl stop kubelet
+sudo systemctl stop kube-scheduler
+sudo systemctl stop kube-controller-manager
+sudo systemctl stop kube-apiserver
+```
+
+启动服务脚本：
+
+```bash
+#!/usr/bin/env bash
+
+sudo systemctl start kube-apiserver
+sudo systemctl start kube-controller-manager
+sudo systemctl start kube-scheduler
+sudo systemctl start kubelet
+sudo systemctl start kube-proxy
+```
+
+
+
+  
+
+---
+
+ 在其他节点也按照上面的操作来一遍，就可以自动组成一个集群了，注意证书和 kubeconfig 这些可以共享，还要注意配置的修改。
+
+---
+
+ 
+
+ 
+
+## 错误处理
+
+1. 节点的 ROLES 为 <none>：
+
+```bash
+$ kubectl get nodes
+NAME         STATUS   ROLES    AGE   VERSION
+fueltank-1   Ready    <none>   40h   v1.17.3
+fueltank-2   Ready    <none>   12h   v1.17.3
+fueltank-3   Ready    <none>   12h   v1.17.3
+```
+
+其实这里的 ROLES 是可以随便自定义的：
+
+```bash
+$ kubectl label node fueltank-1 node-role.kubernetes.io/master=master
+$ kubectl label node fueltank-2 node-role.kubernetes.io/master=master
+$ kubectl label node fueltank-3 node-role.kubernetes.io/master=master
+```
+
+自定义完成后：
+
+```bash
+$ kubectl get node
+NAME         STATUS   ROLES    AGE   VERSION
+fueltank-1   Ready    master   40h   v1.17.3
+fueltank-2   Ready    master   12h   v1.17.3
+fueltank-3   Ready    master   12h   v1.17.3
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
