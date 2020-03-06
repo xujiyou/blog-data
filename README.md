@@ -498,7 +498,13 @@ CDH 开始收费了，怎么说。。。
 
    [syslog-ng使用教程.md](Linux/syslog/syslog-ng使用教程.md) 
 
+   
+
 - iptables
+
+     [iptables教程.md](Linux/iptables/iptables教程.md) 
+
+
 
 - Shell
 
@@ -511,6 +517,8 @@ CDH 开始收费了，怎么说。。。
    [删除脚本.md](Linux/Shell/删除脚本.md) 
    
    [一次网络命令实践.md](Linux/Shell/一次网络命令实践.md) 
+   
+   [内核升级.md](Linux/Shell/内核升级.md) 
 
 
 

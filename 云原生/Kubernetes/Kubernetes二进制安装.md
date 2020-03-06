@@ -198,7 +198,7 @@ $ curl --cacert /etc/etcd/cert/etcd/ca.pem --cert /etc/etcd/cert/etcd/etcd.pem -
 查看 etcd 成员：
 
 ```bash
-$ etcdctl member list --cacert=/etc/etcd/cert/ca.pem
+$ etcdctl member list --cacert=/etc/etcd/cert/etcd/ca.pem
 87664c3cc645be22, started, fueltank-1, http://172.20.20.162:2380, https://172.20.20.162:2379
 8cf2a5bef867d7cf, started, fueltank-2, http://172.20.20.179:2380, https://172.20.20.179:2379
 a8070c86c64102fa, started, fueltank-3, http://172.20.20.145:2380, https://172.20.20.145:2379
@@ -869,6 +869,27 @@ etcd 连接出错要看 `calico-etcd.yaml` 中的 etcd 配置是否正确。
 
 如果是 kube-apiserver 连接错误，可能错误出在 kube-proxy 组件中 ，也可能出在权限没配好。
 
+### 配置 calicoctl
+
+先去网上下载二进制文件，下载地址：https://github.com/projectcalico/calicoctl/releases
+
+配置教程（etcd版本）：https://docs.projectcalico.org/getting-started/calicoctl/configure/etcd
+
+下载好放入 PATH 中，然后写配置文件 `/etc/calico/calicoctl.cfg`：
+
+```yaml
+apiVersion: projectcalico.org/v3
+kind: CalicoAPIConfig
+metadata:
+spec:
+  etcdEndpoints: https://fueltank-1:2379,https://fueltank-2:2379,https://fueltank-3:2379
+  etcdKeyFile: /etc/etcd/cert/etcd/etcd-key.pem
+  etcdCertFile: /etc/etcd/cert/etcd/etcd.pem
+  etcdCACertFile: /etc/etcd/cert/etcd/ca.pem
+```
+
+
+
  
 
  
@@ -879,7 +900,7 @@ etcd 连接出错要看 `calico-etcd.yaml` 中的 etcd 配置是否正确。
 
  
 
-## CoreDNS
+## ## 第九步：CoreDNS
 
 https://www.jianshu.com/p/57d7c9e9f125
 
