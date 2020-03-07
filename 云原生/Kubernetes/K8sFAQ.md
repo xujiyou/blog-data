@@ -107,3 +107,9 @@ $ kubectl exec -i -t prometheus-server-6f7c8bbb88-xzrr8 --container prometheus-s
 
 
 
+## 强制删除
+
+```
+$ kubectl delete pod kube-flannel-ds-amd64-ndlbs -n kube-system --force --grace-period=0
+```
+

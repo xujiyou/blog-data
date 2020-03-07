@@ -292,7 +292,7 @@ IP.1 = 127.0.0.1
 IP.2 = 172.20.20.162
 IP.3 = 172.20.20.179
 IP.4 = 172.20.20.145
-IP.5 = 10.0.0.1
+IP.5 = 10.43.0.1
 
 $ openssl genrsa -out apiserver-key.pem 2048
 $ openssl req -new -key apiserver-key.pem -out apiserver.csr -subj "/CN=kube-apiserver" -config openssl.cnf
@@ -578,9 +578,9 @@ Error from server (Forbidden): componentstatuses is forbidden: User "admin" cann
 创建 ClusterRoleBinding ，ClusterRole 是 cluster-admin ，绑定的是用户 admin，这就赋予了kubectl **所有集群权限**
 
 ```bash
-$ mv .kube/config .kube/config1
+$ mv ~/.kube/config ~/.kube/config1
 $ kubectl create clusterrolebinding root-cluster-admin-binding --clusterrole=cluster-admin --user=admin
-$ mv .kube/config1 .kube/config
+$ mv ~/.kube/config1 ~/.kube/config
 $ kubectl get componentstatus
 NAME                 STATUS    MESSAGE             ERROR
 scheduler            Healthy   ok                  

@@ -559,9 +559,9 @@ kubectl -n cattle-system patch  daemonsets cattle-node-agent --patch '{
                  {
                      "hostnames":
                         [
-                            "rancher.mybatis.io"
+                            "fueltank.bbdops.com"
                         ],
-                            "ip": "负载均衡IP"
+                            "ip": "172.20.20.179"
                  }
              ]
          }
