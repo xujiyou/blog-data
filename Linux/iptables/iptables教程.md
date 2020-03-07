@@ -153,7 +153,9 @@ Options 有：
 
 ![image-20200306214337852](../../resource/image-20200306214337852.png)
 
-主要是用于指定各项参数。
+主要是用于指定各项参数。注意 -t 参数，默认是 filter。另外还有 -j ，这个参数除了能表示规则之外还能表示自定义链！！！
+
+-x 用户控制显示的字节单位。
 
 
 
@@ -192,7 +194,7 @@ $ sudo iptables-restore < file
 
 ## 自定义链
 
-
+https://www.zsythink.net/archives/1625
 
 
 

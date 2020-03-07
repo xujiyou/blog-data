@@ -325,6 +325,7 @@ KUBE_API_ARGS=" \
 --enable-aggregator-routing=true \
 --service-account-key-file=/home/admin/k8s-cluster/cert/kube-apiserver/apiserver-key.pem \
 --allow-privileged=true \
+--service-cluster-ip-range=10.43.0.0/16 \
 "
 ```
 
@@ -647,7 +648,7 @@ KUBELET_ARGS=" \
 --kubeconfig=/home/admin/.kube/config \
 --cgroup-driver=systemd \
 --pod-infra-container-image=registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:3.1 \
---cluster-dns=10.0.0.2 \
+--cluster-dns=10.43.0.2 \
 --cluster-domain=cluster.fueltank. \
 --root-dir=/mnt/vde/kubelet \
 --network-plugin=cni \
@@ -846,7 +847,7 @@ $ curl https://docs.projectcalico.org/manifests/calico-etcd.yaml -o calico-etcd.
 
 然后修改 CALICO_IPV4POOL_CIDR：
 
-![image-20200304174616246](../../resource/image-20200304174616246.png)
+![image-20200307132532078](../../resource/image-20200307132532078.png)
 
 全部修改完成后，部署：
 
@@ -915,7 +916,7 @@ $ cd cluster/addons/dns/coredns/
 编辑  transforms2sed.sed ：
 
 ```
-s/__PILLAR__DNS__SERVER__/10.0.0.2/g
+s/__PILLAR__DNS__SERVER__/10.43.0.2/g
 s/__PILLAR__DNS__DOMAIN__/cluster.fueltank./g
 s/__PILLAR__CLUSTER_CIDR__/10.42.0.0\/16/g
 s/__PILLAR__DNS__MEMORY__LIMIT__/200Mi/g
