@@ -847,7 +847,7 @@ $ curl https://docs.projectcalico.org/manifests/calico-etcd.yaml -o calico-etcd.
 
 然后修改 CALICO_IPV4POOL_CIDR：
 
-![image-20200307132532078](../../resource/image-20200307132532078.png)
+![image-20200309121158408](../../resource/image-20200309121158408.png)
 
 全部修改完成后，部署：
 
