@@ -62,7 +62,13 @@ $ GOOS=linux go build
 
 编译好之后，将生成的二进制文件发到 Linux 系统上。
 
-在 Linux 系统上，直接执行 `./docker-uts`
+在 Linux 系统上，直接执行 :
+
+```bash
+$ sudo ./docker-uts
+```
+
+
 
 执行完成后，会进入一个 sh 命令行。
 
@@ -102,4 +108,122 @@ fueltank-1.cloud.bbdops.com
 ```
 
 可以看到外部的 hostnam 井没有被内部的修改所影响，由此可了解 UTS Namespac 的作用
+
+
+
+## PID Namespace
+
+PID Namespace 是用来隔离进程的，同样一个进程在不同的 Namespace 里面拥有不同的 PID。
+
+修改刚才的代码，加上 syscall.CLONE_NEWPID ：
+
+```go
+// +build linux
+
+package main
+
+import (
+	"log"
+	"os"
+	"os/exec"
+	"syscall"
+)
+
+func main() {
+	cmd := exec.Command("sh")
+	cmd.SysProcAttr = &syscall.SysProcAttr{
+		Cloneflags: syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID,
+	}
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	if err := cmd.Run(); err != nil {
+		log.Fatal(err)
+	}
+}
+```
+
+重新打包，上传。然后重新执行：
+
+```
+$ sudo ./docker-uts
+```
+
+然后：
+
+```
+$ echo $$
+1
+```
+
+这样子就会 发现当前进程ID变成 1 了。
+
+
+
+## Mount Namespace
+
+Mount Namespace 用来隔离各个进程看到的挂载点视图。在不同 Namespace 的进程中，看到的文件系统层次是不 样的。在 Mount Namespace 调用 mount（）和 umount（） 仅仅只会影响当前 Namespace 内的文件系统，而对全局的文件系统是没有影响的。
+
+对上面的代码加入 syscall.CLONE_NEWNS
+
+重新打包，上传。然后运行。进入新命令行后，依次运行：
+
+```bash
+$ ls /proc
+$ mount -t proc proc /proc
+$ ls /proc
+$ ps -ef
+```
+
+观察结果
+
+Docker Volume 是利用了这个特性。
+
+
+
+## User Namespace
+
+User Namespace 主要隔离的是用户组 ID，也就是说，一个进程的 User ID 和 Grroup ID 在 User Namespace 内外是 不同的 。
+
+将上面的代码加入 syscall.CLONE_NEWUSER 。
+
+重新打包，上传。然后重新执行：
+
+```bash
+$ sudo id
+$ sudo ./docker-uts
+```
+
+然后在容器内：
+
+```bash
+$ id
+```
+
+可以看到，前后的 id 是不同的。
+
+
+
+## Network Namespace
+
+Network Namespace 不止用来隔离网络设备，还可以用来隔离IP地址端口！！！
+
+关于网络命名空间可以看我的另一篇文章： [一次网络命令实践.md](../../Linux/Shell/一次网络命令实践.md) 
+
+
+
+## Cgroups
+
+上面理解了进程是如何隔离出单独的空间的，但如何限制空间的大小哪？这就要用到 Linux 的 Cgroups 技术了。
+
+Linux Cgroups 提供了对一组进程及将来的子进程的资源限制、控制和统计能力，这些资源包括CPU、内存、储存、网络等，通过 Cgroups，可以实时的监控进程的监控和统计信息。
+
+
+
+
+
+
+
+
 

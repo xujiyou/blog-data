@@ -1,5 +1,9 @@
 # Istio 安装教程
 
+Istio 1.5 发布了，架构发生了改变，幸好之前没深入学习，这下可以尝鲜了。
+
+官方安装教程(istioctl 方式)：https://istio.io/docs/setup/install/istioctl/
+
 首先去官方下载二进制包，或者用脚本下载
 
 ```

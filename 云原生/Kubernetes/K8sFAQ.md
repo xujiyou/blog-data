@@ -113,3 +113,21 @@ $ kubectl exec -i -t prometheus-server-6f7c8bbb88-xzrr8 --container prometheus-s
 $ kubectl delete pod kube-flannel-ds-amd64-ndlbs -n kube-system --force --grace-period=0
 ```
 
+
+
+## Pod内权限错误
+
+查看 pod 日志，出现错误：
+
+```
+mkdir: cannot create directory '/var/lib/zookeeper/data': Permission denied
+```
+
+在 pod 定义中加入：
+
+```
+securityContext:
+  runAsUser: 1000
+  fsGroup: 1000
+```
+

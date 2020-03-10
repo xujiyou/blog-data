@@ -27,7 +27,12 @@ $ docker pull gcr.azk8s.cn/google-samples/node-hello:1.0
 $ docker tag gcr.azk8s.cn/google-samples/node-hello:1.0 gcr.io/google-samples/node-hello:1.0
 ```
 
+另外还有：
 
+```yaml
+k8s.gcr.io/kubernetes-zookeeper:1.0-3.4.10
+gcr.azk8s.cn/google-containers/kubernetes-zookeeper:1.0-3.4.10
+```
 
 ## 阿里云代理
 

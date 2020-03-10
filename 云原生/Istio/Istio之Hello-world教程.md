@@ -73,6 +73,10 @@ public class HelloApi {
 
 ## 使用 Telepresence 简化开发流程
 
+Telepresence 也是 CNCF 的项目，用来简化 k8s 中微服务的开发流程。
+
+官方文档：https://www.telepresence.io/
+
 系统为MacOS，首先在本地安装 Telepresence：
 
 ```bash
@@ -88,7 +92,7 @@ $ telepresence --namespace xujiyou-test -n hello --expose 8080
 
 命令运行过程中会要求 root 权限，需输入密码。运行完成后，会出来一个bash命令行，在这个命令行里边，可以直接访问 k8s 的 service ！！！
 
-简单说明一下这个命令，这里的 -n 参数代表新创建一个名为 hello 的 Deployment 和同名的 Service。如果集群中已经存在这样的 Deployment 了，可以把 -n 替换成 -s，-s 是 --swap-deployment 的简称。
+简单说明一下这个命令，这里的 -n 参数代表新创建一个名为 hello 的 Deployment 和同名的 Service。如果集群中已经存在这样的 Deployment 了，可以把 -n 替换成 -s，-s 是 --swap-deployment 的简称，-n 是 --new-deployment 的简称。指定命名空间用 --namespace 。
 
 然后在 telepresence 生成的 bash 命令行中，运行以下命令
 

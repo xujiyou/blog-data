@@ -28,11 +28,11 @@
 
    [kubectl命令行参考.md](云原生/Kubernetes/kubectl命令行参考.md) 
 
-   [Kubernetes-Operator教程.md](云原生/Kubernetes/Kubernetes-Operator教程.md) 
-
-    [Kubernetes-Ingress-Controller.md](云原生/Kubernetes/Kubernetes-Ingress-Controller.md) 
+   [Kubernetes-Ingress-Controller.md](云原生/Kubernetes/Kubernetes-Ingress-Controller.md) 
 
    
+
+   [部署Zookeeper.md](云原生/Kubernetes/部署Zookeeper.md) 
 
    [创建PV及PVC.md](云原生/Kubernetes/创建PV及PVC.md) 
 
@@ -134,8 +134,6 @@
 
    [Istio安装教程.md](云原生/Istio/Istio安装教程.md) 
 
-   [Istio UI.md](云原生/Istio/Istio-UI.md) 
-
    [Istio Hello-world 教程.md](云原生/Istio/Istio之Hello-world教程.md) 
 
    [Istio 错误记录.md](云原生/Istio/Istio错误记录.md) 
@@ -157,6 +155,8 @@
    
 
 - Rook
+
+   [Rook安装.md](云原生/Rook/Rook安装.md) 
 
    [Rook-Ceph 块储存.md](云原生/Rook/Rook-Ceph块储存.md) 
 
@@ -260,9 +260,17 @@
 
    [Grafana入门.md](云原生/Grafana/Grafana入门.md) 
 
+   
+
 - Calico
 
    [calicoctl 使用方法.md](云原生/Calico/calicoctl使用方法.md) 
+
+
+
+- Operator
+
+   [Kubernetes-Operator教程.md](云原生/Operator/Kubernetes-Operator教程.md) 
 
 
 

@@ -12,3 +12,5 @@ kubernetes中的pause容器主要为每个业务容器提供以下功能：
 - 启用pid命名空间，开启init进程。
 
 pause容器的PID是1
+
+另外，pause 容器还有对接 CNI 的功能。
