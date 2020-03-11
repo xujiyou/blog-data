@@ -198,7 +198,10 @@ $ curl --cacert /etc/etcd/cert/etcd/ca.pem --cert /etc/etcd/cert/etcd/etcd.pem -
 查看 etcd 成员：
 
 ```bash
-$ etcdctl member list --cacert=/etc/etcd/cert/etcd/ca.pem
+$ export ETCDCTL_CACERT=/etc/etcd/cert/etcd/ca.pem
+$ export ETCDCTL_CERT=/etc/etcd/cert/etcd/etcd.pem
+$ export ETCDCTL_KEY=/etc/etcd/cert/etcd/etcd-key.pem
+$ etcdctl member list
 87664c3cc645be22, started, fueltank-1, http://172.20.20.162:2380, https://172.20.20.162:2379
 8cf2a5bef867d7cf, started, fueltank-2, http://172.20.20.179:2380, https://172.20.20.179:2379
 a8070c86c64102fa, started, fueltank-3, http://172.20.20.145:2380, https://172.20.20.145:2379
@@ -305,7 +308,7 @@ $ openssl x509 -req -in apiserver.csr -CA ../ca.pem -CAkey ../ca-key.pem -CAcrea
 $ sudo vim /etc/kubernetes/apiserver
 KUBE_API_ARGS=" \
 --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota,NodeRestriction,MutatingAdmissionWebhook,ValidatingAdmissionWebhook \
---apiserver-count=1 \
+--apiserver-count=3 \
 --allow-privileged=true \
 --audit-log-maxage=30 \
 --audit-log-maxbackup=3 \

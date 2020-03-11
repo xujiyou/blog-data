@@ -30,6 +30,8 @@
 
    [Kubernetes-Ingress-Controller.md](云原生/Kubernetes/Kubernetes-Ingress-Controller.md) 
 
+    [Kubernetes-Leader选举.md](云原生/Kubernetes/Kubernetes-Leader选举.md) 
+
    
 
    [部署Zookeeper.md](云原生/Kubernetes/部署Zookeeper.md) 
