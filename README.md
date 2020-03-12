@@ -28,7 +28,7 @@
 
    [Kubernetes-Ingress-Controller.md](云原生/Kubernetes/Kubernetes-Ingress-Controller.md) 
 
-    [Kubernetes-Leader选举.md](云原生/Kubernetes/Kubernetes-Leader选举.md) 
+   [Kubernetes-Leader选举.md](云原生/Kubernetes/Kubernetes-Leader选举.md) 
 
    
 
@@ -117,6 +117,26 @@
       [Kubernetes源码系列(六)-kube-controller-manager源码分析.md](云原生/Kubernetes/Kubernetes源码系列/Kubernetes源码系列(六)-kube-controller-manager源码分析.md) 
 
       [Kubernetes源码系列(七)-kube-apiserver源码分析.md](云原生/Kubernetes/Kubernetes源码系列/Kubernetes源码系列(七)-kube-apiserver源码分析.md) 
+
+   - Kubernetes 扩展机制
+
+   - Kubernetes API
+
+      [Kubernetes-API访问方式.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API访问方式.md) 
+
+      [swagger.json位置.md](云原生/Kubernetes/Kubernetes-API/swagger.json位置.md) 
+
+      [Kubernetes-API学习(一)-介绍.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(一)-介绍.md) 
+
+      [Kubernetes-API学习(二)-核心API.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(二)-核心API.md) 
+
+      [Kubernetes-API学习(三)-apps.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(三)-apps.md) 
+
+      [Kubernetes-API学习(四)-batch.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(四)-batch.md) 
+
+     
+
+     
 
    
 
@@ -587,6 +607,10 @@ CDH 开始收费了，怎么说。。。
 - OpenSSL
 
 - TensorFlow
+
+- 日常
+
+   [chrome没有继续前往.md](其他/日常/chrome没有继续前往.md) 
 
 
 

@@ -44,5 +44,58 @@ $ kube-apiserver -h
 
 ## Etcd flags
 
+etch falgs 的源码在 `staging/src/k8s.io/apiserver/pkg/server/options/etcd.go`
+
+一个 16 个配置项。
+
+- **--default-watch-cache-size int** 默认 watch 资源的缓存大小，如果为零，将对未设置默认监视大小的资源禁用监视缓存。（默认值100）
+- **--delete-collection-workers** 删除工作的协程数量，这些可用于加速命名空间的清理，默认为1
+- **--enable-garbage-collector** 启用通用垃圾收集器。 必须与kube-controller-manager的相应的配置同步。 （默认为true）
+- **--encryption-provider-config string** 一个文件路径，这个文件提供了配置，配置如何加密保存 etcd 中的 secrets。
+- **--etcd-cafile** etcd 连接用的 CA
+- **--etcd-certfile string ** etcd 连接用的证书
+- **--etcd-compaction-interval duration** 压缩请求的间隔。 如果为0，则禁用来自apiserver的压缩请求。 （默认为5m0s）
+- **--etcd-count-metric-poll-period duration** 针对每种类型的资源数量轮询etcd的频率。 0禁用度量标准收集。 （默认为1m0s）
+- **--etcd-keyfile string** etcd 的私钥
+- **--etcd-prefix string** etcd 键的前缀，默认是 "/registry"
+- **--etcd-servers strings** etcd 的连接地址，可多个，逗号分隔
+- **--etcd-servers-overrides strings** 每个资源的etcd服务器会覆盖，以逗号分隔。 单个替代格式：group/resource#servers，其中服务器是URL，以分号分隔。
+- **--storage-backend string** 储存后端，默认是 etcd3
+- **--storage-media-type string** etcd 中储存对象的类型，默认是  "application/vnd.kubernetes.protobuf"
+- **--watch-cache** 开启 watch 缓存，默认为 true
+- **--watch-cache-sizes strings** watch 缓存大小，可设置多个资源，以逗号分隔。格式为 resource[.group]#size ，没有设置的将使用 --default-watch-cache-size 配置的值。
+
+
+
+## Secure serving flags
+
+安全服务，9 个配置源码在：`staging/src/k8s.io/apiserver/pkg/server/options/serving.go`
+
+- **--bind-address ip** 绑定的 IP 地址，访问 kube-apiserver 时使用的 IP 地址，如果为空，则为 0.0.0.0，允许所有地址访问。
+- **--cert-dir string** 存放证书及私钥文件的目录地址，如果--tls-cert-file 和 --tls-private-key-file 配置设置了，这个配置将被忽略，默认是在 "/var/run/kubernetes"
+- **--http2-max-streams-per-connection int** 服务器为客户端提供的HTTP / 2连接中最大流数的限制。 零表示使用golang的默认值。
+- **--secure-port int** 安全端口，默认 6443
+- **--tls-cert-file string** 证书文件地址，如果 HTTPS 启用了，但是没有配置 --tls-cert-file 和 --tls-private-key-file，但是配置了 --cert-dir ，apiserver 将会自动生成证书到 --cert-dir 目录。
+- **--tls-cipher-suites strings ** 服务器的密码套件列表，以逗号分隔。 如果省略，将使用默认的Go密码套件。 可能的值：TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_RC4_128_SHA,TLS_RSA_WITH_3DES_EDE_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_RC4_128_SHA
+- **--tls-min-version string** TLS 最小版本，可能的值：VersionTLS10, VersionTLS11, VersionTLS12, VersionTLS13
+- **--tls-private-key-file string** 私钥地址
+- **--tls-sni-cert-key namedCertKey** 允许访问的地址，可以访问到的地址，如果未提供，将会使用证书中的地址，例子："example.crt,example.key" 或者 "foo.crt,foo.key:*.foo.com,foo.com". (默认 []) 这样就不必每次都改证书中的合法地址了。
+
+
+
+## Insecure serving flags
+
+不安全的服务，4个配置，都过期了，不要用了，简单列一下：--address ，--insecure-bind-address，-insecure-port，--port
+
+
+
+## Auditing flags
+
+审计配置，31个配置，全部以 audit 开头，源码在：`staging/src/k8s.io/apiserver/pkg/server/options/audit.go`
+
+- **--audit-dynamic-configuration** 
+
+
+
 
 
