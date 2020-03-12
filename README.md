@@ -26,8 +26,6 @@
 
    [pause容器作用.md](云原生/Kubernetes/pause容器作用.md) 
 
-   [kubectl命令行参考.md](云原生/Kubernetes/kubectl命令行参考.md) 
-
    [Kubernetes-Ingress-Controller.md](云原生/Kubernetes/Kubernetes-Ingress-Controller.md) 
 
     [Kubernetes-Leader选举.md](云原生/Kubernetes/Kubernetes-Leader选举.md) 
@@ -87,6 +85,38 @@
    [kubectl查看资源对象.md](云原生/Kubernetes/kubectl查看资源对象.md) 
 
    [Secret.md](云原生/Kubernetes/Secret.md) 
+
+   
+
+   - Kubernetes 配置系列
+
+      [kube-apiserver配置详解.md](云原生/Kubernetes/Kubernetes配置系列/kube-apiserver配置详解.md) 
+
+      [kube-controller-manager配置详解.md](云原生/Kubernetes/Kubernetes配置系列/kube-controller-manager配置详解.md) 
+
+      [kube-scheduler配置详解.md](云原生/Kubernetes/Kubernetes配置系列/kube-scheduler配置详解.md) 
+
+      [kube-proxy配置详解.md](云原生/Kubernetes/Kubernetes配置系列/kube-proxy配置详解.md) 
+
+      [kubelet配置详解.md](云原生/Kubernetes/Kubernetes配置系列/kubelet配置详解.md) 
+
+      [kubectl命令行参考.md](云原生/Kubernetes/Kubernetes配置系列/kubectl命令行参考.md) 
+
+   - Kubernetes 源码系列
+
+      [Kubernetes源码系列(一)-源码结构.md](云原生/Kubernetes/Kubernetes源码系列/Kubernetes源码系列(一)-源码结构.md) 
+
+      [Kubernetes源码系列(二)-kubectl源码分析.md](云原生/Kubernetes/Kubernetes源码系列/Kubernetes源码系列(二)-kubectl源码分析.md) 
+
+      [Kubernetes源码系列(三)-kube-proxy源码分析.md](云原生/Kubernetes/Kubernetes源码系列/Kubernetes源码系列(三)-kube-proxy源码分析.md) 
+
+      [Kubernetes源码系列(四)-kubelet源码分析.md](云原生/Kubernetes/Kubernetes源码系列/Kubernetes源码系列(四)-kubelet源码分析.md) 
+
+      [Kubernetes源码系列(五)-kube-scheduler源码分析.md](云原生/Kubernetes/Kubernetes源码系列/Kubernetes源码系列(五)-kube-scheduler源码分析.md) 
+
+      [Kubernetes源码系列(六)-kube-controller-manager源码分析.md](云原生/Kubernetes/Kubernetes源码系列/Kubernetes源码系列(六)-kube-controller-manager源码分析.md) 
+
+      [Kubernetes源码系列(七)-kube-apiserver源码分析.md](云原生/Kubernetes/Kubernetes源码系列/Kubernetes源码系列(七)-kube-apiserver源码分析.md) 
 
    
 
@@ -421,6 +451,12 @@ CDH 开始收费了，怎么说。。。
     [摆脱GOPATH.md](编程语言/Golang/摆脱GOPATH.md) 
 
     [Golang教程.md](编程语言/Golang/Golang教程.md) 
+
+    [Go-FAQ.md](编程语言/Golang/Go-FAQ.md) 
+
+    - Cobra
+
+       [Cobra入门.md](编程语言/Golang/Cobra/Cobra入门.md) 
 
 - Swift
 

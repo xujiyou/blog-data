@@ -131,3 +131,23 @@ securityContext:
   fsGroup: 1000
 ```
 
+
+
+## kubectl api-resources 出错
+
+在执行`kubectl api-resources` 时报错：
+
+```
+error: unable to retrieve the complete list of server APIs: packages.operators.coreos.com/v1: the server is currently unable to handle the request
+```
+
+这是因为之前删东西没删干净造成的。
+
+可以这样解决：
+
+```
+$ kubectl get apiservice
+```
+
+找出 AVAILABLE 为 false 的项
+
