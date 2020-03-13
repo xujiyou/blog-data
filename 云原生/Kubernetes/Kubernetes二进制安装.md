@@ -730,7 +730,7 @@ $ kubectl config use-context fueltank --kubeconfig=kube-proxy.kubeconfig
 
 为用户 kube-proxy 创建 ClusterRoleBinding ，ClusterRole 是 system:node-proxier。
 
-```
+```bash
 $ kubectl create clusterrolebinding root-cluster-proxy-binding --clusterrole=system:node-proxier --user=kube-proxy
 ```
 
