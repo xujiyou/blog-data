@@ -95,7 +95,152 @@ etch falgs 的源码在 `staging/src/k8s.io/apiserver/pkg/server/options/etcd.go
 
 审计配置，31个配置，全部以 audit 开头，源码在：`staging/src/k8s.io/apiserver/pkg/server/options/audit.go`
 
-- **--audit-dynamic-configuration** 
+- **--audit-dynamic-configuration** 启用动态审计配置。 此功能还需要DynamicAuditing功能标志
+- **--audit-log-batch-buffer-size int** 批处理和写入之前用于存储事件的缓冲区大小。 仅在批处理模式下使用。 （默认为10000）
+- **--audit-log-batch-max-size int** 最大的批处理数量，默认为 1
+- **--audit-log-batch-max-wait duration** 强制写入尚未达到最大大小的批处理之前要等待的时间。 仅在批处理模式下使用。
+- **--audit-log-batch-throttle-burst int** 如果之前未使用ThrottleQPS，则同时发送的最大请求数。 仅在批处理模式下使用。
+- **--audit-log-batch-throttle-enable** 是否启用了批量调节。 仅在批处理模式下使用。
+- **--audit-log-batch-throttle-qps float32** 每秒的最大平均批数。 仅在批处理模式下使用。
+- **--audit-log-format string** 审计的日志格式。 “legacy”表示每个事件的1行文本格式。 “ json”表示结构化的json格式。 已知格式为legacy，json。 （默认为“ json”）
+- **--audit-log-maxage int** 根据文件名中编码的时间戳记保留旧审核日志文件的最大天数。
+- **--audit-log-maxbackup int** 保留的旧审计日志文件的最大数量。
+- **--audit-log-maxsize int** 保存之前，审核日志文件的最大大小（以兆字节为单位）。
+- **--audit-log-mode string**  发送审核事件的策略。 Blocking 表示发送事件应阻止服务器响应。 批处理导致后端异步缓冲和写入事件。 已知的模式是batch,blocking,blocking-strict。 （默认为“blocking”）
+- **--audit-log-path string** 审计日志保存地址，“-”表示标准输出。
+- **--audit-log-truncate-enabled** 是否启用事件和批处理截断。
+- **--audit-log-truncate-max-batch-size int ** 发送到基础后端的批处理的最大大小。 实际的序列化大小可能会增加数百个字节。 如果一个批次超出此限制，则将其分成几个较小的批次。 （默认10485760）
+- **--audit-log-truncate-max-event-size int** 发送到基础后端的审核事件的最大大小。 如果事件的大小大于此数字，则将删除第一个请求和响应，并且如果事件的大小没有减小到足够的数量，则将事件丢弃。 （默认为102400）
+- **--audit-log-version string** 用于序列化写入日志的审核事件的API组和版本。 （默认为“ audit.k8s.io/v1”）
+- **--audit-policy-file string** 定义审核策略配置的文件的路径。
+- **--audit-webhook-batch-buffer-size int** 批处理和写入之前用于存储事件的缓冲区大小。 仅在批处理模式下使用。 （默认为10000）
+- **--audit-webhook-batch-max-size int ** 批处理的最大大小。 仅在批处理模式下使用。 （默认为400）
+
+webhook 与 log 的区别就是发往文件还是网络，其他都是一样的。
+
+
+
+## Features flags
+
+- **--contention-profiling** 如果启用了概要分析，则启用锁争用概要分析
+- **--profiling** 启用 web 界面查看 host:port/debug/pprof/ (default true)
+
+
+
+## Authentication flags
+
+认证配置
+
+- **--anonymous-auth** 启用对API服务器的安全端口的匿名请求。 未被其他身份验证方法拒绝的请求被视为匿名。 匿名请求的用户名是system：anonymous，组名是system：unauthenticated。 （默认为true）
+- **--api-audiences strings** API的标识符。 ServiceAccount token 验证者将验证针对API使用的令牌是否已绑定到这些受众中的至少一个。 如果配置了--service-account-issuer标志，但未配置此标志，则此字段默认为包含发布者URL的单个元素列表。
+- **--authentication-token-webhook-cache-ttl duration** 缓存来自Webhook token 身份验证器的响应的持续时间。 （默认为2m0s）
+- **--authentication-token-webhook-config-file string** 具有webhook配置的文件，用于以kubeconfig格式进行 token 认证。 API服务器将查询远程服务，以确定bearer token 的身份验证。
+- **--authentication-token-webhook-version string**  the authentication.k8s.io TokenReview 使用的 API 版本
+- **--client-ca-file string** 如果已设置，则使用与客户端证书的CommonName对应的标识对任何提出由client-ca文件中的授权机构之一签名的客户端证书的请求进行身份验证。
+- **--enable-bootstrap-token-auth** 启用以允许将 kube-system 名称空间中类型为  bootstrap.kubernetes.io/token 的 Secret 用于TLS引导身份验证。
+- **--oidc-ca-file string** 如果设置，则OpenID服务器的证书将由oidc-ca文件中的授权机构之一验证，否则将使用主机的根CA设置。
+- **--oidc-client-id string** 如果设置了oidc-issuer-url，则必须设置OpenID Connect客户端的客户端ID。
+- **--oidc-groups-claim string** 如果提供的话，用于指定用户组的定制OpenID Connect声明的名称。 声明值应为字符串或字符串数组。 此标志是实验性的，请参阅身份验证文档以获取更多详细信息。
+
+
+
+
+
+
+
+
+
+## Authorization flags
+
+授权配置 
+
+
+
+## Cloud provider flags
+
+- **--cloud-config** 云厂商的配置文件
+- **--cloud-provider** 云厂商
+
+
+
+## API enablement flags
+
+**--runtime-config mapStringString** ，一个键值对Map，支持的选项如下：
+
+v1=true|false for the core API group
+<group>/<version>=true|false for a specific API group and version (e.g. apps/v1=true)
+api/all=true|false controls all API versions
+api/ga=true|false controls all API versions of the form v[0-9]+
+api/beta=true|false controls all API versions of the form v[0-9]+beta[0-9]+
+api/alpha=true|false controls all API versions of the form v[0-9]+alpha[0-9]+
+api/legacy is deprecated, and will be removed in a future version
+
+
+
+## Egress selector flags
+
+**--egress-selector-config-file string**
+
+带有apiserver出口选择器配置的文件。
+
+
+
+## Admission flags
+
+
+
+## Metrics flags
+
+指标选项
+
+**--show-hidden-metrics-for-version string**
+
+您要为其显示隐藏指标的先前版本。 仅先前的次要版本有意义，将不允许其他值。 格式为<major>。<minor>，例如：“ 1.16”。 这种格式的目的是确保您有机会注意到下一个发行版是否隐藏了其他指标，而不是在以后将其永久删除时感到惊讶。
+
+
+
+## Misc flags
+
+杂项
+
+- **--allow-privileged** 是否允许特权模式 ，calico 需要运行在特权模式
+- **--apiserver-count int** 群集中运行的apiserver的数量，必须为正数。 （在启用--endpoint-reconciler-type=master-count时使用。）（默认值为1）
+- **--enable-aggregator-routing** 打开到端点IP而不是集群IP的聚合器路由请求。
+- **--endpoint-reconciler-type string** 使用哪种 reconciler， (master-count, lease, none) (default "lease")
+- **--event-ttl duration ** 事件保留的时间，默认为 1 小时
+- **--kubelet-certificate-authority string** kubelet 使用的 CA 文件
+- **--kubelet-client-certificate string** kubelet 使用的证书文件
+- **--kubelet-client-key string** kubelet 使用的私钥文件
+- **--kubelet-https** 访问 kubelet 时使用 https，默认为 true
+- **--kubelet-preferred-address-types strings** 用于kubelet连接的首选NodeAddressTypes列表，(default [Hostname,InternalDNS,InternalIP,ExternalDNS,ExternalIP])
+- **--kubelet-timeout duration** kubelet 操作的超时时间
+- **--kubernetes-service-node-port int** 如果非零，那么Kubernetes主服务（由apiserver创建/维护）将是NodePort类型，使用它作为端口的值。 如果为零，则Kubernetes主服务将为ClusterIP类型。
+- **--max-connection-bytes-per-sec int ** 如果不为零，则将每个用户连接限制为该字节数/秒。 当前仅适用于长时间运行的请求。
+- **--proxy-client-cert-file string** 通过代理访问 apiserver 时用到的证书文件
+- **--proxy-client-key-file string** 通过代理访问 apiserver 时用到的私钥文件
+- **--service-account-signing-key-file string** Path to the file that contains the current private key of the service account token issuer. The issuer will sign issued ID tokens with this private key. (Requires the 'TokenRequest' feature gate.)
+- **--service-cluster-ip-range string ** service 用到的 ip 范围 
+- **--service-node-port-range portRange** NodePort 使用到的端口范围
+
+
+
+## Global flags
+
+- **--add-dir-header ** If true, adds the file directory to the header
+- **--alsologtostderr** log to standard error as well as files
+- **-h, --help** 查看帮助 
+- **--log-backtrace-at traceLocation** when logging hits line file:N, emit a stack trace (default :0)
+- **--log-dir string** 日志目录
+- **--log-file string** 日志文件
+- **--log-file-max-size uint** 定义日志文件可以增长到的最大大小。 单位为兆字节。 如果值为0，则最大文件大小为无限制。 （默认为1800）
+- **--log-flush-frequency duration** 日志刷新的时间间隔，默认 5 秒
+- **--logtostderr** log to standard error instead of files (default true)
+- **--skip-headers** If true, avoid header prefixes in the log messages
+- **--skip-log-headers** If true, avoid headers when opening log files
+- **--stderrthreshold severity** logs at or above this threshold go to stderr (default 2)
+- **-v, --v Level** 日志等级
+- **--version version[=true]** 查看版本
+- ** --vmodule moduleSpec**  以逗号分隔的pattern = N设置列表，用于文件过滤的日志记录
 
 
 

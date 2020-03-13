@@ -308,6 +308,7 @@ $ openssl x509 -req -in apiserver.csr -CA ../ca.pem -CAkey ../ca-key.pem -CAcrea
 $ sudo vim /etc/kubernetes/apiserver
 KUBE_API_ARGS=" \
 --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota,NodeRestriction,MutatingAdmissionWebhook,ValidatingAdmissionWebhook \
+--endpoint-reconciler-type=master-count \
 --apiserver-count=3 \
 --allow-privileged=true \
 --audit-log-maxage=30 \
