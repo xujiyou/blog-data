@@ -2,6 +2,8 @@
 
 kube-apiserver 配置官方文档：https://kubernetes.io/zh/docs/reference/command-line-tools-reference/kube-apiserver/
 
+共 90 多个配置项。
+
 官方文档的配置是没经过分类的。可以通过以下命令来查看分类过后的全部配置选项：
 
 ```bash
