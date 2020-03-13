@@ -16,77 +16,27 @@
 
    [Kubernetes二进制安装.md](云原生/Kubernetes/Kubernetes二进制安装.md) 
 
-   [核心组件运行原理.md](云原生/Kubernetes/核心组件运行原理.md) 
+    [核心组件运行原理.md](云原生/Kubernetes/核心组件运行原理.md) 
 
-   [深入分析集群安全机制.md](云原生/Kubernetes/深入分析集群安全机制.md) 
+    [Kubernetes-Leader选举.md](云原生/Kubernetes/Kubernetes-Leader选举.md) 
 
-   [k8s网络原理.md](云原生/Kubernetes/k8s网络原理.md)
+    [k8s网络原理.md](云原生/Kubernetes/k8s网络原理.md) 
 
-   [共享储存原理.md](云原生/Kubernetes/共享储存原理.md) 
+    [共享储存原理.md](云原生/Kubernetes/共享储存原理.md) 
 
-   [pause容器作用.md](云原生/Kubernetes/pause容器作用.md) 
+    [深入分析集群安全机制.md](云原生/Kubernetes/深入分析集群安全机制.md) 
 
-   [Kubernetes-Ingress-Controller.md](云原生/Kubernetes/Kubernetes-Ingress-Controller.md) 
+    [pause容器作用.md](云原生/Kubernetes/pause容器作用.md) 
 
-   [Kubernetes-Leader选举.md](云原生/Kubernetes/Kubernetes-Leader选举.md) 
+    [Secret.md](云原生/Kubernetes/Secret.md) 
 
-   
+    [Kubernetes-Ingress-Controller.md](云原生/Kubernetes/Kubernetes-Ingress-Controller.md) 
 
-   [部署Zookeeper.md](云原生/Kubernetes/部署Zookeeper.md) 
+    [K8sFAQ.md](云原生/Kubernetes/K8sFAQ.md) 
 
-   [创建PV及PVC.md](云原生/Kubernetes/创建PV及PVC.md) 
+    [二进制部署Flannel.md](云原生/Kubernetes/二进制部署Flannel.md) 
 
-   [从私有仓库拉取镜像.md](云原生/Kubernetes/从私有仓库拉取镜像.md) 
-
-   [公开外部IP地址以访问集群中应用程序.md](云原生/Kubernetes/公开外部IP地址以访问集群中应用程序.md) 
-
-   [将 Pod 分配给节点.md](云原生/Kubernetes/将Pod分配给节点.md) 
-
-   [配置 Pod 初始化.md](云原生/Kubernetes/配置Pod初始化.md) 
-
-   [配置 Pod 的服务质量.md](云原生/Kubernetes/配置Pod的服务质量.md) 
-
-   [配置 Pod 使用投射卷作存储.md](云原生/Kubernetes/配置Pod使用投射卷作存储.md) 
-
-   [配置 Pod 以使用卷进行存储.md](云原生/Kubernetes/配置Pod以使用卷进行存储.md) 
-
-   [配置存活、就绪和启动探测器.md](云原生/Kubernetes/配置存活、就绪和启动探测器.md) 
-
-   [使用 ConfigMap 配置 Pod.md](云原生/Kubernetes/使用ConfigMap配置Pod.md) 
-
-   [使用 CronJob 运行自动化任务.md](云原生/Kubernetes/使用CronJob运行自动化任务.md) 
-
-   [使用 PodPreset 将信息注入 Pods.md](云原生/Kubernetes/使用PodPreset将信息注入Pods.md) 
-
-   [使用 Secret 安全地分发凭证.md](云原生/Kubernetes/使用Secret安全地分发凭证.md) 
-
-   [使用扩展进行并行处理.md](云原生/Kubernetes/使用扩展进行并行处理.md) 
-
-   [使用ConfigMap来配置Redis.md](云原生/Kubernetes/使用ConfigMap来配置Redis.md) 
-
-   [示例：使用 Persistent Volumes 部署 WordPress 和 MySQL.md](云原生/Kubernetes/示例：使用PV部署WordPress和MySQL.md) 
-
-   [示例：使用 Redis 部署 PHP 留言板应用程序.md](云原生/Kubernetes/示例：使用Redis部署PHP留言板应用程序.md) 
-
-   [通过环境变量将Pod信息呈现给容器.md](云原生/Kubernetes/通过环境变量将Pod信息呈现给容器.md) 
-
-   [通过文件将Pod信息呈现给容器.md](云原生/Kubernetes/通过文件将Pod信息呈现给容器.md) 
-
-   [为节点发布扩展资源-为容器分派扩展资源.md](云原生/Kubernetes/为节点发布扩展资源-为容器分派扩展资源.md) 
-
-   [为容器的生命周期事件设置处理函数.md](云原生/Kubernetes/为容器的生命周期事件设置处理函数.md) 
-
-   [为容器设置启动时要执行的命令及其入参.md](云原生/Kubernetes/为容器设置启动时要执行的命令及其入参.md) 
-
-   [在 Pod 中的容器之间共享进程命名空间.md](云原生/Kubernetes/在Pod中的容器之间共享进程命名空间.md) 
-
-   [K8sFAQ.md](云原生/Kubernetes/K8sFAQ.md) 
-
-   [kubectl查看资源对象.md](云原生/Kubernetes/kubectl查看资源对象.md) 
-
-   [Secret.md](云原生/Kubernetes/Secret.md) 
-
-   
+    [kubectl查看资源对象.md](云原生/Kubernetes/kubectl查看资源对象.md) 
 
    - Kubernetes 配置系列
 
@@ -134,7 +84,55 @@
 
       [Kubernetes-API学习(四)-batch.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(四)-batch.md) 
 
-     
+   - 动手操作
+
+      [部署Zookeeper.md](云原生/Kubernetes/动手操作/部署Zookeeper.md) 
+
+      [创建PV及PVC.md](云原生/Kubernetes/动手操作/创建PV及PVC.md) 
+
+      [从私有仓库拉取镜像.md](云原生/Kubernetes/动手操作/从私有仓库拉取镜像.md) 
+
+      [公开外部IP地址以访问集群中应用程序.md](云原生/Kubernetes/动手操作/公开外部IP地址以访问集群中应用程序.md) 
+
+      [将Pod分配给节点.md](云原生/Kubernetes/动手操作/将Pod分配给节点.md) 
+
+      [配置存活、就绪和启动探测器.md](云原生/Kubernetes/动手操作/配置存活、就绪和启动探测器.md) 
+
+      [配置Pod初始化.md](云原生/Kubernetes/动手操作/配置Pod初始化.md) 
+
+      [配置Pod的服务质量.md](云原生/Kubernetes/动手操作/配置Pod的服务质量.md) 
+
+      [配置Pod使用投射卷作存储.md](云原生/Kubernetes/动手操作/配置Pod使用投射卷作存储.md) 
+
+      [配置Pod以使用卷进行存储.md](云原生/Kubernetes/动手操作/配置Pod以使用卷进行存储.md) 
+
+      [使用扩展进行并行处理.md](云原生/Kubernetes/动手操作/使用扩展进行并行处理.md) 
+
+      [使用ConfigMap来配置Redis.md](云原生/Kubernetes/动手操作/使用ConfigMap来配置Redis.md) 
+
+      [使用ConfigMap配置Pod.md](云原生/Kubernetes/动手操作/使用ConfigMap配置Pod.md) 
+
+      [使用CronJob运行自动化任务.md](云原生/Kubernetes/动手操作/使用CronJob运行自动化任务.md) 
+
+      [使用PodPreset将信息注入Pods.md](云原生/Kubernetes/动手操作/使用PodPreset将信息注入Pods.md) 
+
+      [使用Secret安全地分发凭证.md](云原生/Kubernetes/动手操作/使用Secret安全地分发凭证.md) 
+
+      [示例：使用PV部署WordPress和MySQL.md](云原生/Kubernetes/动手操作/示例：使用PV部署WordPress和MySQL.md) 
+
+      [示例：使用Redis部署PHP留言板应用程序.md](云原生/Kubernetes/动手操作/示例：使用Redis部署PHP留言板应用程序.md) 
+
+      [通过环境变量将Pod信息呈现给容器.md](云原生/Kubernetes/动手操作/通过环境变量将Pod信息呈现给容器.md) 
+
+      [通过文件将Pod信息呈现给容器.md](云原生/Kubernetes/动手操作/通过文件将Pod信息呈现给容器.md) 
+
+      [为节点发布扩展资源-为容器分派扩展资源.md](云原生/Kubernetes/动手操作/为节点发布扩展资源-为容器分派扩展资源.md) 
+
+      [为容器的生命周期事件设置处理函数.md](云原生/Kubernetes/动手操作/为容器的生命周期事件设置处理函数.md) 
+
+      [为容器设置启动时要执行的命令及其入参.md](云原生/Kubernetes/动手操作/为容器设置启动时要执行的命令及其入参.md) 
+
+      [在Pod中的容器之间共享进程命名空间.md](云原生/Kubernetes/动手操作/在Pod中的容器之间共享进程命名空间.md) 
 
      
 
