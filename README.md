@@ -38,6 +38,8 @@
 
     [kubectl查看资源对象.md](云原生/Kubernetes/kubectl查看资源对象.md) 
 
+    [List-Watch原理.md](云原生/Kubernetes/List-Watch原理.md) 
+
    - Kubernetes 配置系列
 
       [kube-apiserver配置详解.md](云原生/Kubernetes/Kubernetes配置系列/kube-apiserver配置详解.md) 
@@ -471,6 +473,8 @@ CDH 开始收费了，怎么说。。。
     [Golang教程.md](编程语言/Golang/Golang教程.md) 
 
     [Go-FAQ.md](编程语言/Golang/Go-FAQ.md) 
+
+    [Go命令详解.md](编程语言/Golang/Go命令详解.md) 
 
     - Cobra
 

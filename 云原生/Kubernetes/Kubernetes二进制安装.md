@@ -508,7 +508,7 @@ $ sudo systemctl status kube-scheduler.service
 
 ## 第五步：配置 kubeconfig
 
-先创建 admin 用户的证书及私钥
+先创建 admin 用户的证书及私钥，注意这里的 CA 证书一定使用和 kube-server 一样的 CA 证书，CN 是用户名。
 
 ```bash
 $ cd ~/k8s-cluster/cert && mkdir admin && cd admin
@@ -568,6 +568,8 @@ $ kubectl config use-context fueltank
 $ cat .kube/config
 ```
 
+
+
 这时候检查组件，但是会出一个错误：
 
 ```bash
@@ -577,20 +579,38 @@ Error from server (Forbidden): componentstatuses is forbidden: User "admin" cann
 
 怎么解决呐？解决方法在：https://github.com/kelseyhightower/kubernetes-the-hard-way/issues/197
 
-这是为什么呐？因为没有为 admin 用户创建 ClusterRoleBinding 。
+这是为什么呐？因为没有为 admin 用户只是在外部创建了，还没有集群的管理权限，可以创建一个新的 ClusterRoleBinding，也可以修改上边的 `cluster-admin` 这个 ClusterRoleBinding。
 
-创建 ClusterRoleBinding ，ClusterRole 是 cluster-admin ，绑定的是用户 admin，这就赋予了kubectl **所有集群权限**
+注意这里在没有权限时要使用 8080 这个非安全端口，这里一定要是 127.0.0.1 ，且防火墙应该把 8080 端口封掉。
+
+1. 可以修改 cluster-admin
+
+   ```bash
+   $ kubectl edit clusterrolebinding cluster-admin --server=http://127.0.0.1:8080
+   ```
+
+   往 subjects 中加入以下代码：
+
+   ```yaml
+   - apiGroup: rbac.authorization.k8s.io
+     kind: User
+     name: admin
+   ```
+
+   
+
+2. 另外也可以创建 ClusterRoleBinding ，ClusterRole 是 cluster-admin ，绑定的是用户 admin，这就赋予了kubectl **所有集群权限**
 
 ```bash
-$ mv ~/.kube/config ~/.kube/config1
-$ kubectl create clusterrolebinding root-cluster-admin-binding --clusterrole=cluster-admin --user=admin
-$ mv ~/.kube/config1 ~/.kube/config
+$ kubectl create clusterrolebinding root-cluster-admin-binding --clusterrole=cluster-admin --user=admin --server=http://127.0.0.1:8080
 $ kubectl get componentstatus
 NAME                 STATUS    MESSAGE             ERROR
 scheduler            Healthy   ok                  
 controller-manager   Healthy   ok                  
 etcd-0               Healthy   {"health":"true"}
 ```
+
+
 
 OK，完美。
 
