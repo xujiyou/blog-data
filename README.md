@@ -226,13 +226,17 @@
 
 - gRPC
 
-   [gRPC入门.md](云原生/gRPC/gRPC入门.md) 
+    [Java构建gRPC服务.md](云原生/gRPC/Java构建gRPC服务.md) 
 
     [Protobuf语法.md](云原生/gRPC/Protobuf语法.md) 
 
+    [Golang构建gRPC服务.md](云原生/gRPC/Golang构建gRPC服务.md) 
+
    
 
-- Etcd
+- etcd
+
+    [etcd-demo.md](云原生/Etcd/etcd-demo.md) 
 
     [etcd配置详解.md](云原生/Etcd/etcd配置详解.md) 
 

@@ -80,3 +80,46 @@ func (u UserResource) findUser(request *restful.Request, response *restful.Respo
 }
 ```
 
+3. 返回 Json：
+
+```go
+package server
+
+import (
+	"encoding/json"
+	"github.com/emicklei/go-restful/v3"
+	"io"
+	"log"
+	"net/http"
+)
+
+type Book struct {
+	Name string `json:"name"`
+	Id string `json:"id"`
+}
+
+func Run(subCommand SubCommand) {
+	webService := new(restful.WebService)
+
+	switch subCommand {
+	case FILE:
+		webService.Route(webService.GET("/object").To(hello))
+	case MONGODB:
+		webService.Route(webService.GET("/object").To(mongo))
+	}
+
+	restful.Add(webService)
+	log.Print("Start listening on localhost:8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
+}
+
+func hello(req *restful.Request, resp *restful.Response) {
+	book := Book{Name: "k8s", Id: "1111"}
+	_ = json.NewEncoder(resp).Encode(book)
+}
+
+func mongo(req *restful.Request, resp *restful.Response) {
+	_, _ = io.WriteString(resp, "mongo return")
+}
+```
+
