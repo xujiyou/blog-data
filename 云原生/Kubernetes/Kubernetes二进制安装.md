@@ -219,6 +219,12 @@ etcd request cluster ID mismatch (got a want b)
 
 这次安装 etcd 集群的姿势还是比较正确的。。。
 
+
+
+另外，如果想通过 动态发现的方式来安装 etcd 集群，可以看： [etcd动态发现.md](../Etcd/etcd动态发现.md) 
+
+
+
 etcd 集群搞定之后，下一步安装 k8s 的各个组件，最后安装 Calico 和 CoreDNS。
 
 关于 k8s 各组件的作用可以参考  [核心组件运行原理.md](核心组件运行原理.md) 

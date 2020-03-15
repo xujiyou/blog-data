@@ -238,6 +238,8 @@
 
     [etcd-demo.md](云原生/Etcd/etcd-demo.md) 
 
+    [etcd动态发现.md](云原生/Etcd/etcd动态发现.md) 
+
     [etcd配置详解.md](云原生/Etcd/etcd配置详解.md) 
 
     [etcdctl详解.md](云原生/Etcd/Etcdctl详解.md) 
