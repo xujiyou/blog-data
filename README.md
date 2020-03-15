@@ -240,9 +240,13 @@
 
     [etcd动态发现.md](云原生/Etcd/etcd动态发现.md) 
 
+    [Metrics.md](云原生/Etcd/Metrics.md) 
+
     [etcd配置详解.md](云原生/Etcd/etcd配置详解.md) 
 
     [etcdctl详解.md](云原生/Etcd/Etcdctl详解.md) 
+
+    
 
     
 
