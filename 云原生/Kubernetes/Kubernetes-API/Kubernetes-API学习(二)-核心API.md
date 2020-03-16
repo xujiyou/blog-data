@@ -28,11 +28,11 @@ services                 svc                     true         Service
 
 或者通过 curl 或 浏览器获取：
 
-```
+```http
 GET /api/v1
 ```
 
-
+共 17 个。
 
 ---
 
@@ -279,50 +279,29 @@ type PodSpec struct {
 	// HostAliases是主机和IP的可选列表，将注入到Pod的主机中
 	// 仅仅对 non-hostNetwork pods 有效
 	HostAliases []HostAlias `json:"hostAliases,omitempty" patchStrategy:"merge" patchMergeKey:"ip" protobuf:"bytes,23,rep,name=hostAliases"`
-	// If specified, indicates the pod's priority. "system-node-critical" and
-	// "system-cluster-critical" are two special keywords which indicate the
-	// highest priorities with the former being the highest priority. Any other
-	// name must be defined by creating a PriorityClass object with that name.
-	// If not specified, the pod priority will be default or zero if there is no
-	// default.
-	// +optional
+	// Pod 的优先级，
+  // “system-node-critical”和“system-cluster-critical”是两个特殊的关键字，它们指示最高优先级. 
 	PriorityClassName string `json:"priorityClassName,omitempty" protobuf:"bytes,24,opt,name=priorityClassName"`
-	// The priority value. Various system components use this field to find the
-	// priority of the pod. When Priority Admission Controller is enabled, it
-	// prevents users from setting this field. The admission controller populates
-	// this field from PriorityClassName.
-	// The higher the value, the higher the priority.
-	// +optional
+	// 优先级值。 各种系统组件都使用此字段来查找窗格的优先级。 
+  // 启用优先录入控制器后，它将阻止用户设置此字段。 
+  // 准入控制器从PriorityClassName填充此字段。 值越高，优先级越高。
 	Priority *int32 `json:"priority,omitempty" protobuf:"bytes,25,opt,name=priority"`
-	// Specifies the DNS parameters of a pod.
-	// Parameters specified here will be merged to the generated DNS
-	// configuration based on DNSPolicy.
-	// +optional
+	// 指定容器的DNS参数。
+  // 此处指定的参数将合并到生成的DNS中
+  // 基于DNSPolicy的配置。
 	DNSConfig *PodDNSConfig `json:"dnsConfig,omitempty" protobuf:"bytes,26,opt,name=dnsConfig"`
-	// If specified, all readiness gates will be evaluated for pod readiness.
-	// A pod is ready when all its containers are ready AND
-	// all conditions specified in the readiness gates have status equal to "True"
+	// 如果指定，将评估所有 Pod 是否具有就绪状态。
 	// More info: https://git.k8s.io/enhancements/keps/sig-network/0007-pod-ready%2B%2B.md
-	// +optional
 	ReadinessGates []PodReadinessGate `json:"readinessGates,omitempty" protobuf:"bytes,28,opt,name=readinessGates"`
-	// RuntimeClassName refers to a RuntimeClass object in the node.k8s.io group, which should be used
-	// to run this pod.  If no RuntimeClass resource matches the named class, the pod will not be run.
-	// If unset or empty, the "legacy" RuntimeClass will be used, which is an implicit class with an
-	// empty definition that uses the default runtime handler.
-	// More info: https://git.k8s.io/enhancements/keps/sig-node/runtime-class.md
-	// This is a beta feature as of Kubernetes v1.14.
-	// +optional
+	// RuntimeClassName引用node.k8s.io组中的RuntimeClass对象，该对象应用于运行此pod。 如果没有RuntimeClass资源与命名类匹配，则pod将不会运行。
+  // 如果未设置或为空，则将使用“legacy” RuntimeClass，这是具有空定义的隐式类，使用默认的运行时处理程序。
 	RuntimeClassName *string `json:"runtimeClassName,omitempty" protobuf:"bytes,29,opt,name=runtimeClassName"`
-	// EnableServiceLinks indicates whether information about services should be injected into pod's
-	// environment variables, matching the syntax of Docker links.
+	// EnableServiceLinks指示是否应将与服务相关的信息注入到pod的环境变量中，以匹配Docker链接的语法。
 	// Optional: Defaults to true.
-	// +optional
 	EnableServiceLinks *bool `json:"enableServiceLinks,omitempty" protobuf:"varint,30,opt,name=enableServiceLinks"`
-	// PreemptionPolicy is the Policy for preempting pods with lower priority.
-	// One of Never, PreemptLowerPriority.
-	// Defaults to PreemptLowerPriority if unset.
-	// This field is alpha-level and is only honored by servers that enable the NonPreemptingPriority feature.
-	// +optional
+	// PreemptionPolicy是抢占优先级较低的Pod的策略。
+  // 如果未设置，则默认为PreemptLowerPriority。
+  // 此字段是字母级别的，并且仅由启用NonPreemptingPriority功能的服务器使用。
 	PreemptionPolicy *PreemptionPolicy `json:"preemptionPolicy,omitempty" protobuf:"bytes,31,opt,name=preemptionPolicy"`
 	// Overhead represents the resource overhead associated with running a pod for a given RuntimeClass.
 	// This field will be autopopulated at admission time by the RuntimeClass admission controller. If
@@ -348,6 +327,737 @@ type PodSpec struct {
 	TopologySpreadConstraints []TopologySpreadConstraint `json:"topologySpreadConstraints,omitempty" patchStrategy:"merge" patchMergeKey:"topologyKey" protobuf:"bytes,33,opt,name=topologySpreadConstraints"`
 }
 ```
+
+
+
+下面就是 PodStatus 了。
+
+```go
+type PodStatus struct {
+	// 用于显示 Pod 的状态，有 "Pending"，"Running"，"Succeeded"， "Failed"，"Unknown"
+	// More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-phase
+	// +optional
+	Phase PodPhase `json:"phase,omitempty" protobuf:"bytes,1,opt,name=phase,casttype=PodPhase"`
+	// Pod 的状态列表
+	Conditions []PodCondition `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,2,rep,name=conditions"`
+	// 人类可读的 Pod 的细节信息
+	// +optional
+	Message string `json:"message,omitempty" protobuf:"bytes,3,opt,name=message"`
+	// 一个简单的信息，标明为什么 Pod 会处于这个状态
+	// e.g. 'Evicted'
+	// +optional
+	Reason string `json:"reason,omitempty" protobuf:"bytes,4,opt,name=reason"`
+	// nominatedNodeName is set only when this pod preempts other pods on the node, but it cannot be
+	// scheduled right away as preemption victims receive their graceful termination periods.
+	// This field does not guarantee that the pod will be scheduled on this node. Scheduler may decide
+	// to place the pod elsewhere if other nodes become available sooner. Scheduler may also decide to
+	// give the resources on this node to a higher priority pod that is created after preemption.
+	// As a result, this field may be different than PodSpec.nodeName when the pod is
+	// scheduled.
+	// +optional
+	NominatedNodeName string `json:"nominatedNodeName,omitempty" protobuf:"bytes,11,opt,name=nominatedNodeName"`
+
+	// Pod 所在主机的IP
+	HostIP string `json:"hostIP,omitempty" protobuf:"bytes,5,opt,name=hostIP"`
+	// Pod 自己的 IP
+	PodIP string `json:"podIP,omitempty" protobuf:"bytes,6,opt,name=podIP"`
+
+	// Pod 的 IP 列表，包含 上边的 PodIP
+	PodIPs []PodIP `json:"podIPs,omitempty" protobuf:"bytes,12,rep,name=podIPs" patchStrategy:"merge" patchMergeKey:"ip"`
+
+	// 创建时间
+	StartTime *metav1.Time `json:"startTime,omitempty" protobuf:"bytes,7,opt,name=startTime"`
+
+	// 初始化容器的信息
+	InitContainerStatuses []ContainerStatus `json:"initContainerStatuses,omitempty" protobuf:"bytes,10,rep,name=initContainerStatuses"`
+
+	// Pod 中容器信息
+	ContainerStatuses []ContainerStatus `json:"containerStatuses,omitempty" protobuf:"bytes,8,rep,name=containerStatuses"`
+	// The Quality of Service (QOS) classification assigned to the pod based on resource requirements
+	// See PodQOSClass type for available QOS classes
+	// More info: https://git.k8s.io/community/contributors/design-proposals/node/resource-qos.md
+  // Guaranteed（放心），Burstable（稳定的），BestEffort（尽最大努力）
+	// +optional
+	QOSClass PodQOSClass `json:"qosClass,omitempty" protobuf:"bytes,9,rep,name=qosClass"`
+	// Status for any ephemeral containers that have run in this pod.
+	// This field is alpha-level and is only populated by servers that enable the EphemeralContainers feature.
+	// +optional
+	EphemeralContainerStatuses []ContainerStatus `json:"ephemeralContainerStatuses,omitempty" protobuf:"bytes,13,rep,name=ephemeralContainerStatuses"`
+}
+```
+
+---
+
+另外，Pod有哪些动作那 ，使用 `kubectl api-resources --api-group="" -o wide` 就可以看到了，Pod的动作有：
+
+```
+[create delete deletecollection get list patch update watch]
+```
+
+创建 POD，数据部分是 body：Pod：
+
+```http
+POST /api/v1/namespaces/{namespace}/pods
+```
+
+PATCH POD，数据部分为 body: Patch：
+
+```http
+PATCH /api/v1/namespaces/{namespace}/pods/{name}
+```
+
+Replace Pod，数据部分为 body: Pod：
+
+```http
+PUT /api/v1/namespaces/{namespace}/pods/{name}
+```
+
+Delete Pod：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/pods/{name}
+```
+
+Delete Collection Pod:
+
+```http
+DELETE /api/v1/namespaces/{namespace}/pods
+```
+
+---
+
+READ Pod:
+
+```http
+GET /api/v1/namespaces/{namespace}/pods/{name}
+```
+
+LIST Pod:
+
+```http
+GET /api/v1/namespaces/{namespace}/pods
+```
+
+List ALL Namespace Pod:
+
+```http
+GET /api/v1/pods
+```
+
+WATCH Pod:
+
+```http
+GET /api/v1/watch/namespaces/{namespace}/pods/{name}
+```
+
+WATCH List Pod:
+
+```http
+GET /api/v1/watch/namespaces/{namespace}/pods
+```
+
+Watch All Namespace Pod:
+
+```http
+GET /api/v1/watch/pods
+```
+
+更新 Pod 的状态：
+
+```http
+PATCH /api/v1/namespaces/{namespace}/pods/{name}/status
+```
+
+读取 Pod 的状态
+
+```http
+GET /api/v1/namespaces/{namespace}/pods/{name}/status
+```
+
+替换 Pod 的状态：
+
+```
+PUT /api/v1/namespaces/{namespace}/pods/{name}/status
+```
+
+---
+
+查看 Pod 日志：
+
+```http
+GET /api/v1/namespaces/{namespace}/pods/{name}/log
+```
+
+
+
+## Service
+
+首先看下 Service 对象的结构：
+
+```go
+type Service struct {
+	metav1.TypeMeta `json:",inline"`
+	// Standard object's metadata.
+	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+	// +optional
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+	// Spec defines the behavior of a service.
+	// https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+	// +optional
+	Spec ServiceSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	// Most recently observed status of the service.
+	// Populated by the system.
+	// Read-only.
+	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+	// +optional
+	Status ServiceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
+}
+```
+
+TypeMeta 和 ObjectMeta 不看了，介绍 Pod 时都说了。主要看 ServiceSpec：
+
+```go
+type ServiceSpec struct {
+   // 端口列表，很熟悉了
+   Ports []ServicePort `json:"ports,omitempty" patchStrategy:"merge" patchMergeKey:"port" protobuf:"bytes,1,rep,name=ports"`
+
+   // 选择了哪些 Pod
+   Selector map[string]string `json:"selector,omitempty" protobuf:"bytes,2,rep,name=selector"`
+
+   // service 用到的 IP 地址，这个地址会写入到 iptables 和 ipvs
+   ClusterIP string `json:"clusterIP,omitempty" protobuf:"bytes,3,opt,name=clusterIP"`
+
+   // 也很熟悉了，ClusterIP、NodePort、LoadBalancer、ExternalName
+   Type ServiceType `json:"type,omitempty" protobuf:"bytes,4,opt,name=type,casttype=ServiceType"`
+
+   // 外部 IP，详情请看 https://kubernetes.io/zh/docs/concepts/services-networking/service/ 
+   // 外部 IP 部分
+   ExternalIPs []string `json:"externalIPs,omitempty" protobuf:"bytes,5,rep,name=externalIPs"`
+
+   // Supports "ClientIP" and "None". Used to maintain session affinity.
+   // Enable client IP based session affinity.
+   // Must be ClientIP or None.
+   // Defaults to None.
+   // More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
+   // +optional
+   SessionAffinity ServiceAffinity `json:"sessionAffinity,omitempty" protobuf:"bytes,7,opt,name=sessionAffinity,casttype=ServiceAffinity"`
+
+   // 负载均衡 IP 地址
+   LoadBalancerIP string `json:"loadBalancerIP,omitempty" protobuf:"bytes,8,opt,name=loadBalancerIP"`
+
+   // 负载均衡 IP 地址范围
+   LoadBalancerSourceRanges []string `json:"loadBalancerSourceRanges,omitempty" protobuf:"bytes,9,opt,name=loadBalancerSourceRanges"`
+
+   // 用于 dns 解析的名字
+   ExternalName string `json:"externalName,omitempty" protobuf:"bytes,10,opt,name=externalName"`
+
+   // externalTrafficPolicy denotes if this Service desires to route external
+   // traffic to node-local or cluster-wide endpoints. "Local" preserves the
+   // client source IP and avoids a second hop for LoadBalancer and Nodeport
+   // type services, but risks potentially imbalanced traffic spreading.
+   // "Cluster" obscures the client source IP and may cause a second hop to
+   // another node, but should have good overall load-spreading.
+   // +optional
+   ExternalTrafficPolicy ServiceExternalTrafficPolicyType `json:"externalTrafficPolicy,omitempty" protobuf:"bytes,11,opt,name=externalTrafficPolicy"`
+
+   // 用于健康检查的端口
+   HealthCheckNodePort int32 `json:"healthCheckNodePort,omitempty" protobuf:"bytes,12,opt,name=healthCheckNodePort"`
+
+   // 这个要注意，用于 Headless Service，表示将 service 下面的 Endpoints 也用上 DNS。
+   PublishNotReadyAddresses bool `json:"publishNotReadyAddresses,omitempty" protobuf:"varint,13,opt,name=publishNotReadyAddresses"`
+
+   // sessionAffinityConfig contains the configurations of session affinity.
+   // +optional
+   SessionAffinityConfig *SessionAffinityConfig `json:"sessionAffinityConfig,omitempty" protobuf:"bytes,14,opt,name=sessionAffinityConfig"`
+
+   // ipv4 还是 ipv6
+   IPFamily *IPFamily `json:"ipFamily,omitempty" protobuf:"bytes,15,opt,name=ipFamily,Configcasttype=IPFamily"`
+
+   // topologyKeys is a preference-order list of topology keys which
+   // implementations of services should use to preferentially sort endpoints
+   // when accessing this Service, it can not be used at the same time as
+   // externalTrafficPolicy=Local.
+   // Topology keys must be valid label keys and at most 16 keys may be specified.
+   // Endpoints are chosen based on the first topology key with available backends.
+   // If this field is specified and all entries have no backends that match
+   // the topology of the client, the service has no backends for that client
+   // and connections should fail.
+   // The special value "*" may be used to mean "any topology". This catch-all
+   // value, if used, only makes sense as the last value in the list.
+   // If this is not specified or empty, no topology constraints will be applied.
+   // +optional
+   TopologyKeys []string `json:"topologyKeys,omitempty" protobuf:"bytes,16,opt,name=topologyKeys"`
+}
+```
+
+然后就是 ServiceStatus，这个很简单：
+
+```go
+type ServiceStatus struct {
+	// LoadBalancer contains the current status of the load-balancer,
+	// if one is present.
+	// +optional
+	LoadBalancer LoadBalancerStatus `json:"loadBalancer,omitempty" protobuf:"bytes,1,opt,name=loadBalancer"`
+}
+```
+
+
+
+---
+
+
+
+Service 的动作：
+
+创建 Service：
+
+```http
+POST /api/v1/namespaces/{namespace}/services
+```
+
+更新 Service：
+
+```http
+PATCH /api/v1/namespaces/{namespace}/services/{name}
+```
+
+替换 Service：
+
+```http
+PUT /api/v1/namespaces/{namespace}/services/{name}
+```
+
+删除 Service：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/services/{name}
+```
+
+读取 Service：
+
+```http
+GET /api/v1/namespaces/{namespace}/services/{name}
+```
+
+读取 Service 列表：
+
+```http
+GET /api/v1/namespaces/{namespace}/services
+```
+
+读取所有命名空间的 Service 列表：
+
+```http
+GET /api/v1/services
+```
+
+Watch Service:
+
+```http
+GET /api/v1/watch/namespaces/{namespace}/services/{name}
+```
+
+Watch Service 列表：
+
+```http
+GET /api/v1/watch/namespaces/{namespace}/services
+```
+
+Watch 全部命名空间的 Service 列表：
+
+```http
+GET /api/v1/watch/services
+```
+
+修改 Service 的状态：
+
+```http
+PATCH /api/v1/namespaces/{namespace}/services/{name}/status
+```
+
+读取 Service 的状态：
+
+```http
+GET /api/v1/namespaces/{namespace}/services/{name}/status
+```
+
+替换 Service 的状态：
+
+```http
+PUT /api/v1/namespaces/{namespace}/services/{name}/status
+```
+
+
+
+## Endpoints
+
+先看资源对象结构：
+
+```go
+type Endpoints struct {
+	metav1.TypeMeta `json:",inline"`
+	// Standard object's metadata.
+	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+	// +optional
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+	// The set of all endpoints is the union of all subsets. Addresses are placed into
+	// subsets according to the IPs they share. A single address with multiple ports,
+	// some of which are ready and some of which are not (because they come from
+	// different containers) will result in the address being displayed in different
+	// subsets for the different ports. No address will appear in both Addresses and
+	// NotReadyAddresses in the same subset.
+	// Sets of addresses and ports that comprise a service.
+	// +optional
+	Subsets []EndpointSubset `json:"subsets,omitempty" protobuf:"bytes,2,rep,name=subsets"`
+}
+```
+
+看 EndpointSubset：
+
+```go
+type EndpointSubset struct {
+	// IP addresses which offer the related ports that are marked as ready. These endpoints
+	// should be considered safe for load balancers and clients to utilize.
+	// +optional
+	Addresses []EndpointAddress `json:"addresses,omitempty" protobuf:"bytes,1,rep,name=addresses"`
+	// IP addresses which offer the related ports but are not currently marked as ready
+	// because they have not yet finished starting, have recently failed a readiness check,
+	// or have recently failed a liveness check.
+	// +optional
+	NotReadyAddresses []EndpointAddress `json:"notReadyAddresses,omitempty" protobuf:"bytes,2,rep,name=notReadyAddresses"`
+	// Port numbers available on the related IP addresses.
+	// +optional
+	Ports []EndpointPort `json:"ports,omitempty" protobuf:"bytes,3,rep,name=ports"`
+}
+```
+
+很好理解，不多解释了，下面看 API：
+
+创建 Endpoints：
+
+```http
+POST /api/v1/namespaces/{namespace}/endpoints
+```
+
+修改 Endpoints：
+
+```http
+PATCH /api/v1/namespaces/{namespace}/endpoints/{name}
+```
+
+替换 Endpoints：
+
+```http
+PUT /api/v1/namespaces/{namespace}/endpoints/{name}
+```
+
+删除 Endpoints：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/endpoints/{name}
+```
+
+集体删除：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/endpoints
+```
+
+读取 Endpoints：
+
+```http
+GET /api/v1/namespaces/{namespace}/endpoints/{name}
+```
+
+读取 Endpoints 列表：
+
+```http
+GET /api/v1/namespaces/{namespace}/endpoints
+```
+
+读全部命名空间的 Endpoints 列表：
+
+```http
+GET /api/v1/endpoints
+```
+
+Watch Endpoints：
+
+```http
+GET /api/v1/watch/namespaces/{namespace}/endpoints/{name}
+```
+
+Watch Endpoints List:
+
+```http
+GET /api/v1/watch/namespaces/{namespace}/endpoints
+```
+
+Watch All Namespace Endpoints List:
+
+```http
+GET /api/v1/watch/endpoints
+```
+
+
+
+## Node
+
+资源对象：
+
+```go
+type Node struct {
+	metav1.TypeMeta `json:",inline"`
+	// Standard object's metadata.
+	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+	// +optional
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+	// Spec defines the behavior of a node.
+	// https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+	// +optional
+	Spec NodeSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	// Most recently observed status of the node.
+	// Populated by the system.
+	// Read-only.
+	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+	// +optional
+	Status NodeStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
+}
+```
+
+先来看 NodeSpec：
+
+```go
+type NodeSpec struct {
+	// Pod 的子网，不过在使用了 Calico 之后，这里就没用了。
+	PodCIDR string `json:"podCIDR,omitempty" protobuf:"bytes,1,opt,name=podCIDR"`
+
+	// 多个 PodCIDR
+	PodCIDRs []string `json:"podCIDRs,omitempty" protobuf:"bytes,7,opt,name=podCIDRs" patchStrategy:"merge"`
+
+	// 用于云厂商
+	ProviderID string `json:"providerID,omitempty" protobuf:"bytes,3,opt,name=providerID"`
+	// 不调度，不让Pod调度到这个node上，默认为调度
+	Unschedulable bool `json:"unschedulable,omitempty" protobuf:"varint,4,opt,name=unschedulable"`
+	// node 的非亲和性
+	// +optional
+	Taints []Taint `json:"taints,omitempty" protobuf:"bytes,5,opt,name=taints"`
+	// If specified, the source to get node configuration from
+	// The DynamicKubeletConfig feature gate must be enabled for the Kubelet to use this field
+	// +optional
+	ConfigSource *NodeConfigSource `json:"configSource,omitempty" protobuf:"bytes,6,opt,name=configSource"`
+
+	// Deprecated. Not all kubelets will set this field. Remove field after 1.13.
+	// see: https://issues.k8s.io/61966
+	// +optional
+	DoNotUseExternalID string `json:"externalID,omitempty" protobuf:"bytes,2,opt,name=externalID"`
+}
+```
+
+然后再来看 NodeStatus：
+
+```go
+type NodeStatus struct {
+	// 节点信息，包括 CPU，内存，磁盘，最大 Pod 数量等。
+	Capacity ResourceList `json:"capacity,omitempty" protobuf:"bytes,1,rep,name=capacity,casttype=ResourceList,castkey=ResourceName"`
+	// 同上
+	// Defaults to Capacity.
+	// +optional
+	Allocatable ResourceList `json:"allocatable,omitempty" protobuf:"bytes,2,rep,name=allocatable,casttype=ResourceList,castkey=ResourceName"`
+	// 节点状态
+	// More info: https://kubernetes.io/docs/concepts/nodes/node/#phase
+	// 过期了
+	// +optional
+	Phase NodePhase `json:"phase,omitempty" protobuf:"bytes,3,opt,name=phase,casttype=NodePhase"`
+	// 当前节点的一些信息，比如哪些 Pod 成功了，kublet 的状态等。
+	Conditions []NodeCondition `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,4,rep,name=conditions"`
+	// 节点的 IP 地址及主机名
+	Addresses []NodeAddress `json:"addresses,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,5,rep,name=addresses"`
+	// kubelet 的端口，默认 10250
+	DaemonEndpoints NodeDaemonEndpoints `json:"daemonEndpoints,omitempty" protobuf:"bytes,6,opt,name=daemonEndpoints"`
+	// 节点的信息，比如 CPU 架构，各组件版本等。
+	NodeInfo NodeSystemInfo `json:"nodeInfo,omitempty" protobuf:"bytes,7,opt,name=nodeInfo"`
+	// 节点上的镜像列表
+	Images []ContainerImage `json:"images,omitempty" protobuf:"bytes,8,rep,name=images"`
+	// 节点上的正在使用卷列表
+	VolumesInUse []UniqueVolumeName `json:"volumesInUse,omitempty" protobuf:"bytes,9,rep,name=volumesInUse"`
+	// 节点上挂载的卷列表
+	VolumesAttached []AttachedVolume `json:"volumesAttached,omitempty" protobuf:"bytes,10,rep,name=volumesAttached"`
+	// Status of the config assigned to the node via the dynamic Kubelet config feature.
+	// +optional
+	Config *NodeConfigStatus `json:"config,omitempty" protobuf:"bytes,11,opt,name=config"`
+}
+```
+
+
+
+下面来看 URL:
+
+创建节点：
+
+```http
+POST /api/v1/nodes
+```
+
+修改节点：
+
+```http
+PATCH /api/v1/nodes/{name}
+```
+
+替换节点：
+
+```http
+PUT /api/v1/nodes/{name}
+```
+
+删除节点：
+
+```http
+DELETE /api/v1/nodes/{name}
+```
+
+删除一群节点：
+
+```http
+DELETE /api/v1/nodes
+```
+
+读取节点：
+
+```http
+GET /api/v1/nodes/{name}
+```
+
+读取节点列表：
+
+```http
+GET /api/v1/nodes
+```
+
+Watch 节点：
+
+```
+GET /api/v1/watch/nodes/{name}
+```
+
+Watch 一群节点：
+
+```http
+GET /api/v1/watch/nodes
+```
+
+修改节点状态：
+
+```http
+PATCH /api/v1/nodes/{name}/status
+```
+
+读取节点状态：
+
+```http
+GET /api/v1/nodes/{name}/status
+```
+
+替换节点状态：
+
+```http
+PUT /api/v1/nodes/{name}/status
+```
+
+
+
+
+
+## Binding
+
+1.7 就过期了，不捣鼓了
+
+
+
+## Event
+
+先来看对象：
+
+```go
+type Event struct {
+	metav1.TypeMeta `json:",inline"`
+	// Standard object's metadata.
+	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+	metav1.ObjectMeta `json:"metadata" protobuf:"bytes,1,opt,name=metadata"`
+
+	// The object that this event is about.
+	InvolvedObject ObjectReference `json:"involvedObject" protobuf:"bytes,2,opt,name=involvedObject"`
+
+	// This should be a short, machine understandable string that gives the reason
+	// for the transition into the object's current status.
+	// TODO: provide exact specification for format.
+	// +optional
+	Reason string `json:"reason,omitempty" protobuf:"bytes,3,opt,name=reason"`
+
+	// A human-readable description of the status of this operation.
+	// TODO: decide on maximum length.
+	// +optional
+	Message string `json:"message,omitempty" protobuf:"bytes,4,opt,name=message"`
+
+	// The component reporting this event. Should be a short machine understandable string.
+	// +optional
+	Source EventSource `json:"source,omitempty" protobuf:"bytes,5,opt,name=source"`
+
+	// The time at which the event was first recorded. (Time of server receipt is in TypeMeta.)
+	// +optional
+	FirstTimestamp metav1.Time `json:"firstTimestamp,omitempty" protobuf:"bytes,6,opt,name=firstTimestamp"`
+
+	// The time at which the most recent occurrence of this event was recorded.
+	// +optional
+	LastTimestamp metav1.Time `json:"lastTimestamp,omitempty" protobuf:"bytes,7,opt,name=lastTimestamp"`
+
+	// The number of times this event has occurred.
+	// +optional
+	Count int32 `json:"count,omitempty" protobuf:"varint,8,opt,name=count"`
+
+	// Type of this event (Normal, Warning), new types could be added in the future
+	// +optional
+	Type string `json:"type,omitempty" protobuf:"bytes,9,opt,name=type"`
+
+	// Time when this Event was first observed.
+	// +optional
+	EventTime metav1.MicroTime `json:"eventTime,omitempty" protobuf:"bytes,10,opt,name=eventTime"`
+
+	// Data about the Event series this event represents or nil if it's a singleton Event.
+	// +optional
+	Series *EventSeries `json:"series,omitempty" protobuf:"bytes,11,opt,name=series"`
+
+	// What action was taken/failed regarding to the Regarding object.
+	// +optional
+	Action string `json:"action,omitempty" protobuf:"bytes,12,opt,name=action"`
+
+	// Optional secondary object for more complex actions.
+	// +optional
+	Related *ObjectReference `json:"related,omitempty" protobuf:"bytes,13,opt,name=related"`
+
+	// Name of the controller that emitted this Event, e.g. `kubernetes.io/kubelet`.
+	// +optional
+	ReportingController string `json:"reportingComponent" protobuf:"bytes,14,opt,name=reportingComponent"`
+
+	// ID of the controller instance, e.g. `kubelet-xyzf`.
+	// +optional
+	ReportingInstance string `json:"reportingInstance" protobuf:"bytes,15,opt,name=reportingInstance"`
+}
+```
+
+
+
+
+
+
+
+
 
 
 
