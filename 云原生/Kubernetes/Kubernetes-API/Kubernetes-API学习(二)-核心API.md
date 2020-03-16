@@ -1478,49 +1478,639 @@ PersistentVolumeSpec：
 
 ```go
 type PersistentVolumeSpec struct {
-	// A description of the persistent volume's resources and capacity.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
-	// +optional
+	// 资源的描述，
 	Capacity ResourceList `json:"capacity,omitempty" protobuf:"bytes,1,rep,name=capacity,casttype=ResourceList,castkey=ResourceName"`
 	// The actual volume backing the persistent volume.
 	PersistentVolumeSource `json:",inline" protobuf:"bytes,2,opt,name=persistentVolumeSource"`
-	// AccessModes contains all ways the volume can be mounted.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes
-	// +optional
+	// 访问模式，包括 ReadWriteOnce、ReadOnlyMany、ReadWriteMany
 	AccessModes []PersistentVolumeAccessMode `json:"accessModes,omitempty" protobuf:"bytes,3,rep,name=accessModes,casttype=PersistentVolumeAccessMode"`
-	// ClaimRef is part of a bi-directional binding between PersistentVolume and PersistentVolumeClaim.
-	// Expected to be non-nil when bound.
-	// claim.VolumeName is the authoritative bind between PV and PVC.
+	// ClaimRef是PersistentVolume和PersistentVolumeClaim之间双向绑定的一部分。
+	// 绑定时不应为 空
+	// claim.VolumeName 是 PV 和 PVC 之间的认证
 	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#binding
 	// +optional
 	ClaimRef *ObjectReference `json:"claimRef,omitempty" protobuf:"bytes,4,opt,name=claimRef"`
-	// What happens to a persistent volume when released from its claim.
-	// Valid options are Retain (default for manually created PersistentVolumes), Delete (default
-	// for dynamically provisioned PersistentVolumes), and Recycle (deprecated).
-	// Recycle must be supported by the volume plugin underlying this PersistentVolume.
-	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming
-	// +optional
+	// 当一个持久卷从声明中释放时会发生什么。
+  // 有效选项包括Retain（手动创建的PersistentVolumes的默认值）、Delete（动态配置的PersistentVolumes的默认值）和Recycle（不推荐）。
+  //此PersistentVolume的基础卷插件必须支持回收。
 	PersistentVolumeReclaimPolicy PersistentVolumeReclaimPolicy `json:"persistentVolumeReclaimPolicy,omitempty" protobuf:"bytes,5,opt,name=persistentVolumeReclaimPolicy,casttype=PersistentVolumeReclaimPolicy"`
-	// Name of StorageClass to which this persistent volume belongs. Empty value
-	// means that this volume does not belong to any StorageClass.
-	// +optional
+	// StorageClassName 的名字. 为空意味着 卷 不属于任何 StorageClass
 	StorageClassName string `json:"storageClassName,omitempty" protobuf:"bytes,6,opt,name=storageClassName"`
-	// A list of mount options, e.g. ["ro", "soft"]. Not validated - mount will
-	// simply fail if one is invalid.
+	// 一个挂在选项列表, 例如 ["ro", "soft"]. 未验证-如果其中一个无效，装载将失败。比如CephFS，RBD等。
 	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options
 	// +optional
 	MountOptions []string `json:"mountOptions,omitempty" protobuf:"bytes,7,opt,name=mountOptions"`
-	// volumeMode defines if a volume is intended to be used with a formatted filesystem
-	// or to remain in raw block state. Value of Filesystem is implied when not included in spec.
+	// volumeMode定义卷是要与格式化的文件系统一起使用还是保持原始块状态。文件系统的值在未包含在规范中时是隐含的。
+  // 取值为 “Block” 或 “Filesystem”
 	// This is a beta feature.
-	// +optional
 	VolumeMode *PersistentVolumeMode `json:"volumeMode,omitempty" protobuf:"bytes,8,opt,name=volumeMode,casttype=PersistentVolumeMode"`
-	// NodeAffinity defines constraints that limit what nodes this volume can be accessed from.
-	// This field influences the scheduling of pods that use this volume.
-	// +optional
+	// 节点亲和性
 	NodeAffinity *VolumeNodeAffinity `json:"nodeAffinity,omitempty" protobuf:"bytes,9,opt,name=nodeAffinity"`
 }
 ```
+
+PersistentVolumeStatus：
+
+```go
+type PersistentVolumeStatus struct {
+	// 指示卷是否可用、是否绑定到声明或是否由声明释放。可能的值包括：Pending、Available、Bound、Released、Failed
+	Phase PersistentVolumePhase `json:"phase,omitempty" protobuf:"bytes,1,opt,name=phase,casttype=PersistentVolumePhase"`
+	// 一个人类可读的信息包含为什么会处在这个状态
+	Message string `json:"message,omitempty" protobuf:"bytes,2,opt,name=message"`
+	// 一个简短的字符串，描述了原因，会在 cli 工具显示。
+	Reason string `json:"reason,omitempty" protobuf:"bytes,3,opt,name=reason"`
+}
+```
+
+创建 PV：
+
+```http
+POST /api/v1/persistentvolumes
+```
+
+修改 PV：
+
+```http
+PATCH /api/v1/persistentvolumes/{name}
+```
+
+替换 PV：
+
+```http
+PUT /api/v1/persistentvolumes/{name}
+```
+
+删除 PV：
+
+```http
+DELETE /api/v1/persistentvolumes/{name}
+```
+
+删除一堆PV：
+
+```http
+DELETE /api/v1/persistentvolumes
+```
+
+读取 PV：
+
+```http
+GET /api/v1/persistentvolumes/{name}
+```
+
+读取 PV List：
+
+```http
+GET /api/v1/persistentvolumes
+```
+
+Watch PV:
+
+```http
+GET /api/v1/watch/persistentvolumes/{name}
+```
+
+Watch PV List:
+
+```http
+GET /api/v1/watch/persistentvolumes
+```
+
+修改 PV 状态：
+
+```http
+PATCH /api/v1/persistentvolumes/{name}/status
+```
+
+读取 PV 状态：
+
+````http
+GET /api/v1/persistentvolumes/{name}/status
+````
+
+替换 PV 状态：
+
+```http
+PUT /api/v1/persistentvolumes/{name}/status
+```
+
+
+
+
+
+## PersistentVolumeClaim
+
+对象结构：
+
+```go
+type PersistentVolumeClaim struct {
+	metav1.TypeMeta `json:",inline"`
+	// Standard object's metadata.
+	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+	// +optional
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+	// Spec defines the desired characteristics of a volume requested by a pod author.
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
+	// +optional
+	Spec PersistentVolumeClaimSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	// Status represents the current information/status of a persistent volume claim.
+	// Read-only.
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
+	// +optional
+	Status PersistentVolumeClaimStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
+}
+```
+
+PersistentVolumeClaimSpec:
+
+```go
+type PersistentVolumeClaimSpec struct {
+	// 访问模式，包括 ReadWriteOnce、ReadOnlyMany、ReadWriteMany
+	AccessModes []PersistentVolumeAccessMode `json:"accessModes,omitempty" protobuf:"bytes,1,rep,name=accessModes,casttype=PersistentVolumeAccessMode"`
+	// 通过 Label 选择卷
+	Selector *metav1.LabelSelector `json:"selector,omitempty" protobuf:"bytes,4,opt,name=selector"`
+	// 资源表示卷应具有的最小资源。
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
+	// +optional
+	Resources ResourceRequirements `json:"resources,omitempty" protobuf:"bytes,2,opt,name=resources"`
+	// 对声明的PersistentVolume的绑定引用。
+	// +optional
+	VolumeName string `json:"volumeName,omitempty" protobuf:"bytes,3,opt,name=volumeName"`
+	// 动态 PV，StorageClass 的名称
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1
+	// +optional
+	StorageClassName *string `json:"storageClassName,omitempty" protobuf:"bytes,5,opt,name=storageClassName"`
+	// volumeMode定义卷是要与格式化的文件系统一起使用还是保持原始块状态。文件系统的值在未包含在规范中时是隐含的。
+  // 取值为 “Block” 或 “Filesystem”
+	// This is a beta feature.
+	// +optional
+	VolumeMode *PersistentVolumeMode `json:"volumeMode,omitempty" protobuf:"bytes,6,opt,name=volumeMode,casttype=PersistentVolumeMode"`
+	// 此字段要求启用VolumeSnapshotDataSource alpha功能门，并且当前VolumeSnapshot是唯一受支持的数据源。
+  // 如果provisioner可以支持VolumeSnapshot数据源，它将创建一个新卷，同时将数据还原到该卷。
+  // 如果provisioner不支持VolumeSnapshot数据源，则不会创建卷，并将失败报告为事件。
+  // 在将来，我们计划支持更多的数据源类型，并且provisioner的行为可能会改变。
+	DataSource *TypedLocalObjectReference `json:"dataSource,omitempty" protobuf:"bytes,7,opt,name=dataSource"`
+}
+```
+
+PersistentVolumeClaimStatus:
+
+```go
+type PersistentVolumeClaimStatus struct {
+	// 状态，Pending、Bound、Lost
+	Phase PersistentVolumeClaimPhase `json:"phase,omitempty" protobuf:"bytes,1,opt,name=phase,casttype=PersistentVolumeClaimPhase"`
+	// 访问模式，包括 ReadWriteOnce、ReadOnlyMany、ReadWriteMany
+	AccessModes []PersistentVolumeAccessMode `json:"accessModes,omitempty" protobuf:"bytes,2,rep,name=accessModes,casttype=PersistentVolumeAccessMode"`
+	// 表示基础卷的实际资源。
+	Capacity ResourceList `json:"capacity,omitempty" protobuf:"bytes,3,rep,name=capacity,casttype=ResourceList,castkey=ResourceName"`
+	// 持久卷声明的当前状态。如果正在调整基础持久卷的大小，则条件将设置为“ResizeStarted”。
+	Conditions []PersistentVolumeClaimCondition `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,4,rep,name=conditions"`
+}
+```
+
+创建 PVC：
+
+```http
+POST /api/v1/namespaces/{namespace}/persistentvolumeclaims
+```
+
+修改 PVC：
+
+```http
+PATCH /api/v1/namespaces/{namespace}/persistentvolumeclaims/{name}
+```
+
+替换 PVC：
+
+```http
+PATCH /api/v1/namespaces/{namespace}/persistentvolumeclaims/{name}
+```
+
+删除 PVC：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/persistentvolumeclaims/{name}
+```
+
+删除一堆 PVC：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/persistentvolumeclaims
+```
+
+读取 PVC：
+
+```http
+GET /api/v1/namespaces/{namespace}/persistentvolumeclaims/{name}
+```
+
+读取 PVC List：
+
+```http
+GET /api/v1/namespaces/{namespace}/persistentvolumeclaims
+```
+
+读取全部命名空间的 PVC：
+
+```http
+GET /api/v1/persistentvolumeclaims
+```
+
+Watch PVC:
+
+```http
+GET /api/v1/watch/namespaces/{namespace}/persistentvolumeclaims/{name}
+```
+
+Watch PVC List:
+
+```http
+GET /api/v1/watch/namespaces/{namespace}/persistentvolumeclaims
+```
+
+Watch All Namespace PVC List:
+
+```http
+GET /api/v1/watch/persistentvolumeclaims
+```
+
+修改 PVC 状态：
+
+```http
+PATCH /api/v1/namespaces/{namespace}/persistentvolumeclaims/{name}/status
+```
+
+读取 PVC 状态：
+
+```http
+GET /api/v1/namespaces/{namespace}/persistentvolumeclaims/{name}/status
+```
+
+替换 PVC 状态：
+
+```http
+PUT /api/v1/namespaces/{namespace}/persistentvolumeclaims/{name}/status
+```
+
+
+
+## ComponentStatus
+
+对象结构：
+
+```go
+type ComponentStatus struct {
+	metav1.TypeMeta `json:",inline"`
+	// Standard object's metadata.
+	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+	// +optional
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+	// 观察到的组件状态列表
+	// +optional
+	// +patchMergeKey=type
+	// +patchStrategy=merge
+	Conditions []ComponentCondition `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,2,rep,name=conditions"`
+}
+```
+
+读取 ：
+
+```http
+GET /api/v1/componentstatuses/{name}
+```
+
+读取列表：
+
+```http
+GET /api/v1/componentstatuses
+```
+
+
+
+## ConfigMap
+
+对象结构：
+
+```go
+type ConfigMap struct {
+	metav1.TypeMeta `json:",inline"`
+	// Standard object's metadata.
+	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+	// +optional
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+	// key-value 键值对 MAP
+	Data map[string]string `json:"data,omitempty" protobuf:"bytes,2,rep,name=data"`
+
+	// 二进制数据
+	BinaryData map[string][]byte `json:"binaryData,omitempty" protobuf:"bytes,3,rep,name=binaryData"`
+}
+```
+
+创建：
+
+```http
+POST /api/v1/namespaces/{namespace}/configmaps
+```
+
+修改：
+
+```http
+PATCH /api/v1/namespaces/{namespace}/configmaps/{name}
+```
+
+替换：
+
+```http
+PUT /api/v1/namespaces/{namespace}/configmaps/{name}
+```
+
+删除：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/configmaps/{name}
+```
+
+删除一堆：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/configmaps
+```
+
+读取 ：
+
+```http
+GET /api/v1/namespaces/{namespace}/configmaps/{name}
+```
+
+读取列表：
+
+```http
+GET /api/v1/namespaces/{namespace}/configmaps
+```
+
+读取全部命名空间的列表：
+
+```http
+GET /api/v1/configmaps
+```
+
+
+
+## LimitRange
+
+`LimitRange`是在`pod`和`container`级别的资源限制
+
+对象结构：
+
+```go
+type LimitRange struct {
+   metav1.TypeMeta `json:",inline"`
+   // Standard object's metadata.
+   // More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+   // +optional
+   metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+   // Spec defines the limits enforced.
+   // More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+   // +optional
+   Spec LimitRangeSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+}
+```
+
+LimitRangeSpec:
+
+```go
+type LimitRangeSpec struct {
+	// Limits is the list of LimitRangeItem objects that are enforced.
+	Limits []LimitRangeItem `json:"limits" protobuf:"bytes,1,rep,name=limits"`
+}
+```
+
+LimitRangeItem:
+
+```go
+type LimitRangeItem struct {
+   // Type of resource that this limit applies to.
+   // +optional
+   Type LimitType `json:"type,omitempty" protobuf:"bytes,1,opt,name=type,casttype=LimitType"`
+   // Max usage constraints on this kind by resource name.
+   // +optional
+   Max ResourceList `json:"max,omitempty" protobuf:"bytes,2,rep,name=max,casttype=ResourceList,castkey=ResourceName"`
+   // Min usage constraints on this kind by resource name.
+   // +optional
+   Min ResourceList `json:"min,omitempty" protobuf:"bytes,3,rep,name=min,casttype=ResourceList,castkey=ResourceName"`
+   // Default resource requirement limit value by resource name if resource limit is omitted.
+   // +optional
+   Default ResourceList `json:"default,omitempty" protobuf:"bytes,4,rep,name=default,casttype=ResourceList,castkey=ResourceName"`
+   // DefaultRequest is the default resource requirement request value by resource name if resource request is omitted.
+   // +optional
+   DefaultRequest ResourceList `json:"defaultRequest,omitempty" protobuf:"bytes,5,rep,name=defaultRequest,casttype=ResourceList,castkey=ResourceName"`
+   // MaxLimitRequestRatio if specified, the named resource must have a request and limit that are both non-zero where limit divided by request is less than or equal to the enumerated value; this represents the max burst for the named resource.
+   // +optional
+   MaxLimitRequestRatio ResourceList `json:"maxLimitRequestRatio,omitempty" protobuf:"bytes,6,rep,name=maxLimitRequestRatio,casttype=ResourceList,castkey=ResourceName"`
+}
+```
+
+创建：
+
+```http
+POST /api/v1/namespaces/{namespace}/limitranges
+```
+
+修改：
+
+```http
+PATCH /api/v1/namespaces/{namespace}/limitranges/{name}
+```
+
+替换：
+
+```http
+PUT /api/v1/namespaces/{namespace}/limitranges/{name}
+```
+
+删除：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/limitranges/{name}
+```
+
+删除一堆：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/limitranges
+```
+
+读取：
+
+```http
+GET /api/v1/namespaces/{namespace}/limitranges/{name}
+```
+
+读取列表：
+
+```http
+GET /api/v1/namespaces/{namespace}/limitranges
+```
+
+读取全部命名空间的列表：
+
+```http
+GET /api/v1/limitranges
+```
+
+
+
+## ResourceQuota
+
+资源配额
+
+对象结构：
+
+```go
+type ResourceQuota struct {
+	metav1.TypeMeta `json:",inline"`
+	// Standard object's metadata.
+	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+	// +optional
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+	// Spec defines the desired quota.
+	// https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+	// +optional
+	Spec ResourceQuotaSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	// Status defines the actual enforced quota and its current usage.
+	// https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+	// +optional
+	Status ResourceQuotaStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
+}
+```
+
+ResourceQuotaSpec:
+
+```go
+type ResourceQuotaSpec struct {
+	// 资源列表
+	Hard ResourceList `json:"hard,omitempty" protobuf:"bytes,1,rep,name=hard,casttype=ResourceList,castkey=ResourceName"`
+	// 必须与配额跟踪的每个对象匹配的筛选器的集合。
+  // 如果未指定，配额将匹配所有对象。
+	// +optional
+	Scopes []ResourceQuotaScope `json:"scopes,omitempty" protobuf:"bytes,2,rep,name=scopes,casttype=ResourceQuotaScope"`
+	// scopeSelector也是一组类似于作用域的筛选器，这些作用域必须与配额跟踪的每个对象匹配，但使用scopeSelector运算符和可能的值组合来表示。
+  // 要匹配资源，必须同时匹配作用域和作用域选择器（如果在规范中指定）。
+	ScopeSelector *ScopeSelector `json:"scopeSelector,omitempty" protobuf:"bytes,3,opt,name=scopeSelector"`
+}
+```
+
+ResourceQuotaStatus：
+
+```go
+type ResourceQuotaStatus struct {
+   // 资源列表
+   Hard ResourceList `json:"hard,omitempty" protobuf:"bytes,1,rep,name=hard,casttype=ResourceList,castkey=ResourceName"`
+   // 已使用的资源列表
+   Used ResourceList `json:"used,omitempty" protobuf:"bytes,2,rep,name=used,casttype=ResourceList,castkey=ResourceName"`
+}
+```
+
+创建：
+
+```http
+POST /api/v1/namespaces/{namespace}/resourcequotas
+```
+
+修改：
+
+```http
+PATCH /api/v1/namespaces/{namespace}/resourcequotas/{name}
+```
+
+替换：
+
+```http
+PUT /api/v1/namespaces/{namespace}/resourcequotas/{name}
+```
+
+删除：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/resourcequotas/{name}
+```
+
+删除一堆：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/resourcequotas/{name}
+```
+
+读取：
+
+```http
+GET /api/v1/namespaces/{namespace}/resourcequotas/{name}
+```
+
+读取列表：
+
+```http
+GET /api/v1/namespaces/{namespace}/resourcequotas
+```
+
+读取所有命名空间的列表：
+
+```http
+GET /api/v1/resourcequotas
+```
+
+修改状态：
+
+```http
+PATCH /api/v1/namespaces/{namespace}/resourcequotas/{name}/status
+```
+
+读取状态：
+
+```http
+GET /api/v1/namespaces/{namespace}/resourcequotas/{name}/status
+```
+
+替换状态：
+
+```http
+PUT /api/v1/namespaces/{namespace}/resourcequotas/{name}/status
+```
+
+
+
+## ReplicationController
+
+Replication Controller 被 ReplicaSet 和 Deployment 按在地上摩擦，不捣鼓了。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
