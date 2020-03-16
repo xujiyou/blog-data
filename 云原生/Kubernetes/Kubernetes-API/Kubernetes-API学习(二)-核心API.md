@@ -991,37 +991,28 @@ type Event struct {
 	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
 	metav1.ObjectMeta `json:"metadata" protobuf:"bytes,1,opt,name=metadata"`
 
-	// The object that this event is about.
+	// 目标对象的信息，比如 Endpoints，或 Service 等
 	InvolvedObject ObjectReference `json:"involvedObject" protobuf:"bytes,2,opt,name=involvedObject"`
 
-	// This should be a short, machine understandable string that gives the reason
-	// for the transition into the object's current status.
-	// TODO: provide exact specification for format.
-	// +optional
+	// 原因
 	Reason string `json:"reason,omitempty" protobuf:"bytes,3,opt,name=reason"`
 
-	// A human-readable description of the status of this operation.
-	// TODO: decide on maximum length.
-	// +optional
+	// 人类可读的详细信息
 	Message string `json:"message,omitempty" protobuf:"bytes,4,opt,name=message"`
 
-	// The component reporting this event. Should be a short machine understandable string.
-	// +optional
+	// 事件源
 	Source EventSource `json:"source,omitempty" protobuf:"bytes,5,opt,name=source"`
 
-	// The time at which the event was first recorded. (Time of server receipt is in TypeMeta.)
-	// +optional
+	// 第一次出现的时间
 	FirstTimestamp metav1.Time `json:"firstTimestamp,omitempty" protobuf:"bytes,6,opt,name=firstTimestamp"`
 
-	// The time at which the most recent occurrence of this event was recorded.
-	// +optional
+	// 最后一次出现的时间
 	LastTimestamp metav1.Time `json:"lastTimestamp,omitempty" protobuf:"bytes,7,opt,name=lastTimestamp"`
 
-	// The number of times this event has occurred.
-	// +optional
+	// 数量
 	Count int32 `json:"count,omitempty" protobuf:"varint,8,opt,name=count"`
 
-	// Type of this event (Normal, Warning), new types could be added in the future
+	// 事件类型(Normal, Warning), new types could be added in the future
 	// +optional
 	Type string `json:"type,omitempty" protobuf:"bytes,9,opt,name=type"`
 
@@ -1033,21 +1024,501 @@ type Event struct {
 	// +optional
 	Series *EventSeries `json:"series,omitempty" protobuf:"bytes,11,opt,name=series"`
 
-	// What action was taken/failed regarding to the Regarding object.
-	// +optional
+	// 动作
 	Action string `json:"action,omitempty" protobuf:"bytes,12,opt,name=action"`
 
 	// Optional secondary object for more complex actions.
 	// +optional
 	Related *ObjectReference `json:"related,omitempty" protobuf:"bytes,13,opt,name=related"`
 
-	// Name of the controller that emitted this Event, e.g. `kubernetes.io/kubelet`.
+	// 哪个组件的事件 e.g. `kubernetes.io/kubelet`.
 	// +optional
 	ReportingController string `json:"reportingComponent" protobuf:"bytes,14,opt,name=reportingComponent"`
 
-	// ID of the controller instance, e.g. `kubelet-xyzf`.
+	// 组件ID, e.g. `kubelet-xyzf`.
 	// +optional
 	ReportingInstance string `json:"reportingInstance" protobuf:"bytes,15,opt,name=reportingInstance"`
+}
+```
+
+动作：
+
+创建 Event：
+
+```http
+POST /api/v1/namespaces/{namespace}/events
+```
+
+修改 Event：
+
+```http
+PATCH /api/v1/namespaces/{namespace}/events/{name}
+```
+
+替换 Event：
+
+```http
+PUT /api/v1/namespaces/{namespace}/events/{name}
+```
+
+删除 Event：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/events/{name}
+```
+
+删除一堆 Event：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/events
+```
+
+读取 Event：
+
+```http
+GET /api/v1/namespaces/{namespace}/events/{name}
+```
+
+读取 Event 列表：
+
+```http
+GET /api/v1/namespaces/{namespace}/events
+```
+
+读取全部命名空间的 Event：
+
+```http
+GET /api/v1/events
+```
+
+Watch Event：
+
+```http
+GET /api/v1/watch/namespaces/{namespace}/events/{name}
+```
+
+Watch Event List:
+
+```http
+GET /api/v1/watch/namespaces/{namespace}/events
+```
+
+Watch 全部命名空间的 Event 列表：
+
+````http
+GET /api/v1/watch/events
+````
+
+
+
+
+
+## Namespace
+
+对象结构：
+
+```go
+type Namespace struct {
+	metav1.TypeMeta `json:",inline"`
+	// Standard object's metadata.
+	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+	// +optional
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+	// Spec defines the behavior of the Namespace.
+	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+	// +optional
+	Spec NamespaceSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	// Status describes the current status of a Namespace.
+	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+	// +optional
+	Status NamespaceStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
+}
+```
+
+NamespaceSpec:
+
+```go
+type NamespaceSpec struct {
+  // 终结列表，必须为空才能被删除
+	// Finalizers is an opaque list of values that must be empty to permanently remove object from storage.
+	// More info: https://kubernetes.io/docs/tasks/administer-cluster/namespaces/
+	// +optional
+	Finalizers []FinalizerName `json:"finalizers,omitempty" protobuf:"bytes,1,rep,name=finalizers,casttype=FinalizerName"`
+}
+```
+
+NamespaceStatus:
+
+```go
+type NamespaceStatus struct {
+	// 状态，Active 或 Terminating
+	Phase NamespacePhase `json:"phase,omitempty" protobuf:"bytes,1,opt,name=phase,casttype=NamespacePhase"`
+
+	// Represents the latest available observations of a namespace's current state.
+	// +optional
+	// +patchMergeKey=type
+	// +patchStrategy=merge
+	Conditions []NamespaceCondition `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,2,rep,name=conditions"`
+}
+```
+
+动作：
+
+创建 Namespace：
+
+```http
+POST /api/v1/namespaces
+```
+
+修改 Namespace：
+
+```http
+PATCH /api/v1/namespaces/{name}
+```
+
+替换 Namespace：
+
+```http
+PUT /api/v1/namespaces/{name}
+```
+
+删除 Namespace：
+
+```http
+DELETE /api/v1/namespaces/{name}
+```
+
+读取 Namespace：
+
+```http
+GET /api/v1/namespaces/{name}
+```
+
+查看 Namespace List：
+
+```http
+GET /api/v1/namespaces
+```
+
+Watch Namespace:
+
+```http
+GET /api/v1/watch/namespaces/{name}
+```
+
+Watch Namespace List:
+
+```http
+GET /api/v1/watch/namespaces
+```
+
+修改 Namespace 状态：
+
+```http
+PATCH /api/v1/namespaces/{name}/status
+```
+
+读取 Namespace 状态：
+
+```http
+GET /api/v1/namespaces/{name}/status
+```
+
+替换 Namespace 状态：
+
+```http
+PUT /api/v1/namespaces/{name}/status
+```
+
+
+
+
+
+## Secret
+
+资源对象：
+
+```go
+type Secret struct {
+	metav1.TypeMeta `json:",inline"`
+	// Standard object's metadata.
+	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+	// +optional
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+	// 实际储存数据的地方，每个 Key 必须由字母数字字符、“-”、“ _”或“.”组成。
+  // Value 是经过 BASE64 编码的人以字符串
+	Data map[string][]byte `json:"data,omitempty" protobuf:"bytes,2,rep,name=data"`
+
+  // 仅用于写，不会被读出。
+	// stringData allows specifying non-binary secret data in string form.
+	// It is provided as a write-only convenience method.
+	// All keys and values are merged into the data field on write, overwriting any existing values.
+	// It is never output when reading from the API.
+	// +k8s:conversion-gen=false
+	// +optional
+	StringData map[string]string `json:"stringData,omitempty" protobuf:"bytes,4,rep,name=stringData"`
+
+	// 数据的类型，
+	// +optional
+	Type SecretType `json:"type,omitempty" protobuf:"bytes,3,opt,name=type,casttype=SecretType"`
+}
+```
+
+SecretType 可能的值如下：
+
+```go
+SecretTypeOpaque SecretType = "Opaque"
+SecretTypeServiceAccountToken SecretType = "kubernetes.io/service-account-token"
+SecretTypeDockercfg SecretType = "kubernetes.io/dockercfg"
+SecretTypeDockerConfigJson SecretType = "kubernetes.io/dockerconfigjson"
+SecretTypeBasicAuth SecretType = "kubernetes.io/basic-auth"
+SecretTypeSSHAuth SecretType = "kubernetes.io/ssh-auth"
+SecretTypeTLS SecretType = "kubernetes.io/tls"
+SecretTypeBootstrapToken SecretType = "bootstrap.kubernetes.io/token"
+```
+
+操作：
+
+创建 Secret：
+
+```http
+POST /api/v1/namespaces/{namespace}/secrets
+```
+
+修改 Secret：
+
+```http
+PATCH /api/v1/namespaces/{namespace}/secrets/{name}
+```
+
+替换 Secret：
+
+```http
+PUT /api/v1/namespaces/{namespace}/secrets/{name}
+```
+
+删除 Secret：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/secrets/{name}
+```
+
+删除一堆 Secret：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/secrets
+```
+
+读取 Secret：
+
+```http
+GET /api/v1/namespaces/{namespace}/secrets/{name}
+```
+
+读取 Secret List：
+
+```http
+GET /api/v1/namespaces/{namespace}/secrets
+```
+
+读取所有命名空间的 Secret List：
+
+```http
+GET /api/v1/secrets
+```
+
+Watch Secret:
+
+```http
+GET /api/v1/watch/namespaces/{namespace}/secrets/{name}
+```
+
+Watch Secret List:
+
+```http
+GET /api/v1/watch/namespaces/{namespace}/secrets
+```
+
+Watch All Namespace Secret List:
+
+```http
+GET /api/v1/watch/secrets
+```
+
+
+
+
+
+## ServiceAccount
+
+对象结构：
+
+```go
+type ServiceAccount struct {
+   metav1.TypeMeta `json:",inline"`
+   // Standard object's metadata.
+   // More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+   // +optional
+   metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+   // Pod 运行过程中，允许 ServiceAccount 使用的 Secret 列表
+   Secrets []ObjectReference `json:"secrets,omitempty" patchStrategy:"merge" patchMergeKey:"name" protobuf:"bytes,2,rep,name=secrets"`
+
+   // 在 pull 镜像时用到的 Secrets
+   ImagePullSecrets []LocalObjectReference `json:"imagePullSecrets,omitempty" protobuf:"bytes,3,rep,name=imagePullSecrets"`
+
+   // AutomountServiceAccountToken指示作为该服务帐户运行的Pod是否应具有自动装入的API Token。
+   // 可以在 Pod 上覆盖
+   // +optional
+   AutomountServiceAccountToken *bool `json:"automountServiceAccountToken,omitempty" protobuf:"varint,4,opt,name=automountServiceAccountToken"`
+}
+```
+
+创建 ServiceAccount：
+
+```http
+POST /api/v1/namespaces/{namespace}/serviceaccounts
+```
+
+更新 ServiceAccount：
+
+```http
+PATCH /api/v1/namespaces/{namespace}/serviceaccounts/{name}
+```
+
+替换 ServiceAccount：
+
+```http
+PUT /api/v1/namespaces/{namespace}/serviceaccounts/{name}
+```
+
+删除 ServiceAccount：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/serviceaccounts/{name}
+```
+
+删除一堆 ServiceAccount：
+
+```http
+DELETE /api/v1/namespaces/{namespace}/serviceaccounts
+```
+
+读取 ServiceAccount：
+
+```http
+GET /api/v1/namespaces/{namespace}/serviceaccounts/{name}
+```
+
+读取 ServiceAccount List：
+
+```http
+GET /api/v1/namespaces/{namespace}/serviceaccounts
+```
+
+读取所有命名空间的 ServiceAccount List：
+
+```http
+GET /api/v1/serviceaccounts
+```
+
+Watch ServiceAccount:
+
+```http
+GET /api/v1/watch/namespaces/{namespace}/serviceaccounts/{name}
+```
+
+Watch ServiceAccount List:
+
+```http
+GET /api/v1/watch/namespaces/{namespace}/serviceaccounts
+```
+
+Watch All Namespace ServiceAccount List:
+
+```http
+GET /api/v1/watch/serviceaccounts
+```
+
+
+
+## PersistentVolume
+
+对象结构：
+
+```go
+type PersistentVolume struct {
+   metav1.TypeMeta `json:",inline"`
+   // Standard object's metadata.
+   // More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+   // +optional
+   metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+   // Spec defines a specification of a persistent volume owned by the cluster.
+   // Provisioned by an administrator.
+   // More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes
+   // +optional
+   Spec PersistentVolumeSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+   // Status represents the current information/status for the persistent volume.
+   // Populated by the system.
+   // Read-only.
+   // More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes
+   // +optional
+   Status PersistentVolumeStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
+}
+```
+
+
+
+PersistentVolumeSpec：
+
+```go
+type PersistentVolumeSpec struct {
+	// A description of the persistent volume's resources and capacity.
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
+	// +optional
+	Capacity ResourceList `json:"capacity,omitempty" protobuf:"bytes,1,rep,name=capacity,casttype=ResourceList,castkey=ResourceName"`
+	// The actual volume backing the persistent volume.
+	PersistentVolumeSource `json:",inline" protobuf:"bytes,2,opt,name=persistentVolumeSource"`
+	// AccessModes contains all ways the volume can be mounted.
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes
+	// +optional
+	AccessModes []PersistentVolumeAccessMode `json:"accessModes,omitempty" protobuf:"bytes,3,rep,name=accessModes,casttype=PersistentVolumeAccessMode"`
+	// ClaimRef is part of a bi-directional binding between PersistentVolume and PersistentVolumeClaim.
+	// Expected to be non-nil when bound.
+	// claim.VolumeName is the authoritative bind between PV and PVC.
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#binding
+	// +optional
+	ClaimRef *ObjectReference `json:"claimRef,omitempty" protobuf:"bytes,4,opt,name=claimRef"`
+	// What happens to a persistent volume when released from its claim.
+	// Valid options are Retain (default for manually created PersistentVolumes), Delete (default
+	// for dynamically provisioned PersistentVolumes), and Recycle (deprecated).
+	// Recycle must be supported by the volume plugin underlying this PersistentVolume.
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming
+	// +optional
+	PersistentVolumeReclaimPolicy PersistentVolumeReclaimPolicy `json:"persistentVolumeReclaimPolicy,omitempty" protobuf:"bytes,5,opt,name=persistentVolumeReclaimPolicy,casttype=PersistentVolumeReclaimPolicy"`
+	// Name of StorageClass to which this persistent volume belongs. Empty value
+	// means that this volume does not belong to any StorageClass.
+	// +optional
+	StorageClassName string `json:"storageClassName,omitempty" protobuf:"bytes,6,opt,name=storageClassName"`
+	// A list of mount options, e.g. ["ro", "soft"]. Not validated - mount will
+	// simply fail if one is invalid.
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options
+	// +optional
+	MountOptions []string `json:"mountOptions,omitempty" protobuf:"bytes,7,opt,name=mountOptions"`
+	// volumeMode defines if a volume is intended to be used with a formatted filesystem
+	// or to remain in raw block state. Value of Filesystem is implied when not included in spec.
+	// This is a beta feature.
+	// +optional
+	VolumeMode *PersistentVolumeMode `json:"volumeMode,omitempty" protobuf:"bytes,8,opt,name=volumeMode,casttype=PersistentVolumeMode"`
+	// NodeAffinity defines constraints that limit what nodes this volume can be accessed from.
+	// This field influences the scheduling of pods that use this volume.
+	// +optional
+	NodeAffinity *VolumeNodeAffinity `json:"nodeAffinity,omitempty" protobuf:"bytes,9,opt,name=nodeAffinity"`
 }
 ```
 
