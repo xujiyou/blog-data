@@ -92,6 +92,8 @@
 
       [Kubernetes-API学习(七)-APIService.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(七)-APIService.md) 
 
+      [Kubernetes-API学习(八)-networking.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(八)-networking.md) 
+
    - 动手操作
 
       [部署Zookeeper.md](云原生/Kubernetes/动手操作/部署Zookeeper.md) 
