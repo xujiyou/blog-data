@@ -1,5 +1,7 @@
 # Kubernetes API 学习（一）- 介绍
 
+Kubernetes 版本为 1.17.3
+
 我想根据官方的 API 源码，API 官方文档，kubectl 工具，curl 等工具来从头到尾的学习一下 Kubernetes API。
 
 API 源码地址：https://github.com/kubernetes/api
