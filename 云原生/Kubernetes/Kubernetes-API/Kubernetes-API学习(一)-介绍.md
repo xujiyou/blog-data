@@ -74,3 +74,11 @@ $ kubectl apply -f default-role-binding.yaml
 ```
 
 然后再用浏览器访问就可以了。这给默认用户加入了所有权限，浏览器访问就方便了。
+
+
+
+
+
+另外还需要注意，如果需要 watch 一个资源，可以在 URL 参数重加 watch，而不是在地址中加 /watch：
+
+![image-20200317143840202](../../../resource/image-20200317143840202.png)
