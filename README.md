@@ -88,6 +88,10 @@
 
       [Kubernetes-API学习(五)-RDBC.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(五)-RDBC.md) 
 
+      [Kubernetes-API学习(六)-admissionregistration.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(六)-admissionregistration.md) 
+
+      [Kubernetes-API学习(七)-APIService.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(七)-APIService.md) 
+
    - 动手操作
 
       [部署Zookeeper.md](云原生/Kubernetes/动手操作/部署Zookeeper.md) 
