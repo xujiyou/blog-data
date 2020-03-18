@@ -72,6 +72,10 @@
 
    - Kubernetes 扩展机制
 
+      - CNI
+
+        
+
    - Kubernetes API
 
       [Kubernetes-API访问方式.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API访问方式.md) 
@@ -93,6 +97,12 @@
       [Kubernetes-API学习(七)-APIService.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(七)-APIService.md) 
 
       [Kubernetes-API学习(八)-networking.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(八)-networking.md) 
+
+      [Kubernetes-API学习(九)-CRD.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(九)-CRD.md) 
+
+      [Kubernetes-API学习(十)-autoscaling.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十)-autoscaling.md) 
+
+      [Kubernetes-API学习(十一)-authentication.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十一)-authentication.md) 
 
    - 动手操作
 
