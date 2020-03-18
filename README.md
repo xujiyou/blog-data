@@ -84,7 +84,7 @@
 
       - CSI
 
-        
+         [CSI工作方式.md](云原生/Kubernetes/Kubernetes扩展机制/CSI/CSI工作方式.md) 
 
       
 
