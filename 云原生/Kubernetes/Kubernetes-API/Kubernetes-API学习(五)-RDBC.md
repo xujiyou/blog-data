@@ -43,10 +43,10 @@ type PolicyRule struct {
 
    // 资源组,如果指定了多个API组，则将允许对任何API组中的枚举资源之一请求的任何操作。
    APIGroups []string `json:"apiGroups,omitempty" protobuf:"bytes,2,rep,name=apiGroups"`
-   // 资源是此规则应用于的资源的列表。ResourceAll表示所有资源。
+   // 资源是此规则应用于的资源的列表。ResourceAll表示所有资源。比如：podsecuritypolicies
    // +optional
    Resources []string `json:"resources,omitempty" protobuf:"bytes,3,rep,name=resources"`
-   // ResourceNames是规则应用于的可选名称白名单。空集意味着一切都是允许的。
+   // ResourceNames是规则应用于的可选名称白名单。空集意味着一切都是允许的。比如一个 podsecuritypolicies 实例。
    // +optional
    ResourceNames []string `json:"resourceNames,omitempty" protobuf:"bytes,4,rep,name=resourceNames"`
 

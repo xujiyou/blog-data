@@ -74,7 +74,19 @@
 
       - CNI
 
+         [CNI工作机制.md](云原生/Kubernetes/Kubernetes扩展机制/CNI/CNI工作机制.md) 
+
+      - CRI
+
+         [CRI工作机制.md](云原生/Kubernetes/Kubernetes扩展机制/CRI/CRI工作机制.md) 
+
+         [CRI-Tools.md](云原生/Kubernetes/Kubernetes扩展机制/CRI/CRI-Tools.md) 
+
+      - CSI
+
         
+
+      
 
    - Kubernetes API
 
@@ -103,6 +115,16 @@
       [Kubernetes-API学习(十)-autoscaling.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十)-autoscaling.md) 
 
       [Kubernetes-API学习(十一)-authentication.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十一)-authentication.md) 
+
+      [Kubernetes-API学习(十二)-RuntimeClass.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十二)-RuntimeClass.md) 
+
+      [Kubernetes-API学习(十三)-policy.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十三)-policy.md) 
+
+      [Kubernetes-API学习(十四)-scheduling.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十四)-scheduling.md) 
+
+      [Kubernetes-API学习(十五)-certificates.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十五)-certificates.md) 
+
+      [Kubernetes-API学习(十六)-coordination.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十六)-coordination.md) 
 
    - 动手操作
 

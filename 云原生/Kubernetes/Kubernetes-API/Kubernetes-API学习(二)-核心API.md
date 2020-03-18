@@ -279,7 +279,7 @@ type PodSpec struct {
 	// HostAliases是主机和IP的可选列表，将注入到Pod的主机中
 	// 仅仅对 non-hostNetwork pods 有效
 	HostAliases []HostAlias `json:"hostAliases,omitempty" patchStrategy:"merge" patchMergeKey:"ip" protobuf:"bytes,23,rep,name=hostAliases"`
-	// Pod 的优先级，
+	// Pod 的优先级，见 scheduling API
   // “system-node-critical”和“system-cluster-critical”是两个特殊的关键字，它们指示最高优先级. 
 	PriorityClassName string `json:"priorityClassName,omitempty" protobuf:"bytes,24,opt,name=priorityClassName"`
 	// 优先级值。 各种系统组件都使用此字段来查找窗格的优先级。 
