@@ -253,3 +253,74 @@ curl 有个弊端，就是需要自己生成 BASE64 的数据。看到上边填�
 
 
 
+## put
+
+```go
+type PutRequest struct {
+   // 需要保存的key
+   Key []byte `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+   // 需要保存的value
+   Value []byte `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+   // 租约 ID
+   Lease int64 `protobuf:"varint,3,opt,name=lease,proto3" json:"lease,omitempty"`
+   // 如果为 true，则上一个版本的 key-value 会在响应中返回。
+   PrevKv bool `protobuf:"varint,4,opt,name=prev_kv,json=prevKv,proto3" json:"prev_kv,omitempty"`
+   // 如果 ignore_value 设置了, 则会使用当前的 value 更新 key
+   // 如果 key 不存在就返回错误
+   IgnoreValue bool `protobuf:"varint,5,opt,name=ignore_value,json=ignoreValue,proto3" json:"ignore_value,omitempty"`
+   // If ignore_lease is set, etcd updates the key using its current lease.
+   // Returns an error if the key does not exist.
+   IgnoreLease bool `protobuf:"varint,6,opt,name=ignore_lease,json=ignoreLease,proto3" json:"ignore_lease,omitempty"`
+}
+```
+
+PutResponse：
+
+```go
+type PutResponse struct {
+   Header *ResponseHeader `protobuf:"bytes,1,opt,name=header" json:"header,omitempty"`
+   // if prev_kv is set in the request, the previous key-value pair will be returned.
+   PrevKv *mvccpb.KeyValue `protobuf:"bytes,2,opt,name=prev_kv,json=prevKv" json:"prev_kv,omitempty"`
+}
+```
+
+这个响应很熟悉了，不必看了。
+
+查看 etcdctl 的帮助：
+
+```
+$ etcdctl put -h
+NAME:
+        put - Puts the given key into the store
+
+USAGE:
+        etcdctl put [options] <key> <value> (<value> can also be given from stdin) [flags]
+
+DESCRIPTION:
+        Puts the given key into the store.
+
+        When <value> begins with '-', <value> is interpreted as a flag.
+        Insert '--' for workaround:
+
+        $ put <key> -- <value>
+        $ put -- <key> <value>
+
+        If <value> isn't given as a command line argument and '--ignore-value' is not specified,
+        this command tries to read the value from standard input.
+
+        If <lease> isn't given as a command line argument and '--ignore-lease' is not specified,
+        this command tries to read the value from standard input.
+
+        For example,
+        $ cat file | put <key>
+        will store the content of the file to <key>.
+
+OPTIONS:
+  -h, --help[=false]            help for put
+      --ignore-lease[=false]    updates the key using its current lease
+      --ignore-value[=false]    updates the key using its current value
+      --lease="0"               lease ID (in hexadecimal) to attach to the key
+      --prev-kv[=false]         return the previous key-value pair before modification
+```
+
+curl 和 golang 还是用上边的套路。
