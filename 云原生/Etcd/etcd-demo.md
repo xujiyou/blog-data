@@ -216,3 +216,17 @@ $ etcdctl --user=root:123456 get foo
 
 
 
+## Kubernetes 相关
+
+查询所有 key ：
+
+```bash
+$ etcdctl get / --prefix --keys-only
+```
+
+查看所有命名空间的 key ：
+
+```bash
+$ etcdctl get /registry/namespaces --prefix --keys-only
+```
+

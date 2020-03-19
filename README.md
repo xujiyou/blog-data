@@ -288,7 +288,9 @@
 
     [etcdctl详解.md](云原生/Etcd/Etcdctl详解.md) 
 
-    
+    [etcd-golang客户端.md](云原生/Etcd/etcd-golang客户端.md) 
+
+    [etcd中的各种版本.md](云原生/Etcd/etcd中的各种版本.md) 
 
     
 

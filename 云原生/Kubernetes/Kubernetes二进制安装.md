@@ -191,6 +191,8 @@ $ curl --cacert /etc/etcd/cert/etcd/ca.pem --cert /etc/etcd/cert/etcd/etcd.pem -
 
 ```
 
+注意上边的 curl 是用的 v2 版本的API。v2 和 v3 的数据是不互通的。v3 版本没办法用 curl。
+
 查看 etcd 成员：
 
 ```bash
