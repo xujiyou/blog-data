@@ -126,6 +126,8 @@
 
       [Kubernetes-API学习(十六)-coordination.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十六)-coordination.md) 
 
+      [Kubernetes-API学习(十七)-storage.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十七)-storage.md) 
+
    - 动手操作
 
       [部署Zookeeper.md](云原生/Kubernetes/动手操作/部署Zookeeper.md) 
