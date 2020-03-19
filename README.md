@@ -273,6 +273,8 @@
     [Protobuf语法.md](云原生/gRPC/Protobuf语法.md) 
 
     [Golang构建gRPC服务.md](云原生/gRPC/Golang构建gRPC服务.md) 
+    
+    [gRPC流式传输.md](云原生/gRPC/gRPC流式传输.md) 
 
    
 
@@ -535,6 +537,8 @@ CDH 开始收费了，怎么说。。。
     [Go-FAQ.md](编程语言/Golang/Go-FAQ.md) 
 
     [Go命令详解.md](编程语言/Golang/Go命令详解.md) 
+
+    [Golang类型转换.md](编程语言/Golang/Golang类型转换.md) 
 
     - Cobra
 

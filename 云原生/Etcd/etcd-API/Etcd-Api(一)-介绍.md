@@ -35,7 +35,7 @@ $ export ETCDCTL_API=3
 
 通过 goland 来查看这个 proto 文件的结构，可以看到：
 
-![image-20200319135818836](../../resource/image-20200319135818836.png)
+![image-20200319135818836](../../../resource/image-20200319135818836.png)
 
 一共有 6 个 Service。
 

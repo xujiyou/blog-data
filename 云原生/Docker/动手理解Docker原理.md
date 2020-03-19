@@ -219,6 +219,41 @@ Network Namespace 不止用来隔离网络设备，还可以用来隔离IP地址
 
 Linux Cgroups 提供了对一组进程及将来的子进程的资源限制、控制和统计能力，这些资源包括CPU、内存、储存、网络等，通过 Cgroups，可以实时的监控进程的监控和统计信息。
 
+Cgroups 的三个组件：
+
+- 首先，Cgroups 肯定要包含一组进程，并把这组进程与Linux subsystem的各种配置关联起来。
+
+- subsystem 是一组资源控制的模块，包含以下几项：
+
+  - blkio 对块设备的输入输出的访问
+  - cpu 限制 CPU 的使用
+  - cpuacct 统计进程的 CPU 占用
+  - cpuset 设置进程可以使用的 cpu 和 内存
+  - devices 控制对设备的访问
+  - freezer 挂起恢复进程
+  - memory 控制内存的使用
+  - net_cls 对进程的网络包分类，以便做限流和监控
+  - ns 创建新的 Cgroups
+
+  查看内核支持哪些 subsystem：
+
+  ```bash
+  $ sudo yum install -y libcgroup-pam libcgroup-tools
+  $ lssubsys -a
+  cpuset
+  cpu,cpuacct
+  blkio
+  memory
+  devices
+  freezer
+  net_cls,net_prio
+  perf_event
+  hugetlb
+  pids
+  ```
+
+- hierarchy 的功能是把一组 cgroup 串成 个树状的结构，一个这样的树便是一个 hierarchy ，通过这种树状结构， Cgroups 可以做到继承 比如，系统对一组定时的任务进程通过 cgroupl 限制了 CPU 的使用率，然后其中有一个定时 dump 日志的进程还需要限制磁盘 IO ，为了避免限制了磁盘 IO 之后影响到其他进程，就可以创建 cgroup2 ，使其继承于 cgroupl 井限制磁盘的 IO ，这样 cgroup2 便继承了 cgroupl 中对 CPU 使用率的限制，并且增加了磁盘 IO 的限制而不影响到 cgroupl 中的其他进程。
+
 
 
 
