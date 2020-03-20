@@ -6,3 +6,7 @@
 
 但是这篇公开课只讲了大体思路，并没有深入细节。
 
+CNI 官方库：https://github.com/containernetworking/cni
+
+配置详解：https://github.com/containernetworking/cni/blob/master/SPEC.md
+

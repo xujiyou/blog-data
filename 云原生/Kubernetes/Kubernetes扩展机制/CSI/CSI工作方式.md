@@ -8,3 +8,7 @@
 
 ![image-20200318162205853](../../../../resource/image-20200318162205853.png)
 
+CSI 的文档库地址：https://github.com/container-storage-interface/spec
+
+CSI Kubernetes 官方文档：https://kubernetes-csi.github.io/docs/
+

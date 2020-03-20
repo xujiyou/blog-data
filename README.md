@@ -84,11 +84,11 @@
 
          [CRI与OCI的关系.md](云原生/Kubernetes/Kubernetes扩展机制/CRI/CRI与OCI的关系.md) 
 
+         [CRI-API.md](云原生/Kubernetes/Kubernetes扩展机制/CRI/CRI-API.md) 
+
       - CSI
 
          [CSI工作方式.md](云原生/Kubernetes/Kubernetes扩展机制/CSI/CSI工作方式.md) 
-
-      
 
    - Kubernetes API
 
@@ -180,9 +180,7 @@
 
       [在Pod中的容器之间共享进程命名空间.md](云原生/Kubernetes/动手操作/在Pod中的容器之间共享进程命名空间.md) 
 
-     
-
-   
+  
 
 - Docker
 
@@ -212,9 +210,63 @@
 
       [Docker-API(三)-Images.md](云原生/Docker/Docker-API/Docker-API(三)-Images.md) 
 
-     
 
-   
+
+- containerd
+
+
+
+- etcd
+
+  [etcd-demo.md](云原生/Etcd/etcd-demo.md) 
+
+  [etcd动态发现.md](云原生/Etcd/etcd动态发现.md) 
+
+  [Metrics.md](云原生/Etcd/Metrics.md) 
+
+  [etcd配置详解.md](云原生/Etcd/etcd配置详解.md) 
+
+  [etcdctl详解.md](云原生/Etcd/Etcdctl详解.md) 
+
+  [etcd-golang客户端.md](云原生/Etcd/etcd-golang客户端.md) 
+
+  [etcd中的各种版本.md](云原生/Etcd/etcd中的各种版本.md) 
+
+  - etch - API
+
+    [Etcd-Api(一)-介绍.md](云原生/Etcd/etcd-API/Etcd-Api(一)-介绍.md) 
+
+    [Etcd-API(二)-KV.md](云原生/Etcd/etcd-API/Etcd-API(二)-KV.md) 
+
+    [Etcd-API(三)-Watch.md](云原生/Etcd/etcd-API/Etcd-API(三)-Watch.md) 
+
+    [Etcd-API(四)-Lease.md](云原生/Etcd/etcd-API/Etcd-API(四)-Lease.md) 
+
+    [Etcd-API(五)-Cluster.md](云原生/Etcd/etcd-API/Etcd-API(五)-Cluster.md) 
+
+    [Etcd-API(六)-Maintenance.md](云原生/Etcd/etcd-API/Etcd-API(六)-Maintenance.md) 
+
+    [Etcd-API(七)-Auth.md](云原生/Etcd/etcd-API/Etcd-API(七)-Auth.md) 
+
+
+
+- gRPC
+
+  [Java构建gRPC服务.md](云原生/gRPC/Java构建gRPC服务.md) 
+
+  [Protobuf语法.md](云原生/gRPC/Protobuf语法.md) 
+
+  [Golang构建gRPC服务.md](云原生/gRPC/Golang构建gRPC服务.md) 
+
+  [gRPC流式传输.md](云原生/gRPC/gRPC流式传输.md) 
+
+  [gRPC认证.md](云原生/gRPC/gRPC认证.md) 
+
+  [grpc-gateway使用.md](云原生/gRPC/grpc-gateway使用.md) 
+
+  [gRPC使用sock文件进行通信.md](云原生/gRPC/gRPC使用sock文件进行通信.md) 
+
+
 
 - Helm
 
@@ -274,49 +326,7 @@
 
    [Telepresence安装及入门.md](云原生/Telepresence/Telepresence安装及入门.md) 
 
-   
 
-- gRPC
-
-    [Java构建gRPC服务.md](云原生/gRPC/Java构建gRPC服务.md) 
-
-    [Protobuf语法.md](云原生/gRPC/Protobuf语法.md) 
-
-    [Golang构建gRPC服务.md](云原生/gRPC/Golang构建gRPC服务.md) 
-    
-    [gRPC流式传输.md](云原生/gRPC/gRPC流式传输.md) 
-    
-    [gRPC认证.md](云原生/gRPC/gRPC认证.md) 
-    
-    [grpc-gateway使用.md](云原生/gRPC/grpc-gateway使用.md) 
-    
-    [gRPC使用sock文件进行通信.md](云原生/gRPC/gRPC使用sock文件进行通信.md) 
-
-   
-
-- etcd
-
-    [etcd-demo.md](云原生/Etcd/etcd-demo.md) 
-
-    [etcd动态发现.md](云原生/Etcd/etcd动态发现.md) 
-
-    [Metrics.md](云原生/Etcd/Metrics.md) 
-
-    [etcd配置详解.md](云原生/Etcd/etcd配置详解.md) 
-
-    [etcdctl详解.md](云原生/Etcd/Etcdctl详解.md) 
-
-    [etcd-golang客户端.md](云原生/Etcd/etcd-golang客户端.md) 
-
-    [etcd中的各种版本.md](云原生/Etcd/etcd中的各种版本.md) 
-
-    - etch - API
-
-       [Etcd-Api(一)-介绍.md](云原生/Etcd/etcd-API/Etcd-Api(一)-介绍.md) 
-
-       [Etcd-API(二)-KV.md](云原生/Etcd/etcd-API/Etcd-API(二)-KV.md) 
-
-    
 
 - CoreDNS
 
