@@ -501,3 +501,91 @@ func main() {
 ```
 
 golang 的语法还是比较简单的。
+
+
+
+## Compact
+
+CompactionRequest
+
+```go
+type CompactionRequest struct {
+   // 要压缩的 revision
+   Revision int64 `protobuf:"varint,1,opt,name=revision,proto3" json:"revision,omitempty"`
+   // 设置了physical，以便RPC将等待，直到将压缩物理地应用于本地数据库为止，
+   // 以便从后端数据库中完全删除压缩的条目。
+   Physical bool `protobuf:"varint,2,opt,name=physical,proto3" json:"physical,omitempty"`
+}
+```
+
+CompactionResponse
+
+```go
+type CompactionResponse struct {
+   Header *ResponseHeader `protobuf:"bytes,1,opt,name=header" json:"header,omitempty"`
+}
+```
+
+etcdctl 操作这条 API：
+
+```bash
+$ etcdctl compaction 10 --physical
+$ # 再次访问 revision 为 10 之前的 key 会报错
+$ etcdctl get "" --from-key --limit=10 --rev=5 -w json          
+{"level":"warn","ts":"2020-03-20T17:05:17.682+0800","caller":"clientv3/retry_interceptor.go:62","msg":"retrying of unary invoker failed","target":"endpoint://client-46f6086c-c326-499e-81cc-94d9e0870b60/127.0.0.1:2379","attempt":0,"error":"rpc error: code = OutOfRange desc = etcdserver: mvcc: required revision has been compacted"}
+Error: etcdserver: mvcc: required revision has been compacted
+```
+
+curl 操作：
+
+```bash
+$ curl -L http://localhost:2379/v3/kv/compaction -X POST -d '{"revision": 15, "physical": true}'
+```
+
+这样之后，验证效果：
+
+```bash
+$ etcdctl get "" --from-key --limit=10 --rev=12 -w json
+{"level":"warn","ts":"2020-03-20T17:08:50.751+0800","caller":"clientv3/retry_interceptor.go:62","msg":"retrying of unary invoker failed","target":"endpoint://client-babfa488-34a1-487e-
+a17c-2d450da75b6c/127.0.0.1:2379","attempt":0,"error":"rpc error: code = OutOfRange desc = etcdserver: mvcc: required revision has been compacted"}
+Error: etcdserver: mvcc: required revision has been compacted
+17:08:50-jiyouxu@XuJiyou:~$ etcdctl get "" --from-key --limit=10 --rev=16 -w json
+{"header":{"cluster_id":14841639068965178418,"member_id":10276657743932975437,"revision":21,"raft_term":5},"kvs":[{"key":"WTJOakNnPT0=","create_revision":16,"mod_revision":16,"version"
+:1,"value":"WkdSa0NnPT0="},{"key":"Zm9v","create_revision":15,"mod_revision":15,"version":1,"value":"YmFyNg=="},{"key":"Zm9vMQ==","create_revision":12,"mod_revision":12,"version":1,"va
+lue":"YmFyNA=="}],"count":3}
+```
+
+
+
+Golfing 代码：
+
+```go
+package main
+
+import (
+   "context"
+   "fmt"
+   "go.etcd.io/etcd/clientv3"
+   "time"
+)
+
+func main() {
+
+   cli, err := clientv3.New(clientv3.Config{
+      Endpoints:   []string{"127.0.0.1:2379"},
+      RetryDialer: nil,
+      DialTimeout: 5 * time.Second,
+   })
+   if err == nil {
+      _ = cli.KV.Compact(context.TODO(), 18)
+   } else {
+      _ = fmt.Errorf("err: %s", err)
+   }
+   defer cli.Close()
+}
+```
+
+
+
+
+
