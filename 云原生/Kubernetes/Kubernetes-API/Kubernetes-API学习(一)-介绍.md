@@ -24,9 +24,17 @@ $ kubectl api-versions | grep k8s
 
 也可以通过 curl 获取资源对象的版本：
 
-```
+```http
 GET /apis
 ```
+
+获取所有可访问的 API 列表：
+
+```http
+GET /
+```
+
+
 
 关于 API 分类，可以直接看源码中的包分类，如下：
 
@@ -38,7 +46,7 @@ GET /apis
 
 这里记录一下错误：
 
-```
+```http
 GET /api/v1/namespaces/kube-system/pods
 ```
 
