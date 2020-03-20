@@ -29,6 +29,11 @@ $ sudo systemctl restart docker.service
 然后在客户端执行以下命令来测试是否成功：
 
 ```
-$ docker -H tcp://fueltank-1:2376 info
+$ docker -H tcp://127.0.0.1:2376 info
 ```
 
+
+
+另外说明：
+
+`unix:///*.sock` 的意思是基于文件的 Socket 通信。
