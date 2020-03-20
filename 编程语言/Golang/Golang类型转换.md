@@ -6,3 +6,11 @@
 str := strconv.Itoa(10)
 ```
 
+
+
+## string 转 byte数组
+
+```
+var data []byte = []byte(str)
+```
+

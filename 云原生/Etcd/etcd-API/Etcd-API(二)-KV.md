@@ -324,3 +324,180 @@ OPTIONS:
 ```
 
 curl 和 golang 还是用上边的套路。
+
+
+
+## DeleteRange
+
+DeleteRangeRequest
+
+```go
+type DeleteRangeRequest struct {
+   // key is the first key to delete in the range.
+   Key []byte `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+   // range_end is the key following the last key to delete for the range [key, range_end).
+   // If range_end is not given, the range is defined to contain only the key argument.
+   // If range_end is one bit larger than the given key, then the range is all the keys
+   // with the prefix (the given key).
+   // If range_end is '\0', the range is all keys greater than or equal to the key argument.
+   RangeEnd []byte `protobuf:"bytes,2,opt,name=range_end,json=rangeEnd,proto3" json:"range_end,omitempty"`
+   // If prev_kv is set, etcd gets the previous key-value pairs before deleting it.
+   // The previous key-value pairs will be returned in the delete response.
+   PrevKv bool `protobuf:"varint,3,opt,name=prev_kv,json=prevKv,proto3" json:"prev_kv,omitempty"`
+}
+```
+
+DeleteRangeResponse
+
+```go
+type DeleteRangeResponse struct {
+   Header *ResponseHeader `protobuf:"bytes,1,opt,name=header" json:"header,omitempty"`
+   // deleted is the number of keys deleted by the delete range request.
+   Deleted int64 `protobuf:"varint,2,opt,name=deleted,proto3" json:"deleted,omitempty"`
+   // if prev_kv is set in the request, the previous key-value pairs will be returned.
+   PrevKvs []*mvccpb.KeyValue `protobuf:"bytes,3,rep,name=prev_kvs,json=prevKvs" json:"prev_kvs,omitempty"`
+}
+```
+
+很好理解，不赘述了。查看 etcdctl 帮助：
+
+```
+$ etcdctl del -h
+NAME:
+        del - Removes the specified key or range of keys [key, range_end)
+
+USAGE:
+        etcdctl del [options] <key> [range_end] [flags]
+
+OPTIONS:
+      --from-key[=false]        delete keys that are greater than or equal to the given key using byte compare
+  -h, --help[=false]            help for del
+      --prefix[=false]          delete keys with matching prefix
+      --prev-kv[=false]         return deleted key-value pairs
+```
+
+
+
+## Txn
+
+TxnRequest
+
+```go
+type TxnRequest struct {
+   // compare 是一组比较表达式
+   // 如果比较成功，则将按顺序处理成功请求，并且响应将按顺序包含它们各自的响应.
+   // 如果比较失败，则将按顺序处理失败请求，并且响应将按顺序包含它们各自的响应。
+   Compare []*Compare `protobuf:"bytes,1,rep,name=compare" json:"compare,omitempty"`
+   // success 是当比较为 true 时将应用的请求列表。
+   Success []*RequestOp `protobuf:"bytes,2,rep,name=success" json:"success,omitempty"`
+   // failure 是当比较为 false 时将应用的请求列表。
+   Failure []*RequestOp `protobuf:"bytes,3,rep,name=failure" json:"failure,omitempty"`
+}
+```
+
+Compare
+
+```go
+type Compare struct {
+   // result 是进行此比较的逻辑比较操作。可选取值为 Compare_EQUAL、Compare_GREATER、Compare_LESS、Compare_NOT_EQUAL
+   Result Compare_CompareResult `protobuf:"varint,1,opt,name=result,proto3,enum=etcdserverpb.Compare_CompareResult" json:"result,omitempty"`
+   // 比较的目标，可选取值为 Compare_VERSION、Compare_CREATE、Compare_MOD、Compare_VALUE、Compare_LEASE
+   Target Compare_CompareTarget `protobuf:"varint,2,opt,name=target,proto3,enum=etcdserverpb.Compare_CompareTarget" json:"target,omitempty"`
+   // key 是将用于比较的键
+   Key []byte `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"`
+   // isCompare_TargetUnion 是一个接口，应该是比较操作的集体实现。
+   // Types that are valid to be assigned to TargetUnion:
+   // *Compare_Version
+   // *Compare_CreateRevision
+   // *Compare_ModRevision
+   // *Compare_Value
+   // *Compare_Lease
+   TargetUnion isCompare_TargetUnion `protobuf_oneof:"target_union"`
+   // 指定了 key 的范围
+   // range_end compares the given target to all keys in the range [key, range_end).
+   // See RangeRequest for more details on key ranges.
+   RangeEnd []byte `protobuf:"bytes,64,opt,name=range_end,json=rangeEnd,proto3" json:"range_end,omitempty"`
+}
+```
+
+RequestOp
+
+```go
+type RequestOp struct {
+   // isRequestOp_Request 也是一个接口，用于具体的实现。
+   // request is a union of request types accepted by a transaction.
+   //
+   // Types that are valid to be assigned to Request:
+   // *RequestOp_RequestRange
+   // *RequestOp_RequestPut
+   // *RequestOp_RequestDeleteRange
+   // *RequestOp_RequestTxn
+   Request isRequestOp_Request `protobuf_oneof:"request"`
+}
+```
+
+TxnResponse
+
+```go
+type TxnResponse struct {
+   Header *ResponseHeader `protobuf:"bytes,1,opt,name=header" json:"header,omitempty"`
+   // 为 true 则表示完成了事务（不论判断语句是成功还是失败）
+   Succeeded bool `protobuf:"varint,2,opt,name=succeeded,proto3" json:"succeeded,omitempty"`
+   // 执行结果
+   Responses []*ResponseOp `protobuf:"bytes,3,rep,name=responses" json:"responses,omitempty"`
+}
+```
+
+查看 etcdctl 相关帮助信息：
+
+```
+$ etcdctl txn -h
+NAME:
+        txn - Txn processes all the requests in one transaction
+
+USAGE:
+        etcdctl txn [options] [flags]
+
+OPTIONS:
+  -h, --help[=false]            help for txn
+  -i, --interactive[=false]     Input transaction in interactive mode
+```
+
+关于 etcdctl txn 的操作在 [etcd-demo.md](../etcd-demo.md) 中已经学习了。下面先看 curl 怎么玩
+
+由于 json 没办法表达像上边的 `isCompare_TargetUnion` 这个接口实现语法，所有 curl GG了。下面使用 golang 来搞定。
+
+```go
+package main
+
+import (
+   "context"
+   "fmt"
+   "go.etcd.io/etcd/clientv3"
+   "log"
+   "time"
+)
+
+func main() {
+
+   cli, err := clientv3.New(clientv3.Config{
+      Endpoints:   []string{"127.0.0.1:2379"},
+      RetryDialer: nil,
+      DialTimeout: 5 * time.Second,
+   })
+   if err == nil {
+      txn := cli.KV.Txn(context.TODO())
+      resp, _ := txn.If(clientv3.Compare(clientv3.Value("foo"), "=", "bar6")).
+         Then(clientv3.OpPut("aaa", "bbb")).
+         Else(clientv3.OpPut("ccc", "ddd")).
+         Commit()
+
+      log.Printf("%s", resp)
+   } else {
+      _ = fmt.Errorf("err: %s", err)
+   }
+   defer cli.Close()
+}
+```
+
+golang 的语法还是比较简单的。
