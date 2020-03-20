@@ -212,6 +212,8 @@
 
       [Docker-API(三)-Images.md](云原生/Docker/Docker-API/Docker-API(三)-Images.md) 
 
+     
+
    
 
 - Helm
@@ -283,6 +285,10 @@
     [Golang构建gRPC服务.md](云原生/gRPC/Golang构建gRPC服务.md) 
     
     [gRPC流式传输.md](云原生/gRPC/gRPC流式传输.md) 
+    
+    [gRPC认证.md](云原生/gRPC/gRPC认证.md) 
+    
+    [grpc-gateway使用.md](云原生/gRPC/grpc-gateway使用.md) 
 
    
 
