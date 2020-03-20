@@ -289,6 +289,8 @@
     [gRPC认证.md](云原生/gRPC/gRPC认证.md) 
     
     [grpc-gateway使用.md](云原生/gRPC/grpc-gateway使用.md) 
+    
+    [gRPC使用sock文件进行通信.md](云原生/gRPC/gRPC使用sock文件进行通信.md) 
 
    
 
