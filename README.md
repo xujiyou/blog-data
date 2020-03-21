@@ -76,6 +76,8 @@
 
          [CNI工作机制.md](云原生/Kubernetes/Kubernetes扩展机制/CNI/CNI工作机制.md) 
 
+         [cnitool使用方式.md](云原生/Kubernetes/Kubernetes扩展机制/CNI/cnitool使用方式.md) 
+
       - CRI
 
          [CRI工作机制.md](云原生/Kubernetes/Kubernetes扩展机制/CRI/CRI工作机制.md) 
@@ -177,7 +179,7 @@
       [为容器的生命周期事件设置处理函数.md](云原生/Kubernetes/动手操作/为容器的生命周期事件设置处理函数.md) 
 
       [为容器设置启动时要执行的命令及其入参.md](云原生/Kubernetes/动手操作/为容器设置启动时要执行的命令及其入参.md) 
-
+   
       [在Pod中的容器之间共享进程命名空间.md](云原生/Kubernetes/动手操作/在Pod中的容器之间共享进程命名空间.md) 
 
   

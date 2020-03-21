@@ -129,7 +129,6 @@ func main() {
       DialTimeout: 5 * time.Second,
    })
    if err == nil {
-      _ = cli.KV.Compact(context.TODO(), 18)
       for resp := range cli.Watcher.Watch(context.TODO(), "foo", clientv3.WithPrefix()) {
          log.Println("%s", resp)
       }
