@@ -685,6 +685,8 @@ CDH 开始收费了，怎么说。。。
    [一次网络命令实践.md](Linux/Shell/一次网络命令实践.md) 
    
    [内核升级.md](Linux/Shell/内核升级.md) 
+   
+   [iproute2命令详解.md](Linux/Shell/iproute2命令详解.md) 
 
 
 

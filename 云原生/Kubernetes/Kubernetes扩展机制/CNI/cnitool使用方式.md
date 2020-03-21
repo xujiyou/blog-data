@@ -131,11 +131,68 @@ $ sudo ip netns del testing
 
 
 
+---
 
 
 
+上面已经测试了 ptp 插件。下面开始想办法开发一个自己的插件，并运行起来。
 
+上面在官方的插件代码里，有一个示例插件，在 `plugins/sample` 包下，下面先编译这个包，让后将其放入 bin 目录(先不该动任何代码)：
 
+```bash
+$ cd plugins/sample/
+$ go build 
+$ cd ../../
+$ cp plugins/sample/sample ./bin
+```
+
+然后编写配置文件，在 `plugins/sample/sample_linux_test.go` 这个文件中有配置，需要对其进行改造：
+
+```bash
+$ cat /etc/cni/net.d/10-sample.conflist
+{
+    "cniVersion": "0.4.0",
+    "name": "sample",
+    "plugins": [
+        {
+            "type": "sample",
+            "anotherAwesomeArg": "haha",
+            "prevResult": {
+                        "interfaces": [
+                                 {
+                                          "name": "eth0",
+                                          "sandbox": "/var/run/netns/test"
+                                 }
+                         ],
+                         "ips": [
+                                 {
+                                         "version": "4",
+                                         "address": "10.0.0.2/24",
+                                         "gateway": "10.0.0.1",
+                                         "interface": 0
+                                 }
+                         ],
+                         "routes": []
+                 }
+        }
+    ]
+}
+```
+
+然后使用 cnitool 来执行 sample 插件：
+
+```bash
+$ sudo ip netns add test
+$ sudo CNI_PATH=./bin cnitool add sample /var/run/netns/test
+```
+
+测试：
+
+```bash
+$ sudo ip -n test addr
+```
+
+OK，这样 就可以自定义 CNI 插件了。
 
 
 
