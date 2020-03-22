@@ -40,6 +40,8 @@
 
     [List-Watch原理.md](云原生/Kubernetes/List-Watch原理.md) 
 
+    [kube-controller-manager内置的控制器.md](云原生/Kubernetes/kube-controller-manager内置的控制器.md) 
+
    - Kubernetes 配置系列
 
       [kube-apiserver配置详解.md](云原生/Kubernetes/Kubernetes配置系列/kube-apiserver配置详解.md) 
@@ -77,6 +79,8 @@
          [CNI工作机制.md](云原生/Kubernetes/Kubernetes扩展机制/CNI/CNI工作机制.md) 
 
          [cnitool使用方式.md](云原生/Kubernetes/Kubernetes扩展机制/CNI/cnitool使用方式.md) 
+
+         [手写一款CNI插件.md](云原生/Kubernetes/Kubernetes扩展机制/CNI/手写一款CNI插件.md) 
 
       - CRI
 
@@ -175,9 +179,9 @@
       [通过文件将Pod信息呈现给容器.md](云原生/Kubernetes/动手操作/通过文件将Pod信息呈现给容器.md) 
 
       [为节点发布扩展资源-为容器分派扩展资源.md](云原生/Kubernetes/动手操作/为节点发布扩展资源-为容器分派扩展资源.md) 
-
+   
       [为容器的生命周期事件设置处理函数.md](云原生/Kubernetes/动手操作/为容器的生命周期事件设置处理函数.md) 
-
+   
       [为容器设置启动时要执行的命令及其入参.md](云原生/Kubernetes/动手操作/为容器设置启动时要执行的命令及其入参.md) 
    
       [在Pod中的容器之间共享进程命名空间.md](云原生/Kubernetes/动手操作/在Pod中的容器之间共享进程命名空间.md) 
@@ -204,17 +208,29 @@
 
    [动手理解Docker原理.md](云原生/Docker/动手理解Docker原理.md) 
 
+   [Docker配置.md](云原生/Docker/Docker配置.md) 
+
    - Docker-API
 
       [Docker-API(一)-介绍.md](云原生/Docker/Docker-API/Docker-API(一)-介绍.md) 
 
       [Docker-API(二)-Containers.md](云原生/Docker/Docker-API/Docker-API(二)-Containers.md) 
-
+   
       [Docker-API(三)-Images.md](云原生/Docker/Docker-API/Docker-API(三)-Images.md) 
+      
+      [Docker-API(四)-Network.md](云原生/Docker/Docker-API/Docker-API(四)-Network.md) 
+      
+      [Docker-API(五)-Volume.md](云原生/Docker/Docker-API/Docker-API(五)-Volume.md) 
+      
+      [Docker-API(六)-Exec.md](云原生/Docker/Docker-API/Docker-API(六)-Exec.md) 
+      
+      [Docker-API(七)-System.md](云原生/Docker/Docker-API/Docker-API(七)-System.md) 
 
 
 
 - containerd
+
+  [containerd介绍.md](云原生/containerd/containerd介绍.md) 
 
 
 
@@ -690,6 +706,20 @@ CDH 开始收费了，怎么说。。。
 
 
 
+- systemd
+
+
+
+- SELinux
+
+
+
+- yum
+
+  
+
+
+
 ---
 
 
@@ -711,6 +741,8 @@ CDH 开始收费了，怎么说。。。
 - 日常
 
    [chrome没有继续前往.md](其他/日常/chrome没有继续前往.md) 
+   
+   [MacOS触控板与鼠标的滚动方向.md](其他/日常/MacOS触控板与鼠标的滚动方向.md) 
    
    
 

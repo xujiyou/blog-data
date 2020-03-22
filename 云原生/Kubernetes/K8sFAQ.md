@@ -151,3 +151,11 @@ $ kubectl get apiservice
 
 找出 AVAILABLE 为 false 的项
 
+
+
+
+
+#### kubelet 目录数据删不掉
+
+清理 kubelet 时有几个文件夹删不掉，是因为这几个目录被挂载了卷，使用 `df -h` 查看，卸载掉挂载的卷即可
+

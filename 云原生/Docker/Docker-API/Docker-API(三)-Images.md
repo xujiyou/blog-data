@@ -156,6 +156,14 @@ POST /images/load
 
 
 
+#### 获取远程库中的镜像信息
+
+```http
+GET /distribution/{name}/json
+```
+
+
+
 
 
 

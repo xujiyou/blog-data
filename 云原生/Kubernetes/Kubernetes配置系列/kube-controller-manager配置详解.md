@@ -72,7 +72,7 @@ Pod 的地址池，需要 --allocate-node-cidrs 为 true。
 
 开启控制器的列表，* 意味着启用所有默认控制器，“foo” 表示开启名字为 foo 的控制器，“-foo” 表示关闭名字为 foo 的控制器。
 
-所有的控制器：
+所有默认开启的控制器，共36个：
 
 attachdetach, bootstrapsigner, cloud-node-lifecycle, clusterrole-aggregation, cronjob, csrapproving, csrcleaner, csrsigning, daemonset, deployment, disruption, endpoint, endpointslice, garbagecollector, horizontalpodautoscaling, job, namespace, nodeipam, nodelifecycle, persistentvolume-binder, persistentvolume-expander, podgc, pv-protection, pvc-protection, replicaset, replicationcontroller, resourcequota, root-ca-cert-publisher, route, service, serviceaccount, serviceaccount-token, statefulset, tokencleaner, ttl, ttl-after-finished。
 

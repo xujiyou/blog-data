@@ -196,5 +196,43 @@ OK，这样 就可以自定义 CNI 插件了。
 
 
 
+---
 
+
+
+## cnitool 源码分析
+
+cnitool 的源码在 https://github.com/containernetworking/cni/blob/master/cnitool/cnitool.go
+
+一共就100多行，很简单。
+
+其中，最关键的几句话：
+
+```go
+  cninet := libcni.NewCNIConfig(filepath.SplitList(os.Getenv(EnvCNIPath)), nil)
+
+	rt := &libcni.RuntimeConf{
+		ContainerID:    containerID,
+		NetNS:          netns,
+		IfName:         ifName,
+		Args:           cniArgs,
+		CapabilityArgs: capabilityArgs,
+	}
+
+	switch os.Args[1] {
+	case CmdAdd:
+		result, err := cninet.AddNetworkList(context.TODO(), netconf, rt)
+		if result != nil {
+			_ = result.Print()
+		}
+		exit(err)
+	case CmdCheck:
+		err := cninet.CheckNetworkList(context.TODO(), netconf, rt)
+		exit(err)
+	case CmdDel:
+		exit(cninet.DelNetworkList(context.TODO(), netconf, rt))
+	}
+```
+
+可以看出，其实就是传入配置，然后调用的插件的三个方法。。。
 
