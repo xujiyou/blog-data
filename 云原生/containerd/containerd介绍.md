@@ -38,13 +38,49 @@ containerd 的各种库放在了GitHub中：
 
 安装完 docker 后，系统中已经有 containerd 了，下面来写代码：
 
-```
+```go
+package main
+
+import (
+	"context"
+	"github.com/containerd/containerd"
+	"github.com/containerd/containerd/namespaces"
+	"log"
+)
+
+func main() {
+	client, err := containerd.New("/run/containerd/containerd.sock")
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	defer client.Close()
+	ctx := namespaces.WithNamespace(context.Background(), "example")
+	image, err := client.Pull(ctx, "docker.io/library/redis:alpine", containerd.WithPullUnpack)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	log.Printf("Successfully pulled %s image\n", image.Name())
+}
 
 ```
 
+注意因为 containerd 还不支持 go modules，所以应该把代码放到 $GOPATH/src 目录下才行。
 
+编译：
 
+```
+$ go build
+```
 
+执行：
+
+```
+$ sudo ./containerd-test
+2020/03/22 20:57:08 Successfully pulled docker.io/library/redis:alpine image
+```
+
+可以了，测试通过。
 
 
 
