@@ -112,7 +112,7 @@ $ curl -L http://localhost:2379/v3/lease/grant -X POST -d '{"TTL": 300, "ID": 0}
 {"header":{"cluster_id":"14841639068965178418","member_id":"10276657743932975437","revision":"23","raft_term":"6"},"ID":"7587845169630795786","TTL":"300"}
 ```
 
-Golang 创建租约：
+Golang 创建租约（有毛病：context canceled"）：
 
 ```go
 package main
@@ -153,13 +153,250 @@ func main() {
 
 
 
+## LeaseRevoke
+
+撤销租约
+
+LeaseRevokeRequest
+
+```go
+type LeaseRevokeRequest struct {
+   // ID is the lease ID to revoke. When the ID is revoked, all associated keys will be deleted.
+   ID int64 `protobuf:"varint,1,opt,name=ID,proto3" json:"ID,omitempty"`
+}
+```
+
+LeaseRevokeResponse
+
+```go
+type LeaseRevokeResponse struct {
+   Header *ResponseHeader `protobuf:"bytes,1,opt,name=header" json:"header,omitempty"`
+}
+```
+
+ #### etcdctl 撤销租约：
+
+```bash
+$ etcdctl lease revoke 694d7104f3a49704
+```
+
+#### Curl 撤销租约：
+
+先找出 lease id：
+
+```bash
+$ etcdctl lease list -w json
+{"cluster_id":14841639068965178418,"member_id":10276657743932975437,"revision":24,"raft_term":7,"leases":[{"id":7587845213270611733},{"id":7587845213270611735},{"id":7587845213270611737},{"id":7587845213270611739}]}
+```
+
+这里说明一下，输出是json格式的才会看到 10 进制的 id，如果像下面这样：
+
+```bash
+$ etcdctl lease list        
+found 2 leases
+694d7104f3a49719
+694d7104f3a4971b
+```
+
+这样只能获取 16 进制的 id。如果想用到 curl 里面，需要转换格式：
+
+```bash
+$ printf %d 0x694d7104f3a49719
+7587845213270611737
+```
+
+再进行撤销：
+
+```
+curl -L http://127.0.0.1:2379/v3/lease/revoke -X POST -d '{"ID": 7587845213270611735}'
+```
+
+
+
+##### golang 撤销租约：
+
+可以用 10 进制的租约 id，也可以用 16 进制的：
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"go.etcd.io/etcd/clientv3"
+	"log"
+	"time"
+)
+
+func main() {
+
+	cli, err := clientv3.New(clientv3.Config{
+		Endpoints:   []string{"127.0.0.1:2379"},
+		DialTimeout: 20 * time.Second,
+	})
+	if err == nil {
+	  // resp, err := cli.Lease.Revoke(context.TODO(), 0x694d7104f3a49721)
+		resp, err := cli.Lease.Revoke(context.TODO(), 7587845213270611733)
+		if err == nil {
+			log.Println("%s", resp)
+		} else {
+			log.Fatalln("%v", err)
+		}
+
+	} else {
+		_ = fmt.Errorf("err: %s", err)
+	}
+	defer cli.Close()
+}
+
+```
+
+
+
+## LeaseKeepAlive
+
+这是个双向流式的 rpc 方法。
+
+etcdctl 调用：
+
+```bash
+$ etcdctl lease keep-alive 694d7104f3a49724
+```
+
+golang 调用：
+
+```go
+package main
+
+import (
+   "context"
+   "fmt"
+   "go.etcd.io/etcd/clientv3"
+   "log"
+   "time"
+)
+
+func main() {
+
+   cli, err := clientv3.New(clientv3.Config{
+      Endpoints:   []string{"127.0.0.1:2379"},
+      DialTimeout: 20 * time.Second,
+   })
+   if err == nil {
+      ch, err := cli.Lease.KeepAlive(context.TODO(), 0x694d7104f3a49724)
+      if err != nil {
+         log.Fatalln(err)
+      }
+      for resp := range ch {
+         log.Println(resp)
+      }
+
+   } else {
+      _ = fmt.Errorf("err: %s", err)
+   }
+   defer cli.Close()
+}
+```
+
+
+
+## LeaseTimeToLive
+
+LeaseTimeToLiveRequest
+
+```go
+type LeaseTimeToLiveRequest struct {
+   // ID is the lease ID for the lease.
+   ID int64 `protobuf:"varint,1,opt,name=ID,proto3" json:"ID,omitempty"`
+   // keys is true to query all the keys attached to this lease.
+   Keys bool `protobuf:"varint,2,opt,name=keys,proto3" json:"keys,omitempty"`
+}
+```
+
+LeaseTimeToLiveResponse
+
+```go
+type LeaseTimeToLiveResponse struct {
+   Header *ResponseHeader `protobuf:"bytes,1,opt,name=header" json:"header,omitempty"`
+   // ID is the lease ID from the keep alive request.
+   ID int64 `protobuf:"varint,2,opt,name=ID,proto3" json:"ID,omitempty"`
+   // TTL is the remaining TTL in seconds for the lease; the lease will expire in under TTL+1 seconds.
+   TTL int64 `protobuf:"varint,3,opt,name=TTL,proto3" json:"TTL,omitempty"`
+   // GrantedTTL is the initial granted time in seconds upon lease creation/renewal.
+   GrantedTTL int64 `protobuf:"varint,4,opt,name=grantedTTL,proto3" json:"grantedTTL,omitempty"`
+   // Keys is the list of keys attached to this lease.
+   Keys [][]byte `protobuf:"bytes,5,rep,name=keys" json:"keys,omitempty"`
+}
+```
+
+etcdctl 访问：
+
+```bash
+$ etcdctl lease timetolive 694d7104f3a49724
+lease 694d7104f3a49724 granted with TTL(300s), remaining(265s)
+```
+
+curl 访问：
+
+```bash
+$ curl http://127.0.0.1:2379/v3/lease/timetolive -X POST -d '{"ID": 7587845213270611748, "keys": true}'
+```
+
+golang 没有这个方法。
+
+
+
+## LeaseLeases
+
+没有请求信息。
+
+LeaseTimeToLiveResponse
+
+```go
+type LeaseTimeToLiveResponse struct {
+   Header *ResponseHeader `protobuf:"bytes,1,opt,name=header" json:"header,omitempty"`
+   // ID is the lease ID from the keep alive request.
+   ID int64 `protobuf:"varint,2,opt,name=ID,proto3" json:"ID,omitempty"`
+   // TTL is the remaining TTL in seconds for the lease; the lease will expire in under TTL+1 seconds.
+   TTL int64 `protobuf:"varint,3,opt,name=TTL,proto3" json:"TTL,omitempty"`
+   // GrantedTTL is the initial granted time in seconds upon lease creation/renewal.
+   GrantedTTL int64 `protobuf:"varint,4,opt,name=grantedTTL,proto3" json:"grantedTTL,omitempty"`
+   // Keys is the list of keys attached to this lease.
+   Keys [][]byte `protobuf:"bytes,5,rep,name=keys" json:"keys,omitempty"`
+}
+```
+
+etcdctl 访问：
+
+```bash
+$ etcdctl lease list
+```
+
+curl 访问：
+
+```
+$ curl http://127.0.0.1:2379/v3/lease/leases -X POST
+```
+
+golang 也没有这个方法。
 
 
 
 
 
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
