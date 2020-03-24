@@ -50,3 +50,39 @@ $ docker tag googlecontainer/defaultbackend-amd64:1.5 k8s.gcr.io/defaultbackend-
 
 ![image-20200305132855703](../../resource/image-20200305132855703.png)
 
+
+
+
+
+
+
+----
+
+
+
+另，上边的安装方式有些弊端，强制负载均衡又不不行。可以使用下边的安装方式：
+
+```bash
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/mandatory.yaml
+```
+
+参见：https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md
+
+
+
+---
+
+
+
+还是不行，但是在 https://www.jianshu.com/p/22509970c1f5 这里找到了解决方案
+
+#### 以 hostPort 暴露 Pod 导入流量的方式，进行配置
+
+一键安装：
+
+```bash
+$ helm install my-nginx stable/nginx-ingress  --namespace kube-system --set rbac.create=true --set controller.kind=DaemonSet --set controller.hostNetwork=true --set
+ controller.daemonset.useHostPort=false --set controller.daemonset.hostPorts.http=80 --set controller.daemonset.hostPorts.https=443 --set controller.service.type=ClusterIP
+```
+
+配置了 hostNetwork 为 true 之后，就可以直接通过本地地址来访问 nginx pod 了，设置为 DaemonSet 之后，就在每个机器上都部署了一个 Pod，这样就可以访问每个主机都能实现转发了。

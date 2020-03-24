@@ -35,3 +35,21 @@ spec:
 ```
 
 使用 kubectl apply -f 添加后，再等这个pod重启一次就可以了！！！
+
+
+
+## 注入错误
+
+报错：
+
+```
+$ kubectl get event -n xujiyou-test
+LAST SEEN   TYPE      REASON              OBJECT                        MESSAGE
+2m9s        Warning   FailedCreate        replicaset/other-6ccffc4bcd   Error creating: Internal error occurred: failed calling webhook "sidecar-injector.istio.io": Post https://istiod
+.istio-system.svc:443/inject?timeout=30s: net/http: TLS handshake timeout
+1s          Warning   FailedCreate        replicaset/other-6ccffc4bcd   Error creating: Internal error occurred: failed calling webhook "sidecar-injector.istio.io": Post https://istiod
+.istio-system.svc:443/inject?timeout=30s: net/http: TLS handshake timeout
+```
+
+解决方案：https://istio.io/docs/ops/common-problems/injection/#x509-certificate-related-errors
+

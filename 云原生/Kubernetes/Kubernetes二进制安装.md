@@ -319,7 +319,8 @@ KUBE_API_ARGS=" \
 --audit-log-maxbackup=3 \
 --audit-log-maxsize=100 \
 --audit-log-path=/mnt/vde/kube-apiserver \
---authorization-mode=Node,RBAC \
+--authorization-mode=Node,RBAC,Webhook \
+--authorization-webhook-config-file=/home/admin/.kube/config \
 --anonymous-auth=false \
 --etcd-cafile=/etc/etcd/cert/etcd/ca.pem \
 --etcd-certfile=/etc/etcd/cert/etcd/etcd.pem \
@@ -344,7 +345,8 @@ KUBE_API_ARGS=" \
 etcd 的地址和证书是要正确配置的
 
 - `--audit-log-path` 用来配置日志地址。
-- `--authorization-mode` 配置中是一定要包含 RBAC 的，否则逼格不够。
+- `--authorization-mode` 配置中是一定要包含 RBAC 的，否则逼格不够。有一些服务需要使用 Webhook。
+- `--authorization-webhook-config-file` webhook 模式下必须提供
 - `--kubelet-https` 默认是 true，但是不必加 kubelet 的证书及私钥。
 - `--client-ca-file` 、`--tls-cert-file` 、`--tls-private-key-file` 一定要配置，否则启动不起来 ，客户端访问 kube-apiserver 都是要加密的。
 - `--service-account-key-file` 也是一定要配的，不配的话会影响 ServiceAccount 的使用，这个值和 `--tls-private-key-file ` 一样即可，被这个参数坑了半天。
