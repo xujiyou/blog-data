@@ -104,9 +104,7 @@ Istio configuration profiles:
 接下来正式安装 istio，命令如下：
 
 ```bash
-$ istioctl manifest apply --set profile=demo \
-   --set cni.enabled=true --set cni.components.cni.namespace=kube-system \
-   --set values.gateways.istio-ingressgateway.type=ClusterIP --set security.enabled=false
+$ istioctl manifest apply --set profile=demo --set values.gateways.istio-ingressgateway.type=ClusterIP
 ```
 
 部署完成后，查看各组件状态：
@@ -136,6 +134,6 @@ $ istioctl verify-install -f $HOME/generated-manifest.yaml
 ## 卸载：
 
 ```bash
-$ istioctl manifest generate --set profile=demo | kubectl delete -f -
+$ istioctl manifest generate --set profile=demo --set values.gateways.istio-ingressgateway.type=ClusterIP | kubectl delete -f -
 ```
 
