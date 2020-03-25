@@ -231,6 +231,8 @@
 - containerd
 
   [containerd介绍.md](云原生/containerd/containerd介绍.md) 
+  
+  [containerd配置.md](云原生/containerd/containerd配置.md) 
 
 
 
@@ -632,7 +634,11 @@ CDH 开始收费了，怎么说。。。
 
 - Gitlab
 
+
+
 - Jenkins
+
+
 
 - Kibana
 
@@ -642,6 +648,8 @@ CDH 开始收费了，怎么说。。。
 
    [Kibana 错误记录.md](DevOps/Kibana/Kibana错误记录.md) 
 
+
+
 - Logstash
 
    [LogStash入门教程.md](DevOps/Logstash/LogStash入门教程.md) 
@@ -650,7 +658,15 @@ CDH 开始收费了，怎么说。。。
 
    [LogStash配置详解.md](DevOps/Logstash/LogStash配置详解.md) 
 
+
+
 - SlatStack
+
+
+
+- Git
+
+   [git命令详解.md](DevOps/Git/git命令详解.md) 
 
 
 
@@ -678,13 +694,13 @@ CDH 开始收费了，怎么说。。。
 
 ## Linux
 
-- syslog
+- Syslog
 
    [syslog-ng使用教程.md](Linux/syslog/syslog-ng使用教程.md) 
 
    
 
-- iptables
+- Iptables
 
      [iptables教程.md](Linux/iptables/iptables教程.md) 
 
@@ -708,17 +724,35 @@ CDH 开始收费了，怎么说。。。
 
 
 
-- systemd
+- Systemd
 
+  [systemd入门.md](Linux/systemd/systemd入门.md) 
 
+  [systemctl命令详解.md](Linux/systemd/systemctl命令详解.md) 
+
+  [journalctl命令详解.md](Linux/systemd/journalctl命令详解.md) 
+
+  [其他命令.md](Linux/systemd/其他命令.md) 
+
+  [service文件结构.md](Linux/systemd/service文件结构.md) 
+
+  
 
 - SELinux
 
 
 
-- yum
+- YUM
 
+   [yum命令详解.md](Linux/yum/yum命令详解.md) 
   
+   [rpm命令详解.md](Linux/yum/rpm命令详解.md) 
+
+
+
+- IPVS
+
+
 
 
 
