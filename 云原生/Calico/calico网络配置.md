@@ -4,7 +4,9 @@
 
 这里先学习下 overlay 的配置，我的集群不支持 BGP，无法实验，所以先不管 BGP 模式了。
 
-查看集群中使用的模式：
+calico 的配置主要是使用 FelixConfiguration 这个资源对象来实现的。具体查看： [FelixConfiguration.md](资源对象/FelixConfiguration.md) 
+
+查看集群中使用的模式及IP池：
 
 ```yaml
 $ calicoctl get ipPool -o yaml

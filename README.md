@@ -432,9 +432,23 @@
    
    [calico网络配置.md](云原生/Calico/calico网络配置.md) 
    
-   [calico资源对象详解.md](云原生/Calico/calico资源对象详解.md) 
-   
    [calico-cni插件配置详解.md](云原生/Calico/calico-cni插件配置详解.md) 
+   
+   - 资源对象
+   
+      [FelixConfiguration.md](云原生/Calico/资源对象/FelixConfiguration.md) 
+   
+      [GlobalNetworkPolicy.md](云原生/Calico/资源对象/GlobalNetworkPolicy.md) 
+   
+      [GlobalNetworkSet.md](云原生/Calico/资源对象/GlobalNetworkSet.md) 
+   
+      [HostEndpoint.md](云原生/Calico/资源对象/HostEndpoint.md) 
+   
+      [IPPool.md](云原生/Calico/资源对象/IPPool.md) 
+   
+      [Node.md](云原生/Calico/资源对象/Node.md) 
+   
+      [WorkloadEndpoint.md](云原生/Calico/资源对象/WorkloadEndpoint.md) 
 
 
 
