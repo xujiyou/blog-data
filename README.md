@@ -42,6 +42,8 @@
 
     [kube-controller-manager内置的控制器.md](云原生/Kubernetes/kube-controller-manager内置的控制器.md) 
 
+    [Kubernetes证书生成.md](云原生/Kubernetes/Kubernetes证书生成.md) 
+
    - Kubernetes 配置系列
 
       [kube-apiserver配置详解.md](云原生/Kubernetes/Kubernetes配置系列/kube-apiserver配置详解.md) 
@@ -177,7 +179,7 @@
       [通过环境变量将Pod信息呈现给容器.md](云原生/Kubernetes/动手操作/通过环境变量将Pod信息呈现给容器.md) 
 
       [通过文件将Pod信息呈现给容器.md](云原生/Kubernetes/动手操作/通过文件将Pod信息呈现给容器.md) 
-
+   
       [为节点发布扩展资源-为容器分派扩展资源.md](云原生/Kubernetes/动手操作/为节点发布扩展资源-为容器分派扩展资源.md) 
    
       [为容器的生命周期事件设置处理函数.md](云原生/Kubernetes/动手操作/为容器的生命周期事件设置处理函数.md) 
@@ -715,6 +717,10 @@ CDH 开始收费了，怎么说。。。
 
 
 ## Linux
+
+ [Linux中的各种信号.md](Linux/Linux中的各种信号.md) 
+
+ [Linux处理僵尸进程.md](Linux/Linux处理僵尸进程.md) 
 
 - Syslog
 
