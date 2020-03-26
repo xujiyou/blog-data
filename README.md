@@ -316,6 +316,8 @@
 
    [Istio 错误记录.md](云原生/Istio/Istio错误记录.md) 
 
+   [istio安装配置.md](云原生/Istio/istio安装配置.md) 
+
    
 
 - Jaeger
@@ -427,6 +429,12 @@
 - Calico
 
    [calicoctl 使用方法.md](云原生/Calico/calicoctl使用方法.md) 
+   
+   [calico网络配置.md](云原生/Calico/calico网络配置.md) 
+   
+   [calico资源对象详解.md](云原生/Calico/calico资源对象详解.md) 
+   
+   [calico-cni插件配置详解.md](云原生/Calico/calico-cni插件配置详解.md) 
 
 
 
@@ -747,6 +755,8 @@ CDH 开始收费了，怎么说。。。
    [yum命令详解.md](Linux/yum/yum命令详解.md) 
   
    [rpm命令详解.md](Linux/yum/rpm命令详解.md) 
+   
+   [repo文件格式.md](Linux/yum/repo文件格式.md) 
 
 
 

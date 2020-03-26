@@ -4,7 +4,5 @@
 
 阮一峰老师的博客还挺不错的：http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html
 
-## 命令
 
-#### systemctl
 

@@ -125,7 +125,7 @@ $ istioctl dashboard --help
 ## 验证安装
 
 ```bash
-$ istioctl manifest generate <your original installation options> > $HOME/generated-manifest.yaml
+$ istioctl manifest generate --set profile=demo --set values.gateways.istio-ingressgateway.type=ClusterIP --set values.global.mtls.enabled=true --set values.global.controlPlaneSecurityEnabled=true --set values.global.sds.enabled=true > $HOME/generated-manifest.yaml
 $ istioctl verify-install -f $HOME/generated-manifest.yaml
 ```
 
@@ -137,3 +137,22 @@ $ istioctl verify-install -f $HOME/generated-manifest.yaml
 $ istioctl manifest generate --set profile=demo --set values.gateways.istio-ingressgateway.type=ClusterIP --set values.global.mtls.enabled=true --set values.global.controlPlaneSecurityEnabled=true --set values.global.sds.enabled=true | kubectl delete -f -
 ```
 
+
+
+## 错误记录
+
+报错说不能用第三方 JWT，解决方法：
+
+https://github.com/kubeflow/manifests/issues/959
+
+https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#service-account-token-volume-projection
+
+kube-apiserver 要配两个参数：
+
+```bash
+--service-account-signing-key-file=/home/admin/k8s-cluster/cert/kube-apiserver/apiserver-key.pem 
+--service-account-issuer=kubernetes.default.svc
+--api-audiences=kubernetes.default.svc
+```
+
+配好后，重启 kube-apiserver，重装 istio。
