@@ -138,6 +138,12 @@
 
       [Kubernetes-API学习(十七)-storage.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十七)-storage.md) 
 
+   - Kubernetes 认证及授权系列
+
+     [Kubernetes证书生成.md](云原生/Kubernetes/Kubernetes认证及授权系列/Kubernetes证书生成.md) 
+
+     [为Kubernetes搭建支持OpenId-Connect的身份认证系统.md](云原生/Kubernetes/Kubernetes认证及授权系列/为Kubernetes搭建支持OpenId-Connect的身份认证系统.md) 
+
    - 动手操作
 
       [部署Zookeeper.md](云原生/Kubernetes/动手操作/部署Zookeeper.md) 
@@ -173,11 +179,11 @@
       [使用Secret安全地分发凭证.md](云原生/Kubernetes/动手操作/使用Secret安全地分发凭证.md) 
 
       [示例：使用PV部署WordPress和MySQL.md](云原生/Kubernetes/动手操作/示例：使用PV部署WordPress和MySQL.md) 
-
+   
       [示例：使用Redis部署PHP留言板应用程序.md](云原生/Kubernetes/动手操作/示例：使用Redis部署PHP留言板应用程序.md) 
-
+   
       [通过环境变量将Pod信息呈现给容器.md](云原生/Kubernetes/动手操作/通过环境变量将Pod信息呈现给容器.md) 
-
+   
       [通过文件将Pod信息呈现给容器.md](云原生/Kubernetes/动手操作/通过文件将Pod信息呈现给容器.md) 
    
       [为节点发布扩展资源-为容器分派扩展资源.md](云原生/Kubernetes/动手操作/为节点发布扩展资源-为容器分派扩展资源.md) 
@@ -381,6 +387,10 @@
    [Vault简介及入门.md](云原生/Vault/Vault简介及入门.md) 
 
    [部署vault-operator.md](云原生/Vault/部署vault-operator.md) 
+
+   [Vault使用示例.md](云原生/Vault/Vault使用示例.md) 
+
+   [Vault之OIDC认证方法.md](云原生/Vault/Vault之OIDC认证方法.md) 
 
    
 
@@ -778,7 +788,11 @@ CDH 开始收费了，怎么说。。。
    
    [repo文件格式.md](Linux/yum/repo文件格式.md) 
 
+- OpenSSL
 
+   [openssl常用命令.md](Linux/OpenSSL/openssl常用命令.md) 
+
+   [证书各个字段的含义.md](Linux/OpenSSL/证书各个字段的含义.md) 
 
 - IPVS
 
@@ -799,8 +813,6 @@ CDH 开始收费了，怎么说。。。
 - 数据结构与算法
 
 - 区块链
-
-- OpenSSL
 
 - TensorFlow
 

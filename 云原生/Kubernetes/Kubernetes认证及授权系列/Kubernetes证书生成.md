@@ -99,8 +99,13 @@
    DNS.3 = kubernetes.default.svc
    DNS.4 = kubernetes.default.svc.cluster
    DNS.5 = kubernetes.default.svc.cluster.local
+   DNS.6 = fueltank-1
+   DNS.7 = fueltank-2
+   DNS.8 = fueltank-3
    IP.1 = 127.0.0.1
-   IP.2 = 172.20.0.1
+   IP.2 = 172.20.20.162
+   IP.3 = 172.20.20.179
+   IP.4 = 172.20.20.145
    
    [ v3_ext ]
    authorityKeyIdentifier=keyid,issuer:always

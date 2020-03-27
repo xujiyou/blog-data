@@ -567,8 +567,7 @@ Subjects:
 
 ```bash
 $ kubectl config set-cluster fueltank --certificate-authority=/home/admin/k8s-cluster/cert/ca.pem --embed-certs=true --server=https://fueltank-1:6443
-$ kubectl config set-credentials admin --client-certificate=/home/admin/k8s-cluster/cert/admin/admin.pem --embed-certs=true --client-key=/home/admin/k8s-cluster/cer
-t/admin/admin-key.pem
+$ kubectl config set-credentials admin --client-certificate=/home/admin/k8s-cluster/cert/admin/admin.pem --embed-certs=true --client-key=/home/admin/k8s-cluster/cert/admin/admin-key.pem
 $ kubectl config set-context fueltank --cluster=fueltank --user=admin
 $ kubectl config use-context fueltank
 $ cat .kube/config
