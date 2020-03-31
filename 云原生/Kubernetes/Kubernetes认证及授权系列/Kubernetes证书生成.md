@@ -128,13 +128,12 @@
 4. 最后使用 ca.key、ca.crt 和 server.csr 、server.conf 来生成服务器证书
 
    ```bash
-   $ openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key \
+   $ openssl x509 -req -in server.csr -CA ../ca.pem -CAkey ../ca-key.pem \
    -CAcreateserial -days 10000 \
-   -extensions v3_ext -extfile server.conf \
-   -out server.crt
+   -extensions v3_ext -extfile server.conf -out server.crt
    ```
-
    
+
 
 完成后，会生成一个名为 `server.crt` 的证书文件，同时还创建了一个 `ca.srl` 文件。
 

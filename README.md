@@ -386,11 +386,11 @@
 
    [Vault简介及入门.md](云原生/Vault/Vault简介及入门.md) 
 
-   [部署vault-operator.md](云原生/Vault/部署vault-operator.md) 
-
    [Vault使用示例.md](云原生/Vault/Vault使用示例.md) 
 
    [Vault之OIDC认证方法.md](云原生/Vault/Vault之OIDC认证方法.md) 
+
+   [Vault-Getting-Start.md](云原生/Vault/Vault-Getting-Start.md) 
 
    
 
@@ -759,6 +759,18 @@ CDH 开始收费了，怎么说。。。
    [内核升级.md](Linux/Shell/内核升级.md) 
    
    [iproute2命令详解.md](Linux/Shell/iproute2命令详解.md) 
+   
+- 命令详解
+
+    [top命令详解.md](Linux/命令详解/top命令详解.md) 
+
+    [lsof命令详解.md](Linux/命令详解/lsof命令详解.md) 
+    
+    [ps命令详解.md](Linux/命令详解/ps命令详解.md) 
+    
+    [netstat命令详解.md](Linux/命令详解/netstat命令详解.md) 
+    
+    [iostat命令详解.md](Linux/命令详解/iostat命令详解.md) 
 
 
 
