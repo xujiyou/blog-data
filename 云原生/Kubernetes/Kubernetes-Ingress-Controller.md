@@ -81,8 +81,15 @@ $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/ng
 一键安装：
 
 ```bash
-$ helm install my-nginx stable/nginx-ingress  --namespace kube-system --set rbac.create=true --set controller.kind=DaemonSet --set controller.hostNetwork=true --set
- controller.daemonset.useHostPort=false --set controller.daemonset.hostPorts.http=80 --set controller.daemonset.hostPorts.https=443 --set controller.service.type=ClusterIP
+$ helm install my-ic stable/nginx-ingress  --namespace kube-system --set rbac.create=true --set controller.kind=DaemonSet --set controller.hostNetwork=true --set controller.daemonset.useHostPort=false --set controller.daemonset.hostPorts.http=80 --set controller.daemonset.hostPorts.https=443 --set controller.service.type=ClusterIP
 ```
 
 配置了 hostNetwork 为 true 之后，就可以直接通过本地地址来访问 nginx pod 了，设置为 DaemonSet 之后，就在每个机器上都部署了一个 Pod，这样就可以访问每个主机都能实现转发了。
+
+另外可以通过：
+
+```bash
+$ helm inspect values stable/nginx-ingress > nginx-ingress-custom.yaml
+```
+
+来查看可配置的值。

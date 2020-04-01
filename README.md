@@ -698,6 +698,8 @@ CDH 开始收费了，怎么说。。。
 
   [Ansible安装.md](DevOps/Ansible/Ansible安装.md) 
 
+  [PlayBook学习.md](DevOps/Ansible/PlayBook学习.md) 
+
 - Git
 
    [git命令详解.md](DevOps/Git/git命令详解.md) 
