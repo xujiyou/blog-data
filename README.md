@@ -694,7 +694,9 @@ CDH 开始收费了，怎么说。。。
 
 - SlatStack
 
+- Ansible
 
+  [Ansible安装.md](DevOps/Ansible/Ansible安装.md) 
 
 - Git
 
@@ -834,7 +836,7 @@ CDH 开始收费了，怎么说。。。
    
    [MacOS触控板与鼠标的滚动方向.md](其他/日常/MacOS触控板与鼠标的滚动方向.md) 
    
-   [Mac OS X文件系统的附加属性@如何彻底删除.md](其他/日常/Mac OS X文件系统的附加属性@如何彻底删除.md) 
+   [Mac OS文件系统的附加属性@如何彻底删除.md](其他/日常/MacOS文件系统的附加属性@如何彻底删除.md) 
    
    
 
