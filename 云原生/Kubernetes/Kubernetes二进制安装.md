@@ -984,6 +984,10 @@ coredns-7556c4b876-dtd5p                   1/1     Running   0          114m
 
 我测试的是可以运行的。
 
+为测试 calico 是否完美运行，可以在本机 ping 一下 coredns 的 ip 看看通不通。
+
+按道理说，Pod 的 ip 不论是在宿主机还是别的 Pod 内都必须要 ping 的通的。Service 的 ClusterIP 是 ping 不通的，但是可以通过 curl 来访问 Service 的 ClusterIP 上的服务！！！因为 ClusterIP 是 iptables 或 ipvs 虚拟出来的地址，不支持 ICMP 协议。
+
 如果想修改配置，可以这样子：
 
 ![企业微信截图_54f99652-f801-43f7-9d17-f94bc84b2d80](../../resource/54f99652-f801-43f7-9d17-f94bc84b2d80.png)
