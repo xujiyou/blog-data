@@ -42,8 +42,6 @@
 
     [kube-controller-manager内置的控制器.md](云原生/Kubernetes/kube-controller-manager内置的控制器.md) 
 
-    [Kubernetes证书生成.md](云原生/Kubernetes/Kubernetes证书生成.md) 
-
    - Kubernetes 配置系列
 
       [kube-apiserver配置详解.md](云原生/Kubernetes/Kubernetes配置系列/kube-apiserver配置详解.md) 
@@ -179,7 +177,7 @@
       [使用Secret安全地分发凭证.md](云原生/Kubernetes/动手操作/使用Secret安全地分发凭证.md) 
 
       [示例：使用PV部署WordPress和MySQL.md](云原生/Kubernetes/动手操作/示例：使用PV部署WordPress和MySQL.md) 
-   
+
       [示例：使用Redis部署PHP留言板应用程序.md](云原生/Kubernetes/动手操作/示例：使用Redis部署PHP留言板应用程序.md) 
    
       [通过环境变量将Pod信息呈现给容器.md](云原生/Kubernetes/动手操作/通过环境变量将Pod信息呈现给容器.md) 
