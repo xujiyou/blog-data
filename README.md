@@ -732,6 +732,8 @@ CDH 开始收费了，怎么说。。。
 
  [Linux处理僵尸进程.md](Linux/Linux处理僵尸进程.md) 
 
+ [Cgroup实践.md](Linux/Cgroup实践.md) 
+
 - Syslog
 
    [syslog-ng使用教程.md](Linux/syslog/syslog-ng使用教程.md) 

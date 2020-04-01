@@ -102,6 +102,7 @@
    DNS.6 = fueltank-1
    DNS.7 = fueltank-2
    DNS.8 = fueltank-3
+   DNS.9 = localhost
    IP.1 = 127.0.0.1
    IP.2 = 172.20.20.162
    IP.3 = 172.20.20.179
