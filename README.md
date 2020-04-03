@@ -736,6 +736,8 @@ CDH 开始收费了，怎么说。。。
 
  [Cgroup实践.md](Linux/Cgroup实践.md) 
 
+ [DNS配置文件.md](Linux/DNS配置文件.md) 
+
 - Syslog
 
    [syslog-ng使用教程.md](Linux/syslog/syslog-ng使用教程.md) 
@@ -811,6 +813,14 @@ CDH 开始收费了，怎么说。。。
    [证书各个字段的含义.md](Linux/OpenSSL/证书各个字段的含义.md) 
 
 - IPVS
+
+- Keepalived
+
+    [Keepalived入门教程.md](Linux/Keepalived/Keepalived入门教程.md) 
+
+    [Keepalived配置.md](Linux/Keepalived/Keepalived配置.md) 
+
+   
 
 
 
