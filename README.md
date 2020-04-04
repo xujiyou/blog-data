@@ -16,31 +16,33 @@
 
    [Kubernetes二进制安装.md](云原生/Kubernetes/Kubernetes二进制安装.md) 
 
-    [核心组件运行原理.md](云原生/Kubernetes/核心组件运行原理.md) 
+   [kubeadm安装集群.md](云原生/Kubernetes/kubeadm安装集群.md) 
 
-    [Kubernetes-Leader选举.md](云原生/Kubernetes/Kubernetes-Leader选举.md) 
+   [核心组件运行原理.md](云原生/Kubernetes/核心组件运行原理.md) 
 
-    [k8s网络原理.md](云原生/Kubernetes/k8s网络原理.md) 
+   [Kubernetes-Leader选举.md](云原生/Kubernetes/Kubernetes-Leader选举.md) 
 
-    [共享储存原理.md](云原生/Kubernetes/共享储存原理.md) 
+   [k8s网络原理.md](云原生/Kubernetes/k8s网络原理.md) 
 
-    [深入分析集群安全机制.md](云原生/Kubernetes/深入分析集群安全机制.md) 
+   [共享储存原理.md](云原生/Kubernetes/共享储存原理.md) 
 
-    [pause容器作用.md](云原生/Kubernetes/pause容器作用.md) 
+   [深入分析集群安全机制.md](云原生/Kubernetes/深入分析集群安全机制.md) 
 
-    [Secret.md](云原生/Kubernetes/Secret.md) 
+   [pause容器作用.md](云原生/Kubernetes/pause容器作用.md) 
 
-    [Kubernetes-Ingress-Controller.md](云原生/Kubernetes/Kubernetes-Ingress-Controller.md) 
+   [Secret.md](云原生/Kubernetes/Secret.md) 
 
-    [K8sFAQ.md](云原生/Kubernetes/K8sFAQ.md) 
+   [Kubernetes-Ingress-Controller.md](云原生/Kubernetes/Kubernetes-Ingress-Controller.md) 
 
-    [二进制部署Flannel.md](云原生/Kubernetes/二进制部署Flannel.md) 
+   [K8sFAQ.md](云原生/Kubernetes/K8sFAQ.md) 
 
-    [kubectl查看资源对象.md](云原生/Kubernetes/kubectl查看资源对象.md) 
+   [二进制部署Flannel.md](云原生/Kubernetes/二进制部署Flannel.md) 
 
-    [List-Watch原理.md](云原生/Kubernetes/List-Watch原理.md) 
+   [kubectl查看资源对象.md](云原生/Kubernetes/kubectl查看资源对象.md) 
 
-    [kube-controller-manager内置的控制器.md](云原生/Kubernetes/kube-controller-manager内置的控制器.md) 
+   [List-Watch原理.md](云原生/Kubernetes/List-Watch原理.md) 
+
+   [kube-controller-manager内置的控制器.md](云原生/Kubernetes/kube-controller-manager内置的控制器.md) 
 
    - Kubernetes 配置系列
 
@@ -177,7 +179,7 @@
       [使用Secret安全地分发凭证.md](云原生/Kubernetes/动手操作/使用Secret安全地分发凭证.md) 
 
       [示例：使用PV部署WordPress和MySQL.md](云原生/Kubernetes/动手操作/示例：使用PV部署WordPress和MySQL.md) 
-
+   
       [示例：使用Redis部署PHP留言板应用程序.md](云原生/Kubernetes/动手操作/示例：使用Redis部署PHP留言板应用程序.md) 
    
       [通过环境变量将Pod信息呈现给容器.md](云原生/Kubernetes/动手操作/通过环境变量将Pod信息呈现给容器.md) 
@@ -216,10 +218,12 @@
 
    [Docker配置.md](云原生/Docker/Docker配置.md) 
 
+   [Docker储存驱动.md](云原生/Docker/Docker储存驱动.md) 
+
    - Docker-API
 
       [Docker-API(一)-介绍.md](云原生/Docker/Docker-API/Docker-API(一)-介绍.md) 
-
+   
       [Docker-API(二)-Containers.md](云原生/Docker/Docker-API/Docker-API(二)-Containers.md) 
    
       [Docker-API(三)-Images.md](云原生/Docker/Docker-API/Docker-API(三)-Images.md) 

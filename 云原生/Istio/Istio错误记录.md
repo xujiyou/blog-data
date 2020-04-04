@@ -53,3 +53,33 @@ LAST SEEN   TYPE      REASON              OBJECT                        MESSAGE
 
 解决方案：https://istio.io/docs/ops/common-problems/injection/#x509-certificate-related-errors
 
+
+
+## 缺少 ConfigMap
+
+报错：
+
+```
+MountVolume.SetUp failed for volume "istiod-ca-cert" : configmap "istio-ca-root-cert" not found #22463
+```
+
+issue：https://github.com/istio/istio/issues/22463
+
+解决方法：在 default 命名空间下是有这个 ConfigMap 的，但是新创建的命名空间里面没有这个东西！！！
+
+```bash
+$ kubectl get configmaps -n default
+NAME                 DATA   AGE
+istio-ca-root-cert   1      3h49m
+```
+
+把它在自己创建的命名空间内也创建一份就可以了。
+
+还有创建资源时要用这种方式：
+
+```bash
+$ kubectl apply -f <(istioctl kube-inject -f other-service-deployment.yaml)
+```
+
+不要用给命名空间打标签的方式！！！
+

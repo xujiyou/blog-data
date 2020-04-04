@@ -196,9 +196,9 @@ $ curl --cacert /etc/etcd/cert/etcd/ca.pem --cert /etc/etcd/cert/etcd/etcd.pem -
 查看 etcd 成员：
 
 ```bash
-$ export ETCDCTL_CACERT=/etc/etcd/cert/etcd/ca.pem
-$ export ETCDCTL_CERT=/etc/etcd/cert/etcd/etcd.pem
-$ export ETCDCTL_KEY=/etc/etcd/cert/etcd/etcd-key.pem
+$ export ETCDCTL_CACERT=/etc/etcd/cert/ca.pem
+$ export ETCDCTL_CERT=/etc/etcd/cert/etcd.pem
+$ export ETCDCTL_KEY=/etc/etcd/cert/etcd-key.pem
 $ etcdctl member list
 87664c3cc645be22, started, fueltank-1, http://172.20.20.162:2380, https://172.20.20.162:2379
 8cf2a5bef867d7cf, started, fueltank-2, http://172.20.20.179:2380, https://172.20.20.179:2379

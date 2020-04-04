@@ -19,6 +19,8 @@ ExecStart=
 ExecStart=/usr/bin/dockerd
 ```
 
+这会生成一个 `/etc/systemd/system/docker.service.d/override.conf` 文件。
+
 完成后重启Docker：
 
 ```
