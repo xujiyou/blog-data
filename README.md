@@ -58,6 +58,8 @@
 
       [kubectl命令行参考.md](云原生/Kubernetes/Kubernetes配置系列/kubectl命令行参考.md) 
 
+      [配置踩坑笔记.md](云原生/Kubernetes/Kubernetes配置系列/配置踩坑笔记.md) 
+
    - Kubernetes 源码系列
 
       [Kubernetes源码系列(一)-源码结构.md](云原生/Kubernetes/Kubernetes源码系列/Kubernetes源码系列(一)-源码结构.md) 
@@ -177,7 +179,7 @@
       [使用PodPreset将信息注入Pods.md](云原生/Kubernetes/动手操作/使用PodPreset将信息注入Pods.md) 
 
       [使用Secret安全地分发凭证.md](云原生/Kubernetes/动手操作/使用Secret安全地分发凭证.md) 
-
+   
       [示例：使用PV部署WordPress和MySQL.md](云原生/Kubernetes/动手操作/示例：使用PV部署WordPress和MySQL.md) 
    
       [示例：使用Redis部署PHP留言板应用程序.md](云原生/Kubernetes/动手操作/示例：使用Redis部署PHP留言板应用程序.md) 
