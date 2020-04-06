@@ -2,13 +2,15 @@
 
 网上的教程太复杂，并且应用代码不是自己写的，所以用起来理解的不那么透彻。这篇文章的目的就是从头开发一个简单的 Istio 应用。
 
-本篇的微服务采用 Spring boot，方便快捷。
+本篇的微服务采用 Spring boot，方便快捷。也可以用其他 RESTFul 服务框架，一样的道理。
 
 前提：
 
 1. 有一个 K8s 集群
 2. K8s 集群中安装有 Istio
-3. 最好把 Istio 官方的 book-info 示例跑通。
+3. 最好把 Istio 官方的 book-info 示例跑通。保证不会出像证书错误，sidecar 不能注入之类的问题。
+
+下面的代码可以根据自己的需求稍加改动。
 
 
 
@@ -100,7 +102,7 @@ $ telepresence --namespace xujiyou-test -n hello --expose 8080
 $ curl http://hello:8080/api/hello
 ```
 
-然后会看到 hello world 显示出来，说明成功了。
+然后会看到 hello world 显示出来，说明成功了。这里的域名 hello 就是访问的 service 的名字
 
 
 
@@ -549,7 +551,7 @@ public interface OtherClient {
 }
 ```
 
-你看这代码，跟 api 的代码差不多，看着多舒服啊，简洁明了，这就是 Java 的好处，轮子多还好用。
+你看这代码，跟 api 的代码差不多，看着多舒服啊，简洁明了。
 
 修改 HelloApi 类：
 
@@ -955,9 +957,69 @@ other project
 [admin@fueltank-1 ~]$ curl http://fueltank-1:32380/api/hello?version=v3
 hello world v3 
 other project
-[admin@fueltank-1 ~]$ 
 ```
 
 
 
-好了，至此，Istio 就入门了
+---
+
+
+
+## 使用 Ingress 代替 NodePort
+
+由于自建的私有云环境没有外部负载均衡可以用，NodePort 又不够优雅，所以 Ingress 是最后的方案了。
+
+通过 ingress 这种运行在集群里的七层负载均衡加上本机的 keepalived 四层负载均衡的方式来报漏服务是比较优雅的。
+
+要使用 Ingress ，前提是集群中安装有 Ingress Controller，这个是需要自己安装的，推荐使用 Nginx Ingress Controller。
+
+一般 Rancher 安装的集群都会带有 Nginx Ingress Controller，如果自己建立的集群可以使用下面的方式：
+
+```bash
+$ helm install my-ic stable/nginx-ingress  --namespace kube-system --set rbac.create=true --set controller.kind=DaemonSet --set controller.hostNetwork=true --set controller.daemonset.useHostPort=true --set controller.daemonset.hostPorts.http=80 --set controller.daemonset.hostPorts.https=443 --set controller.service.type=ClusterIP
+```
+
+安装完成后，Ingress 就可以使用了。
+
+
+
+下面来建立一个 Ingress ，编写 istio-ingress.yaml：
+
+```yaml
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: istio-gateway-ingress
+  namespace: istio-system
+spec:
+  rules:
+    - host: fueltank-1
+      http:
+        paths:
+          - backend:
+              serviceName: istio-ingressgateway
+              servicePort: 80
+            path: /api
+```
+
+创建：
+
+```bash
+$ kubectl apply -f istio-ingress.yaml
+```
+
+创建成功后，就可以通过域名直接访问服务，而不用加端口号了：
+
+```bash
+$ curl http://fueltank-1/api/hello
+$ curl http://fueltank-1/api/hello?version=v1
+```
+
+最终效果：
+
+![image-20200406142030956](../../resource/image-20200406142030956.png)
+
+
+
+
+

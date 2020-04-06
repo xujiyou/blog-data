@@ -60,20 +60,20 @@ $ docker login --username=552003271@qq.com registry.cn-chengdu.aliyuncs.com
 ```bash
 #!/bin/bash
 
-sudo docker pull registry.cn-chengdu.aliyuncs.com/bbd-image/kube-apiserver:v1.18.0
-sudo docker tag registry.cn-chengdu.aliyuncs.com/bbd-image/kube-apiserver:v1.18.0 k8s.gcr.io/kube-apiserver:v1.18.0
-sudo docker pull registry.cn-chengdu.aliyuncs.com/bbd-image/kube-controller-manager:v1.18.0
-sudo docker tag registry.cn-chengdu.aliyuncs.com/bbd-image/kube-controller-manager:v1.18.0 k8s.gcr.io/kube-controller-manager:v1.18.0
-sudo docker pull registry.cn-chengdu.aliyuncs.com/bbd-image/kube-scheduler:v1.18.0
-sudo docker tag registry.cn-chengdu.aliyuncs.com/bbd-image/kube-scheduler:v1.18.0 k8s.gcr.io/kube-scheduler:v1.18.0
-sudo docker pull registry.cn-chengdu.aliyuncs.com/bbd-image/kube-proxy:v1.18.0
-sudo docker tag registry.cn-chengdu.aliyuncs.com/bbd-image/kube-proxy:v1.18.0 k8s.gcr.io/kube-proxy:v1.18.0
-sudo docker pull registry.cn-chengdu.aliyuncs.com/bbd-image/pause:3.2
-sudo docker tag registry.cn-chengdu.aliyuncs.com/bbd-image/pause:3.2 k8s.gcr.io/pause:3.2
-sudo docker pull registry.cn-chengdu.aliyuncs.com/bbd-image/etcd:3.4.3-0
-sudo docker tag registry.cn-chengdu.aliyuncs.com/bbd-image/etcd:3.4.3-0 k8s.gcr.io/etcd:3.4.3-0
-sudo docker pull registry.cn-chengdu.aliyuncs.com/bbd-image/coredns:1.6.7
-sudo docker tag registry.cn-chengdu.aliyuncs.com/bbd-image/coredns:1.6.7 k8s.gcr.io/coredns:1.6.7
+docker pull registry.cn-chengdu.aliyuncs.com/bbd-image/kube-apiserver:v1.18.0
+docker tag registry.cn-chengdu.aliyuncs.com/bbd-image/kube-apiserver:v1.18.0 k8s.gcr.io/kube-apiserver:v1.18.0
+docker pull registry.cn-chengdu.aliyuncs.com/bbd-image/kube-controller-manager:v1.18.0
+docker tag registry.cn-chengdu.aliyuncs.com/bbd-image/kube-controller-manager:v1.18.0 k8s.gcr.io/kube-controller-manager:v1.18.0
+docker pull registry.cn-chengdu.aliyuncs.com/bbd-image/kube-scheduler:v1.18.0
+docker tag registry.cn-chengdu.aliyuncs.com/bbd-image/kube-scheduler:v1.18.0 k8s.gcr.io/kube-scheduler:v1.18.0
+docker pull registry.cn-chengdu.aliyuncs.com/bbd-image/kube-proxy:v1.18.0
+docker tag registry.cn-chengdu.aliyuncs.com/bbd-image/kube-proxy:v1.18.0 k8s.gcr.io/kube-proxy:v1.18.0
+docker pull registry.cn-chengdu.aliyuncs.com/bbd-image/pause:3.2
+docker tag registry.cn-chengdu.aliyuncs.com/bbd-image/pause:3.2 k8s.gcr.io/pause:3.2
+docker pull registry.cn-chengdu.aliyuncs.com/bbd-image/etcd:3.4.3-0
+docker tag registry.cn-chengdu.aliyuncs.com/bbd-image/etcd:3.4.3-0 k8s.gcr.io/etcd:3.4.3-0
+docker pull registry.cn-chengdu.aliyuncs.com/bbd-image/coredns:1.6.7
+docker tag registry.cn-chengdu.aliyuncs.com/bbd-image/coredns:1.6.7 k8s.gcr.io/coredns:1.6.7
 ```
 
 查看镜像：
@@ -259,8 +259,8 @@ $ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 其他节点也执行上面的操作，只不过这里是 `join`，而不是 `init`。
 
 ```bash
-$ kubeadm join 172.20.20.162:6443 --token abcdef.0123456789abcdef \
-    --discovery-token-ca-cert-hash sha256:553620341cdd8dab462f623c8456300e206f47b3acbaaafded78f1bbcd577abb
+$ sudo kubeadm join 172.20.20.162:6443 --token abcdef.0123456789abcdef \
+    --discovery-token-ca-cert-hash sha256:bb97cc772a836dd7125365218dbd9b1e7f58373c20daf0948b703f35ff8b4cbe
 ```
 
 怎么查看这里的 token 值那，可以这样：
@@ -318,6 +318,10 @@ sed -i -e "s?192.168.0.0/16?$POD_CIDR?g" calico.yaml
 ```bash
 $ kubectl apply -f calico.yaml
 ```
+
+
+
+---
 
 
 
