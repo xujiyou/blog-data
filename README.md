@@ -336,6 +336,8 @@
 
       [Istio实现灰度发布.md](云原生/Istio/实践/Istio实现灰度发布.md) 
 
+      [Istio流量治理.md](云原生/Istio/实践/Istio流量治理.md) 
+
    
 
 - Jaeger
@@ -551,6 +553,12 @@ CDH 开始收费了，怎么说。。。
    [ZooKeeper开发手册.md](大数据/ZooKeeper/ZooKeeper开发手册.md) 
 
    [ZooKeeper管理手册.md](大数据/ZooKeeper/ZooKeeper管理手册.md) 
+   
+- HDP
+
+   [HDP离线安装.md](大数据/HDP/HDP离线安装.md) 
+
+- CDH
 
 
 
@@ -583,6 +591,8 @@ CDH 开始收费了，怎么说。。。
 - MongoDB
 
 - MySQL
+
+   [MySQL主从搭建.md](数据存储/MySQL/MySQL主从搭建.md) 
 
 - PostgrerSQL
 
@@ -645,6 +655,8 @@ CDH 开始收费了，怎么说。。。
 - Python
 
     [Python教程.md](编程语言/Python/Python教程.md) 
+    
+    [Python源码安装.md](编程语言/Python/Python源码安装.md) 
 
 
 
@@ -752,6 +764,8 @@ CDH 开始收费了，怎么说。。。
 
  [DNS配置文件.md](Linux/DNS配置文件.md) 
 
+ [Linux创建用户并配置免密登录.md](Linux/Linux创建用户并配置免密登录.md) 
+
 - Syslog
 
    [syslog-ng使用教程.md](Linux/syslog/syslog-ng使用教程.md) 
@@ -815,10 +829,16 @@ CDH 开始收费了，怎么说。。。
 - YUM
 
    [yum命令详解.md](Linux/yum/yum命令详解.md) 
-  
+
    [rpm命令详解.md](Linux/yum/rpm命令详解.md) 
-   
+
    [repo文件格式.md](Linux/yum/repo文件格式.md) 
+
+   [yum离线源的配置.md](Linux/yum/yum离线源的配置.md) 
+
+   [yum配置文件.md](Linux/yum/yum配置文件.md) 
+
+   [epel软件库的使用.md](Linux/yum/epel软件库的使用.md) 
 
 - OpenSSL
 

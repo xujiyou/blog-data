@@ -243,5 +243,15 @@ $ sudo yum shell
 
 
 
+## 安装软件指定 repo
+
+```bash
+$ sudo yum install nginx --enablerepo=epel
+```
+
+
+
+
+
 
 
