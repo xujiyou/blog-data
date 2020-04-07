@@ -24,7 +24,7 @@ $ make
 
 安装：
 
-```
-
+```bash
+$ make install
 ```
 

@@ -592,7 +592,7 @@ CDH 开始收费了，怎么说。。。
 
 - MySQL
 
-   [MySQL主从搭建.md](数据存储/MySQL/MySQL主从搭建.md) 
+   [MySQL离线环境主从搭建.md](数据存储/MySQL/MySQL离线环境主从搭建.md) 
 
 - PostgrerSQL
 
