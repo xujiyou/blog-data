@@ -110,3 +110,17 @@ $ ssh-keygen -t rsa
 $ ssh admin@fueltank-1  # 这种是使用自己的公钥登录目标服务器
 ```
 
+
+
+## 给用户添加sudo权限
+
+使用命令 `visudo` 来编辑 `/etc/sudoers` 文件，添加以下行：
+
+```
+xujiyou ALL=(ALL)     ALL
+```
+
+
+
+## 限制用户只执行一个命令
+
