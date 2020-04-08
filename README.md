@@ -332,6 +332,8 @@
 
    [Istio监控措施.md](云原生/Istio/Istio监控措施.md) 
 
+   [istioctl使用方法.md](云原生/Istio/istioctl使用方法.md) 
+
    - 实践
 
       [Istio实现灰度发布.md](云原生/Istio/实践/Istio实现灰度发布.md) 
