@@ -288,3 +288,204 @@ spec:
               number: 8080
 ```
 
+
+
+## HTTP 重定向
+
+HTTP重定向（HTTP Redirect）能够让单个页面、表单或者整个Web应用都跳转到新的 URL 下，该 操作可以应用于多种场景：网站维护期间的临时跳转，网站架构改变后为了保持外部链接继续可用的永 久重定向，上传文件时的进度页面等。
+
+修改 hello 的 VirtualService ：
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: xujiyou-test
+  name: hello
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - hello-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /api/hello
+          queryParams:
+            version:
+              exact: v1
+      route:
+        - destination:
+            host: hello-service
+            subset: v1
+            port:
+              number: 8080
+      name: http-haha
+    - match:
+        - uri:
+            prefix: /api/hello
+          queryParams:
+            version:
+              exact: v2
+      redirect:
+        authority: fueltank-1
+        uri: /api/hello?version=v3
+    - match:
+        - uri:
+            prefix: /api/hello
+          queryParams:
+            version:
+              exact: v3
+      route:
+        - destination:
+            host: hello-service
+            subset: v3
+            port:
+              number: 8080
+    - retries:
+        attempts: 3
+        perTryTimeout: 1s
+        retryOn: 5xx
+      route:
+        - destination:
+            host: hello-service
+            subset: default
+            port:
+              number: 8080
+```
+
+查看其中的 `redirect` 配置。
+
+访问：
+
+```bash
+$ curl http://fueltank-1/api/hello?version=v2 -v
+```
+
+也可以浏览器测试结果
+
+
+
+## HTTP 重写
+
+继续修改 ：
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: xujiyou-test
+  name: hello
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - hello-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /api/hello
+          queryParams:
+            version:
+              exact: v1
+      route:
+        - destination:
+            host: hello-service
+            subset: v1
+            port:
+              number: 8080
+      name: http-haha
+    - match:
+        - uri:
+            prefix: /api/he
+      rewrite:
+        uri: /api/hello
+      route:
+        - destination:
+            host: hello-service
+            subset: v2
+            port:
+              number: 8080
+    - match:
+        - uri:
+            prefix: /api/hello
+          queryParams:
+            version:
+              exact: v3
+      route:
+        - destination:
+            host: hello-service
+            subset: v3
+            port:
+              number: 8080
+    - retries:
+        attempts: 3
+        perTryTimeout: 1s
+        retryOn: 5xx
+      route:
+        - destination:
+            host: hello-service
+            subset: default
+            port:
+              number: 8080
+```
+
+注意看其中的 `rewrite` 配置。
+
+访问：
+
+```bash
+$ curl http://fueltank-1/api/he
+```
+
+
+
+## 熔断
+
+服务端的Proxy会记录调用发生错误的次数，然后根据配置决定是否继续提供服务或者立刻返回错 误。使用熔断机制可以保护服务后端不会过载。
+
+## 限流
+
+限流是一种预防措施，在发生灾难发生前就对并发访问进行限制。Istio的速率限制特性可以实现常见 的限流功能，即防止来自外部服务的过度调用。衡量指标主要是QPS（每秒请求量），实现方式是计数器 方式。Istio 支持 Memquota 适配器和 Redisquota 适配器。
+
+## 服务隔离
+
+即 Sidecar 资源的使用方式。
+
+## 影子测试
+
+查找新代码错误的最佳方法是在实际环境中进行测试。影子测试可以将生产流量复制到目标服务中 进行测试，在处理中产生的任何错误都不会对整个系统的性能和可靠性造成影响。 
+
+配置：
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: xujiyou-test
+  name: hello
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - hello-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /api/hello
+          queryParams:
+            version:
+              exact: v1
+      mirror:
+        host: hello-service
+        subset: v2
+      route:
+        - destination:
+            host: hello-service
+            subset: v1
+            port:
+              number: 8080
+```
+
+上面配置的策略将全部流量都发送到 hello-service 服务的 v1 版本，其中的 mirror 字段指定将流量复制到  forecast 服务的v2版本。当流量被复制时，会在请求的HOST或Authority头中添加-shadow后缀（例如 hello-service-shadow）并将请求发送到 hello-service 服务的v2版本以示它是影子流量。这些被复制的请求引发的响应 会被丢弃，不会影响终端客户。 
+
