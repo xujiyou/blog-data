@@ -30,10 +30,12 @@ SDS方式：https://istio.io/zh/docs/tasks/traffic-management/ingress/secure-ing
 
 2. 定义 Gateway 如下：
 
+   
+   
    ```yaml
-   apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1alpha3
    kind: Gateway
-metadata:
+   metadata:
      namespace: xujiyou-test
      name: hello-gateway
    spec:
@@ -51,6 +53,8 @@ metadata:
            serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
            privateKey: /etc/istio/ingressgateway-certs/tls.key
    ```
+   
+   
    
 3. 访问如下：
 
