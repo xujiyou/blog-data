@@ -334,15 +334,35 @@
 
    [istioctl使用方法.md](云原生/Istio/istioctl使用方法.md) 
 
+   [动手构建一个adapter.md](云原生/Istio/动手构建一个adapter.md) 
+
    - 实践
 
       [Istio实现灰度发布.md](云原生/Istio/实践/Istio实现灰度发布.md) 
-
+   
       [Istio流量治理.md](云原生/Istio/实践/Istio流量治理.md) 
       
       [Istio服务保护.md](云原生/Istio/实践/Istio服务保护.md) 
-
    
+   - CRD
+
+      [Istio-crd(一)-概述.md](云原生/Istio/CRD/Istio-crd(一)-概述.md) 
+
+      [Istio-crd(二)-authentication.md](云原生/Istio/CRD/Istio-crd(二)-authentication.md) 
+
+      [Istio-crd(三)-config.md](云原生/Istio/CRD/Istio-crd(三)-config.md) 
+
+      [Istio-crd(四)-networking.md](云原生/Istio/CRD/Istio-crd(四)-networking.md) 
+
+      [Istio-crd(五)-rbac.md](云原生/Istio/CRD/Istio-crd(五)-rbac.md) 
+
+      [Istio-crd(六)-security.md](云原生/Istio/CRD/Istio-crd(六)-security.md) 
+
+   - 架构
+   
+   - 配置
+
+
 
 - Jaeger
 

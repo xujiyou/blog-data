@@ -123,7 +123,7 @@
 3. 再根据私钥和配置文件创建证书签名请求文件 server.csr
 
    ```bash
-   $ openssl req -new -key server.key -config csr.conf -out server.csr
+   $ openssl req -new -key server.key -config server.conf -out server.csr
    ```
 
 4. 最后使用 ca.key、ca.crt 和 server.csr 、server.conf 来生成服务器证书
