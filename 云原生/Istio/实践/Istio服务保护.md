@@ -30,33 +30,33 @@ SDS方式：https://istio.io/zh/docs/tasks/traffic-management/ingress/secure-ing
 
 2. 定义 Gateway 如下：
 
-   
-   
-   ```yaml
+
+
+```yaml
 apiVersion: networking.istio.io/v1alpha3
-   kind: Gateway
-   metadata:
-     namespace: xujiyou-test
-     name: hello-gateway
-   spec:
-     selector:
-       istio: ingressgateway
-     servers:
-       - port:
-           number: 443
-           name: https
-           protocol: HTTPS
-         hosts:
-           - "fueltank-1.cloud.bbdops.com"
-         tls:
-           mode: SIMPLE
-           serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
-           privateKey: /etc/istio/ingressgateway-certs/tls.key
-   ```
-   
-   
-   
-3. 访问如下：
+kind: Gateway
+metadata:
+  namespace: xujiyou-test
+  name: hello-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      hosts:
+        - "fueltank-1.cloud.bbdops.com"
+      tls:
+        mode: SIMPLE
+        serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+        privateKey: /etc/istio/ingressgateway-certs/tls.key
+```
+
+
+
+1. 访问如下：
 
    ```bash
     $ curl -v -HHost:fueltank-1.cloud.bbdops.com --cacert /home/admin/k8s-cluster/cert/ca.pem https://fueltank-1.cloud.bbdops.com:31390/api/hello
