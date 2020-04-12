@@ -99,6 +99,12 @@
       - CSI
 
          [CSI工作方式.md](云原生/Kubernetes/Kubernetes扩展机制/CSI/CSI工作方式.md) 
+      
+      - Operator
+
+         [Kubernetes-Operator教程.md](云原生/Kubernetes/Kubernetes扩展机制/Operator/Kubernetes-Operator教程.md) 
+
+         [operator-sdk教程.md](云原生/Kubernetes/Kubernetes扩展机制/Operator/operator-sdk教程.md) 
 
    - Kubernetes API
 
@@ -173,11 +179,11 @@
       [使用ConfigMap来配置Redis.md](云原生/Kubernetes/动手操作/使用ConfigMap来配置Redis.md) 
 
       [使用ConfigMap配置Pod.md](云原生/Kubernetes/动手操作/使用ConfigMap配置Pod.md) 
-
+   
       [使用CronJob运行自动化任务.md](云原生/Kubernetes/动手操作/使用CronJob运行自动化任务.md) 
-
+   
       [使用PodPreset将信息注入Pods.md](云原生/Kubernetes/动手操作/使用PodPreset将信息注入Pods.md) 
-
+   
       [使用Secret安全地分发凭证.md](云原生/Kubernetes/动手操作/使用Secret安全地分发凭证.md) 
    
       [示例：使用PV部署WordPress和MySQL.md](云原生/Kubernetes/动手操作/示例：使用PV部署WordPress和MySQL.md) 
@@ -364,6 +370,12 @@
 
 
 
+- Envoy
+
+  [Envoy入门.md](云原生/Envoy/Envoy入门.md) 
+
+
+
 - Jaeger
 
    [Jaeger 入门.md](云原生/jaeger/Jaeger入门.md) 
@@ -500,9 +512,11 @@
 
 
 
-- Operator
+- Argo 
 
-   [Kubernetes-Operator教程.md](云原生/Operator/Kubernetes-Operator教程.md) 
+  [Argo介绍及入门.md](云原生/Argo/Argo介绍及入门.md) 
+
+
 
 
 
@@ -612,11 +626,17 @@ CDH 开始收费了，怎么说。。。
 
 - Ceph
 
+   [Ceph 安装.md](数据存储/Ceph/Ceph 安装.md) 
+
 - MongoDB
+
+   [MongoDB高可用部署.md](数据存储/MongoDB/MongoDB高可用部署.md) 
 
 - MySQL
 
    [MySQL离线环境主从搭建.md](数据存储/MySQL/MySQL离线环境主从搭建.md) 
+
+   [MySQL-binlog介绍.md](数据存储/MySQL/MySQL-binlog介绍.md) 
 
 - PostgrerSQL
 
