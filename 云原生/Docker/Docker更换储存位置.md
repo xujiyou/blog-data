@@ -2,28 +2,38 @@
 
 最好将 Docker 的数据放到挂载盘里
 
-1.关闭docker服务
+1. 关闭docker服务
 
-```
-service docker stop
-```
-
-将/var/lib/docker文件夹拷贝到指定目录
-
-```
-cd /var/lib
-cp -rf /docker /<目标路径>/
+```bash
+$ service docker stop
 ```
 
-3.建立软连接
+2. 将/var/lib/docker文件夹拷贝到指定目录
 
-```
-sudo ln -s /mnt/vde/docker/ /var/lib/docker
+```bash
+$ cp -rf /var/lib/docker /<目标路径>/
 ```
 
-4.重启docker服务
+3. 建立软连接
 
+```bash
+$ sudo ln -s /mnt/vde/docker /var/lib/docker
 ```
-service docker start
+
+4. 重启docker服务
+
+```bash
+$ service docker start
+```
+
+
+
+## 更改配置来切换储存位置
+
+```bash
+$ sudo vim /etc/docker/daemon.json 
+{
+  "graph": "/new-path/docker"
+}
 ```
 

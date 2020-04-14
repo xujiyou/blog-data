@@ -114,6 +114,133 @@ $ sudo ceph -s
 
 
 
+---
+
+
+
+## 部署 RGW
+
+```bash
+$ sudo ceph-deploy rgw create fueltank-1
+```
+
+查看状态：
+
+```bash
+$ sudo systemctl status ceph-radosgw@rgw.fueltank-1
+```
+
+访问：
+
+```bash
+$ curl http://fueltank:7480
+```
+
+
+
+
+
+---
+
+
+
+## 安装 Dashboard
+
+```bash
+$ sudo yum install ceph-mgr-dashboard -y
+```
+
+我靠，新版本有坑，有一个依赖 CentOS 不支持，放弃，反正也很鸡肋，不要了。
+
+
+
+---
+
+
+
+## 测试储存一个对象
+
+创建对象
+
+```bash
+$ echo "Hello BBD" > testfile.txt
+$ sudo ceph osd pool create mytest
+$ sudo rados put test-object testfile.txt --pool=mytest
+```
+
+查看对象列表：
+
+```bash
+$ sudo rados -p mytest ls
+```
+
+下载对象：
+
+```bash
+$ sudo rados -p mytest get test-object abc.txt
+```
+
+确定对象储存的位置：
+
+```bash
+$ sudo ceph osd map mytest test-object
+```
+
+删除对象：
+
+```bash
+$ sudo rados rm test-object --pool=mytest
+```
+
+再次查看对象列表，发现刚才的对象被删除了：
+
+```bash
+$ sudo rados -p mytest ls
+```
+
+删除 pool：
+
+```bash
+$ sudo ceph osd pool rm mytest
+```
+
+报错，说：
+
+```
+Error EPERM: WARNING: this will *PERMANENTLY DESTROY* all data stored in pool mytest.  If you are *ABSOLUTELY CERTAIN* that is what you want, pass the pool name *twice*, followed by --yes-i-really-really-mean-it.
+```
+
+意思是 pool 名字要写两次，并且要带 `--yes-i-really-really-mean-it` 参数：
+
+```bash
+$ sudo ceph osd pool rm mytest mytest --yes-i-really-really-mean-it
+```
+
+又报错，说：
+
+```
+Error EPERM: pool deletion is disabled; you must first set the mon_allow_pool_delete config option to true before you can destroy a pool
+```
+
+这样解决：
+
+```bash
+$ sudo ceph tell mon.\* injectargs '--mon-allow-pool-delete=true'
+$ sudo ceph osd pool rm mytest mytest --yes-i-really-really-mean-it
+```
+
+查看 pool 列表：
+
+```bash
+$ sudo ceph osd pool ls
+```
+
+
+
+---
+
+
+
 ## 卸载
 
 ```bash

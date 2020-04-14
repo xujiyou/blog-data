@@ -373,6 +373,8 @@
 - Envoy
 
   [Envoy入门.md](云原生/Envoy/Envoy入门.md) 
+  
+  [Envoy代理自己的服务.md](云原生/Envoy/Envoy代理自己的服务.md) 
 
 
 
@@ -624,15 +626,23 @@ CDH 开始收费了，怎么说。。。
 
    [ES开启安全认证.md](数据存储/Elasticsearch/ES开启安全认证.md) 
 
+
+
 - Ceph
 
    [cephadm安装集群.md](数据存储/Ceph/cephadm安装集群.md) 
 
    [ceph-deploy安装集群.md](数据存储/Ceph/ceph-deploy安装集群.md) 
 
+   - Ceph对象储存
+
+
+
 - MongoDB
 
    [MongoDB高可用部署.md](数据存储/MongoDB/MongoDB高可用部署.md) 
+
+
 
 - MySQL
 
@@ -640,9 +650,15 @@ CDH 开始收费了，怎么说。。。
 
    [MySQL-binlog介绍.md](数据存储/MySQL/MySQL-binlog介绍.md) 
 
+
+
 - PostgrerSQL
 
+
+
 - Redis
+
+
 
 - Neo4j
 
@@ -735,6 +751,10 @@ CDH 开始收费了，怎么说。。。
 
 
 - Gitlab
+
+  [Gitlab安装.md](DevOps/Gitlab/Gitlab安装.md) 
+
+  [Gitlab升级.md](DevOps/Gitlab/Gitlab升级.md) 
 
 
 
