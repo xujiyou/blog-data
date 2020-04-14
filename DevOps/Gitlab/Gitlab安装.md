@@ -44,7 +44,7 @@ $ sudo yum install gitlab-ce-10.1.2-ce.0.el7.x86_64
 全部修改的配置如下：
 
 ```properties
-external_url 'http://10.28.30.17:10000'
+external_url 'http://1.2.3.4:10000'
 gitlab_rails['backup_path'] = "/data1/gitlab/git-backups"
 gitlab_rails['backup_archive_permissions'] = 0644
 gitlab_rails['backup_keep_time'] = 604800
@@ -100,10 +100,8 @@ $ sudo gitlab-ctl start
 
 ```bash
 gitlab-ctl stop
-# Restart all GitLab components
 gitlab-ctl restart
 gitlab-ctl restart sidekiq
-# start a Rails console for GitLab
 gitlab-rails console
 ```
 
@@ -120,7 +118,7 @@ $ sudo ls /data1/gitlab/git-backups/
 
 ## 创建备份
 
-上面已经制定了备份的目录和保存时间，下面来创建备份：
+上面的配置已经指定了备份的目录和保存时间，下面来创建备份：
 
 ```bash
 $ sudo gitlab-rake gitlab:backup:create
@@ -165,7 +163,7 @@ sh -c 'umask 0077; tar -cf $(date "+etc-gitlab-%s.tar") -C / etc/gitlab'
 /bin/gitlab-rake gitlab:backup:create
 find $back_dir -name "*.tar" -mtime +7 | xargs rm -f
 #rsync to zfs server
-rsync -a --delete --password-file=/root/rsyncd.passwd $back_dir gitlab@10.28.72.16::gitlab
+rsync -a --delete --password-file=/root/rsyncd.passwd $back_dir gitlab@4.5.6.7::gitlab
 echo "`date +%F-%T` rsync done" >> rsync_gitlab.log
 ```
 
@@ -193,6 +191,8 @@ rsync：
 
 
 
+
+
 ## 修改 root 密码
 
 执行：
@@ -205,8 +205,8 @@ $ sudo gitlab-rails console production
 
 ```
  user = User.where(id: 1).first
- user.password="root:bbdyw@123"
- user.password_confirmation="root:bbdyw@123"
+ user.password="******"
+ user.password_confirmation="******"
  user.save!
  quit
 ```
@@ -227,12 +227,25 @@ $ sudo gitlab-rails console production
 $ sudo gitlab-ctl stop unicorn
 $ sudo gitlab-ctl stop sidekiq
 $ sudo gitlab-rake gitlab:backup:restore BACKUP=1586804022_2020_04_14_10.1.2
+```
+
+重新启动：
+
+```bash
 $ sudo gitlab-ctl start
+```
+
+检查 GitLab 是否正常运行：
+
+```bash
+$ gitlab-rake gitlab:check SANITIZE=true
 ```
 
 
 
+## 去掉注册
 
+管理员账号登录 ----> 进入 `Admin area` (就是那个🔧) ----> `settings` ----> `取消Signup enabled` 。
 
 
 

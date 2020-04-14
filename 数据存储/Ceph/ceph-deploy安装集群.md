@@ -133,7 +133,7 @@ $ sudo systemctl status ceph-radosgw@rgw.fueltank-1
 访问：
 
 ```bash
-$ curl http://fueltank:7480
+$ curl http://fueltank-1:7480
 ```
 
 
@@ -160,7 +160,7 @@ $ sudo yum install ceph-mgr-dashboard -y
 
 ## 测试储存一个对象
 
-创建对象
+创建 pool ，并往里面添加一个对象。
 
 ```bash
 $ echo "Hello BBD" > testfile.txt
