@@ -626,7 +626,9 @@ CDH 开始收费了，怎么说。。。
 
 - Ceph
 
-   [Ceph 安装.md](数据存储/Ceph/Ceph 安装.md) 
+   [cephadm安装集群.md](数据存储/Ceph/cephadm安装集群.md) 
+
+   [ceph-deploy安装集群.md](数据存储/Ceph/ceph-deploy安装集群.md) 
 
 - MongoDB
 
