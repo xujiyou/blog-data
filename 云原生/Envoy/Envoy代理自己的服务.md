@@ -10,7 +10,7 @@ Envoy 并没有二进制文件（但可以自己编译），只能使用 Envoy �
 
 本文使用 `go-restful` 进行构建 web 服务。
 
-参考：https://www.envoyproxy.io/docs/envoy/latest/start/start
+本文参考：https://www.envoyproxy.io/docs/envoy/latest/start/start
 
 
 
