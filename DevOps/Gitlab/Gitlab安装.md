@@ -221,15 +221,20 @@ $ sudo gitlab-rails console production
 
 复制数据时注意，别复制太大的数据，生产环境要小心！！！这里略过复制。
 
-恢复数据：
+先暂停服务：
 
 ```bash
 $ sudo gitlab-ctl stop unicorn
 $ sudo gitlab-ctl stop sidekiq
+```
+
+再恢复数据：
+
+```bash
 $ sudo gitlab-rake gitlab:backup:restore BACKUP=1586804022_2020_04_14_10.1.2
 ```
 
-重新启动：
+恢复完成后重新启动：
 
 ```bash
 $ sudo gitlab-ctl start
@@ -245,7 +250,7 @@ $ gitlab-rake gitlab:check SANITIZE=true
 
 ## 去掉注册
 
-管理员账号登录 ----> 进入 `Admin area` (就是那个🔧) ----> `settings` ----> `取消Signup enabled` 。
+管理员账号登录 ----> 进入 `Admin area` (就是那个🔧) ----> `settings` ---->  取消 `Sign-up enabled`  --->  `save` 
 
 
 

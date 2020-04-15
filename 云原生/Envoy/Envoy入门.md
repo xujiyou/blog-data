@@ -88,7 +88,6 @@ $ docker-compose ps
 下面来看下 `front-envoy.yaml` ：
 
 ```yaml
-static_resources:
   admin:
     access_log_path: "/dev/null"
     address:
