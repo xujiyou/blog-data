@@ -39,6 +39,8 @@ $ cat /opt/gitlab/embedded/service/gitlab-rails/VERSION
 
 万一生产环境升级失败，服务启动失败，可以直接改 DNS 将测试环境变为生产环境。
 
+下面在测试环境进行升级。
+
 
 
 ## 升级到 10.8.7
@@ -136,5 +138,63 @@ $ cat /opt/gitlab/embedded/service/gitlab-rails/VERSION
 $ sudo yum install gitlab-ce-12.8.5-ce.0.el7.x86_64
 ```
 
+相安无事。。。
 
+```bash
+$ cat /opt/gitlab/embedded/service/gitlab-rails/VERSION
+12.8.5
+```
+
+
+
+## 生产环境升级准备
+
+四次升级，都没有特别注意的地方。备份只需要在关服务后进行一次即可。
+
+产线环境，要把源从本地准备好，网上的源下载太慢，耽误时间。
+
+先把测试环境弄好，包括 CI/DI等。测试没毛病之后，再进行升级。
+
+准备凌晨进行线上环境升级。预计耗时一小时。
+
+
+
+## 12.0 版本更新的 CI/CD 功能
+
+在12.0 版本中，Gitlab 对 CI/CD 进行了升级，见官方文档：https://docs.gitlab.com/ee/ci/
+
+需要在机器上安装 gitlab-runner ，官方地址：https://docs.gitlab.com/runner/install/linux-manually.html
+
+可以按照这个地址来安装：https://packages.gitlab.com/runner/gitlab-runner
+
+```bash
+$ curl -s https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash
+$ sudo yum install gitlab-runner
+```
+
+安装完成后，进行注册：https://docs.gitlab.com/runner/register/index.html#gnulinux
+
+```bash
+$ sudo gitlab-runner register
+```
+
+具体过程如下：
+
+![image-20200415160208230](../../resource/image-20200415160208230.png)
+
+这里的地址和 token 要去项目中的 `setting` --->  `CI/CD`  ---> `Runners` 中获取。
+
+配置完成后，`gitlab-runner` 会自己启动。。
+
+手动启动，多启动一遍也没啥事：
+
+```bash
+$ sudo gitlab-runner start
+```
+
+查看状态：
+
+```bash
+$ sudo gitlab-runner status
+```
 

@@ -210,3 +210,12 @@ world
 ![image-20200415132436588](../../resource/image-20200415132436588.png)
 
 套路就是这么个套路，玩法就是这么个玩法。
+
+
+
+## 卸载容器
+
+```bash
+$ sudo docker-compose down
+```
+
