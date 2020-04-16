@@ -636,6 +636,14 @@ CDH 开始收费了，怎么说。。。
 
    - Ceph对象储存
 
+     [用户管理.md](数据存储/Ceph/Ceph对象储存/用户管理.md) 
+     
+     [S3-API.md](数据存储/Ceph/Ceph对象储存/S3-API.md) 
+     
+   - Ceph块储存
+   
+   - Ceph文件系统
+
 
 
 - MongoDB
