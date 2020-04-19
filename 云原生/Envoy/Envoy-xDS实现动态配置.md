@@ -588,6 +588,18 @@ world
 
 
 
+---
+
+
+
+## 卸载
+
+```bash
+$ sudo docker-compose down
+```
+
+
+
 
 
 ---
