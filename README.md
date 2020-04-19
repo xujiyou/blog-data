@@ -375,6 +375,8 @@
   [Envoy入门.md](云原生/Envoy/Envoy入门.md) 
   
   [Envoy代理自己的服务.md](云原生/Envoy/Envoy代理自己的服务.md) 
+  
+  [Envoy-xDS实现动态配置.md](云原生/Envoy/Envoy-xDS实现动态配置.md) 
 
 
 
@@ -657,6 +659,8 @@ CDH 开始收费了，怎么说。。。
    [MySQL离线环境主从搭建.md](数据存储/MySQL/MySQL离线环境主从搭建.md) 
 
    [MySQL-binlog介绍.md](数据存储/MySQL/MySQL-binlog介绍.md) 
+   
+   [Mysql数据备份.md](数据存储/MySQL/Mysql数据备份.md) 
 
 
 

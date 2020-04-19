@@ -186,6 +186,8 @@ services:
 
 在这个 docker-compose 文件中，指定了 Dockerfile 文件，然后会把 `hello-envoy-config.yaml` 挂载到容器中，最后映射好端口，把 Envoy 提供服务的 80 端口映射到宿主机的 8080 端口，把 Envoy 的 admin 管理端口 8081 映射到宿主机的 8081 端口。
 
+注意这里的 hello-service ，就是 docker compose 中容器的主机名
+
 
 
 ## 上传 & 构建 & 测试
@@ -208,6 +210,123 @@ world
 访问 Envoy 管理界面：
 
 ![image-20200415132436588](../../resource/image-20200415132436588.png)
+
+
+
+## 创建一个前端代理
+
+我想多部署一个容器，作为上面那个 hello 容器的前端。
+
+创建 front-envoy.yaml 文件：
+
+```yaml
+static_resources:
+  listeners:
+  - address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 80
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager
+          codec_type: auto
+          stat_prefix: ingress_http
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: backend
+              domains:
+              - "*"
+              routes:
+              - match:
+                  prefix: "/hello"
+                route:
+                  cluster: service
+          http_filters:
+          - name: envoy.filters.http.router
+            typed_config: {}
+  clusters:
+  - name: service
+    connect_timeout: 0.25s
+    type: strict_dns
+    lb_policy: round_robin
+    http2_protocol_options: {}
+    load_assignment:
+      cluster_name: service
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: hello-service
+                port_value: 80
+admin:
+  access_log_path: "/dev/null"
+  address:
+    socket_address:
+      address: 0.0.0.0
+      port_value: 8001
+```
+
+当访问这个容器时，这个容器的 envoy 会重定向到 `hello-service` 容器的 80 端口。
+
+创建 Dockfile-frontenvoy 文件：
+
+```dockerfile
+FROM envoyproxy/envoy-dev:latest
+
+CMD /usr/local/bin/envoy -c /etc/front-envoy-config.yaml --service-cluster front-proxy
+```
+
+修改 docker-compose.yaml 文件：
+
+```yaml
+version: "3.7"
+services:
+
+  front-envoy:
+    build:
+      context: .
+      dockerfile: Dockerfile-frontenvoy
+    volumes:
+      - ./front-envoy-config.yaml:/etc/front-envoy-config.yaml
+    expose:
+      - "80"
+      - "8001"
+    ports:
+      - "8000:80"
+      - "8001:8001"
+
+  hello-service:
+    build:
+      context: .
+      dockerfile: Dockerfile-hello
+    volumes:
+      - ./hello-envoy-config.yaml:/etc/hello-envoy-config.yaml
+    expose:
+      - "80"
+      - "8081"
+```
+
+删除并重新构建：
+
+```bash
+$ sudo docker-compose down
+$ sudo docker-compose up --build -d
+```
+
+测试：
+
+```
+$ curl http://localhost:8000/hello
+world
+```
+
+成功。
+
+
 
 套路就是这么个套路，玩法就是这么个玩法。
 
