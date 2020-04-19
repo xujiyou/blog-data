@@ -47,6 +47,9 @@ Envoy 官方提供了两份 xDS Server 的实现，分别是：
 
 - 参考：https://github.com/envoyproxy/go-control-plane
 - 参考：https://github.com/salrashid123/envoy_control
+- Envoy 版本：v1.14.1
+- xDS API 版本：v2
+- go-control-plane 版本：0.9.4
 
 下来一步一步来构建一个最简单的服务端，相当于一个 hello world。
 
@@ -206,7 +209,7 @@ func BuildCluster() []cache.Resource {
 }
 ```
 
-这个文件很简单，就是根据官方的结构体来填数据，这里都是我们自己填的测试数据。在实际场景中，比如 Istio 中，是在 k8s 中拿数据，然后填入到这里面。并且这里也可以对接各种数据库后端来保存信息。
+这个文件很简单，就是根据官方的结构体来填数据，这里都是我们自己填的测试数据。在实际场景中，比如 Istio 中，是在 k8s apiserver 中拿数据，然后填入到这里面。并且这里也可以对接各种数据库后端来保存信息。
 
 - 这里使用 golang 代码构建的配置和  [Envoy代理自己的服务.md](Envoy代理自己的服务.md) 中使用的静态配置是一模一样的。
 - `127.0.0.1:8080` 是真正的后端服务的地址，即 hello-service（上一篇文章中构建的） 监听的地址。
