@@ -176,7 +176,7 @@ metadata:
    name: csi-rbd-sc
 provisioner: rbd.csi.ceph.com
 parameters:
-   clusterID: b9127830-b0cc-4e34-aa47-9d1a2e9949a8
+   clusterID: 418765c6-2776-4d19-8ab3-1d887278256e
    pool: kubernetes
    csi.storage.k8s.io/provisioner-secret-name: csi-rbd-secret
    csi.storage.k8s.io/provisioner-secret-namespace: default
