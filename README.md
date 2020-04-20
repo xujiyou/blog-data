@@ -654,6 +654,10 @@ CDH 开始收费了，怎么说。。。
    
      [Kubernetes使用Ceph块设备.md](数据存储/Ceph/Ceph块储存/Kubernetes使用Ceph块设备.md) 
    
+     [rbd命令详解.md](数据存储/Ceph/Ceph块储存/rbd命令详解.md) 
+   
+     [Ceph块储存快照.md](数据存储/Ceph/Ceph块储存/Ceph块储存快照.md) 
+   
    - Ceph文件系统
 
 
