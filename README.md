@@ -381,6 +381,8 @@
   [Envoy二进制构建及安装.md](云原生/Envoy/Envoy二进制构建及安装.md) 
   
   [Envoy配置文件详解.md](云原生/Envoy/Envoy配置文件详解.md) 
+  
+  [Envoy命令行选项.md](云原生/Envoy/Envoy命令行选项.md) 
 
 
 
@@ -647,6 +649,10 @@ CDH 开始收费了，怎么说。。。
      [S3-API.md](数据存储/Ceph/Ceph对象储存/S3-API.md) 
      
    - Ceph块储存
+   
+     [Ceph块储存入门.md](数据存储/Ceph/Ceph块储存/Ceph块储存入门.md) 
+   
+     [Kubernetes使用Ceph块设备.md](数据存储/Ceph/Ceph块储存/Kubernetes使用Ceph块设备.md) 
    
    - Ceph文件系统
 
