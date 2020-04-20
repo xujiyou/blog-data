@@ -658,6 +658,8 @@ CDH 开始收费了，怎么说。。。
    
      [Ceph块储存快照.md](数据存储/Ceph/Ceph块储存/Ceph块储存快照.md) 
    
+     [Ceph块设备挂载.md](数据存储/Ceph/Ceph块储存/Ceph块设备挂载.md) 
+   
    - Ceph文件系统
 
 

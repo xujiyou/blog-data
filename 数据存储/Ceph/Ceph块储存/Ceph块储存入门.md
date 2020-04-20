@@ -12,11 +12,19 @@ $ sudo ceph osd pool create one
 $ sudo rbd pool init one
 ```
 
-创建用户：
+创建 auth：
 
 ```bash
-$ sudo ceph auth get-or-create client.qemu mon 'profile rbd' osd 'profile rbd pool=vms, profile rbd-read-only pool=images' mgr 'profile rbd pool=images'
+$ sudo ceph auth get-or-create client.one mon 'profile rbd' osd 'profile rbd pool=one' mgr 'profile rbd pool=one'
 ```
+
+查看 auth：
+
+```bash
+$ sudo ceph auth get client.one
+```
+
+
 
 返回：
 
