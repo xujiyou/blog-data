@@ -783,6 +783,8 @@ CDH 开始收费了，怎么说。。。
   [Gitlab安装.md](DevOps/Gitlab/Gitlab安装.md) 
 
   [Gitlab升级.md](DevOps/Gitlab/Gitlab升级.md) 
+  
+  [Gitlab-CI教程.md](DevOps/Gitlab/Gitlab-CI教程.md) 
 
 
 

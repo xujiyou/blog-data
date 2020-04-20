@@ -169,7 +169,7 @@ $ cat /opt/gitlab/embedded/service/gitlab-rails/VERSION
 
 ```bash
 $ curl -s https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash
-$ sudo yum install gitlab-runner
+$ sudo yum install gitlab-runner -y
 ```
 
 安装完成后，进行注册：https://docs.gitlab.com/runner/register/index.html#gnulinux
