@@ -377,6 +377,10 @@
   [Envoy代理自己的服务.md](云原生/Envoy/Envoy代理自己的服务.md) 
   
   [Envoy-xDS实现动态配置.md](云原生/Envoy/Envoy-xDS实现动态配置.md) 
+  
+  [Envoy二进制构建及安装.md](云原生/Envoy/Envoy二进制构建及安装.md) 
+  
+  [Envoy配置文件详解.md](云原生/Envoy/Envoy配置文件详解.md) 
 
 
 
