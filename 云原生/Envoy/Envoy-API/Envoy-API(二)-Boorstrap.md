@@ -342,7 +342,7 @@ scrape_configs:
 $ ./prometheus --config.file=prometheus.yml
 ```
 
-启动完成后，访问几下 envoy，再登上 15 秒，就可以在 Prometheus 中看到数据了！！！
+启动完成后，访问几下 envoy，再等上 15 秒，就可以在 Prometheus 中看到数据了！！！
 
 可以通过访问 `http://fueltank-1:9090/graph` 来搜索。
 
