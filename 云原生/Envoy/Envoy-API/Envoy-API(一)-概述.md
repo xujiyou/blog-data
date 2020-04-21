@@ -16,10 +16,10 @@ v2 版本的 API 参考：https://www.envoyproxy.io/docs/envoy/latest/api-v2/api
 
 共分为 10 种类型。分别是：
 
-- Boorstrap ：必须要配置的，不管是动态配置还是静态配置，这个类型包含其他类型
+- Boorstrap ：必须要配置的，不管是动态配置还是静态配置，这个类型包含其他类型，直接包含 SDS、RTDS 相关 API
 - Listeners：LDS 相关API
 - Clusters：CDS 相关API
-- HTTP Route Manager
+- HTTP Route Manager：包含 RDS、VHDS、SRDS 相关 API
 - Extensions
 - Admin：Envoy 的管理端配置
 - Envoy Data
@@ -27,4 +27,4 @@ v2 版本的 API 参考：https://www.envoyproxy.io/docs/envoy/latest/api-v2/api
 - Common messages
 - Tpyes
 
-后面的文章分别对这些 API 进行学习。
+后面的文章分别对这些 API 进行动手学习。
