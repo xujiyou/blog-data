@@ -398,6 +398,8 @@
 
    [Rancher安装.md](云原生/Rancher/Rancher安装.md) 
 
+   [Ranche重置密码.md](云原生/Rancher/Ranche重置密码.md) 
+
    
 
 - Rook
