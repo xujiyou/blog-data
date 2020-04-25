@@ -374,6 +374,8 @@
 
   [Envoy入门.md](云原生/Envoy/Envoy入门.md) 
   
+  [Envoy术语.md](云原生/Envoy/Envoy术语.md) 
+  
   [Envoy代理自己的服务.md](云原生/Envoy/Envoy代理自己的服务.md) 
   
   [Envoy-xDS实现动态配置.md](云原生/Envoy/Envoy-xDS实现动态配置.md) 
@@ -389,6 +391,8 @@
     [Envoy-API(一)-概述.md](云原生/Envoy/Envoy-API/Envoy-API(一)-概述.md) 
   
     [Envoy-API(二)-Boorstrap.md](云原生/Envoy/Envoy-API/Envoy-API(二)-Boorstrap.md) 
+  
+    [Envoy-API(三)-Listeners.md](云原生/Envoy/Envoy-API/Envoy-API(三)-Listeners.md) 
 
 
 

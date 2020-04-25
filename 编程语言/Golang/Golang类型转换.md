@@ -14,3 +14,9 @@ str := strconv.Itoa(10)
 var data []byte = []byte(str)
 ```
 
+反转：
+
+```
+str2 = string(data2[:])
+```
+

@@ -159,3 +159,10 @@ $ ambari-agent start
 
 
 
+## 关闭
+
+```bash
+$ sudo ambari-server stop
+$ sudo ambari-agent stop
+```
+

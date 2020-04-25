@@ -551,7 +551,7 @@ public interface OtherClient {
 }
 ```
 
-你看这代码，跟 api 的代码差不多，看着多舒服啊，简洁明了。
+这代码跟 api 的代码差不多，看着多舒服啊，简洁明了。
 
 修改 HelloApi 类：
 
