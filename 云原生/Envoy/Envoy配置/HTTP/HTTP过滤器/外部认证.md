@@ -148,3 +148,4 @@ $ curl -L http://localhost:82/ping -H "Authorization: my-token1"
 $ curl -L http://localhost:82/ping -H "Authorization: my-token"
 ```
 
+需要加 -L 选项 curl 才能处理 301 响应。
