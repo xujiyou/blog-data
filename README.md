@@ -702,6 +702,8 @@ CDH 开始收费了，怎么说。。。
 
 - Redis
 
+  [Redis入门教程.md](数据存储/Redis/Redis入门教程.md) 
+
 
 
 - Neo4j
@@ -917,6 +919,10 @@ CDH 开始收费了，怎么说。。。
     [netstat命令详解.md](Linux/命令详解/netstat命令详解.md) 
     
     [iostat命令详解.md](Linux/命令详解/iostat命令详解.md) 
+    
+    [screen命令详解.md](Linux/命令详解/screen命令详解.md) 
+    
+    [demsg命令.md](Linux/命令详解/demsg命令.md) 
 
 
 
