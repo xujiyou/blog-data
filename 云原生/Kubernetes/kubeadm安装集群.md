@@ -10,6 +10,14 @@
 $ sudo yum install kubeadm kubelet kubectl cri-tools kubernetes-cni -y
 ```
 
+或者指定版本安装：
+
+```bash
+$ sudo yum install kubeadm-1.18.0 kubelet-1.18.0 kubectl-1.18.0 cri-tools kubernetes-cni -y
+```
+
+
+
 
 
 ---

@@ -366,6 +366,8 @@
 
    - 架构
    
+      [Poilt.md](云原生/Istio/架构/Poilt.md) 
+   
    - 配置
 
 
@@ -934,6 +936,8 @@ CDH 开始收费了，怎么说。。。
 
 - SELinux
 
+  [SELinux入门.md](Linux/SELinux/SELinux入门.md) 
+
 
 
 - YUM
@@ -963,6 +967,10 @@ CDH 开始收费了，怎么说。。。
     [Keepalived入门教程.md](Linux/Keepalived/Keepalived入门教程.md) 
 
     [Keepalived配置.md](Linux/Keepalived/Keepalived配置.md) 
+    
+- HAProxy
+
+    [HAProxy安装及入门.md](Linux/HAPorxy/HAProxy安装及入门.md) 
 
    
 
