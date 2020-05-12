@@ -696,10 +696,6 @@ CDH 开始收费了，怎么说。。。
 
 
 
-- PostgrerSQL
-
-
-
 - Redis
 
   [Redis入门教程.md](数据存储/Redis/Redis入门教程.md) 
@@ -707,6 +703,10 @@ CDH 开始收费了，怎么说。。。
   [redis-cli使用方法.md](数据存储/Redis/redis-cli使用方法.md) 
   
   [Redis配置.md](数据存储/Redis/Redis配置.md) 
+  
+  [Redis主从复制.md](数据存储/Redis/Redis主从复制.md) 
+  
+  [Redis数据持久化.md](数据存储/Redis/Redis数据持久化.md) 
 
 
 
