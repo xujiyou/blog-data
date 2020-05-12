@@ -705,6 +705,8 @@ CDH 开始收费了，怎么说。。。
   [Redis入门教程.md](数据存储/Redis/Redis入门教程.md) 
 
   [redis-cli使用方法.md](数据存储/Redis/redis-cli使用方法.md) 
+  
+  [Redis配置.md](数据存储/Redis/Redis配置.md) 
 
 
 
@@ -718,7 +720,7 @@ CDH 开始收费了，怎么说。。。
 
 ## 编程语言
 
-挑几门有前途的学
+挑几门有前途的学一下
 
 - Rust
 
