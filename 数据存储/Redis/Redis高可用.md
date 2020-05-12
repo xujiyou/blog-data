@@ -2,7 +2,7 @@
 
 官方文档：https://redis.io/topics/sentinel
 
-Redis 可以通过 Sentinel 来实现高可用。在使用前，需要先为 redis 配置主从辅助，参考： [Redis主从复制.md](Redis主从复制.md) 
+Redis 可以通过 Sentinel 来实现高可用。在使用前，需要先为 redis 配置主从复制机，参考： [Redis主从复制.md](Redis主从复制.md) 
 
 先获取配置文件，配置文件地址：http://download.redis.io/redis-stable/sentinel.conf
 
@@ -132,4 +132,50 @@ $ redis-cli --cluster create 172.20.20.162:6379 172.20.20.179:6379 172.20.20.145
 检查节点，运行 `redis-cli --cluster check 172.20.20.145:6379` :
 
 ![image-20200512180207966](../../resource/image-20200512180207966.png)
+
+
+
+#### 测试删除一个节点
+
+先查看有哪些 master 节点：
+
+```bash
+$ redis-cli cluster nodes | grep master
+```
+
+然后把其中一个节点弄成故障：
+
+```bash
+$ redis-cli debug segfault
+```
+
+再次查看节点：
+
+```bash
+$ redis-cli cluster nodes
+```
+
+发现如下现象：
+
+![image-20200512201728610](../../resource/image-20200512201728610.png)
+
+发现一个 master 节点失败了，他之前的 slave 节点变成了 master 节点。
+
+再重新启动刚才发生故障的节点：
+
+````bash
+$ redis-cli cluster nodes
+````
+
+再查看节点发现恢复了，只不过角色发生了更换：
+
+![image-20200512202126732](../../resource/image-20200512202126732.png)
+
+
+
+
+
+
+
+
 
