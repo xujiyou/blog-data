@@ -77,6 +77,22 @@ mysql> select user,host from user;
 
 这样外部就可以连接了。
 
+经常数据密码很烦人，这里做一下免密登录：
+
+```
+$ vim ~/.mysql/localhost.cnf
+[client]
+host=127.0.0.1
+user=root
+password=BBDERS1@bbdops.com
+```
+
+然后登录时使用：
+
+```bash
+$ mysql --defaults-file=~/.mysql/localhost.cnf
+```
+
 
 
 

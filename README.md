@@ -691,12 +691,22 @@ CDH 开始收费了，怎么说。。。
    [MySQL最新版本安装.md](数据存储/MySQL/MySQL最新版本安装.md) 
 
    [MySQL离线环境主从搭建.md](数据存储/MySQL/MySQL离线环境主从搭建.md) 
-   
+
    [MySQL-binlog介绍.md](数据存储/MySQL/MySQL-binlog介绍.md) 
-   
+
    [Mysql数据备份.md](数据存储/MySQL/Mysql数据备份.md) 
-   
+
    [mysql-shell的使用.md](数据存储/MySQL/mysql-shell的使用.md) 
+
+   - MySQL 管理
+
+     [MySQL配置.md](数据存储/MySQL/MySQL管理/MySQL配置.md) 
+
+     [MySQL系统库.md](数据存储/MySQL/MySQL管理/MySQL系统库.md) 
+
+     [MySQL日志.md](数据存储/MySQL/MySQL管理/MySQL日志.md) 
+
+     
 
 
 
@@ -891,6 +901,8 @@ CDH 开始收费了，怎么说。。。
  [DNS配置文件.md](Linux/DNS配置文件.md) 
 
  [Linux创建用户并配置免密登录.md](Linux/Linux创建用户并配置免密登录.md) 
+
+[RAID实践.md](Linux/RAID实践.md) 
 
 - Syslog
 
