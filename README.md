@@ -707,6 +707,10 @@ CDH 开始收费了，怎么说。。。
   [Redis主从复制.md](数据存储/Redis/Redis主从复制.md) 
   
   [Redis数据持久化.md](数据存储/Redis/Redis数据持久化.md) 
+  
+  [Redis高可用.md](数据存储/Redis/Redis高可用.md) 
+  
+  [Redis权限控制.md](数据存储/Redis/Redis权限控制.md) 
 
 
 

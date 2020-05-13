@@ -173,7 +173,7 @@ $ redis-cli cluster nodes
 
 
 
-
+更多关于 Redis Cluster 的知识请看：https://redis.io/topics/cluster-spec
 
 
 
