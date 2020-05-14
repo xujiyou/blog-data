@@ -712,6 +712,10 @@ CDH 开始收费了，怎么说。。。
 
    [ZooKeeper使用入门.md](大数据/ZooKeeper/ZooKeeper使用入门.md) 
 
+   [zkCli的使用.md](大数据/ZooKeeper/zkCli的使用.md) 
+   
+   [ZooKeeper之ACL认证.md](大数据/ZooKeeper/ZooKeeper之ACL认证.md) 
+   
    
    
 - HDP
