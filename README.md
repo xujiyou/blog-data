@@ -702,15 +702,17 @@ CDH 开始收费了，怎么说。。。
 
    [YARN架构.md](大数据/YARN/YARN架构.md) 
 
+   
+
 - ZooKeeper
 
    [ZooKeeper介绍.md](大数据/ZooKeeper/ZooKeeper介绍.md) 
 
+   [ZooKeeper高可用部署.md](大数据/ZooKeeper/ZooKeeper高可用部署.md) 
+
    [ZooKeeper使用入门.md](大数据/ZooKeeper/ZooKeeper使用入门.md) 
 
-   [ZooKeeper开发手册.md](大数据/ZooKeeper/ZooKeeper开发手册.md) 
-
-   [ZooKeeper管理手册.md](大数据/ZooKeeper/ZooKeeper管理手册.md) 
+   
    
 - HDP
 
