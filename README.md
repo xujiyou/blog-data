@@ -827,6 +827,16 @@ CDH 开始收费了，怎么说。。。
   [Redis高可用.md](数据存储/Redis/Redis高可用.md) 
   
   [Redis权限控制.md](数据存储/Redis/Redis权限控制.md) 
+  
+  - Redis 使用
+  
+     [Redis订阅发布.md](数据存储/Redis/Redis使用/Redis订阅发布.md) 
+  
+     [Redis分布式锁.md](数据存储/Redis/Redis使用/Redis分布式锁.md) 
+  
+     [Redis键过期.md](数据存储/Redis/Redis使用/Redis键过期.md) 
+  
+     [Redis事务.md](数据存储/Redis/Redis使用/Redis事务.md) 
 
 
 

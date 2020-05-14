@@ -35,4 +35,9 @@ $ sudo systemctl start redis
 $ redis-cli --version
 ```
 
+测试流水线任务：
+
+```bash
+$ (printf "PING\r\nPING\r\nPING\r\n"; sleep 1) | nc localhost 6379
+```
 
