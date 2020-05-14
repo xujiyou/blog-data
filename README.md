@@ -706,7 +706,13 @@ CDH 开始收费了，怎么说。。。
 
      [MySQL日志.md](数据存储/MySQL/MySQL管理/MySQL日志.md) 
 
+     [MySQL数据目录.md](数据存储/MySQL/MySQL管理/MySQL数据目录.md) 
+
+   - InnoDB
+
      
+
+   
 
 
 

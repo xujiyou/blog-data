@@ -133,3 +133,102 @@ mysql> SET PERSIST log_error_services = 'log_filter_internal; log_sink_internal;
 
 关于日志格式，可以查看：https://dev.mysql.com/doc/refman/8.0/en/error-log-format.html
 
+
+
+## 二进制日志
+
+二进制日志，即 binlog，就是记录数据修改的日志。
+
+作用主要有：
+
+- 复制：MySQL Replication在Master端开启binlog，Master把它的二进制日志传递给slaves并回放来达到master-slave数据一致的目的
+- 数据恢复：通过mysqlbinlog工具恢复数据
+- 增量备份
+
+binlog 默认是开启的。可以通过 log_bin='存放binlog的目录' 来设置。
+
+可以通过以下命令查看 binlog 的设置：
+
+```mysql
+mysql> SHOW VARIABLES LIKE '%log_bin%';
++---------------------------------+-----------------------------+
+| Variable_name                   | Value                       |
++---------------------------------+-----------------------------+
+| log_bin                         | ON                          |
+| log_bin_basename                | /mnt/vde/mysql/binlog       |
+| log_bin_index                   | /mnt/vde/mysql/binlog.index |
+| log_bin_trust_function_creators | OFF                         |
+| log_bin_use_v1_row_events       | OFF                         |
+| sql_log_bin                     | ON                          |
++---------------------------------+-----------------------------+
+6 rows in set (0.01 sec)
+```
+
+开启binlog后，会在数据目录（默认）生产binlog.n（具体binlog信息）文件及binlog.index索引文件（记录binlog文件列表）。当binlog日志写满(binlog大小max_binlog_size，默认1G),或者数据库重启才会生产新文件，但是也可通过手工进行切换让其重新生成新的文件（flush logs）；另外，如果正使用大的事务，由于一个事务不能横跨两个文件，因此也可能在binlog文件未满的情况下刷新文件。
+
+通过以下命令查看文件名：
+
+```mysql
+mysql> SHOW BINARY LOGS;
++---------------+-----------+-----------+
+| Log_name      | File_size | Encrypted |
++---------------+-----------+-----------+
+| binlog.000001 |       499 | No        |
+| binlog.000002 |       179 | No        |
+| binlog.000003 |      1633 | No        |
+| binlog.000004 |       179 | No        |
+| binlog.000005 |       200 | No        |
+| binlog.000006 |       179 | No        |
+| binlog.000007 |       179 | No        |
+| binlog.000008 |       179 | No        |
+| binlog.000009 |       156 | No        |
++---------------+-----------+-----------+
+9 rows in set (0.00 sec)
+```
+
+
+
+查看binlog的状态：show master status可查看当前二进制日志文件的状态信息，显示正在写入的二进制文件，及当前position。
+
+```mysql
+mysql> SHOW MASTER STATUS;
++---------------+----------+--------------+------------------+-------------------+
+| File          | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
++---------------+----------+--------------+------------------+-------------------+
+| binlog.000009 |      156 |              |                  |                   |
++---------------+----------+--------------+------------------+-------------------+
+1 row in set (0.00 sec)
+```
+
+可以通过以下命令清空 binlog：
+
+```mysql
+mysql> RESET MASTER;
+```
+
+
+
+默认情况下binlog日志是二进制格式，无法直接查看。可使用两种方式进行查看：
+
+```bash
+$ sudo mysqlbinlog /mnt/vde/mysql/binlog.000001
+```
+
+或者使用 以下方式：
+
+```mysql
+mysql> SHOW BINLOG EVENTS IN 'binlog.000001';
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
