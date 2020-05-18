@@ -355,22 +355,22 @@ Hadoop集群启动过一次之后，就不需要再进行fomat等操作了，另
 
 ```bash
 # 启动 journalnode（fueltank-1，fueltank-2，fueltank-3）
-nohup hdfs journalnode &
+nohup hdfs journalnode > journalnode.log &
 
 # 启动 namenode active（fueltank-1,fueltank-2）
-nohup hdfs namenode  &
+nohup hdfs namenode > namenode.log  &
 
 # 启动ZookeeperFailoverController（fueltank-1，fueltank-2）
-nohup hdfs zkfc  &
+nohup hdfs zkfc > zkfc.log &
 
 # 启动 datanode（fueltank-2，fueltank-3）
-nohup hdfs datanode  &
+nohup hdfs datanode > datanode.log &
 
 # 启动 resourcemanager（fueltank-2，fueltank-3）
-nohup yarn resourcemanager  &
+nohup yarn resourcemanager > resourcemanager.log  &
 
 # 启动 nodemanager（fueltank-2，fueltank-3）
-nohup yarn nodemanager  &
+nohup yarn nodemanager > nodemanager.log &
 
 #启动完成之后使用jps命令查看各节点服务是否正常启动即可
 jps
@@ -418,7 +418,11 @@ Standby NameNode状态查看，访问：http://fueltank-2:50070
 
 在 fueltank-1 上重新执行 `hdfs namenode ` 后，fueltank-1 上的 NameNode 将变为 Standy。
 
+查看 Yarn：
 
+```bash
+$ yarn node -list -all
+```
 
 #### 插入数据
 
@@ -427,6 +431,22 @@ $ echo "hello world" > abc.txt
 $ hdfs dfs -fs hdfs://fueltank-2:9000 -put abc.txt /
 $ hdfs dfs -fs hdfs://fueltank-2:9000 -ls /
 ```
+
+查看 namenode 状态：
+
+```bash
+$ hdfs haadmin -getServiceState nn1
+$ hdfs haadmin -getServiceState nn2
+```
+
+查看 resourcemanager 的状态：
+
+```bash
+$ yarn rmadmin -getServiceState rm1
+$ yarn rmadmin -getServiceState rm2
+```
+
+
 
 
 

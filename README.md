@@ -656,17 +656,27 @@ CDH 开始收费了，怎么说。。。
 
    [Splash使用教程.md](大数据/爬虫/Splash使用教程.md) 
 
+
+
 - Flink
 
    [Flink-Table教程.md](大数据/Flink/Flink-Table教程.md) 
+
+
 
 - Flume
 
    [Flume入门教程.md](大数据/Flume/Flume入门教程.md) 
 
+
+
 - HBase
 
+   [HBase高可用部署.md](大数据/HBase/HBase高可用部署.md) 
+
    [HBase入门教程.md](大数据/HBase/HBase入门教程.md) 
+
+
 
 - HDFS
 
@@ -674,19 +684,29 @@ CDH 开始收费了，怎么说。。。
 
    [HDFS常用操作.md](大数据/HDFS/HDFS常用操作.md) 
 
+
+
 - Hive
+
+   [Hive部署.md](大数据/Hive/Hive部署.md) 
 
    [Java连接Hive.md](大数据/Hive/Java连接Hive.md) 
 
    [Hive错误处理.md](大数据/Hive/Hive错误处理.md) 
 
+
+
 - Kafka
 
    [Kafka快速入门.md](大数据/Kafka/Kafka快速入门.md) 
 
+
+
 - Oozie
 
    [Oozie入门.md](大数据/Oozie/Oozie入门.md) 
+
+
 
 - Spark
 
@@ -697,6 +717,8 @@ CDH 开始收费了，怎么说。。。
    [Spark-Streaming学习指南.md](大数据/Spark/Spark-Streaming学习指南.md) 
 
    [Spark SQL入门教程.md](大数据/Spark/Spark-SQL入门教程.md) 
+
+
 
 - YARN
 
@@ -725,6 +747,8 @@ CDH 开始收费了，怎么说。。。
 - HDP
 
    [HDP离线安装.md](大数据/HDP/HDP离线安装.md) 
+
+
 
 - CDH
 
@@ -783,6 +807,10 @@ CDH 开始收费了，怎么说。。。
    - Ceph文件系统
    
      [Ceph文件系统入门.md](数据存储/Ceph/Ceph文件系统/Ceph文件系统入门.md) 
+
+
+
+- GlusterFS
 
 
 
