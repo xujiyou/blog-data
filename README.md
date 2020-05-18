@@ -698,6 +698,8 @@ CDH 开始收费了，怎么说。。。
 
 - Kafka
 
+   [Kafka高可用部署.md](大数据/Kafka/Kafka高可用部署.md) 
+
    [Kafka快速入门.md](大数据/Kafka/Kafka快速入门.md) 
 
 
@@ -709,6 +711,8 @@ CDH 开始收费了，怎么说。。。
 
 
 - Spark
+
+   [Spark高可用部署.md](大数据/Spark/Spark高可用部署.md) 
 
    [Spark入门教程.md](大数据/Spark/Spark入门教程.md) 
 

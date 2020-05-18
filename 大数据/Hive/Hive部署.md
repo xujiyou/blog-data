@@ -217,6 +217,14 @@ schemaTool completed
 $ hive
 ```
 
+这里直接启动一个客户端即可，这条命令也相当于：
+
+```bash
+$ hive --service cli
+```
+
+
+
 
 
 ## 写入数据
