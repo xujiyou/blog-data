@@ -670,6 +670,10 @@ CDH 开始收费了，怎么说。。。
 
 - HDFS
 
+   [Hadoop高可用部署.md](大数据/HDFS/Hadoop高可用部署.md) 
+
+   [HDFS常用操作.md](大数据/HDFS/HDFS常用操作.md) 
+
 - Hive
 
    [Java连接Hive.md](大数据/Hive/Java连接Hive.md) 
