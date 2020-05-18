@@ -650,6 +650,17 @@
 
 CDH 开始收费了，怎么说。。。
 
+不用 CDH 和 HDP，自己动手搭建一个高可用的大数据集群，路线如下：
+
+1. [ZooKeeper高可用部署.md](大数据/ZooKeeper/ZooKeeper高可用部署.md) 
+2. [Hadoop高可用部署.md](大数据/HDFS/Hadoop高可用部署.md) 
+3. [HBase高可用部署.md](大数据/HBase/HBase高可用部署.md) 
+4. [Hive部署.md](大数据/Hive/Hive部署.md) 
+5. [Spark高可用部署.md](大数据/Spark/Spark高可用部署.md) 
+6. [Kafka高可用部署.md](大数据/Kafka/Kafka高可用部署.md) 
+
+下面按组件来学习。
+
 - 爬虫
 
    [Scrapy入门教程.md](大数据/爬虫/Scrapy入门教程.md) 
