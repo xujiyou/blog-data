@@ -658,6 +658,7 @@ CDH 开始收费了，怎么说。。。
 4. [Hive部署.md](大数据/Hive/Hive部署.md) 
 5. [Spark高可用部署.md](大数据/Spark/Spark高可用部署.md) 
 6. [Kafka高可用部署.md](大数据/Kafka/Kafka高可用部署.md) 
+7. [Flink高可用部署.md](大数据/Flink/Flink高可用部署.md) 
 
 下面按组件来学习。
 
@@ -670,6 +671,8 @@ CDH 开始收费了，怎么说。。。
 
 
 - Flink
+
+   [Flink高可用部署.md](大数据/Flink/Flink高可用部署.md) 
 
    [Flink-Table教程.md](大数据/Flink/Flink-Table教程.md) 
 
