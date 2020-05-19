@@ -832,6 +832,16 @@ CDH 开始收费了，怎么说。。。
 
 
 
+- MinIO
+
+  [MinIO单机版启动.md](数据存储/MinIO/MinIO单机版启动.md) 
+
+  [MinIO客户端的使用.md](数据存储/MinIO/MinIO客户端的使用.md) 
+
+  [MinIO备份定期删除脚本.md](数据存储/MinIO/MinIO备份定期删除脚本.md) 
+
+
+
 - MongoDB
 
    [MongoDB高可用部署.md](数据存储/MongoDB/MongoDB高可用部署.md) 
