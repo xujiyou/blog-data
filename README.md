@@ -697,6 +697,10 @@ CDH 开始收费了，怎么说。。。
    [Hadoop高可用部署.md](大数据/HDFS/Hadoop高可用部署.md) 
 
    [HDFS常用操作.md](大数据/HDFS/HDFS常用操作.md) 
+   
+   [HDFS之web-ui.md](大数据/HDFS/HDFS之web-ui.md) 
+   
+   [HDFS原理详解.md](大数据/HDFS/HDFS原理详解.md) 
 
 
 

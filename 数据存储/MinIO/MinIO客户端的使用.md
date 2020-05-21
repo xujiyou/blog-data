@@ -4,7 +4,7 @@ MinIO 的客户端是一个名为 mc 的二进制文件。
 
 下面是一些常用操作。
 
-首先配置 mc：
+首先配置 mc，在每一台需要备份的机子上操作：
 
 ```bash
 $ mc config host add myminio http://192.168.1.18:9000 bbders bbders@bbdops.com

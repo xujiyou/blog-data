@@ -24,3 +24,11 @@ $ hdfs dfs -put file /user/abc/
 $ hadoop fs -mv < hdfs file >  < hdfs file >
 ```
 
+
+
+## 修改 HDFS 目录权限
+
+```
+su - hdfs -s /bin/bash -c "hadoop fs -chmod 755 /user/spark"
+```
+
