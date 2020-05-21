@@ -1049,6 +1049,8 @@ CDH 开始收费了，怎么说。。。
 - Git
 
    [git命令详解.md](DevOps/Git/git命令详解.md) 
+   
+   [详解.git目录.md](DevOps/Git/详解.git目录.md) 
 
 
 
