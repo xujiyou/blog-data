@@ -689,6 +689,14 @@ CDH 开始收费了，怎么说。。。
    [HBase高可用部署.md](大数据/HBase/HBase高可用部署.md) 
 
    [HBase入门教程.md](大数据/HBase/HBase入门教程.md) 
+   
+   [HBase架构.md](大数据/HBase/HBase架构.md) 
+   
+   - HBase配置
+   
+     [HBase配置概述.md](大数据/HBase/HBase配置/HBase配置概述.md) 
+   
+     [HBase默认配置.md](大数据/HBase/HBase配置/HBase默认配置.md) 
 
 
 
@@ -719,6 +727,12 @@ CDH 开始收费了，怎么说。。。
    [Kafka高可用部署.md](大数据/Kafka/Kafka高可用部署.md) 
 
    [Kafka快速入门.md](大数据/Kafka/Kafka快速入门.md) 
+   
+   [Kafka主题.md](大数据/Kafka/Kafka主题.md) 
+   
+   [Kafka生产者.md](大数据/Kafka/Kafka生产者.md) 
+   
+   [Kafka消费者.md](大数据/Kafka/Kafka消费者.md) 
 
 
 
@@ -765,7 +779,13 @@ CDH 开始收费了，怎么说。。。
    [ZooKeeper之ACL认证.md](大数据/ZooKeeper/ZooKeeper之ACL认证.md) 
    
    
-   
+
+- Kerberos
+
+- Sqoop
+
+
+
 - HDP
 
    [HDP离线安装.md](大数据/HDP/HDP离线安装.md) 

@@ -1,6 +1,10 @@
 # HBase 入门教程
 
----
+HBase 的官方文档：https://hbase.apache.org/book.html
+
+网上也有官方文档的中文版，版本还是比较新的，比如：https://www.docs4dev.com/docs/zh/apache-hbase/2.1/reference/book.html
+
+
 
 HBase 是一种建立在 HDFS 之上的数据库，传说中的列数据库。列数据库最适合干的就是批量数据处理，和实时查询。而传统的关系型数据库则适合处理小批量的数据，比如对一行的增删改查。
 
@@ -9,9 +13,78 @@ HBase 在建表时，必须要指定表名和列族。下面是建表语句：
 ```shell
 $ hbase shell
 > create 'user', 'body data', 'login data'
+> create 'foo', {NAME => 'bar1', VERSIONS => 2}, {NAME => 'bar2', VERSIONS => 2}
 ```
 
-创建一个 user 表，user 表包含 'body data' 和 'login data' 两个列族
+这里，列簇是必须要指定的，并且后续是不可以改变的。
+
+创建一个 user 表，user 表包含 'body data' 和 'login data' 两个列簇。
+
+创建一个 foo 表，foo 表包含 'bar1' 和 'bar2' 两个列簇，并且版本号均为 2
+
+列出表：
+
+```bash
+> list
+```
+
+查看表结构：
+
+```bash
+> describe 'foo'
+```
+
+插入数据 ，语法为：
+
+```
+put <table>,<rowkey>,<family:column>,<value>,<timestamp>
+```
+
+实际插入：
+
+```bash
+> put 'foo', 'row1', 'bar1:oneKey', 'oneValue'
+> put 'foo', 'row1', 'bar2:twoKey', 'twoValue'
+```
+
+每次只能往一个列簇中插入。
+
+查询数据，语法：
+
+```
+get <table>,<rowkey>,[<family:column>,....]
+```
+
+实际查询：
+
+```bash
+> get 'foo', 'row1', 'bar1'
+> get 'foo', 'row1', 'bar1:oneKey'
+> get 'foo', 'row1', 'bar1:oneKey', 'bar2:twoKey'
+```
+
+扫描表，限制为 5 行：
+
+```bash
+> scan 'foo', {LIMIT => 5}
+```
+
+统计行数：
+
+```bash
+> count 'foo'
+```
+
+删除：
+
+```bash
+> delete 'foo', 'row1', 'bar1:oneKey'
+> delete 'foo', 'row1', 'bar1'
+```
+
+删除命令并不会立即删除数据，而是把数据标记为删除，真正的物理删除会在压缩过程中删除。
+
+
 
 用 Java 创建表的代码如下：
 

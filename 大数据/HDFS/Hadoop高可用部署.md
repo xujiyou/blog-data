@@ -85,7 +85,7 @@ vim $HADOOP_HOME/etc/hadoop/core-site.xml
 <configuration>
   <property>
     <name>fs.defaultFS</name>
-    <value>hdfs://hdfscluster</value>
+    <value>hdfs://fueltank-1:9000</value>
   </property>
   <property>
     <name>dfs.journalnode.edits.dir</name>
