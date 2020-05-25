@@ -34,9 +34,7 @@ $ sudo yum install -y yum-utils \
 
 ```bash
 $ sudo rm /etc/yum.repos.d/docker-ce.repo
-$ sudo yum-config-manager \
-    --add-repo \
-    https://download.docker.com/linux/centos/docker-ce.repo
+$ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 $ sudo yum install docker-ce docker-ce-cli containerd.io -y
 ```
 

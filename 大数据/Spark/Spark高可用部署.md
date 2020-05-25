@@ -27,11 +27,38 @@ $ mv conf/spark-env.sh.template conf/spark-env.sh
 export SPARK_DAEMON_JAVA_OPTS="-Dspark.deploy.recoveryMode=ZOOKEEPER  -Dspark.deploy.zookeeper.url=fueltank-1:2181,fueltank-2:2181,fueltank-3:2181  -Dspark.deploy.zookeeper.dir=/spark"
 ```
 
+修改 `/etc/profile` ，添加以下内容：
+
+```bash
+export SPARK_HOME=/opt/spark
+export PATH=$PATH:$SPARK_HOME/bin
+```
+
+使之生效：
+
+```bash
+$ source /etc/profile
+```
 
 
-## 启动一个单点
 
-启动 master：
+## 启动一个 Master 和多个 Worker
+
+设置 Slave 即 Worker 所在的节点：
+
+```bash
+$ mv conf/slaves.template conf/slaves
+```
+
+为 `conf/slaves` 添加以下内容：
+
+```
+fueltank-1
+fueltank-2
+fueltank-3
+```
+
+启动一个 master 和多个 worker：
 
 ```bash
 $ ./sbin/start-all.sh 
@@ -104,7 +131,7 @@ $ ./sbin/start-master.sh
 $ MASTER=spark://fueltank-1.cloud.bbdops.com:7077 ./bin/spark-shell
 ```
 
-这时候再从第一台上停掉 master：
+再从第一台上停掉 master：
 
 ```
 ./sbin/stop-master.sh 
@@ -124,15 +151,77 @@ $ MASTER=spark://fueltank-1.cloud.bbdops.com:7077 ./bin/spark-shell
 
 
 
-## 高可用部署
+## 高可用部署总结
 
-通过以上实践。可以使用 ZooKeeper 配置来保证 Master 的高可用。然后在启动 Slave ，即启动 Worker 节点时，使用以下方式启动：
+通过以上实践。可以使用 ZooKeeper 配置来保证 Master 的高可用。然后在启动 Slave ，即启动 Worker 节点时，可以使用以下方式启动：
 
 ```bash
 $ ./sbin/start-slave.sh spark://fueltank-2.cloud.bbdops.com:7077
 ```
 
 这样，就可以把 worker 节点连接到 master 了，即使这个master 挂了，这些 worker 节点也会连接到其他 master。这样就实现了高可用！！！
+
+
+
+## 跑一个 Demo
+
+代码如下：
+
+```java
+package com.bbd.spark;
+
+import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.Function;
+
+public class Main {
+
+    public static void main(String[] args) {
+        String logFile = "/user/admin/bbd.txt";
+        SparkConf conf = new SparkConf().setAppName("Simple Application");
+        JavaSparkContext sc = new JavaSparkContext(conf);
+        JavaRDD<String> logData = sc.textFile(logFile).cache();
+
+        long numAs = logData.filter((Function<String, Boolean>) s -> s.contains("a")).count();
+        long numBs = logData.filter((Function<String, Boolean>) s -> s.contains("b")).count();
+
+        System.out.println("Lines with a: " + numAs + ", lines with b: " + numBs);
+    }
+}
+```
+
+使用 Gradle 打成 jar 包时，不必指定主类，也不必把依赖都打入 jar 包。
+
+这里的 logFile ，如果使用的是 master 是 local，则从本地文件系统里找，如果 master 是 spark，则会从 hdfs 里找。
+
+使用 Gradle 将代码打成 Jar 包，然后丢到服务器中，然后执行：
+
+```bash
+$ spark-submit --class com.bbd.spark.Main --master spark://fueltank-1:7077 --deploy-mode cluster /home/admin/spark-app/spark-demo-1.0-SNAPSHOT.jar
+```
+
+如果是多个 master 可以这样：
+
+```bash
+$ spark-submit --class com.bbd.spark.Main --master spark://fueltank-1:7077,fueltank-2:7077 --deploy-mode cluster /home/admin/spark-app/spark-demo-1.0-SNAPSHOT.jar
+```
+
+这时会出现一个问题，必须把这个 jar 包放到所有 worker 节点下面才行，否则会报找不到 jar 包。
+
+为了解决这一问题，可以把 jar 包放到 HDFS：
+
+```bash
+$ hdfs dfs -put spark-app/ /user/admin
+```
+
+然后执行：
+
+```bash
+$ spark-submit --class com.bbd.spark.Main --master spark://fueltank-1:7077,fueltank-2:7077 --deploy-mode cluster hdfs://fueltank-1:9000/user/admin/spark-app/spark-demo-1.0-SNAPSHOT.jar
+```
+
+
 
 
 

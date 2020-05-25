@@ -126,6 +126,8 @@ object HomeSort {
 
 每个 Spark 程序都要初始化一个 SparkContext 才能使用，Master 是 Spark 的运行模式，这里是 Local ，至于后面的 2 ，则是 Spark 用到的线程数，每种运行模式都有一些参数，后面再学习 Spark 的运行模式。
 
+还有其他 master ，可见：https://spark.apache.org/docs/latest/submitting-applications.html#master-urls
+
 ## 在 Hadoop 集群中运行 Spark 程序
 
 首先，数据是放在 HDFS 中的，Spark 会自动识别 HDFS 的路径，修改代码如下：
