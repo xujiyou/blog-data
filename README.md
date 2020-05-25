@@ -1118,6 +1118,8 @@ CDH 开始收费了，怎么说。。。
 
 [RAID实践.md](Linux/RAID实践.md) 
 
+[rc.local文件.md](Linux/rc.local文件.md) 
+
 - Syslog
 
    [syslog-ng使用教程.md](Linux/syslog/syslog-ng使用教程.md) 
