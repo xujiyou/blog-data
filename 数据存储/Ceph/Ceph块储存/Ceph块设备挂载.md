@@ -87,6 +87,26 @@ $ rbd device list
 
 
 
+## 修改配置
+
+上面为每一个块设备都禁用特性，显然不科学，这里需要修改配置。
+
+集群使用的是 ceph-deploy 部署的，修改部署的时候生成的 ceph.conf，添加如下语句
+
+```
+rbd_default_features = 1
+```
+
+然后运行命令：
+
+```bash
+$ sudo ceph-deploy --overwrite-conf admin fueltank-1 fueltank-2 fueltank-3
+```
+
+这句命令会将配置发布到每一个节点，并使之生效。
+
+
+
 ## 挂载到文件系统
 
 执行命令，格式化文件系统：

@@ -12,8 +12,8 @@ $ vim /opt/minio/run.sh
 
 ```bash
 #!/bin/bash
-export MINIO_ACCESS_KEY=Minio
-export MINIO_SECRET_KEY=Test123456
+export MINIO_ACCESS_KEY=bbders
+export MINIO_SECRET_KEY=bbders@bbdops.com
 /usr/bin/minio server /store/minio
 ```
 

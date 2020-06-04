@@ -8,8 +8,6 @@ Operator Hub：https://operatorhub.io/
 
 官方的入门教程：https://github.com/operator-framework/getting-started
 
-需要写 Golang 代码，要了亲命了。。。
-
 关于 Helm 和 Operator 的对比：https://blog.51cto.com/12462495/2084517
 
 下面把我的一次操作过程记录一下。
@@ -90,7 +88,7 @@ $ operator-sdk add controller --api-version=cache.example.com/v1alpha1 --kind=Me
 先部署 CRD：
 
 ```bash
-$ $ kubectl create -f deploy/crds/cache.example.com_memcacheds_crd.yaml
+$ kubectl create -f deploy/crds/cache.example.com_memcacheds_crd.yaml
 ```
 
 部署完 CRD 后，可以打 Docker 镜像，在上传，再部署另外几个 yaml 文件：(这步我没操作)

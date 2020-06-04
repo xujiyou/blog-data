@@ -57,6 +57,7 @@ root 用户之间要配置免密，过程省略
 
 ```bash
 $ sudo ceph-deploy new fueltank-1 fueltank-2 fueltank-3 # 会在当前目录生成三个配置文件
+# 在 ceph.conf 中添加 rbd_default_features = 1
 $ sudo yum -y install ceph ceph-radosgw
 $ sudo ceph-deploy install --no-adjust-repos fueltank-1 fueltank-2 fueltank-3
 ```
@@ -70,7 +71,7 @@ $ systemctl status ceph-crash
 然后：
 
 ```bash
-$ sudo ceph-deploy mon create-initial
+$ sudo ceph-deploy --overwrite-conf mon create-initial
 ```
 
 这步完成后，会在当前目录生成以下文件：

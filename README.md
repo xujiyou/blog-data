@@ -44,6 +44,8 @@
 
    [kube-controller-manager内置的控制器.md](云原生/Kubernetes/kube-controller-manager内置的控制器.md) 
 
+   [批量删除Evicted状态的pod.md](云原生/Kubernetes/批量删除Evicted状态的pod.md) 
+
    - Kubernetes 配置系列
 
       [kube-apiserver配置详解.md](云原生/Kubernetes/Kubernetes配置系列/kube-apiserver配置详解.md) 
@@ -97,9 +99,9 @@
          [CRI-API.md](云原生/Kubernetes/Kubernetes扩展机制/CRI/CRI-API.md) 
 
       - CSI
-
+   
          [CSI工作方式.md](云原生/Kubernetes/Kubernetes扩展机制/CSI/CSI工作方式.md) 
-      
+   
       - Operator
 
          [Kubernetes-Operator教程.md](云原生/Kubernetes/Kubernetes扩展机制/Operator/Kubernetes-Operator教程.md) 
@@ -177,7 +179,7 @@
       [使用扩展进行并行处理.md](云原生/Kubernetes/动手操作/使用扩展进行并行处理.md) 
 
       [使用ConfigMap来配置Redis.md](云原生/Kubernetes/动手操作/使用ConfigMap来配置Redis.md) 
-
+   
       [使用ConfigMap配置Pod.md](云原生/Kubernetes/动手操作/使用ConfigMap配置Pod.md) 
    
       [使用CronJob运行自动化任务.md](云原生/Kubernetes/动手操作/使用CronJob运行自动化任务.md) 
@@ -832,8 +834,12 @@ CDH 开始收费了，怎么说。。。
 
    [ceph-deploy安装集群.md](数据存储/Ceph/ceph-deploy安装集群.md) 
 
-   - Ceph对象储存
+   [ceph手动部署.md](数据存储/Ceph/ceph手动部署.md) 
 
+   [ceph注意事项.md](数据存储/Ceph/ceph注意事项.md) 
+   
+   - Ceph对象储存
+   
      [用户管理.md](数据存储/Ceph/Ceph对象储存/用户管理.md) 
      
      [S3-API.md](数据存储/Ceph/Ceph对象储存/S3-API.md) 
@@ -867,6 +873,10 @@ CDH 开始收费了，怎么说。。。
   [MinIO客户端的使用.md](数据存储/MinIO/MinIO客户端的使用.md) 
 
   [MinIO备份定期删除脚本.md](数据存储/MinIO/MinIO备份定期删除脚本.md) 
+  
+  [MySQL定期备份并传输到MinIO脚本.md](数据存储/MinIO/MySQL定期备份并传输到MinIO脚本.md) 
+  
+  [MinIO高可用部署.md](数据存储/MinIO/MinIO高可用部署.md) 
 
 
 
@@ -1163,6 +1173,8 @@ CDH 开始收费了，怎么说。。。
     [screen命令详解.md](Linux/命令详解/screen命令详解.md) 
     
     [demsg命令.md](Linux/命令详解/demsg命令.md) 
+    
+    [xargs命令.md](Linux/命令详解/xargs命令.md) 
 
 
 
