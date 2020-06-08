@@ -236,5 +236,82 @@ $ sudo rbd ls kubernetes
 
 
 
+## 错误
+
+创建 PVC 时没问题，但是在使用时会有一个错误，详情见  [Ceph块设备挂载.md](Ceph块设备挂载.md) 
+
+
+
+## 查看块设备内容
+
+有个地方不理解，PV 的回收策略是 DELETE，但是当块 PVC 被删除时，PV 并不会自动删除，而是变成了 Released 状态，再等一段时间，看看会不会自动删除。
+
+PV 不会自动删除，同理，块设备也不会被删除，有块设备在，就可以查看块设备里边的内容！！！
+
+查看块设备：
+
+```bash
+$ sudo rbd ls kubernetes
+```
+
+映射块设备为本地磁盘：
+
+```bash
+$ sudo rbd device map kubernetes/csi-vol-49b1dcdf-a6f8-11ea-bf90-0a580a2a021d
+```
+
+查看映射到本地的设备列表：
+
+```bash
+$ sudo rbd device list
+$ sudo fdisk -l
+```
+
+挂载到文件系统：
+
+```bash
+$ sudo mkdir /mnt/rbd1
+$ sudo mount /dev/rbd1 /mnt/rbd1
+```
+
+这样就可以查看块设备里面的内容了：
+
+```bash
+$ ls /mnt/rbd1
+```
+
+查看块设备的文件系统：
+
+```bash
+$ mount | grep /dev/rbd1
+$ df -hT
+```
+
+取消挂载：
+
+```bash
+$ sudo umount /dev/rbd1
+```
+
+查看所有磁盘的挂载结果：
+
+```bash
+$ sudo lsblk
+```
+
+取消映射：
+
+```bash
+$ sudo rbd device unmap kubernetes/csi-vol-49b1dcdf-a6f8-11ea-bf90-0a580a2a021d
+```
+
+取消挂载到本地文件系统，并取消映射后，Kubernetes 就可以继续使用这个块设备了。
+
+
+
+
+
+
+
 
 

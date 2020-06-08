@@ -214,3 +214,22 @@ example-memcached   4/4     4            4           29m
 
 
 OK，至此，创建 Operator 的套路就掌握了，剩下的就是研究 golang 代码怎么写了。
+
+
+
+## 关于 operator 的命名空间
+
+https://access.redhat.com/documentation/zh-cn/openshift_container_platform/4.2/html/operators/operator-sdk
+
+默认只会监听 operator 所在的命名空间，可以通过在 main.go 中设置：
+
+```go
+  options := manager.Options{
+		Namespace:          "",
+		MetricsBindAddress: fmt.Sprintf("%s:%d", metricsHost, metricsPort),
+	}
+
+	mgr, err := manager.New(cfg, options)
+```
+
+来监听所有命名空间。

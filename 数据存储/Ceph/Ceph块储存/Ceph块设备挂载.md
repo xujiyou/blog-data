@@ -7,7 +7,7 @@
 
 按照  [Ceph块储存入门.md](Ceph块储存入门.md)  中的步骤创建一个块设备。
 
-挂载：
+映射：
 
 ```bash
 $ sudo rbd device map one/bar
@@ -67,19 +67,19 @@ rbd image 'bar':
 $ sudo rbd feature disable one/bar exclusive-lock object-map fast-diff deep-flatten
 ```
 
-再次挂载，就成功了：
+再次映射，就成功了：
 
 ```bash
 $ sudo rbd device map one/bar
 ```
 
-查看挂载的块设备：
+查看映射到本地的块设备：
 
 ```bash
 $ sudo fdisk -l
 ```
 
-使用 rbd 查看挂载的设备：
+使用 rbd 查看已映射的设备：
 
 ```bash
 $ rbd device list
@@ -109,7 +109,7 @@ $ sudo ceph-deploy --overwrite-conf admin fueltank-1 fueltank-2 fueltank-3
 
 ## 挂载到文件系统
 
-执行命令，格式化文件系统：
+执行命令，格式化磁盘：
 
 ```bash
 $ sudo mkfs.ext4 -m0 /dev/rbd0
@@ -130,7 +130,7 @@ $ sudo mount /dev/rbd0 /mnt/rbd0
 one/bar    id=admin,keyring=/etc/ceph/ceph.client.admin.keyring
 ```
 
-在 中，加入一下内容：
+在/etc/fstab中，加入一下内容：
 
 ```
 /dev/rbd0 /mnt/rbd0 ext4 noauto 0 0

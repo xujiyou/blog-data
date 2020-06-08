@@ -19,13 +19,13 @@ $ sudo mv kafka_2.12-2.5.0 /opt/kafka
 broker.id=0
 listeners=PLAINTEXT://fueltank-1:9092
 advertised.listeners=PLAINTEXT://fueltank-1:9092
-log.dirs=/mnt/vde/kafka/log
+log.dirs=/mnt/vde/kafka
 zookeeper.connect=fueltank-1:2181,fueltank-2:2181,fueltank-3:2181
 ```
 
 按照这个套路再为其他两台修改配置。
 
-创建日志目录：
+创建数据目录：
 
 ```bash
 $ sudo mkdir -p /mnt/vde/kafka/log
