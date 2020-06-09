@@ -18,3 +18,20 @@ $ vim ~/.docker/config.json
 "credStore": ""
 ```
 
+
+
+## 证书错误
+
+由于是内网镜像库，证书是自签的，所以本地会出x509错误：
+
+```
+x509: certificate signed by unknown authority
+```
+
+可以修改 `/etc/docker/daemon.json`，加入以下内容：
+
+```
+"insecure-registries": ["registry.prod.bbdops.com"]
+```
+
+重启docker后就没有错误了！！！

@@ -74,6 +74,8 @@ data:
 
 其中的 monitors 的地址是我本地的地址，clusterID 是通过 `ceph status` 获取的！
 
+注意，config.json 要是符合json格式，特别是 monitors 最后一项没有逗号！！！
+
 创建：
 
 ```bash

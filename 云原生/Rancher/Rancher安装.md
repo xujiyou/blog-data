@@ -90,7 +90,7 @@ $ #sudo docker rmi --force $(sudo docker images -q) # 删除全部镜像,可不�
 $ sudo usermod -aG docker admin
 ```
 
-这里有个坑：更改用户组之后，需要重启服务器，或者重新登录账号，才会生效！！！！
+这里有个坑：更改用户组之后，需要命令行，才会生效！！！！
 
 然后需要每台服务器之间配置免密登录，包括自己登录自己。
 
@@ -539,9 +539,9 @@ kubectl -n cattle-system patch  deployments cattle-cluster-agent --patch '{
                     {
                         "hostnames":
                         [
-                            "fueltank.bbdops.com"
+                            "drift.bbdops.com"
                         ],
-                            "ip": "172.20.20.179"
+                            "ip": "172.20.20.224"
                     }
                 ]
             }
@@ -557,9 +557,9 @@ kubectl -n cattle-system patch  daemonsets cattle-node-agent --patch '{
                  {
                      "hostnames":
                         [
-                            "fueltank.bbdops.com"
+                            "drift.bbdops.com"
                         ],
-                            "ip": "172.20.20.179"
+                            "ip": "172.20.20.224"
                  }
              ]
          }

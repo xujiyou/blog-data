@@ -250,3 +250,29 @@ $ sudo ceph-deploy purgedata fueltank-1 fueltank-2 fueltank-3
 $ sudo ceph-deploy forgetkeys
 ```
 
+
+
+---
+
+
+
+## 错误记录
+
+有一个错误说：
+
+````
+Module 'restful' has failed dependency: No module named 'werkzeug'
+````
+
+解决方案，在各个节点下执行：
+
+```
+pip3 install werkzeug
+```
+
+然后重启各节点的 ceph-mon 和 ceph-mgr
+
+
+
+
+

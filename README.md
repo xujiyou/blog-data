@@ -600,6 +600,10 @@
 
    [Prometheus架构.md](云原生/Prometheus/Prometheus架构.md) 
 
+   - Prometheus-Operator
+
+     [创建ServiceMonitor.md](云原生/Prometheus/Prometheus-operator/创建ServiceMonitor.md) 
+
    
 
 - Grafana
