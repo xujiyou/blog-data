@@ -322,7 +322,92 @@ $ operator-sdk add controller --api-version=app.drift.com/v1alpha1 --kind=DriftI
 $ kubectl apply -f deploy/crds/app.drift.com_driftinits_crd.yaml 
 ```
 
+```yaml
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: driftinits.app.drift.com
+spec:
+  group: app.drift.com
+  names:
+    kind: DriftInit
+    listKind: DriftInitList
+    plural: driftinits
+    singular: driftinit
+  scope: Cluster
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            properties:
+              active:
+                format: int32
+                type: integer
+              complete:
+                type: boolean
+              components:
+                items:
+                  type: string
+                type: array
+              currentPath:
+                type: string
+              namespace:
+                type: string
+              pvc:
+                additionalProperties:
+                  properties:
+                    storage:
+                      type: string
+                    storageClass:
+                      type: string
+                  required:
+                  - storage
+                  - storageClass
+                  type: object
+                type: object
+            required:
+            - active
+            - complete
+            - components
+            - currentPath
+            - namespace
+            type: object
+          status:
+            type: object
+        type: object
+    served: true
+    storage: true
+```
 
+
+
+
+
+## 部署
+
+```
+helm install my-drift ./drift --namespace drift --set ingress.host=drift.test.bbdops.com
+```
+
+测试：
+
+```
+kafka-topics.sh --zookeeper zookeeper-cluster-0.zookeeper-cluster-headless-service:2181/kafka --create --topic one --replication-factor 3 --partitions 3
+```
 
 
 
