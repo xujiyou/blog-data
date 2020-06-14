@@ -270,6 +270,8 @@
 
   [etcd中的各种版本.md](云原生/Etcd/etcd中的各种版本.md) 
 
+  [etcd性能调优.md](云原生/Etcd/etcd性能调优.md) 
+
   - etch - API
 
     [Etcd-Api(一)-介绍.md](云原生/Etcd/etcd-API/Etcd-Api(一)-介绍.md) 
@@ -283,7 +285,7 @@
     [Etcd-API(五)-Cluster.md](云原生/Etcd/etcd-API/Etcd-API(五)-Cluster.md) 
 
     [Etcd-API(六)-Maintenance.md](云原生/Etcd/etcd-API/Etcd-API(六)-Maintenance.md) 
-
+  
     [Etcd-API(七)-Auth.md](云原生/Etcd/etcd-API/Etcd-API(七)-Auth.md) 
 
 
@@ -598,9 +600,13 @@
 
    [Prometheus架构.md](云原生/Prometheus/Prometheus架构.md) 
 
-   - Prometheus-Operator
+   - Prometheus Operator
 
+     [Prometheus Operator资源对象.md](云原生/Prometheus/Prometheus-operator/prometheus-operator资源对象.md) 
+     
      [创建ServiceMonitor.md](云原生/Prometheus/Prometheus-operator/创建ServiceMonitor.md) 
+     
+     [Kubernetes集群监控.md](云原生/Prometheus/Prometheus-operator/Kubernetes集群监控.md) 
 
    
 

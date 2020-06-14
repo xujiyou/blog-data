@@ -35,3 +35,12 @@ x509: certificate signed by unknown authority
 ```
 
 重启docker后就没有错误了！！！
+
+
+
+## 删除docker 日志
+
+在linux上，容器日志一般存放在`/var/lib/docker/containers/container_id/`下面， 以json.log结尾的文件（业务日志）很大。
+
+
+
