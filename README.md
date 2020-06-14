@@ -1140,6 +1140,8 @@ CDH 开始收费了，怎么说。。。
 
 [rc.local文件.md](Linux/rc.local文件.md) 
 
+[LVM实践.md](Linux/LVM实践.md) 
+
 - Syslog
 
    [syslog-ng使用教程.md](Linux/syslog/syslog-ng使用教程.md) 
