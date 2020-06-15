@@ -19,7 +19,7 @@ $ sudo yum localinstall mysql80-community-release-el7-3.noarch.rpm
 然后安装 MySQL：
 
 ```bash
-$ sudo yum install mysql-community-server
+$ sudo yum install mysql-community-server -y
 ```
 
 此过程将安装以下包：
@@ -54,8 +54,7 @@ mysql> ALTER USER root@localhost identified by 'BBDERS1@bbdops.com';
 查看用户：
 
 ```mysql
-mysql> use mysql;
-mysql> select user,host from user;
+mysql> select user,host from mysql.user;
 +------------------+-----------+
 | user             | host      |
 +------------------+-----------+

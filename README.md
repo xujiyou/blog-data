@@ -930,8 +930,14 @@ CDH 开始收费了，怎么说。。。
 
    - InnoDB
 
-     
+   - 高可用MySQL
 
+     [MySQL复制.md](数据存储/MySQL/高可用MySQL/MySQL复制.md) 
+     
+     
+     
+     
+   
    
 
 
