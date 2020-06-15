@@ -10,6 +10,108 @@ Prometheus 可以在运行期间重新加载配置，如果新配置有语法错
 
 可以通过给 Prometheus 发送 SIGHUP 信号来重加载配置，也可以通过 API ：POST /-/reload（前提是 --web.enable-lifecycle 开启）来重加载配置文件。
 
+## 命令行参数
+
+#### --config.file="prometheus.yml"
+
+配置文件路径
+
+#### --web.listen-address="0.0.0.0:9090"
+
+监听的地址
+
+#### --web.read-timeout=5m
+
+读取的超时时间
+
+#### --web.max-connections=512
+
+最大连接数
+
+#### --web.external-url=<URL>
+
+普罗米修斯外部可访问的URL（例如，如果普罗米修斯是通过反向代理服务的）。用于生成返回到普罗米修斯自身的相对和绝对链接。如果URL有一个路径部分，它将用于前缀Prometheus服务的所有HTTP端点。如果省略，相关的URL组件将自动派生
+
+#### --web.route-prefix=<path>
+
+Prefix for the internal routes of web endpoints. Defaults to path of --web.external-url
+
+#### --web.user-assets=<path>
+
+Path to static asset directory, available at /user
+
+#### --web.enable-lifecycle
+
+是否可以通过 HTTP 请求来实现重启和关闭
+
+#### --web.enable-admin-api
+
+Enable API endpoints for admin control actions.
+
+#### --web.console.templates="consoles"
+
+定义 html 文件的路径
+
+#### --web.console.libraries="console_libraries"
+
+定义网站文件所需依赖的路径
+
+#### --web.page-title="Prometheus Time Series Collection and Processing Server"
+
+网站标题
+
+#### --web.cors.origin=".*"
+
+跨域
+
+####  --storage.tsdb.path="data/"
+
+储存数据的目录
+
+#### --storage.tsdb.retention.time=STORAGE.TSDB.RETENTION.TIME
+
+数据保存多长时间，保留时间默认为15d。支持的单位：y、w、d、h、m、s、ms。
+
+#### --storage.tsdb.retention.size=STORAGE.TSDB.RETENTION.SIZE
+
+[实验特性] 数据保存的最大大小，支持的单位 B, KB, MB, GB, TB, PB, EB
+
+#### --storage.tsdb.no-lockfile
+
+不在数据目录中创建锁文件
+
+#### --storage.tsdb.allow-overlapping-blocks
+
+[实验特性] 允许重叠的块，从而启用垂直压缩和垂直查询合并。
+
+#### --storage.tsdb.wal-compression
+
+压缩 wal 文件
+
+#### --storage.remote.flush-deadline=<duration>
+
+关闭或重新加载配置时等待刷新的时间，超过这个时间，刷新配置就会被中断
+
+####  --storage.remote.read-sample-limit=5e7
+
+单个查询中通过远程读取接口返回的最大样本总数。0表示没有限制。对于流式响应类型，将忽略此限制。
+
+#### --storage.remote.read-concurrent-limit=10
+
+最大并发远程读取调用数。0表示无限制
+
+#### --storage.remote.read-max-bytes-in-frame=1048576
+
+在封送处理之前，用于流式远程读取响应类型的单个帧中的最大字节数。请注意，客户端可能也有帧大小限制。默认为protobuf推荐的1MB。
+
+#### --rules.alert.for-outage-tolerance=1h
+
+为恢复“for”警报状态而允许普罗米修斯中断的最长时间。
+
+
+
+
+
 ## 配置文件
 
 可以使用参数 `--config.file` 来指明配置文件。配置文件是 yaml 格式的。
