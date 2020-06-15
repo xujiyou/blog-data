@@ -153,7 +153,21 @@ type=rpm-md
 sudo yum install --enablerepo=elasticsearch elasticsearch
 ```
 
+启动：
 
+```bash
+$ sudo systemctl daemon-reload
+$ sudo systemctl start elasticsearch
+$ sudo systemctl enable elasticsearch
+```
+
+安装 Metricbeat：
+
+```bash
+$ sudo yum install metricbeat --enablerepo=elasticsearch
+$ sudo systemctl enable metricbeat
+$ sudo systemctl start metricbeat
+```
 
 
 

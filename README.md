@@ -600,6 +600,8 @@
 
    [Prometheus架构.md](云原生/Prometheus/Prometheus架构.md) 
 
+   [Prometheus高可用部署.md](云原生/Prometheus/Prometheus高可用部署.md) 
+
    - Prometheus Operator
 
      [Prometheus Operator资源对象.md](云原生/Prometheus/Prometheus-operator/prometheus-operator资源对象.md) 
@@ -607,6 +609,10 @@
      [创建ServiceMonitor.md](云原生/Prometheus/Prometheus-operator/创建ServiceMonitor.md) 
      
      [Kubernetes集群监控.md](云原生/Prometheus/Prometheus-operator/Kubernetes集群监控.md) 
+
+   - 监控实战
+
+     [Prometheus监控Ceph.md](云原生/Prometheus/监控实战/Prometheus监控Ceph.md) 
 
    
 
