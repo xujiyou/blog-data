@@ -534,6 +534,14 @@
 
     [测试k8s集群中安装的CoreDNS.md](云原生/CoreDNS/测试k8s集群中安装的CoreDNS.md) 
 
+    [CoreDNS官方文档.md](云原生/CoreDNS/CoreDNS官方文档.md) 
+
+    - 插件使用
+
+      [CoreDNS使用etcd插件.md](云原生/CoreDNS/插件使用/CoreDNS使用etcd插件.md) 
+
+      [CoreDNS插件.md](云原生/CoreDNS/插件使用/CoreDNS插件.md) 
+
     
 
 - Vitess
