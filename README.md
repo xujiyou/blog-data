@@ -1168,6 +1168,10 @@ CDH 开始收费了，怎么说。。。
 
 [LVM实践.md](Linux/LVM实践.md) 
 
+[CentOS系统初始化脚本.md](Linux/CentOS系统初始化脚本.md) 
+
+[Linux自动挂载脚本.md](Linux/Linux自动挂载脚本.md) 
+
 - Syslog
 
    [syslog-ng使用教程.md](Linux/syslog/syslog-ng使用教程.md) 
