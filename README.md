@@ -1124,6 +1124,10 @@ CDH 开始收费了，怎么说。。。
    [git命令详解.md](DevOps/Git/git命令详解.md) 
    
    [详解.git目录.md](DevOps/Git/详解.git目录.md) 
+   
+- Nginx
+  
+  [Nginx配置记录.md](DevOps/Nginx/Nginx配置记录.md) 
 
 
 
@@ -1155,15 +1159,15 @@ CDH 开始收费了，怎么说。。。
 
 ## Linux
 
- [Linux中的各种信号.md](Linux/Linux中的各种信号.md) 
+[Linux中的各种信号.md](Linux/Linux中的各种信号.md) 
 
- [Linux处理僵尸进程.md](Linux/Linux处理僵尸进程.md) 
+[Linux处理僵尸进程.md](Linux/Linux处理僵尸进程.md) 
 
- [Cgroup实践.md](Linux/Cgroup实践.md) 
+[Cgroup实践.md](Linux/Cgroup实践.md) 
 
- [DNS配置文件.md](Linux/DNS配置文件.md) 
+[DNS配置文件.md](Linux/DNS配置文件.md) 
 
- [Linux创建用户并配置免密登录.md](Linux/Linux创建用户并配置免密登录.md) 
+[Linux创建用户并配置免密登录.md](Linux/Linux创建用户并配置免密登录.md) 
 
 [RAID实践.md](Linux/RAID实践.md) 
 
