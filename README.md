@@ -1082,6 +1082,8 @@ CDH 开始收费了，怎么说。。。
   [Gitlab升级.md](DevOps/Gitlab/Gitlab升级.md) 
   
   [Gitlab-CI教程.md](DevOps/Gitlab/Gitlab-CI教程.md) 
+  
+  [Gitlab之CI-CD应用自动化部署配置步骤.md](DevOps/Gitlab/Gitlab之CI-CD应用自动化部署配置步骤.md) 
 
 
 
