@@ -4,16 +4,18 @@ Helm 是 Kubernetes 的包管理工具。本文基于 Helm 3.
 
 官方文档：https://helm.sh/docs/helm/helm/
 
+---
+
 下面是 Helm 用到的环境变量
 
-| Name             | Description                                                  |
-| ---------------- | ------------------------------------------------------------ |
-| $XDG_CACHE_HOME  | set an alternative location for storing cached files.        |
-| $XDG_CONFIG_HOME | set an alternative location for storing Helm configuration.  |
-| $XDG_DATA_HOME   | set an alternative location for storing Helm data.           |
-| $HELM_DRIVER     | set the backend storage driver. Values are: configmap, secret, memory |
-| $HELM_NO_PLUGINS | disable plugins. Set HELM_NO_PLUGINS=1 to disable plugins.   |
-| $KUBECONFIG      | set an alternative Kubernetes configuration file (default “~/.kube/config”) |
+| Name             | Description                                                                    |
+| ---------------- | ------------------------------------------------------------                   |
+| $XDG_CACHE_HOME  | set an alternative location for storing cached files.                          |
+| $XDG_CONFIG_HOME | set an alternative location for storing Helm configuration.                    |
+| $XDG_DATA_HOME   | set an alternative location for storing Helm data.                             |
+| $HELM_DRIVER     | set the backend storage driver. Values are: configmap, secret, memory          |
+| $HELM_NO_PLUGINS | disable plugins. Set HELM_NO_PLUGINS=1 to disable plugins.                     |
+| $KUBECONFIG      | set an alternative Kubernetes configuration file (default “~/.kube/config”)    |
 
 Helm stores configuration based on the XDG base directory specification, so
 

@@ -233,6 +233,7 @@ data:
 
 `Release`：此对象描述发行版本身。它内部有几个对象：
 
+```
 - `Release.Name`：发行名称
 - `Release.Namespace`：要释放到的名称空间（如果清单未覆盖）
 - `Release.IsUpgrade`：如果当前操作是升级或回滚，则为 true。
@@ -267,6 +268,7 @@ data:
 
 - `Name`：当前模板的命名空间文件路径（例如 `mychart/templates/mytemplate.yaml`）
 - `BasePath`：当前图表的模板目录的命名空间路径（例如`mychart/templates`）。
+```
 
 就这些内置变量。
 

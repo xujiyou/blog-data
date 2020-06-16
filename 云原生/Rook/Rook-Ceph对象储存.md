@@ -2,6 +2,8 @@
 
 首先使用 Rook 在 k8s 集群中安装 Ceph。
 
+---
+
 ## 安装 Ceph
 
 官方文档：https://rook.io/docs/rook/v1.2/ceph-quickstart.html

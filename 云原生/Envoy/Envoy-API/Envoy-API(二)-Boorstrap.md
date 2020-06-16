@@ -2,6 +2,8 @@
 
 官方文档地址：https://www.envoyproxy.io/docs/envoy/latest/api-v2/bootstrap/bootstrap
 
+---
+
 ## Bootstrap
 
 Bootstrap 是所有配置的顶级配置。在启动指定配置文件时：

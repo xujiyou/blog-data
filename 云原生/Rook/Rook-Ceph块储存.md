@@ -6,6 +6,8 @@
 
 两种方式目前都可以工作，推荐使用 CSI
 
+---
+
 ## 创建 CephBlockPool 及 StorageClass
 
 要使用 Ceph 的块储存，需要创建一个 `pool` ，在 Rook 中，这通过 `CephBlockPool` 来实现。

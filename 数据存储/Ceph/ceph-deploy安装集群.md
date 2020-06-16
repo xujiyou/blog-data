@@ -6,6 +6,8 @@ ceph-deploy 安装集群的方式比较流行，不过官方决定放弃这种�
 
 官方教程：https://docs.ceph.com/docs/master/install/ceph-deploy/quick-ceph-deploy/
 
+---
+
 ## 安装
 
 首先安装 ceph-deploy：

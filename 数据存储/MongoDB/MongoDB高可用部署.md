@@ -13,6 +13,8 @@ mongoDB目前已不推荐使用主从模式，取而代之的是副本集模式�
 
 参考：https://cloud.tencent.com/developer/article/1026185
 
+---
+
 ## 单机版安装
 
 系统为 CentOS 7，安装的 mongo 版本为 4.2，我这里为三台机器安装 MongoDB

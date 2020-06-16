@@ -1,5 +1,7 @@
 # ES 开启安全认证
 
+---
+
 首先在 elasticsearch.yml 中设置：
 
 ```

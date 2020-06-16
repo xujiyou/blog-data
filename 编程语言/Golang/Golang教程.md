@@ -8,6 +8,8 @@ Golang 官方中文入门文档：https://tour.go-zh.org/welcome/1
 
 下面记录一下学习过的重点。
 
+---
+
 ## 包
 
 程序从 `main` 包开始运行。下面的程序通过导入路径 `"fmt"` 和 `"math/rand"` 来使用这两个包。

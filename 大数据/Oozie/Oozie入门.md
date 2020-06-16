@@ -4,6 +4,8 @@ Oozie 的作用是将多个作业组合成一个逻辑工作单元（一个工�
 
 我使用的 CDH 安装的 Oozie，拿来即用即可。
 
+---
+
 ## Quick Start
 
 根据官方的 [Running the Examples](https://oozie.apache.org/docs/5.2.0/DG_Examples.html) 来做的。

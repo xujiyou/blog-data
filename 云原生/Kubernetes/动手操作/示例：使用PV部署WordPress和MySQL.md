@@ -4,6 +4,8 @@
 
 PV 和 PVC 是一一对应的！！！
 
+---
+
 mysql-deployment.yaml:
 
 ```yaml

@@ -1,5 +1,7 @@
 # Etcd API (一) - 介绍
 
+---
+
 etcd v3使用 [gRPC](https://www.grpc.io/)作为其消息传递协议。etcd项目包括一个基于gRPC的 [Go客户端](https://github.com/coreos/etcd/tree/master/clientv3)和一个命令行实用程序 [etcdctl](https://github.com/coreos/etcd/tree/master/etcdctl)，用于通过gRPC与etcd集群进行通信。对于不支持gRPC的语言，etcd提供了JSON [gRPC网关](https://github.com/grpc-ecosystem/grpc-gateway)。该网关提供一个RESTful代理，该代理将HTTP / JSON请求转换为gRPC消息。
 
 详细查看：https://github.com/etcd-io/etcd/blob/master/Documentation/dev-guide/api_grpc_gateway.md

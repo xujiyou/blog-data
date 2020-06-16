@@ -1,5 +1,7 @@
 # CentOS 安装 Docker
 
+---
+
 ```
 # uname -r
 5.1.5-1.el7.elrepo.x86_64 # 要大于3.10

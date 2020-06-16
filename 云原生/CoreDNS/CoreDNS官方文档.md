@@ -132,7 +132,10 @@ Corefile *中*插件的顺序*并不确定*插件链的顺序。插件的执行�
 
 Corefile中的注释以开头`#`。然后将该行的其余部分视为注释。
 
+```
 CoreDNS在其配置中支持环境变量替换。它们可以在Corefile中的任何位置使用。语法是`{$ENV_VAR}`（`{%ENV_VAR%}`也支持类似Windows的语法 ）。CoreDNS在解析Corefile时替换了变量的内容。
+```
+
 
 若要导入其他配置文件，可以使用 import 插件。
 

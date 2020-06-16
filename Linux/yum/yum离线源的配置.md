@@ -24,40 +24,10 @@ $ createrepo .
 $ tar -zcvf rpm.tar.gz rpm/
 ```
 
-【注】：如果提示找不到createrepo命令，可以使用yum install createrepo安装该程序。如果无法联网安装，需要自行到网上下载rpm包安装，尤其是还要下载一些依赖包，例如createrepo-0.9.9-23.el7.noarch版本就依赖于以下包：
+【注】：如果提示找不到createrepo命令，可以使用yum install createrepo安装该程序。如果无法联网安装，需要自行到网上下载rpm包安装，尤其是还要下载一些依赖包
 
 ```
 $ yum deplist createrepo
-Loaded plugins: fastestmirror, priorities
-Loading mirror speeds from cached hostfile
- * elrepo: mirrors.neusoft.edu.cn
- * remi-safe: mirrors.tuna.tsinghua.edu.cn
-9 packages excluded due to repository priority protections
-package: createrepo.noarch 0.9.9-28.el7
-  dependency: /bin/sh
-   provider: bash.x86_64 4.2.46-33.el7
-  dependency: /usr/bin/python
-   provider: python.x86_64 2.7.5-86.el7
-  dependency: deltarpm
-   provider: deltarpm.x86_64 3.6-3.el7
-  dependency: libxml2-python
-   provider: libxml2-python.x86_64 2.9.1-6.el7_2.3
-  dependency: pyliblzma
-   provider: pyliblzma.x86_64 0.5.3-11.el7
-  dependency: python >= 2.1
-   provider: python.x86_64 2.7.5-86.el7
-  dependency: python(abi) = 2.7
-   provider: python.x86_64 2.7.5-86.el7
-  dependency: python-deltarpm
-   provider: python-deltarpm.x86_64 3.6-3.el7
-  dependency: rpm >= 4.1.1
-   provider: rpm.x86_64 4.11.3-40.el7
-  dependency: rpm-python
-   provider: rpm-python.x86_64 4.11.3-40.el7
-  dependency: yum >= 3.4.3-4
-   provider: yum.noarch 3.4.3-163.el7.centos
-  dependency: yum-metadata-parser
-   provider: yum-metadata-parser.x86_64 1.1.4-10.el7
 ```
 
 
