@@ -766,6 +766,14 @@ CDH 开始收费了，怎么说。。。
    [Kafka生产者.md](大数据/Kafka/Kafka生产者.md) 
    
    [Kafka消费者.md](大数据/Kafka/Kafka消费者.md) 
+   
+   [MirrorMaker实战.md](大数据/Kafka/MirrorMaker实战.md) 
+   
+   [Kafka官方脚本.md](大数据/Kafka/Kafka官方脚本.md) 
+   
+   - Kafka 配置
+   
+     [Broker配置.md](大数据/Kafka/Kafka配置/Broker配置.md) 
 
 
 
