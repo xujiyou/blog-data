@@ -387,13 +387,13 @@ date: 2020-06-16 14:23:57
   
   [Envoy代理自己的服务.md](云原生/Envoy/Envoy代理自己的服务.md) 
   
-  [Envoy-xDS实现动态配置.md](云原生/Envoy/Envoy-xDS实现动态配置.md) 
-  
   [Envoy二进制构建及安装.md](云原生/Envoy/Envoy二进制构建及安装.md) 
   
-  [Envoy配置文件详解.md](云原生/Envoy/Envoy配置文件详解.md) 
-  
   [Envoy命令行选项.md](云原生/Envoy/Envoy命令行选项.md) 
+  
+  [Envoy集成Jaeger.md](云原生/Envoy/Envoy集成Jaeger.md) 
+  
+  [Envoy热重启.md](云原生/Envoy/Envoy热重启.md) 
   
   - Envoy - API
   
@@ -833,7 +833,7 @@ CDH 开始收费了，怎么说。。。
 
 - CDH 
 
-  CDH离线部署.md](大数据/CDH/CDH离线部署.md) 
+  [CDH离线部署.md](大数据/CDH/CDH离线部署.md) 
 
   
 
