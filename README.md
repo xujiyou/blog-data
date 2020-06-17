@@ -231,10 +231,12 @@ date: 2020-06-16 14:23:57
 
    [Docker储存驱动.md](云原生/Docker/Docker储存驱动.md) 
 
+   [Docker二进制部署.md](云原生/Docker/Docker二进制部署.md) 
+
    - Docker-API
 
       [Docker-API(一)-介绍.md](云原生/Docker/Docker-API/Docker-API(一)-介绍.md) 
-
+   
       [Docker-API(二)-Containers.md](云原生/Docker/Docker-API/Docker-API(二)-Containers.md) 
    
       [Docker-API(三)-Images.md](云原生/Docker/Docker-API/Docker-API(三)-Images.md) 
@@ -829,7 +831,11 @@ CDH 开始收费了，怎么说。。。
 
 
 
-- CDH
+- CDH 
+
+  CDH离线部署.md](大数据/CDH/CDH离线部署.md) 
+
+  
 
 
 
@@ -923,8 +929,6 @@ CDH 开始收费了，怎么说。。。
 
    [MySQL离线环境主从搭建.md](数据存储/MySQL/MySQL离线环境主从搭建.md) 
 
-   [MySQL-binlog介绍.md](数据存储/MySQL/MySQL-binlog介绍.md) 
-
    [Mysql数据备份.md](数据存储/MySQL/Mysql数据备份.md) 
 
    [mysql-shell的使用.md](数据存储/MySQL/mysql-shell的使用.md) 
@@ -944,12 +948,8 @@ CDH 开始收费了，怎么说。。。
    - 高可用MySQL
 
      [MySQL复制.md](数据存储/MySQL/高可用MySQL/MySQL复制.md) 
-     
-     
-     
-     
-   
-   
+    
+     [Binlog详解.md](数据存储/MySQL/高可用MySQL/Binlog详解.md) 
 
 
 
