@@ -771,6 +771,8 @@ CDH 开始收费了，怎么说。。。
    
    [Kafka官方脚本.md](大数据/Kafka/Kafka官方脚本.md) 
    
+   [Kubernetes中的Kafka集群如何在外部访问.md](大数据/Kafka/Kubernetes中的Kafka集群如何在外部访问.md) 
+   
    - Kafka 配置
    
      [Broker配置.md](大数据/Kafka/Kafka配置/Broker配置.md) 
@@ -956,7 +958,7 @@ CDH 开始收费了，怎么说。。。
    - 高可用MySQL
 
      [MySQL复制.md](数据存储/MySQL/高可用MySQL/MySQL复制.md) 
-    
+   
      [Binlog详解.md](数据存储/MySQL/高可用MySQL/Binlog详解.md) 
 
 
