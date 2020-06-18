@@ -8,6 +8,16 @@ str := strconv.Itoa(10)
 
 
 
+## string 到 int
+
+```
+nodePort,_ := strconv.Atoi(nodePortStr)
+```
+
+
+
+
+
 ## string 转 byte数组
 
 ```go

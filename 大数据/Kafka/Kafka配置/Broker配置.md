@@ -28,8 +28,43 @@ zookeeper.connect
 
 如果没有设置，默认跟 listeners 的配置一样，一般用于 IaaS 或 Docker 环境中，如果不需要外网连接就不需要设置，与 listeners 不同的是，这个配置不允许设置为 0.0.0.0
 
+在把 kafka 部署到 k8s 后，需要在外部访问 k8s 的kafka，就用到了这个配置：
+
+![image-20200618165139483](../../../resource/image-20200618165139483.png)
+
 
 
 #### auto.create.topics.enable
 
 在服务器上开启自动创建 topic，默认为 true。即在使用一个 topic 时，即使没使用命令创建，也可以继续使用，不会报错。
+
+
+
+#### auto.leader.rebalance.enable
+
+如果开启了，后台线程定期检查分区领导者的分布，如果超过了`leader.imbalance.per.broker.percentage`设定的失衡比例， 则会导致领导者重新平衡到分区的首选领导者。
+
+
+
+#### background.threads
+
+用于各种后台处理任务的线程数
+
+
+
+#### broker.id
+
+默认为 -1，如果没有设置，则会生成一个唯一 ID，为避免Zookeeper生成的代理ID与用户配置的代理ID之间发生冲突，生成的代理ID从reserved.broker.max.id + 1开始。
+
+
+
+#### compression.type
+
+
+
+
+
+
+
+
+
