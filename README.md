@@ -773,6 +773,8 @@ CDH 开始收费了，怎么说。。。
    
    [Kubernetes中的Kafka集群如何在外部访问.md](大数据/Kafka/Kubernetes中的Kafka集群如何在外部访问.md) 
    
+   [Systemd管理Kafka.md](大数据/Kafka/Systemd管理Kafka.md) 
+   
    - Kafka 配置
    
      [Broker配置.md](大数据/Kafka/Kafka配置/Broker配置.md) 
@@ -824,9 +826,11 @@ CDH 开始收费了，怎么说。。。
    [ZooKeeper使用入门.md](大数据/ZooKeeper/ZooKeeper使用入门.md) 
 
    [zkCli的使用.md](大数据/ZooKeeper/zkCli的使用.md) 
-   
+
    [ZooKeeper之ACL认证.md](大数据/ZooKeeper/ZooKeeper之ACL认证.md) 
-   
+
+   [Systemd管理ZooKeeper.md](大数据/ZooKeeper/Systemd管理ZooKeeper.md) 
+
    
 
 - Kerberos
@@ -1290,6 +1294,10 @@ CDH 开始收费了，怎么说。。。
 - HAProxy
 
     [HAProxy安装及入门.md](Linux/HAPorxy/HAProxy安装及入门.md) 
+
+- Firewalld
+
+  [防火墙常用操作.md](Linux/Firewalld/防火墙常用操作.md) 
 
    
 
