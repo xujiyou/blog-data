@@ -1,11 +1,7 @@
 ---
 title: Ceph 手动部署
 date: 2020-06-21 18:34:57
-categories：数据储存
-
 ---
-
-
 
 为了能够完整了解 Ceph 集群部署过程，我这里不采用 ceph-deploy 和 cephadm，而是采用手工通过 RPM 包管理工具进行部署。
 
@@ -13,7 +9,7 @@ categories：数据储存
 
 参考：https://ceph.readthedocs.io/en/latest/install/manual-deployment/
 
-
+---
 
 ## 下载安装软件包
 
