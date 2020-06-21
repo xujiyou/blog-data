@@ -775,6 +775,8 @@ CDH 开始收费了，怎么说。。。
    
    [Systemd管理Kafka.md](大数据/Kafka/Systemd管理Kafka.md) 
    
+   [Kafka在ZooKeeper中的储存结构.md](大数据/Kafka/Kafka在ZooKeeper中的储存结构.md) 
+   
    - Kafka 配置
    
      [Broker配置.md](大数据/Kafka/Kafka配置/Broker配置.md) 

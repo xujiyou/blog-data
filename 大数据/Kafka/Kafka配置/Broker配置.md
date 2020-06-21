@@ -60,6 +60,10 @@ zookeeper.connect
 
 #### compression.type
 
+指定给定 topic 的的压缩类型。此配置接受标准压缩编解码器（“ gzip”，“ snappy”，“ lz4”，“ zstd”）。它还接受“uncompressed”，这相当于不压缩。'producer'，表示保留生产者设置的原始压缩编解码器。
+
+
+
 
 
 
