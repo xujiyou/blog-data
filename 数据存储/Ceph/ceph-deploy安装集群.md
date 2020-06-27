@@ -155,6 +155,12 @@ $ sudo yum install ceph-mgr-dashboard -y
 
 我靠，新版本有坑，有一个依赖 CentOS 不支持，放弃，反正也很鸡肋，不要了。
 
+```bash
+$ docker run -p 5000:5000 -e CEPHMONS='172.20.21.16,172.20.21.17,172.20.20.115' -e KEYRING="$(sudo cat /etc/ceph/ceph.client.admin.keyring)" crapworks/ceph-dash:latest
+```
+
+
+
 
 
 ---

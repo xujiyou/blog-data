@@ -7,7 +7,7 @@
 或者使用命令直接下载（CentOS 7）：
 
 ```bash
-$ wget https://repo.mysql.com//mysql80-community-release-el7-3.noarch.rpm
+$ wget https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
 ```
 
 下载下来之后，YUM 本地安装：
@@ -69,6 +69,7 @@ mysql> select user,host from mysql.user;
 上边看到，root 仅允许 localhost 访问，下面让 root 允许外网访问：
 
 ```mysql
+mysql> use mysql;
 mysql> UPDATE user SET `Host` = '%' WHERE `User` = 'root' LIMIT 1;
 mysql> flush privileges;
 mysql> select user,host from user;

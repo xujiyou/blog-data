@@ -532,6 +532,8 @@ date: 2020-06-16 14:23:57
 - Telepresence
 
    [Telepresence安装及入门.md](云原生/Telepresence/Telepresence安装及入门.md) 
+   
+   [Telepresence本地调试.md](云原生/Telepresence/Telepresence本地调试.md) 
 
 
 
@@ -912,6 +914,14 @@ CDH 开始收费了，怎么说。。。
    - Ceph文件系统
    
      [Ceph文件系统入门.md](数据存储/Ceph/Ceph文件系统/Ceph文件系统入门.md) 
+   
+   - Ceph深入学习
+   
+     [cephx认证机制.md](数据存储/Ceph/Ceph深入学习/cephx认证机制.md) 
+   
+   - Ceph 架构
+   
+     [CRUSH算法详解.md](数据存储/Ceph/Ceph架构/CRUSH算法详解.md) 
 
 
 

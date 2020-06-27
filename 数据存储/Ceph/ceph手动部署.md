@@ -400,6 +400,26 @@ $ yum install -y python3-werkzeug
 
 
 
+创建 pool 报错：
+
+```
+$ ceph osd pool create mytest
+Error ERANGE:  pg_num 333 size 3 would mean 1002 total pgs, which exceeds max 750 (mon_max_pg_per_osd 250 * num_in_osds 3)
+```
+
+这是因为 pg 的数量超过了 osd 中 pg 的最大数量导致的。
+
+解决方法是修改配置：
+
+```
+osd pool default pg num = 250
+osd pool default pgp num = 250
+```
+
+
+
+
+
 
 
 

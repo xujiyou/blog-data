@@ -71,6 +71,7 @@ $ sudo rbd feature disable one/bar exclusive-lock object-map fast-diff deep-flat
 
 ```bash
 $ sudo rbd device map one/bar
+/dev/rbd0
 ```
 
 查看映射到本地的块设备：
@@ -149,6 +150,34 @@ $ sudo reboot
 ```
 
 亲测可行！！！！！！就是启动慢点而已。。。。。。
+
+
+
+## 卸载
+
+取消挂载
+
+```bash
+$ umount /dev/rbd0
+```
+
+取消映射：
+
+```bash
+$ rbd device ummap one/bar
+```
+
+删除块设备：
+
+```bash
+$ rbd rm one/bar
+```
+
+删除 pool：
+
+```bash
+$ sudo ceph osd pool delete one one --yes-i-really-really-mean-it
+```
 
 
 
