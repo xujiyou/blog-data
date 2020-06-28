@@ -957,6 +957,8 @@ CDH 开始收费了，怎么说。。。
 
    [MySQL离线环境主从搭建.md](数据存储/MySQL/MySQL离线环境主从搭建.md) 
 
+   [MySQL双主.md](数据存储/MySQL/MySQL双主.md) 
+
    [Mysql数据备份.md](数据存储/MySQL/Mysql数据备份.md) 
 
    [mysql-shell的使用.md](数据存储/MySQL/mysql-shell的使用.md) 
@@ -974,7 +976,7 @@ CDH 开始收费了，怎么说。。。
    - InnoDB
 
    - 高可用MySQL
-
+   
      [MySQL复制.md](数据存储/MySQL/高可用MySQL/MySQL复制.md) 
    
      [Binlog详解.md](数据存储/MySQL/高可用MySQL/Binlog详解.md) 

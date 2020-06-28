@@ -131,3 +131,27 @@ binlog-format=MIXED
 
 
 
+## 清除 binlog 文件
+
+通过设置下面的参数可以让服务器自动清除旧的 binlog 文件：
+
+```
+expire-logs-days=3
+```
+
+若要手工删除，可以使用以下命令：
+
+```mysql
+mysql> PURGE BINARY LOGS BEFORE '2020-06-29 00:00:00';
+```
+
+或者：
+
+```mysql
+mysql> PURGE BINARY LOGS TO 'master-bin.000002';
+```
+
+
+
+
+
