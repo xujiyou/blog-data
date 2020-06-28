@@ -924,6 +924,8 @@ CDH 开始收费了，怎么说。。。
      [CRUSH算法详解.md](数据存储/Ceph/Ceph架构/CRUSH算法详解.md) 
    
      [Ceph储存引擎BlueStore.md](数据存储/Ceph/Ceph架构/Ceph储存引擎BlueStore.md) 
+     
+     [Monitor详解.md](数据存储/Ceph/Ceph架构/Monitor详解.md) 
 
 
 
