@@ -126,7 +126,7 @@ osd crush chooseleaf type = 1
 
 #### 配置用户与 key
 
-我的当前目录为 `/root/ceph ，并使用如下命令生成 Monitor 的密钥，用于多个 Monitor 间通信：
+我的当前目录为 `/root/ceph `，并使用如下命令生成 Monitor 的密钥，用于多个 Monitor 间通信：
 
 ```bash
 $ ceph-authtool --create-keyring /tmp/ceph.mon.keyring --gen-key -n mon. --cap mon 'allow *'
@@ -412,8 +412,8 @@ Error ERANGE:  pg_num 333 size 3 would mean 1002 total pgs, which exceeds max 75
 解决方法是修改配置：
 
 ```
-osd pool default pg num = 250
-osd pool default pgp num = 250
+osd pool default pg num = 200
+osd pool default pgp num = 200
 ```
 
 

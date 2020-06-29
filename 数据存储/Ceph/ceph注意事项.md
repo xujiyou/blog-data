@@ -20,3 +20,47 @@ $ sudo mkfs.ext4 /dev/vdb
 $ sudo mount /dev/vdb /data2
 ```
 
+
+
+## 报错
+
+警告：
+
+```
+1 pool(s) do not have an application enabled
+```
+
+解决方法：
+
+```bash
+$ ceph osd pool application enable test rgw
+```
+
+test 是 pool 的名字。
+
+
+
+警告：
+
+```
+9 daemons have recently crashed
+```
+
+解决方法：
+
+```bash
+$ ceph crash ls-new #查看最新的 crash
+$ ceph crash info 2020-06-22T17:28:11.652393Z_ce7105bd-bf96-4fb7-9d69-c47457ccb1b4 #查看 crash 的详细信息
+$ ceph crash archive-all #清除所有 crash
+```
+
+
+
+
+
+
+
+
+
+
+
