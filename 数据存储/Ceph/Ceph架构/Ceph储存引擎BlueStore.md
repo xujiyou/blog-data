@@ -56,7 +56,18 @@ osdmap e264282 pool 'test' (4) object 'test-object' -> pg 4.bf8f6aea (4.a) -> up
 
 test-object 是对象名，test 是 pool。
 
+- osdmap e264282 是 osdmap 的版本号
+- pool 'test' (4) 是 pool 名字及 ID
+- object 'test-object' 是对象名称
+- pg 4.bf8f6aea (4.a) 是对象所在 PG 的编号
+
 结果显示这个对象在 ID 为 4.a 的 PG 上，并且位于 OSD1，OSD0，OSD2 上，三个副本。
+
+查看 pg 中有哪些对象：
+
+```bash
+$ rados --pgid 4.a ls
+```
 
 像 Pool，PG 这些东西都是有 id 的，查看 Pool 的 ID：
 

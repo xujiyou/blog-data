@@ -893,13 +893,13 @@ CDH 开始收费了，怎么说。。。
 
    [ceph注意事项.md](数据存储/Ceph/ceph注意事项.md) 
    
-   - Ceph对象储存
+   - Ceph 对象储存
    
      [用户管理.md](数据存储/Ceph/Ceph对象储存/用户管理.md) 
      
      [S3-API.md](数据存储/Ceph/Ceph对象储存/S3-API.md) 
      
-   - Ceph块储存
+   - Ceph 块储存
    
      [Ceph块储存入门.md](数据存储/Ceph/Ceph块储存/Ceph块储存入门.md) 
    
@@ -911,11 +911,11 @@ CDH 开始收费了，怎么说。。。
    
      [Ceph块设备挂载.md](数据存储/Ceph/Ceph块储存/Ceph块设备挂载.md) 
    
-   - Ceph文件系统
+   - Ceph 文件系统
    
      [Ceph文件系统入门.md](数据存储/Ceph/Ceph文件系统/Ceph文件系统入门.md) 
    
-   - Ceph深入学习
+   - Ceph 深入学习
    
      [cephx认证机制.md](数据存储/Ceph/Ceph深入学习/cephx认证机制.md) 
    
@@ -926,6 +926,10 @@ CDH 开始收费了，怎么说。。。
      [Ceph储存引擎BlueStore.md](数据存储/Ceph/Ceph架构/Ceph储存引擎BlueStore.md) 
      
      [Monitor详解.md](数据存储/Ceph/Ceph架构/Monitor详解.md) 
+   
+   - Ceph 命令
+   
+     [rados命令.md](数据存储/Ceph/Ceph命令/rados命令.md) 
 
 
 
@@ -1162,6 +1166,10 @@ CDH 开始收费了，怎么说。。。
 - Nginx
   
   [Nginx配置记录.md](DevOps/Nginx/Nginx配置记录.md) 
+
+- OpenStack
+
+  [OpenStack安装教程.md](DevOps/OpenStack/OpenStack安装教程.md) 
 
 
 

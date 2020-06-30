@@ -223,8 +223,67 @@ $ ceph osd tree
 
 添加三个机架：
 
+```bash
+$ ceph osd crush add-bucket rack01 rack
+$ ceph osd crush add-bucket rack02 rack
+$ ceph osd crush add-bucket rack03 rack
 ```
 
+移动主机到机架下：
+
+```bash
+$ ceph osd crush move ceph-1 rack=rack01
+$ ceph osd crush move ceph-2 rack=rack02
+$ ceph osd crush move ceph-3 rack=rack03
+```
+
+移动每一个机架到默认的 root 下：
+
+```bash
+$ ceph osd crush move rack01 root=default
+$ ceph osd crush move rack02 root=default
+$ ceph osd crush move rack03 root=default
+```
+
+重新查看布局：
+
+```bash
+$ ceph osd tree
+```
+
+
+
+## 计算 PG 数量
+
+正确计算 PG 数量也是构建一个企业 Ceph 集群中至关重要的一步，因为 PG 在一定程度上提高或者影响储存性能。
+
+计算 PG 数量的公式如下：
+
+> PG总数 = （OSD 总数 * 100） / 最大副本数
+
+结果比如五入到 2 的 N 次幂的值。如果集群有 160 个 OSD，且副本数为 3，这样根据公式得到的 PG 总数是 5333.3，五入后这个值最接近的 2 的 N 次幂的结果就是 8192 个 PG。
+
+每个 Pool 中的 PG 总数应该是
+
+> Pool 中的 PG 总数 = PG 总数 / Pool 数量
+
+PG 的数量只与 OSD 的数量有关，与 OSD 的容量无关。
+
+## 修改 PG 和 PGP
+
+PGP 的值应该与 PG 的总数一致。
+
+获取 PG 和 PGP 的值：
+
+```bash
+$ ceph osd pool get test pg_num
+$ ceph osd pool get test pgp_num
+```
+
+检查副本数量：
+
+```bash
+$ ceph osd dump | grep size
 ```
 
 

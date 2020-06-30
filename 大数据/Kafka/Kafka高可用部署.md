@@ -64,3 +64,21 @@ $ ./bin/zkCli.sh
 
 
 
+## 配置记录
+
+```properties
+broker.id=2
+listeners=PLAINTEXT://0.0.0.0:9092
+advertised.listeners=PLAINTEXT://aitou.push2.bbdservice.net:9092
+advertised.host.name=125.65.43.194
+
+broker.id=3
+listeners=PLAINTEXT://0.0.0.0:9092
+advertised.listeners=PLAINTEXT://aitou.push3.bbdservice.net:9092
+advertised.host.name=125.65.43.195
+```
+
+
+
+
+
