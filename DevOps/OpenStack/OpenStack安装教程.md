@@ -163,7 +163,7 @@ $ openssl rand -hex 10
 
 ```bash
 export ADMIN_PASS=fc05e1929b2c057a4098
-export CINDER_DBPASS=fc05e1929b2c057a4098
+export CINDER_DBPASS=BBDERS1@bbdops.com
 export CINDER_PASS=fc05e1929b2c057a4098
 export DASH_DBPASS=fc05e1929b2c057a4098
 export DEMO_PASS=fc05e1929b2c057a4098
@@ -171,9 +171,9 @@ export GLANCE_DBPASS=BBDERS1@bbdops.com
 export GLANCE_PASS=fc05e1929b2c057a4098
 export KEYSTONE_DBPASS=BBDERS1@bbdops.com
 export METADATA_SECRET=fc05e1929b2c057a4098
-export NEUTRON_DBPASS=fc05e1929b2c057a4098
+export NEUTRON_DBPASS=BBDERS1@bbdops.com
 export NEUTRON_PASS=fc05e1929b2c057a4098
-export NOVA_DBPASS=fc05e1929b2c057a4098
+export NOVA_DBPASS=BBDERS1@bbdops.com
 export NOVA_PASS=fc05e1929b2c057a4098
 export PLACEMENT_PASS=fc05e1929b2c057a4098
 export RABBIT_PASS=fc05e1929b2c057a4098
@@ -190,6 +190,28 @@ $ source /etc/profile
 #### 安装 MySQL
 
 安装一个单节点的 mysql，在 test-1 上安装，安装教程： [MySQL最新版本安装.md](../../数据存储/MySQL/MySQL最新版本安装.md) 
+
+额外添加一个参数，调大最大连接数：
+
+```
+max_connections=300
+```
+
+查看最大连接数：
+
+```mysql
+mysql> show variables like '%max_connections%';
+```
+
+查看当前连接数：
+
+```mysql
+mysql> show status like 'Threads%';
+```
+
+Threads_connected 是当前连接数，Threads_running 是并发数。
+
+
 
 
 
@@ -1209,4 +1231,411 @@ $ openstack subnet create --network provider \
 ```bash
 $ yum install openstack-neutron-linuxbridge ebtables ipset
 ```
+
+修改 `/etc/neutron/neutron.conf` 文件:
+
+```toml
+[DEFAULT]
+transport_url=rabbit://openstack:fc05e1929b2c057a4098@test-1
+
+[DEFAULT]
+auth_strategy = keystone
+
+[keystone_authtoken]
+www_authenticate_uri = http://test-1:5000
+auth_url = http://test-1:5000
+memcached_servers = test-1:11211
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+project_name = service
+username = neutron
+password = fc05e1929b2c057a4098
+
+[oslo_concurrency]
+lock_path = /var/lib/neutron/tmp
+```
+
+修改 `/etc/neutron/plugins/ml2/linuxbridge_agent.ini` 文件：
+
+```toml
+[linux_bridge]
+physical_interface_mappings = provider:ens192
+
+[vxlan]
+enable_vxlan = false
+
+[securitygroup]
+enable_security_group = true
+firewall_driver = neutron.agent.linux.iptables_firewall.IptablesFirewallDriver
+```
+
+修改 `/etc/nova/nova.conf` 文件：
+
+```toml
+[neutron]
+url = http://test-1:9696
+auth_url = http://test-1:5000
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+region_name = RegionOne
+project_name = service
+username = neutron
+password = fc05e1929b2c057a4098
+```
+
+重启计算服务：
+
+```bash
+$ systemctl restart openstack-nova-compute.service
+```
+
+启动网络计算服务：
+
+```bash
+$ systemctl enable neutron-linuxbridge-agent.service
+$ systemctl start neutron-linuxbridge-agent.service
+```
+
+验证：
+
+```bash
+$ openstack extension list --network
+```
+
+输入密码：fc05e1929b2c057a4098
+
+查看网络节点列表：
+
+```bash
+$ openstack network agent list
+```
+
+
+
+## 安装 CInder
+
+Cinder 分为 控制节点、储存节点、备份节点
+
+
+
+#### 安装 Cinder 控制节点
+
+添加 mysql 库和 用户：
+
+```mysql
+mysql> CREATE DATABASE cinder;
+mysql> CREATE USER cinder IDENTIFIED BY 'BBDERS1@bbdops.com';
+mysql> GRANT ALL PRIVILEGES ON cinder.* TO 'cinder'@'%';
+mysql> FLUSH PRIVILEGES;
+```
+
+创建 cinder 用户：
+
+```bash
+$ openstack user create --domain default --password-prompt cinder
+```
+
+密码是 CINDER_PASS，即 fc05e1929b2c057a4098。
+
+为 cinder 用户绑定 admin 权限：
+
+```bash
+$ openstack role add --project service --user cinder admin
+```
+
+创建 `cinderv2` and `cinderv3` service entities：
+
+```bash
+$ openstack service create --name cinderv2 \
+  --description "OpenStack Block Storage" volumev2
+$ openstack service create --name cinderv3 \
+  --description "OpenStack Block Storage" volumev3
+```
+
+创建 Block Storage service API endpoints：
+
+```bash
+$ openstack endpoint create --region RegionOne \
+  volumev2 public http://test-1:8776/v2/%\(project_id\)s
+$ openstack endpoint create --region RegionOne \
+  volumev2 internal http://test-1:8776/v2/%\(project_id\)s
+$ openstack endpoint create --region RegionOne \
+  volumev2 admin http://test-1:8776/v2/%\(project_id\)s
+  
+$ openstack endpoint create --region RegionOne \
+  volumev3 public http://test-1:8776/v3/%\(project_id\)s
+$ openstack endpoint create --region RegionOne \
+  volumev3 internal http://test-1:8776/v3/%\(project_id\)s
+$ openstack endpoint create --region RegionOne \
+  volumev3 admin http://test-1:8776/v3/%\(project_id\)s
+```
+
+安装 cinder：
+
+```bash
+$ yum install openstack-cinder
+```
+
+修改 `/etc/cinder/cinder.conf` 文件：
+
+```toml
+[database]
+connection = mysql+pymysql://cinder:BBDERS1%40bbdops.com@test-1/cinder
+
+[DEFAULT]
+transport_url=rabbit://openstack:fc05e1929b2c057a4098@test-1:5672/
+auth_strategy = keystone
+my_ip = 192.168.112.152
+
+[keystone_authtoken]
+www_authenticate_uri = http://test-1:5000
+auth_url = http://test-1:5000
+memcached_servers = test-1:11211
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+project_name = service
+username = cinder
+password = fc05e1929b2c057a4098
+
+[oslo_concurrency]
+lock_path = /var/lib/cinder/tmp
+```
+
+初始化数据库：
+
+```bash
+$ su -s /bin/sh -c "cinder-manage db sync" cinder
+```
+
+配置计算节点使用块储存，在 全部节点 上修改 `/etc/nova/nova.conf` :
+
+```
+[cinder]
+os_region_name = RegionOne
+```
+
+重启 nova-api :
+
+```bash
+$ systemctl restart openstack-nova-api.service
+```
+
+启动块储存控制节点的服务：
+
+```bash
+$ systemctl enable openstack-cinder-api.service openstack-cinder-scheduler.service
+$ systemctl start openstack-cinder-api.service openstack-cinder-scheduler.service
+```
+
+
+
+#### 安装 Cinder 储存节点
+
+在 test-2 中安装
+
+```bash
+$ yum install lvm2 device-mapper-persistent-data
+```
+
+启动 lvm：
+
+```bash
+$ systemctl enable lvm2-lvmetad.service
+$ systemctl start lvm2-lvmetad.service
+```
+
+准备几块磁盘，创建pv：
+
+```bash
+$ pvcreate /dev/sdb
+$ pvcreate /dev/sdc
+```
+
+创建 vg：
+
+```bash
+$ vgcreate cinder-volumes /dev/sdb /dev/sdc
+```
+
+在 `/etc/lvm/lvm.conf` 中 的 devices 块中添加：
+
+```
+filter = [ "a/sdb/", "a/sdc/" "r/.*/"]
+```
+
+安装 Cinder 储存组件：
+
+```bash
+$ yum install openstack-cinder targetcli python-keystone
+```
+
+修改 `/etc/cinder/cinder.conf` ：
+
+```toml
+[database]
+connection = mysql+pymysql://cinder:BBDERS1%40bbdops.com@test-1/cinder
+
+[DEFAULT]
+transport_url=rabbit://openstack:fc05e1929b2c057a4098@test-1
+auth_strategy = keystone
+my_ip = 192.168.112.153
+enabled_backends = lvm
+glance_api_servers = http://test-1:9292
+
+[keystone_authtoken]
+www_authenticate_uri = http://test-1:5000
+auth_url = http://test-1:5000
+memcached_servers = test-1:11211
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+project_name = service
+username = cinder
+password = fc05e1929b2c057a4098
+
+[lvm]
+volume_driver = cinder.volume.drivers.lvm.LVMVolumeDriver
+volume_group = cinder-volumes
+target_protocol = iscsi
+target_helper = lioadm
+
+[oslo_concurrency]
+lock_path = /var/lib/cinder/tmp
+```
+
+启动 Cinder 储存节点：
+
+```bash
+$ systemctl enable openstack-cinder-volume.service target.service
+$ systemctl start openstack-cinder-volume.service target.service
+```
+
+验证：
+
+```bash
+$ openstack volume service list
+```
+
+输入密码 fc05e1929b2c057a4098
+
+
+
+
+
+## 安装 Horizon
+
+Horizon就是 Openstack 的 Dashboard。
+
+在 test-1 上安装：
+
+```bash
+$ yum install openstack-dashboard
+```
+
+修改 `/etc/openstack-dashboard/local_settings` 文件：
+
+```
+OPENSTACK_HOST = "test-1"
+ALLOWED_HOSTS = ['*']
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+CACHES = {
+    'default': {
+         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+         'LOCATION': 'test-1:11211',
+    }
+}
+
+TIME_ZONE = "Asia/Shanghai"
+
+OPENSTACK_NEUTRON_NETWORK = {
+    'enable_auto_allocated_network': False,
+    'enable_distributed_router': False,
+    'enable_fip_topology_check': False,
+    'enable_ha_router': False,
+    'enable_ipv6': True,
+    # TODO(amotoki): Drop OPENSTACK_NEUTRON_NETWORK completely from here.
+    # enable_quotas has the different default value here.
+    'enable_quotas': False,
+    'enable_rbac_policy': True,
+    'enable_router': False,
+    'enable_lb': False,
+    'enable_firewall': False,
+    'enable_vpn': False,
+
+    'default_dns_nameservers': [],
+    'supported_provider_types': ['*'],
+    'segmentation_id_range': {},
+    'extra_provider_types': {},
+    'supported_vnic_types': ['*'],
+    'physical_networks': [],
+
+}
+
+
+OPENSTACK_KEYSTONE_MULTIDOMAIN_SUPPORT = True
+OPENSTACK_API_VERSIONS = {
+    "identity": 3,
+    "image": 2,
+    "volume": 3,
+}
+OPENSTACK_KEYSTONE_DEFAULT_DOMAIN = "Default"
+OPENSTACK_KEYSTONE_DEFAULT_ROLE = "user"
+
+WEBROOT = "/dashboard/"
+```
+
+
+
+在 `/etc/httpd/conf.d/openstack-dashboard.conf` 中添加：
+
+```
+WSGIApplicationGroup %{GLOBAL}
+```
+
+重启 httpd 和 缓存服务：
+
+```bash
+$ systemctl restart httpd.service memcached.service
+```
+
+测试访问：http://test-1/dashboard
+
+域填写 default，用户名为 admin,密码为  fc05e1929b2c057a4098
+
+在界面上创建一个镜像，上传一个 CentOS 7 的 ISO。然后查看镜像列表：
+
+```bash
+$ glance image-list
+```
+
+然后在 管理员 -> 实例类型中创建一个实例类型。
+
+最后在 项目 -> 计算 -> 实例中创建实例。
+
+我这里可以创建完成！
+
+
+
+## 总结
+
+跟着官方的教程走，可以手动安装一个集群，中间会有一两个小错误，在网上都可以找到解决方案。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
