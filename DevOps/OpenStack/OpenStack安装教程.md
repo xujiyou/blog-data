@@ -788,6 +788,9 @@ $ yum install openstack-nova-api openstack-nova-conductor openstack-nova-novncpr
 ```toml
 [DEFAULT]
 enabled_apis=osapi_compute,metadata
+block_device_allocate_retries=300
+block_device_allocate_retries_interval=3
+
 
 [api_database]
 connection = mysql+pymysql://nova:BBDERS1%40bbdops.com@test-1/nova_api
@@ -909,6 +912,8 @@ $ yum install openstack-nova-compute
 ```toml
 [DEFAULT]
 enabled_apis = osapi_compute,metadata
+block_device_allocate_retries=300
+block_device_allocate_retries_interval=3
 
 [DEFAULT]
 transport_url=rabbit://openstack:fc05e1929b2c057a4098@test-1
@@ -1553,14 +1558,14 @@ TIME_ZONE = "Asia/Shanghai"
 OPENSTACK_NEUTRON_NETWORK = {
     'enable_auto_allocated_network': False,
     'enable_distributed_router': False,
-    'enable_fip_topology_check': False,
+    'enable_fip_topology_check': True,
     'enable_ha_router': False,
     'enable_ipv6': True,
     # TODO(amotoki): Drop OPENSTACK_NEUTRON_NETWORK completely from here.
     # enable_quotas has the different default value here.
     'enable_quotas': False,
     'enable_rbac_policy': True,
-    'enable_router': False,
+    'enable_router': True,
     'enable_lb': False,
     'enable_firewall': False,
     'enable_vpn': False,
@@ -1605,7 +1610,7 @@ $ systemctl restart httpd.service memcached.service
 
 域填写 default，用户名为 admin,密码为  fc05e1929b2c057a4098
 
-在界面上创建一个镜像，上传一个 CentOS 7 的 ISO。然后查看镜像列表：
+在界面上创建一个镜像，镜像需要特殊定制的。然后查看镜像列表：
 
 ```bash
 $ glance image-list
@@ -1616,6 +1621,43 @@ $ glance image-list
 最后在 项目 -> 计算 -> 实例中创建实例。
 
 我这里可以创建完成！
+
+
+
+## 错误
+
+
+
+#### 错误1 
+
+在创建实例时，报错说卷创建错误：
+
+```
+Volume 0e4150db-567 f-4ae0-a947-8fc7a0d624f0 did not finish being created even after we waited 150 seconds or 61 attempts. And its status is downloading.
+```
+
+解决方法：在 nova 的控制和计算节点的 `/etc/nova/nova.conf` 中添加以下配置：
+
+```
+block_device_allocate_retries=300
+block_device_allocate_retries_interval=3
+```
+
+然后重启 Nova 相关的服务，在控制节点：
+
+```bash
+$ systemctl restart \
+      openstack-nova-api.service \
+      openstack-nova-scheduler.service \
+      openstack-nova-conductor.service \
+      openstack-nova-novncproxy.service
+```
+
+在计算节点：
+
+```bash
+$ systemctl restart libvirtd.service openstack-nova-compute.service
+```
 
 
 

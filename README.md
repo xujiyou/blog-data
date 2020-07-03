@@ -1170,6 +1170,10 @@ CDH 开始收费了，怎么说。。。
 - OpenStack
 
   [OpenStack安装教程.md](DevOps/OpenStack/OpenStack安装教程.md) 
+  
+  [Openstack配置使用Ceph.md](DevOps/OpenStack/Openstack配置使用Ceph.md) 
+  
+  [Openstack配置网络.md](DevOps/OpenStack/Openstack配置网络.md) 
 
 
 
@@ -1221,6 +1225,14 @@ CDH 开始收费了，怎么说。。。
 
 [Linux自动挂载脚本.md](Linux/Linux自动挂载脚本.md) 
 
+- 网络
+
+  [一次网络命令实践.md](Linux/网络/一次网络命令实践.md) 
+
+  [Linux虚拟网络设备之tun-tap.md](Linux/网络/Linux虚拟网络设备之tun-tap.md) 
+
+  [网桥详解.md](Linux/网络/网桥详解.md) 
+
 - Syslog
 
    [syslog-ng使用教程.md](Linux/syslog/syslog-ng使用教程.md) 
@@ -1242,8 +1254,6 @@ CDH 开始收费了，怎么说。。。
    [错误记录.md](Linux/Shell/错误记录.md) 
 
    [删除脚本.md](Linux/Shell/删除脚本.md) 
-   
-   [一次网络命令实践.md](Linux/Shell/一次网络命令实践.md) 
    
    [内核升级.md](Linux/Shell/内核升级.md) 
    
