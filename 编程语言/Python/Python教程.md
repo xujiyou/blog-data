@@ -3,3 +3,12 @@
 Python官网：https://www.python.org/
 
 官方中文文档：https://docs.python.org/zh-cn/3/
+
+
+
+快速启动一个 HTTP 服务，代理当前目录下的文件：
+
+```bash
+$ nohup python -m SimpleHTTPServer 8001 &
+```
+

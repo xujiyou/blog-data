@@ -1231,7 +1231,9 @@ CDH 开始收费了，怎么说。。。
 
   [Linux虚拟网络设备之tun-tap.md](Linux/网络/Linux虚拟网络设备之tun-tap.md) 
 
-  [网桥详解.md](Linux/网络/网桥详解.md) 
+  [Linux虚拟网络设备之Bridge.md](Linux/网络/Linux虚拟网络设备之Bridge.md) 
+
+  [VLAN详解.md](Linux/网络/VLAN详解.md) 
 
 - Syslog
 
@@ -1335,7 +1337,11 @@ CDH 开始收费了，怎么说。。。
 
   [防火墙常用操作.md](Linux/Firewalld/防火墙常用操作.md) 
 
-   
+- OpenvSwitch
+
+  [OpenvSwitch安装.md](Linux/OpenvSwitch/OpenvSwitch安装.md) 
+
+ 
 
 
 

@@ -52,6 +52,10 @@ $ kafka-topics.sh --zookeeper fueltank-1:2181 --describe
 
 
 
+## 删除主题
+
+
+
 
 
 
