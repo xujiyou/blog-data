@@ -50,6 +50,12 @@ $ kafka-topics.sh --zookeeper fueltank-1:2181 --list
 $ kafka-topics.sh --zookeeper fueltank-1:2181 --describe
 ```
 
+```bash
+$ kafka-topics.sh --zookeeper localhost:2181 --topic forum_topic --describe
+```
+
+
+
 
 
 ## 删除主题

@@ -251,6 +251,14 @@ $ sudo yum install nginx --enablerepo=epel
 
 
 
+## 只下载，不安装
+
+```bash
+$ yum -y install google-chrome-stable --downloadonly --downloaddir=./
+```
+
+
+
 
 
 

@@ -779,6 +779,8 @@ CDH 开始收费了，怎么说。。。
    
    [Kafka在ZooKeeper中的储存结构.md](大数据/Kafka/Kafka在ZooKeeper中的储存结构.md) 
    
+   [Kafka消息格式.md](大数据/Kafka/Kafka消息格式.md) 
+   
    - Kafka 配置
    
      [Broker配置.md](大数据/Kafka/Kafka配置/Broker配置.md) 
@@ -1065,6 +1067,8 @@ CDH 开始收费了，怎么说。。。
 
     [Golang配置代理.md](编程语言/Golang/Golang配置代理.md) 
 
+    [Golang爬虫脚本.md](编程语言/Golang/Golang爬虫脚本.md) 
+
     - Cobra
 
        [Cobra入门.md](编程语言/Golang/Cobra/Cobra入门.md) 
@@ -1227,6 +1231,8 @@ CDH 开始收费了，怎么说。。。
 
 - 网络
 
+  [Linux安装无头Chrome.md](Linux/网络/Linux安装无头Chrome.md) 
+
   [一次网络命令实践.md](Linux/网络/一次网络命令实践.md) 
 
   [Linux虚拟网络设备之tun-tap.md](Linux/网络/Linux虚拟网络设备之tun-tap.md) 
@@ -1234,6 +1240,8 @@ CDH 开始收费了，怎么说。。。
   [Linux虚拟网络设备之Bridge.md](Linux/网络/Linux虚拟网络设备之Bridge.md) 
 
   [VLAN详解.md](Linux/网络/VLAN详解.md) 
+
+  [IP隧道.md](Linux/网络/IP隧道.md) 
 
 - Syslog
 
@@ -1278,6 +1286,8 @@ CDH 开始收费了，怎么说。。。
     [demsg命令.md](Linux/命令详解/demsg命令.md) 
     
     [xargs命令.md](Linux/命令详解/xargs命令.md) 
+    
+    [tcpdump命令详解.md](Linux/命令详解/tcpdump命令详解.md) 
 
 
 
@@ -1340,6 +1350,12 @@ CDH 开始收费了，怎么说。。。
 - OpenvSwitch
 
   [OpenvSwitch安装.md](Linux/OpenvSwitch/OpenvSwitch安装.md) 
+
+- KVM
+
+  [KVM安装.md](Linux/KVM/KVM安装.md) 
+  
+  [自定义CentOS镜像.md](Linux/KVM/自定义CentOS镜像.md) 
 
  
 

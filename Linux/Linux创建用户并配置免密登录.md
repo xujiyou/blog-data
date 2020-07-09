@@ -117,7 +117,7 @@ $ ssh admin@fueltank-1  # 这种是使用自己的公钥登录目标服务器
 使用命令 `visudo` 来编辑 `/etc/sudoers` 文件，添加以下行：
 
 ```
-xujiyou ALL=(ALL)     ALL
+xujiyou ALL=(ALL)     NOPASSWD:ALL
 ```
 
 
