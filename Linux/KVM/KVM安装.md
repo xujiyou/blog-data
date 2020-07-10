@@ -110,9 +110,9 @@ $ ping www.baidu.com
 
 ```bash
 $ sudo mkdir -p /opt/vms
-$ sudo virt-install --name=kvm001 --ram 2048 --vcpus=2 \
-  --disk path=/opt/vms/kvm001.qcow2,size=10,format=qcow2,bus=virtio \
-  --location=/opt/CentOS-7-x86_64-Minimal-2003.iso \
+$ sudo virt-install --name=kvm008 --ram 2048 --vcpus=2 \
+  --disk path=/opt/vms/kvm008.qcow2,size=10,format=qcow2,bus=virtio \
+  --location=/opt/My_CentOS7.iso \
   --network bridge=br0,model=virtio \
   --graphics=none --console=pty,target_type=serial \
   --extra-args="console=tty0 console=ttyS0"
