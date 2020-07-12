@@ -228,29 +228,110 @@ $ ping -c 1 -I br0 192.168.3.102
 
 ## 将物理网卡添加到bridge
 
-将eth0添加到br0上：
-
-```bash
-$ ip link set dev eth0 master br0
-```
-
-我这里使用 ssh 连的虚拟机，执行完这条命了就断开了，只能通过云平台内部进入虚拟机了。
-
-查看网桥端口：
-
-```bash
-$ bridge link
-```
-
 br0根本不区分接入进来的是物理设备还是虚拟设备，对它来说都一样的，都是网络设备，所以当eth0加入br0之后，落得和上面veth0一样的下场，从外面网络收到的数据包将无条件的转发给br0，自己变成了一根网线。
 
 这时通过eth0来ping网关失败，但由于br0通过eth0这根网线连上了外面的物理交换机，所以连在br0上的设备都能ping通网关，这里连上的设备就是veth1和br0自己，veth1是通过veth0这根网线连上去的，而br0可以理解为自己有一块自带的网卡。
 
-但是这时通过 veth0 或 veth1 还是连不通网关，下面去掉 eth0 的IP地址：
+添加网桥：
 
+```bash
+$ brctl addbr br0
 ```
 
+将eth0接口加入此网桥：
+
+```bash
+$ brctl addif br0 eth0 
 ```
+
+去除 eth0 的地址：
+
+```bash
+$ ifconfig eth0 0.0.0.0
+```
+
+为 br0 添加地址：
+
+```bash
+$ ifconfig br0 172.20.21.16 netmask 255.255.252.0
+```
+
+增加网关：
+
+```bash
+$ route add default gw 172.20.23.254 dev br0
+```
+
+网桥的地址就是为了可以方面进行ssh登录宿主机。与网桥连接的虚拟机IP地址可以设置为网桥处于同一个ip地址网段，也可是设置为不相同的ip地址。
+
+现在通过 SSH 就可以连接 Linux 了。
+
+查看网桥：
+
+```
+$ brctl show
+```
+
+
+
+## 持久化设置
+
+上面将物理网卡添加到网桥的设置，在主机重启后，配置就没了，为了持久化，可以写入网络配置文件。
+
+添加一个网桥：
+
+```bash
+$ vim /etc/sysconfig/network-scripts/ifcfg-br0
+```
+
+内容如下：
+
+```
+DEVICE=br0
+TYPE=Bridge
+ONBOOT=yes
+NM_CONTROLLED=yes
+BOOTPROTO=static
+IPADDR=192.168.98.120
+NETMASK=255.255.255.0
+GATEWAY=192.168.98.1
+DNS1=10.28.100.100
+```
+
+配置物理网卡：
+
+```bash
+$ vim /etc/sysconfig/network-scripts/ifcfg-enp2s0
+```
+
+内容如下：
+
+```
+TYPE=Ethernet
+DEVICE=enp2s0
+ONBOOT=yes
+UUID=d4e8208e-a35b-4944-87e7-c4203a00f8eb
+BRIDGE=br0
+NM_CONTROLLED=yes
+```
+
+注意网卡配置文件里面的内容，每一行的结尾不要有其他空格等字符。
+
+重启网络：
+
+```bash
+$ systemctl restart network
+```
+
+查看网络：
+
+```bash
+$ ip addr
+$ brctl show
+$ ping www.baidu.com
+```
+
+
 
 
 

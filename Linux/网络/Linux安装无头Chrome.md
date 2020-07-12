@@ -22,6 +22,12 @@ $ yum localinstall ./*.rpm
 
 就可以了。
 
+或者：
+
+```bash
+$ rpm -Uvh *.rpm --nodeps --force
+```
+
 版本查看：
 
 ```bash

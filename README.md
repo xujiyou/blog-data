@@ -1269,6 +1269,8 @@ CDH 开始收费了，怎么说。。。
    
    [iproute2命令详解.md](Linux/Shell/iproute2命令详解.md) 
    
+   [IPMI教程.md](Linux/Shell/IPMI教程.md) 
+   
 - 命令详解
 
     [top命令详解.md](Linux/命令详解/top命令详解.md) 

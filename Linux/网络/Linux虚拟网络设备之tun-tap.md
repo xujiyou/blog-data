@@ -225,6 +225,72 @@ $ ping -c 4 192.168.3.12
 
 
 
+## 使用命令创建 tun/tap 设备
+
+
+
+#### tunctl 
+
+安装 `tunctl` ：
+
+```bash
+$ vim /etc/yum.repos.d/nux-misc.repo
+```
+
+内容如下：
+
+```
+[nux-misc]
+name=Nux Misc
+baseurl=http://li.nux.ro/download/nux/misc/el7/x86_64/
+enabled=1
+gpgcheck=1
+gpgkey=http://li.nux.ro/download/nux/RPM-GPG-KEY-nux.ro
+```
+
+安装：
+
+```bash
+$ yum install tunctl
+```
+
+默认创建一个名为 tap0 的接口：
+
+```bash
+$ tunctl
+```
+
+添加 IP 地址：
+
+```bash
+$ ip addr add 192.168.3.11/24 dev tap0
+$ ip link set tap0 up
+```
+
+删除 接口：
+
+```bash
+$ tunctl -d tap0
+```
+
+
+
+#### ip tuntap
+
+创建 tap/tun 设备：
+
+```bash
+$ ip tuntap add dev tap0 mod tap # 创建 tap 
+$ ip tuntap add dev tun0 mod tun # 创建 tun
+```
+
+删除 tap/tun 设备：
+
+```bash
+$ ip tuntap del dev tap0 mod tap # 删除 tap 
+$ ip tuntap del dev tun0 mod tun # 删除 tun
+```
+
 
 
 
