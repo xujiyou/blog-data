@@ -56,7 +56,11 @@ $ echo "drift-1.cloud.bbdops.com" > /proc/sys/kernel/hostname
 $ sysctl kernel.hostname
 ```
 
+不过这种修改文件的方式只是临时的，主机重启后就失效了。
+
 关于这个目录，官方还有个文档：https://www.kernel.org/doc/html/latest/admin-guide/sysctl/index.html
 
-这个文档对每一个参数都进行了说明，不过针对的是最新版本的内核，
+这个文档对每一个参数都进行了说明，不过针对的是最新版本的内核。
+
+
 

@@ -1215,23 +1215,17 @@ CDH 开始收费了，怎么说。。。
 
 [Linux处理僵尸进程.md](Linux/Linux处理僵尸进程.md) 
 
-[DNS配置文件.md](Linux/DNS配置文件.md) 
-
 [Linux创建用户并配置免密登录.md](Linux/Linux创建用户并配置免密登录.md) 
 
 [RAID实践.md](Linux/RAID实践.md) 
 
-[rc.local文件.md](Linux/rc.local文件.md) 
-
 [LVM实践.md](Linux/LVM实践.md) 
 
-[CentOS系统初始化脚本.md](Linux/CentOS系统初始化脚本.md) 
-
-[Linux自动挂载脚本.md](Linux/Linux自动挂载脚本.md) 
-
-[Linux内核参数调优.md](Linux/Linux内核参数调优.md) 
+[Linux常见配置文件.md](Linux/Linux常见配置文件.md) 
 
 - 网络
+
+  [iproute2命令详解.md](Linux/网络/iproute2命令详解.md) 
 
   [Linux安装无头Chrome.md](Linux/网络/Linux安装无头Chrome.md) 
 
@@ -1247,9 +1241,41 @@ CDH 开始收费了，怎么说。。。
 
   [IP隧道.md](Linux/网络/IP隧道.md) 
 
+  [Linux路由.md](Linux/网络/Linux路由.md) 
+
+
+
 - 内核参数
 
   [Linux内核参数调优.md](Linux/内核参数/Linux内核参数调优.md) 
+
+
+
+- 性能分析
+
+  [Linux性能分析.md](Linux/性能分析/Linux性能分析.md) 
+
+  [移动文件提示没有空间排错.md](Linux/性能分析/移动文件提示没有空间排错.md) 
+
+  [CPU性能分析.md](Linux/性能分析/CPU性能分析.md) 
+
+  [内存性能分析.md](Linux/性能分析/内存性能分析.md) 
+
+  [IO性能分析.md](Linux/性能分析/IO性能分析.md) 
+
+  [网络性能分析.md](Linux/性能分析/网络性能分析.md) 
+
+
+
+- 常用脚本
+
+  [CentOS系统初始化脚本.md](Linux/常用脚本/CentOS系统初始化脚本.md) 
+
+  [Linux自动挂载脚本.md](Linux/常用脚本/Linux自动挂载脚本.md) 
+
+  [删除脚本.md](Linux/常用脚本/删除脚本.md) 
+
+
 
 - Syslog
 
@@ -1267,24 +1293,20 @@ CDH 开始收费了，怎么说。。。
 
     [Shell脚本语法记录.md](Linux/Shell/Shell脚本语法记录.md) 
 
-   [常用命令.md](Linux/Shell/常用命令.md) 
-
    [错误记录.md](Linux/Shell/错误记录.md) 
 
-   [删除脚本.md](Linux/Shell/删除脚本.md) 
-   
    [内核升级.md](Linux/Shell/内核升级.md) 
-   
-   [iproute2命令详解.md](Linux/Shell/iproute2命令详解.md) 
-   
+
    [IPMI教程.md](Linux/Shell/IPMI教程.md) 
 
 
 
 - 命令详解
 
-    [top命令详解.md](Linux/命令详解/top命令详解.md) 
+    [常用命令.md](Linux/命令详解/常用命令.md) 
 
+    [top命令详解.md](Linux/命令详解/top命令详解.md) 
+    
     [lsof命令详解.md](Linux/命令详解/lsof命令详解.md) 
     
     [ps命令详解.md](Linux/命令详解/ps命令详解.md) 
