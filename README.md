@@ -1243,6 +1243,8 @@ CDH 开始收费了，怎么说。。。
 
   [Linux路由.md](Linux/网络/Linux路由.md) 
 
+  [DHCP服务器搭建.md](Linux/网络/DHCP服务器搭建.md) 
+
 
 
 - 内核参数
