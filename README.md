@@ -1279,6 +1279,12 @@ CDH 开始收费了，怎么说。。。
 
 
 
+- 硬件信息
+
+  [硬件信息查看.md](Linux/硬件信息/硬件信息查看.md) 
+
+
+
 - Syslog
 
    [syslog-ng使用教程.md](Linux/syslog/syslog-ng使用教程.md) 

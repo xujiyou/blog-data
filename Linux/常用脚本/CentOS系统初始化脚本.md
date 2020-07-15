@@ -1,5 +1,9 @@
 # CentOS 系统初始化脚本
 
+
+
+公司同事脚本：
+
 ```bash
 #!/bin/bash
 #author:Fiber
@@ -144,3 +148,173 @@ exit 0
 =======
 ```
 
+
+
+## 自研脚本
+
+CentOS 初始化脚本，在集群内的所有主机内做以下事情：
+- yum update
+- 修改主机名
+- 添加用户 设置密码 添加 sudo 权限
+- 设置 hosts
+- 关闭防火墙，SELinux
+- 各主机之间 用刚刚创建的用户做免密登录
+
+重点和难点在于 `expect ` 的使用。
+需要主机的几点：
+- 在执行远程命令时，如执行 ssh s1@server-01 bash nopass-login.sh 时，nopass-login.sh 中不能使用 sudo ，因为没有与之绑定的 tty；另外还要注意不要写成：ssh s1@server-01 "bash nopass-login.sh"
+- 注意双引号与单引号的区别：https://blog.csdn.net/K346K346/article/details/86752313
+
+/root/start.sh
+
+```bash
+#!/usr/bin/env bash
+
+SERVERS="192.168.225.2 192.168.225.3 192.168.225.4 192.168.225.5 192.168.225.6 192.168.225.7 192.168.225.8 192.168.225.9 192.168.225.10"
+PASSWORD="kf-2020"
+
+# 将脚本拷贝到全部机器
+scp_copy_to_other() {
+  expect -c "
+  set timeout 30;
+  spawn scp /root/init.sh /root/nopass-login.sh root@$1:/root
+  expect {
+    *password:* {send $PASSWORD\r; exp_continue;}
+    *(yes/no)?* {send yes\r; exp_continue;}
+    eof {exit 0;}
+  }"
+}
+
+# 执行初始化脚本
+ssh_exec_to_other() {
+  ID="$(echo $1 | awk -F. '{print $NF}')"
+  expect -c "
+  set timeout 30;
+  spawn ssh root@$1 bash /root/init.sh server-0$((ID-1))
+  expect {
+    *password:* {send $PASSWORD\r; exp_continue;}
+    *(yes/no)?* {send yes\r; exp_continue;}
+    eof {exit 0;}
+  }"
+}
+
+scp_copy_to_all() {
+  for SERVER in $SERVERS
+    do
+        yum -y install expect
+        scp_copy_to_other $SERVER
+        ssh_exec_to_other $SERVER
+    done
+}
+
+scp_copy_to_all
+
+# 执行免密脚本
+ssh_exec_nopass_to_other() {
+  expect -c "
+  set timeout 30;
+  spawn ssh root@$1 bash /root/nopass-login.sh
+  expect {
+    *password:* {send $PASSWORD\r; exp_continue;}
+    *(yes/no)?* {send yes\r; exp_continue;}
+    eof {exit 0;}
+  }"
+}
+
+nopass_to_all() {
+  for SERVER in $SERVERS
+    do
+      ssh_exec_nopass_to_other $SERVER
+    done
+}
+
+nopass_to_all
+```
+
+
+
+/root/init.sh
+
+```bash
+#!/usr/bin/env bash
+
+PASSWORD="kf-2020"
+
+# 系统更新
+yum update -y
+
+# 设置主机名
+hostnamectl set-hostname $1
+
+# 添加用户 设置密码 添加 sudo 权限
+useradd -d /home/s1 -m s1
+echo $PASSWORD | passwd --stdin s1
+echo 's1 ALL=(ALL)     NOPASSWD:ALL' >> /etc/sudoers
+
+# 设置 hosts
+echo "192.168.225.2 server-01" >> /etc/hosts
+echo "192.168.225.3 server-02" >> /etc/hosts
+echo "192.168.225.4 server-03" >> /etc/hosts
+echo "192.168.225.5 server-04" >> /etc/hosts
+echo "192.168.225.6 server-05" >> /etc/hosts
+echo "192.168.225.7 server-06" >> /etc/hosts
+echo "192.168.225.8 server-07" >> /etc/hosts
+echo "192.168.225.9 server-08" >> /etc/hosts
+echo "192.168.225.10 server-09" >> /etc/hosts
+
+
+# 关闭防火墙
+systemctl stop firewalld
+systemctl disable firewalld
+
+# 关闭 SELinux
+setenforce 0
+sed -i '/SELINUX/s/enforcing/disabled/g' /etc/selinux/config
+```
+
+
+
+/root/nopass-login.sh
+
+```bash
+#!/usr/bin/env bash
+
+# 生成 id_isa 私钥
+su s1 -c "ssh-keygen -q -t rsa -N '' <<< ""$'\n'"y" 2>&1"
+
+# 定义远程地址和密码
+SERVERS="192.168.225.2 192.168.225.3 192.168.225.4 192.168.225.5 192.168.225.6 192.168.225.7 192.168.225.8 192.168.225.9 192.168.225.10"
+PASSWORD="kf-2020"
+
+# 免密登录
+auto_ssh_copy_id() {
+    su s1 -c "
+    expect -c \"set timeout 30;
+        spawn ssh-copy-id s1@$1;
+        expect {
+            *(yes/no)?* {send yes\r;exp_continue;}
+            *password:* {send $2\r;exp_continue;}
+            eof {exit 0;}
+        }\";
+    "
+}
+
+# 迭代
+ssh_copy_id_to_all() {
+    for SERVER in $SERVERS
+    do
+        yum -y install expect
+        auto_ssh_copy_id $SERVER $PASSWORD
+    done
+}
+
+ssh_copy_id_to_all
+```
+
+
+
+启动脚本：
+
+```bash
+$ bash /root/start.sh
+```

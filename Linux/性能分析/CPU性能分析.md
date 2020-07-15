@@ -91,3 +91,122 @@ ave avx f16c rdrand lahf_lm abm invpcid_single kaiser tpr_shadow vnmi flexpriori
 
 
 
+## dmidecode
+
+这个命令是用来获取 DMI（Desktop Management Interface）硬件信息的，包括 BIOS、系统、主板、处理器、内存、缓存等等。对于 CPU 信息，可以使用 dmidecode -t processor 来查看。
+
+```
+$ dmidecode -t processor
+Getting SMBIOS data from sysfs.
+SMBIOS 2.7 present.
+
+Handle 0x0041, DMI type 4, 42 bytes
+Processor Information
+        Socket Designation: SOCKET 0
+        Type: Central Processor
+        Family: Core i7
+        Manufacturer: Intel
+        ID: C3 06 03 00 FF FB EB BF
+        Signature: Type 0, Family 6, Model 60, Stepping 3
+        Flags:
+                FPU (Floating-point unit on-chip)
+                VME (Virtual mode extension)
+                DE (Debugging extension)
+                PSE (Page size extension)
+                TSC (Time stamp counter)
+                MSR (Model specific registers)
+                PAE (Physical address extension)
+                MCE (Machine check exception)
+                CX8 (CMPXCHG8 instruction supported)
+                APIC (On-chip APIC hardware supported)
+                SEP (Fast system call)
+                MTRR (Memory type range registers)
+                PGE (Page global enable)
+                MCA (Machine check architecture)
+                CMOV (Conditional move instruction supported)
+                PAT (Page attribute table)
+                PSE-36 (36-bit page size extension)
+                CLFSH (CLFLUSH instruction supported)
+                DS (Debug store)
+                ACPI (ACPI supported)
+                MMX (MMX technology supported)
+                FXSR (FXSAVE and FXSTOR instructions supported)
+                SSE (Streaming SIMD extensions)
+                SSE2 (Streaming SIMD extensions 2)
+                SS (Self-snoop)
+                HTT (Multi-threading)
+                TM (Thermal monitor supported)
+                PBE (Pending break enabled)
+        Version: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
+        Voltage: 1.1 V
+        External Clock: 100 MHz
+        Max Speed: 7000 MHz
+        Current Speed: 4100 MHz
+        Status: Populated, Enabled
+        Upgrade: Other
+        L1 Cache Handle: 0x0004
+        L2 Cache Handle: 0x0005
+        L3 Cache Handle: 0x0006
+        Serial Number: Not Specified
+        Asset Tag: Fill By OEM
+        Part Number: Fill By OEM
+        Core Count: 4
+        Core Enabled: 1
+        Thread Count: 2
+        Characteristics:
+                64-bit capable
+```
+
+
+
+## Top
+
+top 命令中关于 CPU 的由两块：
+
+- load average：三个数字分别表示最近 1 分钟，5 分钟和 15 分钟的负载，数值越大负载越重。一般要求不超过核数，比如对于单核情况要 < 1。如果机器长期处于高于核数的情况，说明机器 CPU 消耗严重了。
+- 每个进程的使用情况：这里可以罗列每个进程的使用情况，包括内存和 CPU 的，如果要看某个具体的进程，可以使用 top -p pid 查看。
+- %Cpu(s)：表示当前 CPU 的使用情况，如果要查看所有核（逻辑核）的使用情况，可以**按下数字 “1” 查看**。这里有几个参数，表示如下：
+
+```
+- us    用户空间占用 CPU 时间比例
+- sy    系统占用 CPU 时间比例
+- ni    用户空间改变过优先级的进程占用 CPU 时间比例
+- id    CPU 空闲时间比
+- wa    IO等待时间比（IO等待高时，可能是磁盘性能有问题了）
+- hi    硬件中断
+- si    软件中断
+- st    steal time
+```
+
+
+
+## vmstat
+
+这个命令基本能看出当前机器的运行状态和问题，非常强大。可以使用 vmstat n 后面跟一个数字，表示每隔 ns 显示系统的状态，信息包括 CPU、内存和 IO 等。
+
+几个关键的字段：
+
+- r 值：表示在 CPU 运行队列中等待的进程数，如果这个值很大，表示很多进程在排队等待执行，CPU 压力山大。
+- in 和 cs 值：表示中断次数和上下文切换次数，这两个值越大，表示系统在进行大量的进程（或线程）切换。切换的开销是非常大的，这时候应该减少系统进程（或线程）数。
+- us、sy、id、wa 值：这些值上面也提到过，分别表示用户空间进程，系统进程，空闲和 IO 等待的 CPU 占比，这里只有 id 很高是好的，表示系统比较闲，其他值飚高都不好。
+
+这个工具强大之处在于它不仅可以分析 CPU，还可以分析内存、IO 等信息，犹如瑞士军刀。
+
+
+
+## 总结
+
+下面放一张图，来自 Linux 大牛，Netflix 高级性能架构师 **Brendan Gregg**。看完了，你也许会感叹“这世界太疯狂了（just crazy）”。
+
+![image-20200714094047420](../../resource/image-20200714094047420.png)
+
+
+
+
+
+
+
+
+
+
+
