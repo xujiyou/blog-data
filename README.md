@@ -973,6 +973,8 @@ CDH 开始收费了，怎么说。。。
 
    [mysql-shell的使用.md](数据存储/MySQL/mysql-shell的使用.md) 
 
+   [MySQL性能优化.md](数据存储/MySQL/MySQL性能优化.md) 
+
    - MySQL 管理
 
      [MySQL配置.md](数据存储/MySQL/MySQL管理/MySQL配置.md) 
@@ -984,7 +986,7 @@ CDH 开始收费了，怎么说。。。
      [MySQL数据目录.md](数据存储/MySQL/MySQL管理/MySQL数据目录.md) 
 
    - InnoDB
-
+   
    - 高可用MySQL
    
      [MySQL复制.md](数据存储/MySQL/高可用MySQL/MySQL复制.md) 
@@ -1193,6 +1195,8 @@ CDH 开始收费了，怎么说。。。
 
  [package-info的作用.md](Java/package-info的作用.md) 
 
+ [Linux查看Java线程状态.md](Java/Linux查看Java线程状态.md) 
+
 - Gradle
 
   [Gradle生成src目录.md](Java/Gradle/Gradle生成src目录.md) 
@@ -1222,6 +1226,8 @@ CDH 开始收费了，怎么说。。。
 [LVM实践.md](Linux/LVM实践.md) 
 
 [Linux常见配置文件.md](Linux/Linux常见配置文件.md) 
+
+[TTY与PTY设备.md](Linux/TTY与PTY设备.md) 
 
 - 网络
 
@@ -1266,6 +1272,8 @@ CDH 开始收费了，怎么说。。。
   [IO性能分析.md](Linux/性能分析/IO性能分析.md) 
 
   [网络性能分析.md](Linux/性能分析/网络性能分析.md) 
+  
+  [磁盘4k随机写测试.md](Linux/性能分析/磁盘4k随机写测试.md) 
 
 
 

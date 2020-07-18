@@ -12,3 +12,4 @@ Python官网：https://www.python.org/
 $ nohup python -m SimpleHTTPServer 8001 &
 ```
 
+这个 http 服务是单线程的！

@@ -45,6 +45,24 @@ $ mc rm --recursive --force myminio/one-backup
 
 
 
+## 永久链接
+
+将一个 bucket 设置为 public ，其内的对象就可以获得永久链接了：
+
+```bash
+$ mc policy set public minio/test
+```
+
+这样就可以通过 url 直接获取了，而且三个点都可以提供服务，比如：
+
+```bash
+$ wget http://192.168.6.124:29000/test/download.png
+$ wget http://192.168.6.125:29000/test/download.png
+$ wget http://192.168.6.126:29000/test/download.png
+```
+
+然后再通过 Nginx 代理一下就可以了。
+
 
 
 

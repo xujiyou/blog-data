@@ -23,6 +23,16 @@ $ passwd xujiyou
 
 
 
+## 创建系统用户
+
+```bash
+$ useradd -r username
+```
+
+这条命了也会自动添加用户组。
+
+
+
 ## 修改用户信息
 
   有时我们需要修改用户的用户组，家目录等信息，这时候使用useradd命令显然就不合适了，linux系统为我们提供了usermod命令，常用的参数与useradd一样大家可自行尝试。
