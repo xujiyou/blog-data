@@ -103,3 +103,62 @@ tags:
         }
     }
 ```
+
+
+
+## 设置上传大小
+
+```
+server {
+        listen        80;
+        server_name    www.S1.com;
+        client_max_body_size 30M;
+
+        location /api {
+            proxy_pass http://127.0.0.1:8891;
+            proxy_redirect off;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_send_timeout 3600s;
+            proxy_read_timeout 3600s;
+            proxy_connect_timeout 60s;
+        }
+
+        location / {
+            root /opt/s1/www.S1.com;
+            index index.html;
+            add_header Access-Control-Allow-Origin *;
+            try_files $uri $uri/ /index.html;
+        }
+    }
+```
+
+
+
+## 404 重写
+
+```
+        location / {
+            root   /data1/imgs;
+            autoindex on;
+
+            if ($request_uri ~* ^/all) {
+                error_page 404 =200 @test;
+            }
+
+            if ($request_uri ~* ^/test) {
+                error_page 404 =200 @minio;
+            }
+
+        }
+
+        location @test {
+            rewrite ^/all/(.*)$ /test/$1 permanent;
+        }
+
+        location @minio {
+            rewrite ^/test/(.*)$ http://192.168.6.124:29000/test/$1 permanent;
+        }
+```
+
