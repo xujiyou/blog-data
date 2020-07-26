@@ -1429,6 +1429,8 @@ CDH 开始收费了，怎么说。。。
 
   [ipvs使用实例.md](Linux/ipvs/ipvs使用实例.md) 
 
+  [keepalived实现ipvs高可用集群.md](Linux/ipvs/keepalived实现ipvs高可用集群.md) 
+
  
 
 
