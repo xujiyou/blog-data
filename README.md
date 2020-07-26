@@ -1423,6 +1423,12 @@ CDH 开始收费了，怎么说。。。
   
   [自定义CentOS镜像.md](Linux/KVM/自定义CentOS镜像.md) 
 
+
+
+- IPVS & LVS
+
+  [ipvs使用实例.md](Linux/ipvs/ipvs使用实例.md) 
+
  
 
 

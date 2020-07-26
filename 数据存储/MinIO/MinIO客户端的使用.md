@@ -50,7 +50,7 @@ $ mc rm --recursive --force myminio/one-backup
 将一个 bucket 设置为 public ，其内的对象就可以获得永久链接了：
 
 ```bash
-$ mc policy set public minio/test
+$ mc policy set public myminio/test
 ```
 
 这样就可以通过 url 直接获取了，而且三个点都可以提供服务，比如：
