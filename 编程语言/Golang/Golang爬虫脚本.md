@@ -39,6 +39,7 @@ import (
 	"github.com/chromedp/chromedp"
 	"github.com/spf13/cobra"
 	"log"
+	"time"
 )
 
 func main() {
@@ -87,6 +88,7 @@ func startAuth(username string, password string, url string) {
 	}
 
 	log.Println("登出上网认证!!!重新登录中...")
+	time.Sleep(3 * time.Second)
 
 	var arriveTime string
 	var currentUser string
@@ -99,6 +101,8 @@ func startAuth(username string, password string, url string) {
 	log.Println("上网认证成功!!!")
 	log.Println("您的上网有效期截止至：", arriveTime)
 	log.Println("当前上网用户：", currentUser)
+
+	time.Sleep(1 * time.Second)
 }
 
 func downLine(host string, username string, password string) chromedp.Tasks {
@@ -130,5 +134,17 @@ func onLine(host string, arriveTime *string, currentUser *string, username strin
 	}
 
 }
+
+```
+
+构建脚本：
+
+```bash
+#!/usr/bin/env bash
+
+cd cmd/ && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ../bin/bbd-online main.go
+
+scp ../bin/bbd-online bbders@192.168.98.131:/home/bbders
+
 ```
 

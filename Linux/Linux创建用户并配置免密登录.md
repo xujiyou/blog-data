@@ -130,6 +130,25 @@ $ ssh admin@fueltank-1  # 这种是使用自己的公钥登录目标服务器
 xujiyou ALL=(ALL)     NOPASSWD:ALL
 ```
 
+这时候有可能在使用 sudo 时还需要密码。
+
+查看用户的组：
+
+```
+$ id xujiyou
+uid=1000(xujiyou) gid=1000(xujiyou) groups=1000(xujiyou),10(wheel)
+```
+
+发现后面有个 wheel 。
+
+将这句话：
+
+```
+xujiyou ALL=(ALL)     NOPASSWD:ALL
+```
+
+放到 `/etc/sudoers`  的最后就好了。
+
 
 
 ## 限制用户只执行一个命令

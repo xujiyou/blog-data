@@ -1128,6 +1128,8 @@ CDH 开始收费了，怎么说。。。
   [Gitlab-CI教程.md](DevOps/Gitlab/Gitlab-CI教程.md) 
   
   [Gitlab之CI-CD应用自动化部署配置步骤.md](DevOps/Gitlab/Gitlab之CI-CD应用自动化部署配置步骤.md) 
+  
+  [Gitlab-Runner安装部署.md](DevOps/Gitlab/Gitlab-Runner安装部署.md) 
 
 
 
@@ -1157,6 +1159,8 @@ CDH 开始收费了，怎么说。。。
 
 - SlatStack
 
+
+
 - Ansible
 
   [Ansible安装.md](DevOps/Ansible/Ansible安装.md) 
@@ -1165,18 +1169,24 @@ CDH 开始收费了，怎么说。。。
 
   [Ansible安装k8s.md](DevOps/Ansible/Ansible安装k8s.md) 
 
+
+
 - Git
 
    [git命令详解.md](DevOps/Git/git命令详解.md) 
    
    [详解.git目录.md](DevOps/Git/详解.git目录.md) 
-   
+
+
+
 - Nginx
   
   [Nginx配置记录.md](DevOps/Nginx/Nginx配置记录.md) 
 
   [Nginx编译安装.md](DevOps/Nginx/Nginx编译安装.md) 
-  
+
+
+
 - OpenStack
 
   [OpenStack安装教程.md](DevOps/OpenStack/OpenStack安装教程.md) 
@@ -1255,6 +1265,16 @@ CDH 开始收费了，怎么说。。。
 
 
 
+- 文件系统
+
+  [ext4文件系统详解.md](Linux/文件系统/ext4文件系统详解.md) 
+
+  [xfs文件系统详解.md](Linux/文件系统/xfs文件系统详解.md) 
+
+  [btrfs文件系统详解.md](Linux/文件系统/btrfs文件系统详解.md) 
+
+
+
 - 内核参数
 
   [Linux内核参数调优.md](Linux/内核参数/Linux内核参数调优.md) 
@@ -1295,11 +1315,37 @@ CDH 开始收费了，怎么说。。。
 
 
 
+- 命令详解
+
+  命令详解
+
+  [常用命令.md](Linux/命令详解/常用命令.md) 
+
+  [top命令详解.md](Linux/命令详解/top命令详解.md) 
+
+  [lsof命令详解.md](Linux/命令详解/lsof命令详解.md) 
+
+  [ps命令详解.md](Linux/命令详解/ps命令详解.md) 
+
+  [netstat命令详解.md](Linux/命令详解/netstat命令详解.md) 
+
+  [iostat命令详解.md](Linux/命令详解/iostat命令详解.md) 
+
+  [screen命令详解.md](Linux/命令详解/screen命令详解.md) 
+
+  [demsg命令.md](Linux/命令详解/demsg命令.md) 
+
+  [xargs命令.md](Linux/命令详解/xargs命令.md) 
+
+  [tcpdump命令详解.md](Linux/命令详解/tcpdump命令详解.md) 
+
+
+
 - Syslog
 
    [syslog-ng使用教程.md](Linux/syslog/syslog-ng使用教程.md) 
 
-   
+
 
 - Iptables
 
@@ -1321,30 +1367,6 @@ CDH 开始收费了，怎么说。。。
 
 
 
-- 命令详解
-
-    [常用命令.md](Linux/命令详解/常用命令.md) 
-
-    [top命令详解.md](Linux/命令详解/top命令详解.md) 
-    
-    [lsof命令详解.md](Linux/命令详解/lsof命令详解.md) 
-    
-    [ps命令详解.md](Linux/命令详解/ps命令详解.md) 
-    
-    [netstat命令详解.md](Linux/命令详解/netstat命令详解.md) 
-    
-    [iostat命令详解.md](Linux/命令详解/iostat命令详解.md) 
-    
-    [screen命令详解.md](Linux/命令详解/screen命令详解.md) 
-    
-    [demsg命令.md](Linux/命令详解/demsg命令.md) 
-    
-    [xargs命令.md](Linux/命令详解/xargs命令.md) 
-    
-    [tcpdump命令详解.md](Linux/命令详解/tcpdump命令详解.md) 
-
-
-
 - Systemd
 
   [systemd入门.md](Linux/systemd/systemd入门.md) 
@@ -1357,7 +1379,7 @@ CDH 开始收费了，怎么说。。。
 
   [service文件结构.md](Linux/systemd/service文件结构.md) 
 
-  
+
 
 - SELinux
 
@@ -1389,22 +1411,6 @@ CDH 开始收费了，怎么说。。。
 
 
 
-- IPVS
-
-- Keepalived
-
-    [Keepalived入门教程.md](Linux/Keepalived/Keepalived入门教程.md) 
-
-    [Keepalived配置.md](Linux/Keepalived/Keepalived配置.md) 
-
-
-
-- HAProxy
-
-    [HAProxy安装及入门.md](Linux/HAPorxy/HAProxy安装及入门.md) 
-
-
-
 - Firewalld
 
   [防火墙常用操作.md](Linux/Firewalld/防火墙常用操作.md) 
@@ -1431,9 +1437,19 @@ CDH 开始收费了，怎么说。。。
 
   [keepalived实现ipvs高可用集群.md](Linux/ipvs/keepalived实现ipvs高可用集群.md) 
 
- 
 
 
+- Keepalived
+
+  [Keepalived入门教程.md](Linux/Keepalived/Keepalived入门教程.md) 
+
+  [Keepalived配置.md](Linux/Keepalived/Keepalived配置.md) 
+
+
+
+- HAProxy
+
+  [HAProxy安装及入门.md](Linux/HAPorxy/HAProxy安装及入门.md) 
 
 
 
