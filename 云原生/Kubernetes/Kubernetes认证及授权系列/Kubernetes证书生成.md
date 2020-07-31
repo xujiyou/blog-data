@@ -2,7 +2,7 @@
 
 官方文档：https://kubernetes.io/zh/docs/concepts/cluster-administration/certificates/
 
-- 注意: 证书中的 CN 即为用户名，O 即为组名。
+注意: 证书中的 CN 即为用户名，O 即为组名。
 
 当使用客户端证书进行认证时，可以通过 `easyrsa`、`openssl` 或 `cfssl` 手动生成证书。
 

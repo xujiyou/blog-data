@@ -45,7 +45,7 @@ Docker version 19.03.5, build 633a0ea
 
  
 
-### 第一步：安装 etcd 集群（静态发现）
+## 第一步：安装 etcd 集群（静态发现）
 
 kuberntes 集群使用 etcd 存储所有数据，是最重要的组件之一，注意 etcd集群需要奇数个节点(1,3,5...)，本文档使用3个节点做集群。
 
@@ -930,7 +930,7 @@ spec:
 
  
 
-## ## 第九步：CoreDNS
+## 第九步：CoreDNS
 
 https://www.jianshu.com/p/57d7c9e9f125
 

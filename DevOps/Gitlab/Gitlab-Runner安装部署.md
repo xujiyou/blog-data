@@ -91,6 +91,8 @@ Gitlab-runner 注册过程如下：
 
 ![image-20200728180936343](../../resource/image-20200728180936343.png)
 
+这里的 tag，要和 `.gitlab-ci.yaml` 文件中的 tag 相对应，要不然在 CI 时会找不到对应 tag 的 runner。
+
 这里注意，项目和项目组都有自己的 token，如果这里填的是项目组的token，则项目组内的所有项目都可以使用这一 runner，如：
 
 ![image-20200728183735000](../../resource/image-20200728183735000.png)
