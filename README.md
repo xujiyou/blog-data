@@ -65,22 +65,6 @@ date: 2020-06-16 14:23:57
 
       [配置踩坑笔记.md](云原生/Kubernetes/Kubernetes配置系列/配置踩坑笔记.md) 
 
-   - Kubernetes 源码系列
-
-      [Kubernetes源码系列(一)-源码结构.md](云原生/Kubernetes/Kubernetes源码系列/Kubernetes源码系列(一)-源码结构.md) 
-
-      [Kubernetes源码系列(二)-kubectl源码分析.md](云原生/Kubernetes/Kubernetes源码系列/Kubernetes源码系列(二)-kubectl源码分析.md) 
-
-      [Kubernetes源码系列(三)-kube-proxy源码分析.md](云原生/Kubernetes/Kubernetes源码系列/Kubernetes源码系列(三)-kube-proxy源码分析.md) 
-
-      [Kubernetes源码系列(四)-kubelet源码分析.md](云原生/Kubernetes/Kubernetes源码系列/Kubernetes源码系列(四)-kubelet源码分析.md) 
-
-      [Kubernetes源码系列(五)-kube-scheduler源码分析.md](云原生/Kubernetes/Kubernetes源码系列/Kubernetes源码系列(五)-kube-scheduler源码分析.md) 
-
-      [Kubernetes源码系列(六)-kube-controller-manager源码分析.md](云原生/Kubernetes/Kubernetes源码系列/Kubernetes源码系列(六)-kube-controller-manager源码分析.md) 
-
-      [Kubernetes源码系列(七)-kube-apiserver源码分析.md](云原生/Kubernetes/Kubernetes源码系列/Kubernetes源码系列(七)-kube-apiserver源码分析.md) 
-
    - Kubernetes 扩展机制
 
       - CNI
@@ -102,9 +86,9 @@ date: 2020-06-16 14:23:57
          [CRI-API.md](云原生/Kubernetes/Kubernetes扩展机制/CRI/CRI-API.md) 
 
       - CSI
-   
+
          [CSI工作方式.md](云原生/Kubernetes/Kubernetes扩展机制/CSI/CSI工作方式.md) 
-   
+
       - Operator
 
          [Kubernetes-Operator教程.md](云原生/Kubernetes/Kubernetes扩展机制/Operator/Kubernetes-Operator教程.md) 
@@ -117,44 +101,10 @@ date: 2020-06-16 14:23:57
 
       [swagger.json位置.md](云原生/Kubernetes/Kubernetes-API/swagger.json位置.md) 
 
-      [Kubernetes-API学习(一)-介绍.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(一)-介绍.md) 
-
-      [Kubernetes-API学习(二)-核心API.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(二)-核心API.md) 
-
-      [Kubernetes-API学习(三)-apps.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(三)-apps.md) 
-
-      [Kubernetes-API学习(四)-batch.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(四)-batch.md) 
-
-      [Kubernetes-API学习(五)-RDBC.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(五)-RDBC.md) 
-
-      [Kubernetes-API学习(六)-admissionregistration.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(六)-admissionregistration.md) 
-
-      [Kubernetes-API学习(七)-APIService.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(七)-APIService.md) 
-
-      [Kubernetes-API学习(八)-networking.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(八)-networking.md) 
-
-      [Kubernetes-API学习(九)-CRD.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(九)-CRD.md) 
-
-      [Kubernetes-API学习(十)-autoscaling.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十)-autoscaling.md) 
-
-      [Kubernetes-API学习(十一)-authentication.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十一)-authentication.md) 
-
-      [Kubernetes-API学习(十二)-RuntimeClass.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十二)-RuntimeClass.md) 
-
-      [Kubernetes-API学习(十三)-policy.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十三)-policy.md) 
-
-      [Kubernetes-API学习(十四)-scheduling.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十四)-scheduling.md) 
-
-      [Kubernetes-API学习(十五)-certificates.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十五)-certificates.md) 
-
-      [Kubernetes-API学习(十六)-coordination.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十六)-coordination.md) 
-
-      [Kubernetes-API学习(十七)-storage.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API学习(十七)-storage.md) 
-
    - Kubernetes 认证及授权系列
-
+   
      [Kubernetes证书生成.md](云原生/Kubernetes/Kubernetes认证及授权系列/Kubernetes证书生成.md) 
-
+   
      [为Kubernetes搭建支持OpenId-Connect的身份认证系统.md](云原生/Kubernetes/Kubernetes认证及授权系列/为Kubernetes搭建支持OpenId-Connect的身份认证系统.md) 
 
    - 动手操作
@@ -182,29 +132,29 @@ date: 2020-06-16 14:23:57
       [使用扩展进行并行处理.md](云原生/Kubernetes/动手操作/使用扩展进行并行处理.md) 
 
       [使用ConfigMap来配置Redis.md](云原生/Kubernetes/动手操作/使用ConfigMap来配置Redis.md) 
-   
+
       [使用ConfigMap配置Pod.md](云原生/Kubernetes/动手操作/使用ConfigMap配置Pod.md) 
-   
+
       [使用CronJob运行自动化任务.md](云原生/Kubernetes/动手操作/使用CronJob运行自动化任务.md) 
-   
+
       [使用PodPreset将信息注入Pods.md](云原生/Kubernetes/动手操作/使用PodPreset将信息注入Pods.md) 
-   
+
       [使用Secret安全地分发凭证.md](云原生/Kubernetes/动手操作/使用Secret安全地分发凭证.md) 
-   
+
       [示例：使用PV部署WordPress和MySQL.md](云原生/Kubernetes/动手操作/示例：使用PV部署WordPress和MySQL.md) 
-   
+
       [示例：使用Redis部署PHP留言板应用程序.md](云原生/Kubernetes/动手操作/示例：使用Redis部署PHP留言板应用程序.md) 
-   
+
       [通过环境变量将Pod信息呈现给容器.md](云原生/Kubernetes/动手操作/通过环境变量将Pod信息呈现给容器.md) 
-   
+
       [通过文件将Pod信息呈现给容器.md](云原生/Kubernetes/动手操作/通过文件将Pod信息呈现给容器.md) 
-   
+
       [为节点发布扩展资源-为容器分派扩展资源.md](云原生/Kubernetes/动手操作/为节点发布扩展资源-为容器分派扩展资源.md) 
-   
+
       [为容器的生命周期事件设置处理函数.md](云原生/Kubernetes/动手操作/为容器的生命周期事件设置处理函数.md) 
-   
+
       [为容器设置启动时要执行的命令及其入参.md](云原生/Kubernetes/动手操作/为容器设置启动时要执行的命令及其入参.md) 
-   
+
       [在Pod中的容器之间共享进程命名空间.md](云原生/Kubernetes/动手操作/在Pod中的容器之间共享进程命名空间.md) 
 
   
@@ -235,21 +185,6 @@ date: 2020-06-16 14:23:57
 
    [Cgroup实践.md](云原生/Docker/Cgroup实践.md) 
 
-   - Docker-API
-   
-      [Docker-API(一)-介绍.md](云原生/Docker/Docker-API/Docker-API(一)-介绍.md) 
-   
-      [Docker-API(二)-Containers.md](云原生/Docker/Docker-API/Docker-API(二)-Containers.md) 
-   
-      [Docker-API(三)-Images.md](云原生/Docker/Docker-API/Docker-API(三)-Images.md) 
-      
-      [Docker-API(四)-Network.md](云原生/Docker/Docker-API/Docker-API(四)-Network.md) 
-      
-      [Docker-API(五)-Volume.md](云原生/Docker/Docker-API/Docker-API(五)-Volume.md) 
-      
-      [Docker-API(六)-Exec.md](云原生/Docker/Docker-API/Docker-API(六)-Exec.md) 
-      
-      [Docker-API(七)-System.md](云原生/Docker/Docker-API/Docker-API(七)-System.md) 
 
 
 
