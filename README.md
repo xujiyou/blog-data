@@ -1135,6 +1135,10 @@ CDH 开始收费了，怎么说。。。
 
 - Jenkins
 
+  [Jenkins安装.md](DevOps/Jenkins/Jenkins安装.md) 
+
+  [Git提交触发Jenkins自动构建.md](DevOps/Jenkins/Git提交触发Jenkins自动构建.md) 
+
 
 
 - Kibana
