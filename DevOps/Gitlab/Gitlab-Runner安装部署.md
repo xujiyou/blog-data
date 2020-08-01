@@ -131,6 +131,14 @@ sudo gitlab-runner verify --delete --token dZ1NNBsnKWGZCMMmDseV  --url http://gi
 sudo systemctl status gitlab-runner
 ```
 
+配置完成后的配置文件在 `/etc/gitlab-runner/config.toml` 中，可以直接改这个文件，然后使用下面这个命令重启生效：
+
+```bash
+sudo systemctl restart gitlab-runner
+```
+
+
+
 
 
 ## 错误
