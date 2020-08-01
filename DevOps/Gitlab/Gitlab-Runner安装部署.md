@@ -145,7 +145,7 @@ sudo systemctl restart gitlab-runner
 
 错误1，没有拉取代码的权限
 
-![image-20200728181250580](/Users/jiyouxu/Documents/me/blog-hexo/source/_posts/resource/image-20200728181250580.png)
+![image-20200728181250580](../../resource/image-20200728181250580.png)
 
 可以通过将当前用户加入项目来解决，我这里把 root 用户加入了沧海项目组。
 
