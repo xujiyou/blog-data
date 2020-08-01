@@ -715,10 +715,11 @@ body {
   }
 }
 
+
 .menu {
     width: 300px;
     position: fixed;
-    top: 30px; 
+    top: 70px; 
     left: 20px;
     border: 1px solid rgb(221, 221, 221);
     text-align: left;
@@ -744,9 +745,20 @@ a::after {
   color: #4183c4;
 }
 
-li {
- /* list-style-type: none; */
+.menu li {
+  list-style-type: none;
   margin-bottom: 4px;
+}
+
+.menu ul {
+  list-style:none;
+  counter-reset: sectioncounter;
+  padding-inline-start: 10px;
+}
+
+.sidebar-header-2:before {
+  content:counter(sectioncounter) "、"; 
+  counter-increment:  sectioncounter;
 }
 
 .sidebar-header-1 {
@@ -756,15 +768,36 @@ li {
 .sidebar-header-2 {
   margin-left: 8px;
   font-size: 14px;
+  counter-reset: two;
 }
 
 .sidebar-header-3 {
-  margin-left: 16px;
+  margin-left: 20px;
   font-size: 14px;
+}
+
+.sidebar-header-3:before {
+  content: counter(sectioncounter) "." counter(two) "、";
+  counter-increment: two;
 }
 
 .sidebar-header-4 {
-  margin-left: 24px;
+  margin-left: 32px;
   font-size: 14px;
 }
 
+.sidebar-header-4:before {
+  content: counter(sectioncounter) "." counter(two) "、";
+  counter-increment: two;
+}
+
+.title {
+    width: 300px;
+    height: 30px;
+    line-height: 30px;
+    position: fixed;
+    top: 30px;
+    left: 20px;
+    border: 1px solid rgb(221, 221, 221);
+    text-align: center;
+}
