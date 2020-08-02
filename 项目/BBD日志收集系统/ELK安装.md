@@ -57,13 +57,14 @@ $ yum install --enablerepo=elasticsearch elasticsearch
 
 修改配置文件 `/etc/elasticsearch/elasticsearch.yml`
 
-```
+```yaml
 cluster.name: security
 node.name: security-1
 path.data: /data1/es,/data2/es,/data3/es,/data4/es
 path.logs: /data3/es-log
 network.host: 10.28.92.11
-cluster.initial_master_nodes: ["10.28.92.11"]
+discovery.seed_hosts: ["10.28.92.11", "10.28.93.11"]
+cluster.initial_master_nodes: ["security-1", "IDS-transfer"]
 ```
 
 创建目录：
