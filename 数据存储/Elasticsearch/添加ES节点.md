@@ -43,6 +43,30 @@ curl http://10.28.93.11:9200/_cat/shards
 
 还有一个需要注意的问题，再添加一个 ES 节点后，Kibana 会暂时不能使用，过一段时间重启 Kibana 就可以了。
 
+查看磁盘占用，即总数据量：
+
+```bash
+curl http://10.28.93.11:9200/_cat/allocation?v
+shards disk.indices disk.used disk.avail disk.total disk.percent host        ip          node
+    75        2.3gb    87.1gb     11.7tb     11.8tb            0 10.28.92.11 10.28.92.11 security-1
+    74        2.3gb    60.8gb      8.1tb      8.1tb            0 10.28.93.11 10.28.93.11 IDS-transfer
+```
+
+allocation 是分配的意思，不知道字段的意思，可以使用下面的方法查询：
+
+```bash
+curl http://10.28.93.11:9200/_cat/allocation?help
+shards       | s              | number of shards on node      
+disk.indices | di,diskIndices | disk used by ES indices       
+disk.used    | du,diskUsed    | disk used (total, not just ES)
+disk.avail   | da,diskAvail   | disk available                
+disk.total   | dt,diskTotal   | total capacity of all volumes 
+disk.percent | dp,diskPercent | percent disk used             
+host         | h              | host of node                  
+ip           |                | ip of node                    
+node         | n              | name of node 
+```
+
 
 
 
