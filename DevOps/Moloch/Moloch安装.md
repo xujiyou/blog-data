@@ -22,6 +22,10 @@ rpm --install moloch-2.3.2-1.x86_64.rpm
 
 Moloch 安装在了 `/data/moloch/` 中。
 
+
+
+## 配置 Moloch
+
 运行以下命令配置 Moloch：
 
 ```bash
@@ -79,7 +83,11 @@ pcapDir = /data1/moloch/raw
 
 当可用空间小于 20% 时开始删除 pcap 文件。
 
-启动 moloch：
+
+
+## 启动 Moloch
+
+molochcapture 用于收集数据，molochviewer 用于展示数据。
 
 ```bash
 systemctl start molochcapture.service
