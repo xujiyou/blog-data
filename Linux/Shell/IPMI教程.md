@@ -66,6 +66,10 @@ $ ipmitool user set password 2 abcdefg
 
 
 
+## ipmi 安装操作系统
+
+在 Web 中打开 ipmi 的 IP 地址，输入用户名及密码。
+
 
 
 

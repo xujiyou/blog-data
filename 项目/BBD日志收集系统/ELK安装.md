@@ -82,6 +82,15 @@ $ chown -R elasticsearch:elasticsearch /data3/es
 $ chown -R elasticsearch:elasticsearch /data4/es
 ```
 
+在 `/etc/elasticsearch/jvm.options` 中修改内存大小：
+
+```
+-Xms32g
+-Xmx32g
+```
+
+官方建议是设置机器一半的内存，但是不大于 32 GB。
+
 启动：
 
 ```bash

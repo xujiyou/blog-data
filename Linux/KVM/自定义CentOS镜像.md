@@ -317,6 +317,10 @@ $ checkisomd5 ../My_CentOS7.iso
 
 
 
+## IPMI 使用 ISO
+
+在IPMI 安装操作系统时，ISO 对应的盘是 /dev/sr0。
+
 
 
 
