@@ -820,7 +820,13 @@ CDH 开始收费了，怎么说。。。
 
    [ES开启安全认证.md](数据存储/Elasticsearch/ES开启安全认证.md) 
    
-   [添加ES节点.md](数据存储/Elasticsearch/添加ES节点.md) 
+   
+   
+   [添加ES节点.md](数据存储/Elasticsearch/运维/添加ES节点.md) 
+   
+   [ES常用操作.md](数据存储/Elasticsearch/运维/ES常用操作.md) 
+   
+   [ES踩坑.md](数据存储/Elasticsearch/运维/ES踩坑.md) 
 
 
 

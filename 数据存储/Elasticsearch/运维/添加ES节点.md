@@ -67,7 +67,7 @@ ip           |                | ip of node
 node         | n              | name of node 
 ```
 
-
+disk.indices 是 ES 实际使用的磁盘空间，disk.used 是当前机器使用的总磁盘容量。
 
 
 
