@@ -607,13 +607,20 @@ title: 日常工作记录
 ## 大数据
 
 - 原生部署
-  1. [ZooKeeper高可用部署.md](大数据/ZooKeeper/ZooKeeper高可用部署.md) 
-  2. [Hadoop高可用部署.md](大数据/HDFS/Hadoop高可用部署.md) 
-  3. [HBase高可用部署.md](大数据/HBase/HBase高可用部署.md) 
-  4. [Hive部署.md](大数据/Hive/Hive部署.md) 
-  5. [Spark高可用部署.md](大数据/Spark/Spark高可用部署.md) 
-  6. [Kafka高可用部署.md](大数据/Kafka/Kafka高可用部署.md) 
-  7. [Flink高可用部署.md](大数据/Flink/Flink高可用部署.md) 
+
+  [ZooKeeper高可用部署.md](大数据/ZooKeeper/ZooKeeper高可用部署.md) 
+
+  [Hadoop高可用部署.md](大数据/HDFS/Hadoop高可用部署.md) 
+
+  [HBase高可用部署.md](大数据/HBase/HBase高可用部署.md) 
+
+  [Hive部署.md](大数据/Hive/Hive部署.md) 
+
+  [Spark高可用部署.md](大数据/Spark/Spark高可用部署.md) 
+
+  [Kafka高可用部署.md](大数据/Kafka/Kafka高可用部署.md) 
+
+  [Flink高可用部署.md](大数据/Flink/Flink高可用部署.md) 
 
 
 
