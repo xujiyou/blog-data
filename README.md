@@ -249,13 +249,13 @@
 
    [Helm最佳实践.md](云原生/Helm/Helm最佳实践.md) 
 
-   
+
 
 - Pulumi
 
    [Pulumi入门.md](云原生/Pulumi/Pulumi入门.md) 
 
-   
+
 
 - Istio
 
@@ -418,9 +418,6 @@
        [HTTP健康检查.md](云原生/Envoy/Envoy配置/Upstream/HTTP健康检查.md) 
   
        [TCP健康检查.md](云原生/Envoy/Envoy配置/Upstream/TCP健康检查.md) 
-  
-    
-  
   
 
 
@@ -591,13 +588,11 @@
 
   [Argo介绍及入门.md](云原生/Argo/Argo介绍及入门.md) 
 
+
+
 - Rudr
 
   [Rudr入门.md](云原生/Rudr/Rudr入门.md) 
-
-
-
-
 
 
 
@@ -607,19 +602,16 @@
 
 ## 大数据
 
-CDH 开始收费了，怎么说。。。
+- 原生部署
+  1. [ZooKeeper高可用部署.md](大数据/ZooKeeper/ZooKeeper高可用部署.md) 
+  2. [Hadoop高可用部署.md](大数据/HDFS/Hadoop高可用部署.md) 
+  3. [HBase高可用部署.md](大数据/HBase/HBase高可用部署.md) 
+  4. [Hive部署.md](大数据/Hive/Hive部署.md) 
+  5. [Spark高可用部署.md](大数据/Spark/Spark高可用部署.md) 
+  6. [Kafka高可用部署.md](大数据/Kafka/Kafka高可用部署.md) 
+  7. [Flink高可用部署.md](大数据/Flink/Flink高可用部署.md) 
 
-不用 CDH 和 HDP，自己动手搭建一个高可用的大数据集群，路线如下：
 
-1. [ZooKeeper高可用部署.md](大数据/ZooKeeper/ZooKeeper高可用部署.md) 
-2. [Hadoop高可用部署.md](大数据/HDFS/Hadoop高可用部署.md) 
-3. [HBase高可用部署.md](大数据/HBase/HBase高可用部署.md) 
-4. [Hive部署.md](大数据/Hive/Hive部署.md) 
-5. [Spark高可用部署.md](大数据/Spark/Spark高可用部署.md) 
-6. [Kafka高可用部署.md](大数据/Kafka/Kafka高可用部署.md) 
-7. [Flink高可用部署.md](大数据/Flink/Flink高可用部署.md) 
-
-下面按组件来学习。
 
 - 爬虫
 
@@ -630,8 +622,6 @@ CDH 开始收费了，怎么说。。。
 
 
 - Flink
-
-   [Flink高可用部署.md](大数据/Flink/Flink高可用部署.md) 
 
    [Flink-Table教程.md](大数据/Flink/Flink-Table教程.md) 
 
@@ -645,10 +635,8 @@ CDH 开始收费了，怎么说。。。
 
 - HBase
 
-   [HBase高可用部署.md](大数据/HBase/HBase高可用部署.md) 
-
    [HBase入门教程.md](大数据/HBase/HBase入门教程.md) 
-   
+
    [HBase架构.md](大数据/HBase/HBase架构.md) 
    
    - HBase配置
@@ -661,10 +649,8 @@ CDH 开始收费了，怎么说。。。
 
 - HDFS
 
-   [Hadoop高可用部署.md](大数据/HDFS/Hadoop高可用部署.md) 
-
    [HDFS常用操作.md](大数据/HDFS/HDFS常用操作.md) 
-   
+
    [HDFS之web-ui.md](大数据/HDFS/HDFS之web-ui.md) 
    
    [HDFS原理详解.md](大数据/HDFS/HDFS原理详解.md) 
@@ -672,8 +658,6 @@ CDH 开始收费了，怎么说。。。
 
 
 - Hive
-
-   [Hive部署.md](大数据/Hive/Hive部署.md) 
 
    [Java连接Hive.md](大数据/Hive/Java连接Hive.md) 
 
@@ -683,10 +667,8 @@ CDH 开始收费了，怎么说。。。
 
 - Kafka
 
-   [Kafka高可用部署.md](大数据/Kafka/Kafka高可用部署.md) 
-
    [Kafka快速入门.md](大数据/Kafka/Kafka快速入门.md) 
-   
+
    [Kafka主题.md](大数据/Kafka/Kafka主题.md) 
    
    [Kafka生产者.md](大数据/Kafka/Kafka生产者.md) 
@@ -719,8 +701,6 @@ CDH 开始收费了，怎么说。。。
 
 - Spark
 
-   [Spark高可用部署.md](大数据/Spark/Spark高可用部署.md) 
-
    [Spark入门教程.md](大数据/Spark/Spark入门教程.md) 
 
    [spark-submit详解.md](大数据/Spark/spark-submit详解.md) 
@@ -728,7 +708,7 @@ CDH 开始收费了，怎么说。。。
    [在Kubernetes上运行Spark.md](大数据/Spark/在Kubernetes上运行Spark.md) 
 
    - Spark 编程
-   
+
      [Spark RDD及编程接口的学习.md](大数据/Spark/Spark-RDD及编程接口的学习.md) 
    
      [Spark-Streaming学习指南.md](大数据/Spark/Spark-Streaming学习指南.md) 
@@ -751,8 +731,6 @@ CDH 开始收费了，怎么说。。。
 
    [ZooKeeper介绍.md](大数据/ZooKeeper/ZooKeeper介绍.md) 
 
-   [ZooKeeper高可用部署.md](大数据/ZooKeeper/ZooKeeper高可用部署.md) 
-
    [ZooKeeper使用入门.md](大数据/ZooKeeper/ZooKeeper使用入门.md) 
 
    [zkCli的使用.md](大数据/ZooKeeper/zkCli的使用.md) 
@@ -764,6 +742,8 @@ CDH 开始收费了，怎么说。。。
    
 
 - Kerberos
+
+
 
 - Sqoop
 
@@ -788,8 +768,6 @@ CDH 开始收费了，怎么说。。。
 
 
 ## 数据储存
-
-数据储存包括数据库技术，也包含一些分布式储存技术。
 
 - Elasticsearch
 
@@ -959,13 +937,17 @@ CDH 开始收费了，怎么说。。。
 
 
 
+- TiDB
+
+  
+
+
+
 ---
 
 
 
 ## 编程语言
-
-挑几门有前途的学一下
 
 - Rust
 
@@ -973,17 +955,27 @@ CDH 开始收费了，怎么说。。。
 
    [Rust-WASM入门.md](编程语言/Rust/Rust-WASM入门.md) 
 
+
+
 - Scala
 
    [Scala基础语法学习.md](编程语言/Scala/Scala基础语法学习.md) 
 
    [Scala语法深入学习.md](编程语言/Scala/Scala语法深入学习.md) 
 
+
+
 - Dart
+
+
 
 - JavaScript
 
+
+
 - TypeScript
+
+
 
 - Golang
 
@@ -1011,13 +1003,19 @@ CDH 开始收费了，怎么说。。。
 
        [go-restful入门.md](编程语言/Golang/go-restful/go-restful入门.md) 
 
+
+
 - Swift
+
+
 
 - Python
 
     [Python教程.md](编程语言/Python/Python教程.md) 
     
     [Python源码安装.md](编程语言/Python/Python源码安装.md) 
+
+
 
 - Java
 
@@ -1036,6 +1034,10 @@ CDH 开始收费了，怎么说。。。
   - Maven
 
   - JVM
+
+  - Nacos
+
+    [NacOS部署.md](编程语言/Java/NacOS/NacOS部署.md) 
 
 
 
