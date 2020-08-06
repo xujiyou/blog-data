@@ -40,6 +40,8 @@ TiDB 适合高可用、强一致要求较高、数据规模较大等各种应用
 
 参考：https://docs.pingcap.com/zh/tidb/stable/production-deployment-using-tiup
 
+在 Linux 中安装可以更好的对 TiDB 有一个认知，待熟悉之后再往 k8s 上搬。
+
 使用 TiUP 工具来安装 TiDB 集群。下面全部使用一个普通用户执行：
 
 ```bash
