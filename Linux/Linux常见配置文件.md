@@ -21,3 +21,22 @@ Linux 的配置文件按道理应全部放到 /etc 目录。但是这里也记�
 ## 网络命名空间目录
 
 `/var/run/netns/` 中
+
+
+
+## 调整文件描述符数量
+
+显示当前文件描述符数量：
+
+```
+ulimit -n
+```
+
+在 `/etc/security/limits.conf` 最后添加如下两行：
+
+```
+* soft nofile 605536
+* hard nofile 605536
+```
+
+重启当前命令行生效

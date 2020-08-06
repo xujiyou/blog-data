@@ -4,7 +4,7 @@
 
 在 CentOS 上安装最新版本 Redis，我个人还是喜欢通过 YUM 或 RPM 安装，用 systemd 管理，不太喜欢官方那种下载二进制包的方式。
 
-在安装之前，需要先安装 remi 软件库，因为 epel 库中的 redis 不是最新版本的。
+在安装之前，需要先安装 remi 软件库，因为 epel 库中的 redis 不是最新版本的。r
 
 ```bash
 $ sudo yum install http://rpms.famillecollet.com/enterprise/remi-release-7.rpm

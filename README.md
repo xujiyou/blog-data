@@ -1,19 +1,6 @@
----
-title: 日常工作技术记录
-date: 2020-06-16 14:23:57
----
-
-分别包括 `编程语言`，`大数据`，`前端`，`数据储存`，`云原生`，`DevOps`，`Java`，`Linux` 这几个方面，另外还有其他的一些编程基础。
-
-
-
----
-
 
 
 ## 云原生
-
-云原生是最近兴起的开源基金会，包含许多高质量的开源项目，大多依托于 Docker 及 Kubernetes。这些开源项目大多是 Golang 写的。
 
 - Kubernetes
 
@@ -826,7 +813,7 @@ CDH 开始收费了，怎么说。。。
    
    [ES常用操作.md](数据存储/Elasticsearch/运维/ES常用操作.md) 
    
-   [ES踩坑.md](数据存储/Elasticsearch/运维/ES踩坑.md) 
+   [ES掉节点排错.md](数据存储/Elasticsearch/运维/ES掉节点排错.md) 
 
 
 
@@ -1032,6 +1019,24 @@ CDH 开始收费了，怎么说。。。
     
     [Python源码安装.md](编程语言/Python/Python源码安装.md) 
 
+- Java
+
+   [ClassNotFoundException与NoClassDefFoundError.md](Java/ClassNotFoundException与NoClassDefFoundError.md) 
+
+   [package-info的作用.md](Java/package-info的作用.md) 
+
+   [Linux查看Java线程状态.md](Java/Linux查看Java线程状态.md) 
+
+  - Gradle
+
+    [Gradle生成src目录.md](Java/Gradle/Gradle生成src目录.md) 
+
+    [Gradle打包带依赖的jar.md](Java/Gradle/Gradle打包带依赖的jar.md) 
+
+  - Maven
+
+  - JVM
+
 
 
 ---
@@ -1147,30 +1152,6 @@ CDH 开始收费了，怎么说。。。
 - Moloch
 
   [Moloch安装.md](DevOps/Moloch/Moloch安装.md) 
-
-
-
----
-
-
-
-## Java
-
- [ClassNotFoundException与NoClassDefFoundError.md](Java/ClassNotFoundException与NoClassDefFoundError.md) 
-
- [package-info的作用.md](Java/package-info的作用.md) 
-
- [Linux查看Java线程状态.md](Java/Linux查看Java线程状态.md) 
-
-- Gradle
-
-  [Gradle生成src目录.md](Java/Gradle/Gradle生成src目录.md) 
-
-  [Gradle打包带依赖的jar.md](Java/Gradle/Gradle打包带依赖的jar.md) 
-
-- Maven
-
-- JVM
 
 
 
