@@ -99,7 +99,7 @@ alertmanager_servers:
 创建集群：
 
 ```bash
-tiup cluster deploy tidb-test v4.0.0 ./topology.yaml
+tiup cluster deploy tidb-test v4.0.4 ./topology.yaml
 ```
 
 检查集群列表：
@@ -124,6 +124,8 @@ tiup cluster display tidb-test
 
 ![image-20200806120003188](../../resource/image-20200806120003188.png)
 
+在运行过程
+
 
 
 安装 mysql 客户端并登录数据库：
@@ -143,13 +145,59 @@ mysql> use mysql;
 mysql> select user,host from user;
 ```
 
+在 4.0 之后，官方在 pd 上加了一个 Dashboard，访问地址：http://192.168.112.154:2379/dashboard ，初始密码为空。
 
 
 
+## 单机部署
 
+参考：[https://docs.pingcap.com/zh/tidb/stable/quick-start-with-tidb#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E4%BD%BF%E7%94%A8-tiup-cluster-%E5%9C%A8%E5%8D%95%E6%9C%BA%E4%B8%8A%E6%A8%A1%E6%8B%9F%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E6%AD%A5%E9%AA%A4](https://docs.pingcap.com/zh/tidb/stable/quick-start-with-tidb#第二种使用-tiup-cluster-在单机上模拟生产环境部署步骤)
 
+步骤和上边一样，只不过配置不一样，配置如下：
 
+````yaml
+global:
+  user: "s1"
+  ssh_port: 22
+  deploy_dir: "/tidb-deploy"
+  data_dir: "/tidb-data"
 
+server_configs:
+  tikv:
+    readpool.unified.max-thread-count: 2
+    readpool.storage.use-unified-pool: false
+    readpool.coprocessor.use-unified-pool: true
+    storage.block-cache.capacity: 1GB
+    raftstore.capacity: 10GB
+  pd:
+    replication.location-labels: ["host"]
+
+pd_servers:
+  - host: 172.20.21.5
+
+tidb_servers:
+  - host: 172.20.21.5
+    port: 4000
+    status_port: 10080
+    numa_node: "0"
+
+tikv_servers:
+  - host: 172.20.21.5
+    port: 20160
+    status_port: 20180
+    numa_node: "0"
+    config:
+      server.labels: { host: "tikv1" }
+
+monitoring_servers:
+  - host: 172.20.21.5
+
+grafana_servers:
+  - host: 172.20.21.5
+
+alertmanager_servers:
+  - host: 172.20.21.5
+````
 
 
 
