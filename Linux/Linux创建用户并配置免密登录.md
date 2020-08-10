@@ -29,7 +29,16 @@ $ passwd xujiyou
 $ useradd -r username
 ```
 
-这条命了也会自动添加用户组。
+这条命令也会自动添加用户组。
+
+或者：
+
+```bash
+$ sudo groupadd --system prometheus
+$ sudo useradd -s /sbin/nologin --system -g prometheus prometheus
+```
+
+
 
 
 

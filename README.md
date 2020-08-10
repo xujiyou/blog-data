@@ -803,6 +803,18 @@ title: 日常工作记录
      [ES常用操作.md](数据存储/Elasticsearch/运维/ES常用操作.md) 
    
      [ES掉节点排错.md](数据存储/Elasticsearch/运维/ES掉节点排错.md) 
+   
+   - ES 查询实战
+   
+     [2016美国总统选举辩论数据检索实战.md](数据存储/Elasticsearch/ES查询实战/2016美国总统选举辩论数据检索实战.md) 
+     
+     [170万篇论文数据检索.md](数据存储/Elasticsearch/ES查询实战/170万篇论文数据检索.md) 
+   
+   - 性能
+   
+     [ES性能优化建议.md](数据存储/Elasticsearch/性能/ES性能优化建议.md) 
+   
+   
 
 
 
@@ -1243,6 +1255,8 @@ title: 日常工作记录
   [网络性能分析.md](Linux/性能分析/网络性能分析.md) 
   
   [磁盘4k随机写测试.md](Linux/性能分析/磁盘4k随机写测试.md) 
+  
+  [随机读写与顺序读写.md](Linux/性能分析/随机读写与顺序读写.md) 
 
 
 
