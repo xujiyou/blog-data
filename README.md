@@ -205,22 +205,6 @@ title: 日常工作记录
 
   [etcd性能调优.md](云原生/Etcd/etcd性能调优.md) 
 
-  - etch - API
-
-    [Etcd-Api(一)-介绍.md](云原生/Etcd/etcd-API/Etcd-Api(一)-介绍.md) 
-
-    [Etcd-API(二)-KV.md](云原生/Etcd/etcd-API/Etcd-API(二)-KV.md) 
-
-    [Etcd-API(三)-Watch.md](云原生/Etcd/etcd-API/Etcd-API(三)-Watch.md) 
-
-    [Etcd-API(四)-Lease.md](云原生/Etcd/etcd-API/Etcd-API(四)-Lease.md) 
-
-    [Etcd-API(五)-Cluster.md](云原生/Etcd/etcd-API/Etcd-API(五)-Cluster.md) 
-
-    [Etcd-API(六)-Maintenance.md](云原生/Etcd/etcd-API/Etcd-API(六)-Maintenance.md) 
-  
-    [Etcd-API(七)-Auth.md](云原生/Etcd/etcd-API/Etcd-API(七)-Auth.md) 
-
 
 
 - gRPC
@@ -285,24 +269,10 @@ title: 日常工作记录
       
       [Istio服务保护.md](云原生/Istio/实践/Istio服务保护.md) 
    
-   - CRD
-
-      [Istio-crd(一)-概述.md](云原生/Istio/CRD/Istio-crd(一)-概述.md) 
-
-      [Istio-crd(二)-authentication.md](云原生/Istio/CRD/Istio-crd(二)-authentication.md) 
-
-      [Istio-crd(三)-config.md](云原生/Istio/CRD/Istio-crd(三)-config.md) 
-
-      [Istio-crd(四)-networking.md](云原生/Istio/CRD/Istio-crd(四)-networking.md) 
-
-      [Istio-crd(五)-rbac.md](云原生/Istio/CRD/Istio-crd(五)-rbac.md) 
-
-      [Istio-crd(六)-security.md](云原生/Istio/CRD/Istio-crd(六)-security.md) 
-
    - 架构
-   
+
       [Poilt.md](云原生/Istio/架构/Poilt.md) 
-   
+
    - 配置
 
 
@@ -310,119 +280,111 @@ title: 日常工作记录
 - Envoy
 
   [Envoy入门.md](云原生/Envoy/Envoy入门.md) 
-  
+
   [Envoy术语.md](云原生/Envoy/Envoy术语.md) 
-  
+
   [Envoy代理自己的服务.md](云原生/Envoy/Envoy代理自己的服务.md) 
-  
+
   [Envoy二进制构建及安装.md](云原生/Envoy/Envoy二进制构建及安装.md) 
-  
+
   [Envoy命令行选项.md](云原生/Envoy/Envoy命令行选项.md) 
-  
+
   [Envoy集成Jaeger.md](云原生/Envoy/Envoy集成Jaeger.md) 
-  
+
   [Envoy热重启.md](云原生/Envoy/Envoy热重启.md) 
-  
-  - Envoy - API
-  
-    [Envoy-API(一)-概述.md](云原生/Envoy/Envoy-API/Envoy-API(一)-概述.md) 
-  
-    [Envoy-API(二)-Boorstrap.md](云原生/Envoy/Envoy-API/Envoy-API(二)-Boorstrap.md) 
-  
-    [Envoy-API(三)-Listeners.md](云原生/Envoy/Envoy-API/Envoy-API(三)-Listeners.md) 
-  
+
   - Envoy 安全
-  
+
     [Envoy-TLS学习.md](云原生/Envoy/Envoy安全/Envoy-TLS学习.md) 
-  
+
   - xDS
-  
+
     [Envoy-xDS实现动态配置.md](云原生/Envoy/xDS/Envoy-xDS实现动态配置.md) 
-  
+
     [EDS.md](云原生/Envoy/xDS/EDS.md)  
-  
+
     [RDS.md](云原生/Envoy/xDS/RDS.md) 
-  
+
     [RTDS.md](云原生/Envoy/xDS/RTDS.md) 
-  
+
     [SDS.md](云原生/Envoy/xDS/SDS.md) 
-  
+
     [VHDS.md](云原生/Envoy/xDS/VHDS.md) 
-  
+
   - Envoy 配置
-  
+
     - HTTP
-  
+
       - HTTP 过滤器 
-  
+
          [错误注入.md](云原生/Envoy/Envoy配置/HTTP/HTTP过滤器/错误注入.md) 
-  
+
          [外部认证.md](云原生/Envoy/Envoy配置/HTTP/HTTP过滤器/外部认证.md) 
-  
+
          [自适应并发过滤器.md](云原生/Envoy/Envoy配置/HTTP/HTTP过滤器/自适应并发过滤器.md) 
-  
+
          [Buffer.md](云原生/Envoy/Envoy配置/HTTP/HTTP过滤器/Buffer.md) 
-  
+
          [CORS.md](云原生/Envoy/Envoy配置/HTTP/HTTP过滤器/CORS.md) 
-  
+
          [gRPC到HTTP1.1桥接.md](云原生/Envoy/Envoy配置/HTTP/HTTP过滤器/gRPC到HTTP1.1桥接.md) 
-  
+
          [Gzip.md](云原生/Envoy/Envoy配置/HTTP/HTTP过滤器/Gzip.md) 
-  
+
          [Header-To-Metadata.md](云原生/Envoy/Envoy配置/HTTP/HTTP过滤器/Header-To-Metadata.md) 
-  
+
          [IP-Tagging.md](云原生/Envoy/Envoy配置/HTTP/HTTP过滤器/IP-Tagging.md) 
-  
+
          [JWT.md](云原生/Envoy/Envoy配置/HTTP/HTTP过滤器/JWT.md) 
-  
+
          [lua.md](云原生/Envoy/Envoy配置/HTTP/HTTP过滤器/lua.md) 
-  
+
          [tap.md](云原生/Envoy/Envoy配置/HTTP/HTTP过滤器/tap.md) 
-  
+
       - HTTP 连接管理
-  
+
          [流量转移与分流.md](云原生/Envoy/Envoy配置/HTTP/HTTP连接管理/流量转移与分流.md) 
-  
+
          [路由匹配.md](云原生/Envoy/Envoy配置/HTTP/HTTP连接管理/路由匹配.md) 
-  
+
          [Header处理.md](云原生/Envoy/Envoy配置/HTTP/HTTP连接管理/Header处理.md) 
-  
+
          [Header清理.md](云原生/Envoy/Envoy配置/HTTP/HTTP连接管理/Header清理.md) 
-  
+
          [HTTP-Runtime.md](云原生/Envoy/Envoy配置/HTTP/HTTP连接管理/HTTP-Runtime.md) 
-  
+
          [HTTP统计信息.md](云原生/Envoy/Envoy配置/HTTP/HTTP连接管理/HTTP统计信息.md) 
-  
+
     - Listeners
-  
+
        [http_inspector.md](云原生/Envoy/Envoy配置/Listeners/Listener-Filters/http_inspector.md) 
-  
+
        [tls_inspector.md](云原生/Envoy/Envoy配置/Listeners/Listener-Filters/tls_inspector.md) 
-  
+
        [Direct-response.md](云原生/Envoy/Envoy配置/Listeners/Network-Filters/Direct-response.md) 
-  
+
        [echo.md](云原生/Envoy/Envoy配置/Listeners/Network-Filters/echo.md) 
-  
+
        [kafka.md](云原生/Envoy/Envoy配置/Listeners/Network-Filters/kafka.md) 
-  
+
        [mongo.md](云原生/Envoy/Envoy配置/Listeners/Network-Filters/mongo.md) 
-  
+
        [mysql.md](云原生/Envoy/Envoy配置/Listeners/Network-Filters/mysql.md) 
-  
+
        [redis.md](云原生/Envoy/Envoy配置/Listeners/Network-Filters/redis.md) 
-  
+
        [ssl-client.md](云原生/Envoy/Envoy配置/Listeners/Network-Filters/ssl-client.md) 
-  
+
        [zookeeper.md](云原生/Envoy/Envoy配置/Listeners/Network-Filters/zookeeper.md) 
-  
+
     - Upstream
-  
+
        [断路器.md](云原生/Envoy/Envoy配置/Upstream/断路器.md) 
-  
+
        [HTTP健康检查.md](云原生/Envoy/Envoy配置/Upstream/HTTP健康检查.md) 
-  
+
        [TCP健康检查.md](云原生/Envoy/Envoy配置/Upstream/TCP健康检查.md) 
-  
+
 
 
 
