@@ -748,23 +748,15 @@ title: 日常工作记录
 
    [ES之RESTAPIs.md](数据存储/Elasticsearch/ES之RESTAPIs.md) 
 
-   [ES聚合.md](数据存储/Elasticsearch/ES聚合.md) 
-
-   [ES之Mapping.md](数据存储/Elasticsearch/ES之Mapping.md) 
-
-   [ES之QueryDSL.md](数据存储/Elasticsearch/ES之QueryDSL.md) 
-
-   [ES之QueryDSL二.md](数据存储/Elasticsearch/ES之QueryDSL二.md) 
-
-   [ES开启安全认证.md](数据存储/Elasticsearch/ES开启安全认证.md) 
-   
    - ES 运维
-   
+
      [添加ES节点.md](数据存储/Elasticsearch/运维/添加ES节点.md) 
-   
+
      [ES常用操作.md](数据存储/Elasticsearch/运维/ES常用操作.md) 
-   
+
      [ES掉节点排错.md](数据存储/Elasticsearch/运维/ES掉节点排错.md) 
+
+     [ES开启安全认证.md](数据存储/Elasticsearch/运维/ES开启安全认证.md) 
    
    - ES 查询实战
    
@@ -781,6 +773,26 @@ title: 日常工作记录
      [ES与Lucene的关系.md](数据存储/Elasticsearch/架构/ES与Lucene的关系.md) 
    
      [Translog文件保证数据安全.md](数据存储/Elasticsearch/架构/Translog文件保证数据安全.md) 
+   
+   - 聚合
+   
+     [ES聚合概述.md](数据存储/Elasticsearch/聚合/ES聚合概述.md) 
+   
+   - 搜索
+   
+     [ES之QueryDSL.md](数据存储/Elasticsearch/搜索/ES之QueryDSL.md) 
+   
+     [ES之QueryDSL二.md](数据存储/Elasticsearch/搜索/ES之QueryDSL二.md) 
+   
+   - SQL
+   
+   - Mapping
+   
+     [ES之Mapping.md](数据存储/Elasticsearch/Mapping/ES之Mapping.md) 
+   
+     
+   
+   
    
    
 
@@ -1379,6 +1391,12 @@ title: 日常工作记录
 - HAProxy
 
   [HAProxy安装及入门.md](Linux/HAPorxy/HAProxy安装及入门.md) 
+
+
+
+- SSH
+
+  [SSH反向代理端口配置.md](Linux/SSH/SSH反向代理端口配置.md) 
 
 
 

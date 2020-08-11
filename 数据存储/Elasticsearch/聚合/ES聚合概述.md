@@ -1,5 +1,9 @@
 # ES 聚合
 
+参见官方文档：https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html
+
+聚合用于统计ES中的文档。
+
 聚合语句的格式：
 
 ```json
@@ -14,6 +18,22 @@
     [,"<aggregation_name_2>" : { ... } ]*
 }
 ```
+
+
+
+## 聚合类型
+
+**桶（Bucket）聚合**
+
+**指标（Metric）聚合**
+
+**矩阵（Matrix）聚合** 实验特性
+
+**管道（Pipeline）聚合** Pipeline Aggregations 是一组工作在其他聚合计算结果而不是文档集合的聚合。
+
+其中，只有矩阵聚合不能使用脚本。
+
+
 
 ## 度量聚合
 
