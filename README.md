@@ -776,6 +776,12 @@ title: 日常工作记录
    
      [ES性能优化建议.md](数据存储/Elasticsearch/性能/ES性能优化建议.md) 
    
+   - 架构
+   
+     [ES与Lucene的关系.md](数据存储/Elasticsearch/架构/ES与Lucene的关系.md) 
+   
+     [Translog文件保证数据安全.md](数据存储/Elasticsearch/架构/Translog文件保证数据安全.md) 
+   
    
 
 
