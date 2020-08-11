@@ -1396,7 +1396,7 @@ title: 日常工作记录
 
 - SSH
 
-  [SSH反向代理端口配置.md](Linux/SSH/SSH反向代理端口配置.md) 
+  [SSH反向代理与端口转发配置.md](Linux/SSH/SSH反向代理与端口转发配置.md) 
 
 
 
