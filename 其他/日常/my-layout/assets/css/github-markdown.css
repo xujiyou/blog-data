@@ -17,11 +17,11 @@ body {
   overflow: hidden;
   font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.8;
   word-wrap: break-word;
     border-width: 1px;
-    border-style: solid;
-    border-color: rgb(221, 221, 221);
+    border-style: dashed;
+    border-color: rgb(211, 211, 211);
     border-image: initial;
     border-image-source: initial;
     border-image-repeat: initial;
@@ -715,28 +715,50 @@ body {
   }
 }
 
-
-.menu {
+@media (min-width: 43.75em) {
+  .menu {
     width: 300px;
     position: fixed;
-    top: 70px; 
+    top: 70px;
     left: 20px;
     border: 1px solid rgb(221, 221, 221);
     text-align: left;
+  }
+
+  .main {
+    margin: 30px 0 30px 340px;
+  }
+
+  .title {
+    width: 300px;
+    height: 30px;
+    line-height: 30px;
+    position: fixed;
+    top: 30px;
+    left: 20px;
+    border: 1px solid rgb(221, 221, 221);
+    text-align: center;
+  }
 }
 
+@media (max-width: 43.75em) {
+  .title {
+    width: calc(100% - 24px);
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid rgb(221, 221, 221);
+    text-align: center;
+    margin: 12px;
+  }
 
-.main {
-    margin: 30px 0 30px 340px;
 }
 
 a {
   text-decoration: none;
-  height: 32px;
   background-color: transparent;
   cursor: pointer;
   padding: 0;
-  margin-right: 16px;
+  margin: 0;
   color: #4183c4;
   /*font-weight: bold;*/
 }
@@ -748,10 +770,11 @@ a::after {
 .menu li {
   list-style-type: none;
   margin-bottom: 4px;
+  list-style-position: outside;
 }
 
 .menu ul {
-  list-style:none;
+  list-style: outside;
   counter-reset: sectioncounter;
   padding-inline-start: 10px;
 }
@@ -791,13 +814,3 @@ a::after {
   counter-increment: two;
 }
 
-.title {
-    width: 300px;
-    height: 30px;
-    line-height: 30px;
-    position: fixed;
-    top: 30px;
-    left: 20px;
-    border: 1px solid rgb(221, 221, 221);
-    text-align: center;
-}
