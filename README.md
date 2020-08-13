@@ -784,8 +784,6 @@ title: 日常工作记录
    
      [ES之QueryDSL二.md](数据存储/Elasticsearch/搜索/ES之QueryDSL二.md) 
    
-   - SQL
-   
    - Mapping
    
      [ES之Mapping.md](数据存储/Elasticsearch/Mapping/ES之Mapping.md) 

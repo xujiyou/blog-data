@@ -20,7 +20,7 @@ date: 2020-06-21 18:34:57
 ```
 [ceph]
 name=Ceph packages
-baseurl=http://mirrors.163.com/ceph/rpm-15.2.3/el7/x86_64/
+baseurl=http://mirrors.163.com/ceph/rpm-15.2.4/el7/x86_64/
 enabled=1
 gpgcheck=1
 priority=2
@@ -29,7 +29,7 @@ gpgkey=http://mirrors.163.com/ceph/keys/release.asc
 
 [ceph-noarch]
 name=Ceph noarch packages
-baseurl=http://mirrors.163.com/ceph/rpm-15.2.3/el7/noarch/
+baseurl=http://mirrors.163.com/ceph/rpm-15.2.4/el7/noarch/
 enabled=1
 gpgcheck=1
 priority=2
@@ -38,7 +38,7 @@ gpgkey=http://mirrors.163.com/ceph/keys/release.asc
 
 [ceph-source]
 name=Ceph source packages
-baseurl=http://mirrors.163.com/ceph/rpm-15.2.3/el7/SRPMS/
+baseurl=http://mirrors.163.com/ceph/rpm-15.2.4/el7/SRPMS/
 enabled=0
 gpgcheck=1
 priority=2
@@ -311,6 +311,7 @@ $ ceph-mgr -i ceph-1
 启动 ceph-mgr：
 
 ```bash
+$ systemctl enable ceph-mgr@ceph-1
 $ systemctl start ceph-mgr@ceph-1
 ```
 
@@ -363,6 +364,17 @@ $ sudo ceph-volume lvm list
 
 
 ---
+
+## 安装 Dashboard
+
+```bash
+$ yum install ceph-mgr-dashboard 
+$ ceph mgr module enable dashboard
+$ ceph dashboard create-self-signed-cert 
+$ ceph dashboard ac-user-create admin ****** administrator
+```
+
+
 
 
 
@@ -419,6 +431,18 @@ osd pool default pgp num = 200
 
 
 
+
+ceph -s 警告：
+
+```
+3 monitors have not enabled msgr2
+```
+
+解决方案：
+
+```bash
+ceph mon enable-msgr2
+```
 
 
 

@@ -8,6 +8,21 @@
 $ sudo ceph osd pool create kubernetes
 ```
 
+查看 pool 中的 pg 数量、pgp数量、复制份数：
+
+```bash
+$ sudo ceph osd pool get kubernetes pg_num
+$ sudo ceph osd pool get kubernetes pgp_num
+$ sudo ceph osd dump | grep size | grep kubernetes
+```
+
+在 https://ceph.com/pgcalc/ 中计算 pool 的数量，然后使用以下语句修改：
+
+```bash
+$ sudo ceph osd pool set kubernetes pg_num 512
+$ sudo ceph osd pool set kubernetes pgp_num 512
+```
+
 对 pool 进行初始化：
 
 ```bash
@@ -24,7 +39,7 @@ $ sudo ceph auth get-or-create client.kubernetes mon 'profile rbd' osd 'profile 
 
 ```
 [client.kubernetes]
-        key = AQC9OZ1ezHSVOhAA+JLwECCL6RkNZLd3uKnLqw==
+        key = AQCl1DRfftOWHBAA+VIQ7jVZO2Q0H4ERF6A1mg==
 ```
 
 
@@ -58,6 +73,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: ceph-csi-config
+  namespace: ceph
 data:
   config.json: |-
     [
@@ -79,6 +95,7 @@ data:
 创建：
 
 ```bash
+$ kubectl create ns ceph
 $ kubectl apply -f csi-config-map.yaml
 ```
 
@@ -93,10 +110,10 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: csi-rbd-secret
-  namespace: default
+  namespace: ceph
 stringData:
   userID: kubernetes
-  userKey: AQC9OZ1ezHSVOhAA+JLwECCL6RkNZLd3uKnLqw==
+  userKey: AQCl1DRfftOWHBAA+VIQ7jVZO2Q0H4ERF6A1mg==
 ```
 
 创建：
@@ -109,20 +126,20 @@ $ kubectl apply -f csi-rbd-secret.yaml
 
 ## 配置 ceph-csi 插件
 
-首先创建 ceph-csi 插件使用到的 ServiceAccount 和 RBAC 信息：
+首先创建 ceph-csi 插件使用到的 ServiceAccount 和 RBAC 信息（注意修改文件中的命名空间）：
 
 ```bash
-$ kubectl apply -f https://raw.githubusercontent.com/ceph/ceph-csi/master/deploy/rbd/kubernetes/csi-provisioner-rbac.yaml
-$ kubectl apply -f https://raw.githubusercontent.com/ceph/ceph-csi/master/deploy/rbd/kubernetes/csi-nodeplugin-rbac.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/ceph/ceph-csi/master/deploy/rbd/kubernetes/csi-provisioner-rbac.yaml -n ceph
+$ kubectl apply -f https://raw.githubusercontent.com/ceph/ceph-csi/master/deploy/rbd/kubernetes/csi-nodeplugin-rbac.yaml -n ceph
 ```
 
 最后，创建 ceph-csi provisioner 和 node 插件：
 
 ```bash
-$ wget https://raw.githubusercontent.com/ceph/ceph-csi/master/deploy/rbd/kubernetes/csi-rbdplugin-provisioner.yaml
+$ wget https://raw.githubusercontent.com/ceph/ceph-csi/master/deploy/rbd/kubernetes/csi-rbdplugin-provisioner.yaml -n ceph
 $ kubectl apply -f csi-rbdplugin-provisioner.yaml
 $ wget https://raw.githubusercontent.com/ceph/ceph-csi/master/deploy/rbd/kubernetes/csi-rbdplugin.yaml
-$ kubectl apply -f csi-rbdplugin.yaml
+$ kubectl apply -f csi-rbdplugin.yaml -n ceph
 ```
 
 #### 错误
@@ -149,6 +166,7 @@ data:
     }
 metadata:
   name: ceph-csi-encryption-kms-config
+  namespace: ceph
 ```
 
 创建：
@@ -169,22 +187,23 @@ $ kubectl get pods --watch
 
 ## 测试使用
 
-创建一个 `StorageClass`，文件名是 `csi-rbd-sc.yaml`
+创建一个 `StorageClass`，文件名是 ceph-storage-class.yaml
 
 ```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-   name: csi-rbd-sc
+   name: ceph-storage-class
 provisioner: rbd.csi.ceph.com
 parameters:
-   clusterID: 418765c6-2776-4d19-8ab3-1d887278256e
+   clusterID: 150147a4-72f8-456d-8b8c-5204fb866be4
    pool: kubernetes
+   fsType: xfs
    csi.storage.k8s.io/provisioner-secret-name: csi-rbd-secret
-   csi.storage.k8s.io/provisioner-secret-namespace: default
+   csi.storage.k8s.io/provisioner-secret-namespace: ceph
    csi.storage.k8s.io/node-stage-secret-name: csi-rbd-secret
-   csi.storage.k8s.io/node-stage-secret-namespace: default
-reclaimPolicy: Delete
+   csi.storage.k8s.io/node-stage-secret-namespace: ceph
+reclaimPolicy: Retain
 mountOptions:
    - discard
 ```
@@ -194,12 +213,12 @@ mountOptions:
 创建：
 
 ```bash
-$ kubectl apply -f csi-rbd-sc.yaml 
+$ kubectl apply -f ceph-storage-class.yaml
 ```
 
 
 
-创建一个 PVC，命名为 `raw-block-pvc.yaml`
+创建一个 PVC，命名为 `test-pvc.yaml`
 
 ```yaml
 apiVersion: v1
@@ -213,13 +232,13 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: csi-rbd-sc
+  storageClassName: ceph-storage-class
 ```
 
 创建：
 
 ```bash
-$ kubectl apply -f raw-block-pvc.yaml
+$ kubectl apply -f test-pvc.yaml
 ```
 
 查看：

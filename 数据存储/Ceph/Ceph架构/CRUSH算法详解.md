@@ -269,6 +269,8 @@ $ ceph osd tree
 
 PG 的数量只与 OSD 的数量有关，与 OSD 的容量无关。
 
+https://ceph.com/pgcalc/
+
 ## 修改 PG 和 PGP
 
 PGP 的值应该与 PG 的总数一致。
