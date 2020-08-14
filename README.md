@@ -837,12 +837,18 @@ title: 日常工作记录
      [CRUSH算法详解.md](数据存储/Ceph/Ceph架构/CRUSH算法详解.md) 
    
      [Ceph储存引擎BlueStore.md](数据存储/Ceph/Ceph架构/Ceph储存引擎BlueStore.md) 
-     
+   
      [Monitor详解.md](数据存储/Ceph/Ceph架构/Monitor详解.md) 
+   
+     [Ceph新版本PG自动扩展.md](数据存储/Ceph/Ceph架构/Ceph新版本PG自动扩展.md) 
    
    - Ceph 命令
    
      [rados命令.md](数据存储/Ceph/Ceph命令/rados命令.md) 
+   
+   - 性能
+   
+     [Ceph性能测试.md](数据存储/Ceph/性能/Ceph性能测试.md) 
 
 
 
@@ -1036,8 +1042,10 @@ title: 日常工作记录
 
   - JVM
 
-  - Nacos
+    [ZGC垃圾回收器文章收藏.md](编程语言/Java/JVM/ZGC垃圾回收器文章收藏.md) 
 
+  - Nacos
+  
     [NacOS部署.md](编程语言/Java/NacOS/NacOS部署.md) 
 
 

@@ -164,7 +164,7 @@ $ umount /dev/rbd0
 取消映射：
 
 ```bash
-$ rbd device ummap one/bar
+$ rbd device unmap one/bar
 ```
 
 删除块设备：
@@ -178,6 +178,12 @@ $ rbd rm one/bar
 ```bash
 $ sudo ceph osd pool delete one one --yes-i-really-really-mean-it
 ```
+
+
+
+## 踩坑
+
+有一次，我没有 unmap，也没删块设备，但是我删了 pool，回过头来发现不能 unmap 了，也不能删块设备了，这个块设备空间也不大，但是强迫症，必须要删掉，后来是先取消了挂载，然后重启了一下机器（慎重），在 `lsblk` 里那个块设备就自动不见了，使用命令 `rbd showmapped` 也看不到那块块设备了。
 
 
 
