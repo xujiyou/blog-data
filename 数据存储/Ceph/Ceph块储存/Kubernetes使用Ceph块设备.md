@@ -126,6 +126,8 @@ $ kubectl apply -f csi-rbd-secret.yaml
 
 ## 配置 ceph-csi 插件
 
+ceph-csi 官方代码库：https://github.com/ceph/ceph-csi
+
 首先创建 ceph-csi 插件使用到的 ServiceAccount 和 RBAC 信息（注意修改文件中的命名空间）：
 
 ```bash
@@ -204,6 +206,7 @@ parameters:
    csi.storage.k8s.io/node-stage-secret-name: csi-rbd-secret
    csi.storage.k8s.io/node-stage-secret-namespace: ceph
 reclaimPolicy: Retain
+allowVolumeExpansion: true
 mountOptions:
    - discard
 ```
@@ -272,8 +275,10 @@ PV 不会自动删除，同理，块设备也不会被删除，有块设备在�
 查看块设备：
 
 ```bash
-$ sudo rbd ls kubernetes
+$ sudo rbd ls kubernetes -l
 ```
+
+加一个 `-l`参数可以看出块设备有没有被使用，方便删除没有使用的块设备！
 
 映射块设备为本地磁盘：
 

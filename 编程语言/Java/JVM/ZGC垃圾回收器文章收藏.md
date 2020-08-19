@@ -359,7 +359,7 @@ b. **组件依赖版本不兼容JDK 11问题**：找到对应依赖组件，搜�
 
 升级所修改的依赖：
 
-```
+```xml
 <dependency>
     <groupId>javax.annotation</groupId>
     <artifactId>javax.annotation-api</artifactId>
