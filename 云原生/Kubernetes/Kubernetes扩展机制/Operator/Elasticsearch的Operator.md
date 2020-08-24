@@ -4,17 +4,7 @@ Elasticsearch 官方推出了一个 operator，名为 ECK，挺好用的。
 
 通过 Elasticsearch Operator 来部署，参见：https://www.elastic.co/cn/downloads/elastic-cloud-kubernetes
 
-通过一个 Elasticsearch Operator 部署两个版本的 ES 集群，和两个版本的 Kibana。
-
-
-
-## 认证
-
-ES 和 Kibana 的用户名都为：elastic，并且 ES 和 Kibana 的密码也都为：
-
-```bash
-kubectl get secret elasticsearch-6-8-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 -d
-```
+通过一个 Elasticsearch Operator 可以部署多个版本的 ES 集群，和多个版本的 Kibana。
 
 
 
@@ -129,7 +119,13 @@ spec:
 
 
 
+## 认证
 
+ES 和 Kibana 的用户名都为：elastic，并且 ES 和 Kibana 的密码也都为：
+
+```bash
+kubectl get secret elasticsearch-6-8-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 -d
+```
 
 
 
