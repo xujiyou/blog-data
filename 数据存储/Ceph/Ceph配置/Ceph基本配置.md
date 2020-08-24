@@ -77,7 +77,61 @@ Ceph进程在启动时要做的第一件事之一就是解析通过命令行，�
 
 请注意，本地配置文件中的值始终优先于监视器配置数据库中的值，而不管它们出现在哪个部分中。
 
+比如：
 
+```ini
+[global]
+debug ms = 0
+
+[osd]
+debug ms = 1
+
+[osd.1]
+debug ms = 10
+
+[osd.2]
+debug ms = 10
+```
+
+
+
+## 元变量
+
+元变量极大地简化了Ceph存储集群的配置。在配置值中设置了元变量后，Ceph会在使用配置值时将元变量扩展为具体值。Ceph元变量类似于Bash shell中的变量扩展。
+
+Ceph支持以下元变量：
+
+- \$cluster：扩展为Ceph存储群集名称。在同一硬件上运行多个Ceph存储群集时很有用。比如：/etc/ceph/\$cluster.client.admin.keyring，默认值：ceph
+- \$type：扩展为守护程序或进程类型（例如mds，osd或mon），例如：/var/lib/ceph/\$type
+- \$id：扩展为守护程序或客户端标识符。对于osd.0，该值为0；否则为0。对于mds.a，它将是a。例如：/var/lib/ceph/\$type/\$cluster-$id
+- \$host：扩展为运行进程的主机名。
+- \$name：扩展为 \$type.\$id，比如/var/run/ceph/\$cluster-\$name.asok
+- \$pid：扩展为守护进程pid。比如：/var/run/ceph/\$cluster-\$name-\$pid.asok
+
+
+
+## 配置文件
+
+在启动时，Ceph进程在以下位置搜索配置文件：
+
+1. \$CEPH_CONF（即 \$CEPH_CONF 环境变量后的路径）
+2. -c path/path (使用 -c 命令行选项指定配置文件)
+3. /etc/ceph/$cluster.conf
+4. ~/.ceph/$cluster.conf
+5. ./$cluster.conf (在当前工作目录中)
+6. 在 FreeBSD 系统中：/usr/local/etc/ceph/$cluster.conf
+
+其中 $cluster 是群集的名称（默认ceph）。
+
+Ceph配置文件使用ini样式语法。您可以在注释之前添加井号（＃）或分号（;）。例如：
+
+```ini
+# <--A number (#) sign precedes a comment.
+; A comment may be anything.
+# Comments always follow a semi-colon (;) or a pound (#) on each line.
+# The end of the line terminates a comment.
+# We recommend that you provide comments in your configuration file(s).
+```
 
 
 

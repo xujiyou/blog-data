@@ -85,17 +85,19 @@ title: 日常工作记录
          [Kubernetes-Operator教程.md](云原生/Kubernetes/Kubernetes扩展机制/Operator/Kubernetes-Operator教程.md) 
 
          [operator-sdk教程.md](云原生/Kubernetes/Kubernetes扩展机制/Operator/operator-sdk教程.md) 
+      
+         [Elasticsearch的Operator.md](云原生/Kubernetes/Kubernetes扩展机制/Operator/Elasticsearch的Operator.md) 
 
    - Kubernetes API
 
       [Kubernetes-API访问方式.md](云原生/Kubernetes/Kubernetes-API/Kubernetes-API访问方式.md) 
 
       [swagger.json位置.md](云原生/Kubernetes/Kubernetes-API/swagger.json位置.md) 
-
+   
    - Kubernetes 认证及授权系列
    
      [Kubernetes证书生成.md](云原生/Kubernetes/Kubernetes认证及授权系列/Kubernetes证书生成.md) 
-   
+
      [为Kubernetes搭建支持OpenId-Connect的身份认证系统.md](云原生/Kubernetes/Kubernetes认证及授权系列/为Kubernetes搭建支持OpenId-Connect的身份认证系统.md) 
 
    - 动手操作
@@ -145,7 +147,7 @@ title: 日常工作记录
       [为容器的生命周期事件设置处理函数.md](云原生/Kubernetes/动手操作/为容器的生命周期事件设置处理函数.md) 
 
       [为容器设置启动时要执行的命令及其入参.md](云原生/Kubernetes/动手操作/为容器设置启动时要执行的命令及其入参.md) 
-
+   
       [在Pod中的容器之间共享进程命名空间.md](云原生/Kubernetes/动手操作/在Pod中的容器之间共享进程命名空间.md) 
 
   
