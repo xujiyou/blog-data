@@ -52,3 +52,93 @@ nv.yaml rule_dirs=
 ```
 
 通过日志发现，这个容器是三分钟自动刷新一下配置！！！所以会有三分钟延迟。
+
+
+
+## 外部服务
+
+有的服务不是 Kubernetes 内部的，但是也需要接入到 Prometheus 内部，需要这样配置：
+
+```yaml
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: expose-ceph-metrics
+  namespace: cattle-prometheus
+  labels:
+    k8s-app: ceph-metrics
+    app: exporter-ceph
+    io.cattle.field/appId: cluster-monitoring
+    release: cluster-monitoring
+subsets:
+  - addresses:
+      - ip: 10.28.112.11
+        nodeName: test-kubenode-1
+        targetRef:
+          kind: Node
+          name: test-kubenode-1
+    ports:
+      - name: metrics
+        port: 9283
+        protocol: TCP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: expose-ceph-metrics
+  namespace: cattle-prometheus
+  labels:
+    app: exporter-ceph
+    k8s-app: ceph-server
+    io.cattle.field/appId: cluster-monitoring
+    release: cluster-monitoring
+spec:
+  clusterIP: None
+  type: ClusterIP
+  sessionAffinity: None
+  ports:
+    - name: metrics
+      port: 9283
+      protocol: TCP
+      targetPort: 9283
+
+---
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: exporter-ceph-cluster-monitoring
+  namespace: cattle-prometheus
+  labels:
+    app: exporter-ceph
+    io.cattle.field/appId: cluster-monitoring
+    release: cluster-monitoring
+    source: rancher-monitoring
+spec:
+  namespaceSelector:
+    matchNames:
+      - cattle-prometheus
+  selector:
+    matchLabels:
+      k8s-app: ceph-server
+  endpoints:
+    - port: metrics
+      interval: 10s
+      honorLabels: true
+      relabelings:
+        - action: replace
+          regex: (.+)
+          replacement: $1
+          sourceLabels:
+            - __meta_kubernetes_pod_host_ip
+          targetLabel: host_ip
+        - action: replace
+          regex: (.+)
+          replacement: $1
+          sourceLabels:
+            - __meta_kubernetes_pod_node_name
+          targetLabel: node
+```
+

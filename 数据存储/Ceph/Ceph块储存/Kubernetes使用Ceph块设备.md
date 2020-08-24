@@ -138,8 +138,8 @@ $ kubectl apply -f https://raw.githubusercontent.com/ceph/ceph-csi/master/deploy
 最后，创建 ceph-csi provisioner 和 node 插件：
 
 ```bash
-$ wget https://raw.githubusercontent.com/ceph/ceph-csi/master/deploy/rbd/kubernetes/csi-rbdplugin-provisioner.yaml -n ceph
-$ kubectl apply -f csi-rbdplugin-provisioner.yaml
+$ wget https://raw.githubusercontent.com/ceph/ceph-csi/master/deploy/rbd/kubernetes/csi-rbdplugin-provisioner.yaml 
+$ kubectl apply -f csi-rbdplugin-provisioner.yaml -n ceph
 $ wget https://raw.githubusercontent.com/ceph/ceph-csi/master/deploy/rbd/kubernetes/csi-rbdplugin.yaml
 $ kubectl apply -f csi-rbdplugin.yaml -n ceph
 ```

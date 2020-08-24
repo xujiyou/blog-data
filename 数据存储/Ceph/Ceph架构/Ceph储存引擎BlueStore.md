@@ -79,8 +79,6 @@ $ ceph osd lspools
 
 
 
-## 对象
-
 
 
 

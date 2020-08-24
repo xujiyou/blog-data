@@ -849,6 +849,14 @@ title: 日常工作记录
    - 性能
    
      [Ceph性能测试.md](数据存储/Ceph/性能/Ceph性能测试.md) 
+   
+   - Ceph 配置
+   
+     [ceph配置工具的使用.md](数据存储/Ceph/Ceph配置/ceph配置工具的使用.md) 
+     
+     [Ceph配置概述.md](数据存储/Ceph/Ceph配置/Ceph配置概述.md) 
+     
+     [Ceph基本配置.md](数据存储/Ceph/Ceph配置/Ceph基本配置.md) 
 
 
 

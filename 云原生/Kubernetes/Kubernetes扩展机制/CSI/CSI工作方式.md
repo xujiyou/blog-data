@@ -33,9 +33,21 @@ CSI Kubernetes 官方文档：https://kubernetes-csi.github.io/docs/
 
 
 
+## Kubernetes 储存架构
 
+架构图如下：
 
-![image-20200318162205853](../../../../resource/image-20200318162205853.png)
+![image-20200819201328465](../../../../resource/image-20200819201328465.png)
 
+挂载过程：Provision -> Attach -> Mount
 
+卸载过程：Unmount -> Detach -> Delete
+
+组件作用：
+
+- PV Controller：负责 PV/PVC 的绑定，生命周期管理，并根据需求进行数据卷的 Provision/Delete 操作
+- AD Controller：负责设备的 Attach/Detach 操作，将设备挂载到目标节点
+- Volume Manager：管理卷的 Mount/Unmount 操作，卷设备的格式化等
+- Volume Plugins：扩展各种储存类型的卷管理能力，实现第三方的各种操作能力与 Kubernetes 储存系统结合 
+- Scheduler：实现 Pod 调度能力，储存相关的调度器实现了针对储存卷配置进行调度
 
