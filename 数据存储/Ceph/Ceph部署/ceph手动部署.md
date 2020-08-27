@@ -380,11 +380,17 @@ $ ceph dashboard ac-user-create admin ****** administrator
 
 ## 错误记录
 
+
+
+#### 1
+
 Monitor 安装完成后有警告：
 
 ```
 1 monitors have not enabled msgr2
 ```
+
+有一个 Monitor 没启用 V2 版本的消息协议。
 
 解决方案：
 
@@ -393,6 +399,8 @@ $ ceph mon enable-msgr2
 ```
 
 
+
+#### 2
 
 ceph-mgr 安装完成后有警告：
 
@@ -412,6 +420,8 @@ $ yum install -y python3-werkzeug
 
 
 
+#### 3
+
 创建 pool 报错：
 
 ```
@@ -430,7 +440,7 @@ osd pool default pgp num = 200
 
 
 
-
+#### 4
 
 ceph -s 警告：
 

@@ -800,13 +800,15 @@ title: 日常工作记录
 
 - Ceph
 
-   [cephadm安装集群.md](数据存储/Ceph/cephadm安装集群.md) 
-
-   [ceph-deploy安装集群.md](数据存储/Ceph/ceph-deploy安装集群.md) 
-
-   [ceph手动部署.md](数据存储/Ceph/ceph手动部署.md) 
-
    [ceph注意事项.md](数据存储/Ceph/ceph注意事项.md) 
+
+   - Ceph 部署
+
+     [ceph-deploy安装集群.md](数据存储/Ceph/Ceph部署/ceph-deploy安装集群.md) 
+
+     [cephadm安装集群.md](数据存储/Ceph/Ceph部署/cephadm安装集群.md) 
+   
+     [ceph手动部署.md](数据存储/Ceph/Ceph部署/ceph手动部署.md) 
    
    - Ceph 对象储存
    
@@ -848,7 +850,7 @@ title: 日常工作记录
    
      [rados命令.md](数据存储/Ceph/Ceph命令/rados命令.md) 
    
-   - 性能
+   - Ceph 性能
    
      [Ceph性能测试.md](数据存储/Ceph/性能/Ceph性能测试.md) 
    
@@ -858,7 +860,51 @@ title: 日常工作记录
      
      [Ceph配置概述.md](数据存储/Ceph/Ceph配置/Ceph配置概述.md) 
      
-     [Ceph基本配置.md](数据存储/Ceph/Ceph配置/Ceph基本配置.md) 
+     [Ceph配置格式.md](数据存储/Ceph/Ceph配置/Ceph配置格式.md) 
+     
+     [Ceph通用配置.md](数据存储/Ceph/Ceph配置/Ceph通用配置.md) 
+     
+     [Ceph网络配置.md](数据存储/Ceph/Ceph配置/Ceph网络配置.md) 
+     
+     [Ceph的V2版本消息协议.md](数据存储/Ceph/Ceph配置/Ceph的V2版本消息协议.md) 
+     
+     [Ceph认证配置.md](数据存储/Ceph/Ceph配置/Ceph认证配置.md) 
+     
+     [Monitor配置.md](数据存储/Ceph/Ceph配置/Monitor配置.md) 
+     
+     [Ceph心跳配置.md](数据存储/Ceph/Ceph配置/Ceph心跳配置.md) 
+     
+     [OSD配置.md](数据存储/Ceph/Ceph配置/OSD配置.md) 
+     
+     [BlueStore配置.md](数据存储/Ceph/Ceph配置/BlueStore配置.md) 
+     
+     [Ceph日志配置.md](数据存储/Ceph/Ceph配置/Ceph日志配置.md) 
+     
+     [Pool&PG&CRUSH配置.md](数据存储/Ceph/Ceph配置/Pool&PG&CRUSH配置.md) 
+     
+     [Ceph消息配置.md](数据存储/Ceph/Ceph配置/Ceph消息配置.md) 
+   
+   - 管理 Ceph
+   
+     [Ceph服务的启动与停止.md](数据存储/Ceph/管理 Ceph/Ceph服务的启动与停止.md) 
+     
+     [Ceph健康检查.md](数据存储/Ceph/管理 Ceph/Ceph健康检查.md) 
+     
+     [监控Ceph集群.md](数据存储/Ceph/管理 Ceph/监控Ceph集群.md) 
+     
+     [监控OSD与PG.md](数据存储/Ceph/管理 Ceph/监控OSD与PG.md) 
+     
+     [Ceph用户管理.md](数据存储/Ceph/管理 Ceph/Ceph用户管理.md) 
+     
+     [修复PG.md](数据存储/Ceph/管理 Ceph/修复PG.md) 
+     
+     [Pool管理.md](数据存储/Ceph/管理 Ceph/Pool管理.md) 
+     
+     [纠删码.md](数据存储/Ceph/管理 Ceph/纠删码.md) 
+     
+     [缓存层.md](数据存储/Ceph/管理 Ceph/缓存层.md) 
+     
+     [PG管理.md](数据存储/Ceph/管理 Ceph/PG管理.md) 
 
 
 

@@ -166,11 +166,15 @@ kubectl 版本为 1.17.3
 
 将 PV 从 release 状态变为 avaliveable：
 
-````
-kubectl patch pv pvc-7615872a-6328-46f3-9d3a-a636db7c0975 -p '{"spec":{"claimRef": null}}'
+````bash
+$ kubectl patch pv pvc-7615872a-6328-46f3-9d3a-a636db7c0975 -p '{"spec":{"claimRef": null}}'
 ````
 
+查看 node 的 labels：
 
+```bash
+$ kubectl get node --show-labels
+```
 
 
 

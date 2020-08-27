@@ -58,5 +58,14 @@ CONTAINER   CPU %   MEM USAGE / LIMIT       MEM %    NET I/O             BLOCK I
 
 
 
+## 其他优化
+
+```
+max_connections = 1024
+slow_query_log = ON
+long_query_time = 5
+max_allowed_packet = 104857600
+```
+
 
 
