@@ -905,6 +905,8 @@ title: 日常工作记录
      [缓存层.md](数据存储/Ceph/管理 Ceph/缓存层.md) 
      
      [PG管理.md](数据存储/Ceph/管理 Ceph/PG管理.md) 
+     
+     [数据平衡.md](数据存储/Ceph/管理 Ceph/数据平衡.md) 
 
 
 
@@ -1232,8 +1234,6 @@ title: 日常工作记录
 
 [Linux处理僵尸进程.md](Linux/Linux处理僵尸进程.md) 
 
-[Linux创建用户并配置免密登录.md](Linux/Linux创建用户并配置免密登录.md) 
-
 [RAID实践.md](Linux/RAID实践.md) 
 
 [LVM实践.md](Linux/LVM实践.md) 
@@ -1241,6 +1241,14 @@ title: 日常工作记录
 [Linux常见配置文件.md](Linux/Linux常见配置文件.md) 
 
 [TTY与PTY设备.md](Linux/TTY与PTY设备.md) 
+
+- 日常运维
+
+  [CentOS7重置密码.md](Linux/日常运维/CentOS7重置密码.md) 
+
+  [Linux创建用户并配置免密登录.md](Linux/日常运维/Linux创建用户并配置免密登录.md) 
+
+  [CentOS7系统权限被篡改后的恢复方法.md](Linux/日常运维/CentOS7系统权限被篡改后的恢复方法.md) 
 
 - 网络
 

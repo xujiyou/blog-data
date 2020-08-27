@@ -121,6 +121,7 @@ sudo gitlab-ci-multi-runner list
 
 ```bash
 sudo gitlab-runner verify --delete --token dZ1NNBsnKWGZCMMmDseV  --url http://git.bbdops.com/
+sudo gitlab-runner unregister --token -kSUxea5ULyybFjYP3ZP --url http://git.bbdops.com/
 ```
 
 这里 `gitlab-ci-multi-runner` 命令只是 `gitlab-runner` 的一个软链接，用哪个都可以，用 `gitlab-runner` 最好。
