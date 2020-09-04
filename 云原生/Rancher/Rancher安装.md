@@ -529,7 +529,7 @@ ERROR: https://fueltank.bbdops.com/ping is not accessible (The requested URL ret
 
 解决：
 
-```
+```bash
 # 配置 cattle-cluster-agent
 kubectl -n cattle-system patch  deployments cattle-cluster-agent --patch '{
     "spec": {
@@ -559,7 +559,7 @@ kubectl -n cattle-system patch  daemonsets cattle-node-agent --patch '{
                         [
                             "rancher.prod.bbdops.com"
                         ],
-                            "ip": "192.168.112.151"
+                            "ip": "192.168.225.2"
                  }
              ]
          }

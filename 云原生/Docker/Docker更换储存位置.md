@@ -37,3 +37,9 @@ $ sudo vim /etc/docker/daemon.json 
 }
 ```
 
+查看当前储存位置
+
+```bash
+$ sudo docker info | grep "Docker Root Dir"
+```
+

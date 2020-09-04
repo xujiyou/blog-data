@@ -24,3 +24,11 @@ $ ssh admin@fueltank-1 'bash  -s' < /Users/jiyouxu/IdeaProjects/my-grpc/test.sh
 #!/usr/bin/env bash
 ```
 
+
+
+## 加减法
+
+```bash
+$((i-1))
+```
+

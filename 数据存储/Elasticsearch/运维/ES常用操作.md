@@ -97,6 +97,16 @@ PUT /sessions2-200804/_settings
 }
 ```
 
+## 开启慢查询日志
+
+```http
+PUT /_all/_settings?preserve_existing=true
+{
+  "index.search.slowlog.threshold.fetch.warn": "4s",
+  "index.search.slowlog.threshold.query.warn": "4s"
+}
+```
+
 
 
 

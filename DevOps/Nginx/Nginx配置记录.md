@@ -138,7 +138,7 @@ server {
 
 ## 404 重写
 
-```
+```nginx
         location / {
             root   /data1/imgs;
             autoindex on;
@@ -160,5 +160,15 @@ server {
         location @minio {
             rewrite ^/test/(.*)$ http://192.168.6.124:29000/test/$1 permanent;
         }
+```
+
+
+
+## 跨域
+
+```nginx
+    add_header Access-Control-Allow-Origin *;
+    add_header Access-Control-Allow-Headers x-token,Token,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization;
+    add_header Access-Control-Allow-Methods GET,POST,OPTIONS;
 ```
 

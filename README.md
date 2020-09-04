@@ -564,6 +564,18 @@ title: 日常工作记录
 
 
 
+- Harbor
+
+  [Harbor安装.md](云原生/Harbor/Harbor安装.md) 
+
+
+
+- Pulsar
+
+  [Pulsar在Kubernetes中安装.md](云原生/Pulsar/Pulsar在Kubernetes中安装.md) 
+
+
+
 ---
 
 
@@ -770,6 +782,8 @@ title: 日常工作记录
    
      [ES性能优化建议.md](数据存储/Elasticsearch/性能/ES性能优化建议.md) 
    
+     [ES性能优化实践.md](数据存储/Elasticsearch/性能/ES性能优化实践.md) 
+   
    - 架构
    
      [ES与Lucene的关系.md](数据存储/Elasticsearch/架构/ES与Lucene的关系.md) 
@@ -907,6 +921,10 @@ title: 日常工作记录
      [PG管理.md](数据存储/Ceph/管理 Ceph/PG管理.md) 
      
      [数据平衡.md](数据存储/Ceph/管理 Ceph/数据平衡.md) 
+     
+     [添加或去掉OSD.md](数据存储/Ceph/管理 Ceph/添加或去掉OSD.md) 
+     
+     [设备管理.md](数据存储/Ceph/管理 Ceph/设备管理.md) 
 
 
 
@@ -948,6 +966,8 @@ title: 日常工作记录
 
    [MySQL性能优化.md](数据存储/MySQL/MySQL性能优化.md) 
 
+   [MySQL配置.md](数据存储/MySQL/MySQL配置.md) 
+
    - MySQL 管理
 
      [MySQL配置.md](数据存储/MySQL/MySQL管理/MySQL配置.md) 
@@ -957,7 +977,7 @@ title: 日常工作记录
      [MySQL日志.md](数据存储/MySQL/MySQL管理/MySQL日志.md) 
 
      [MySQL数据目录.md](数据存储/MySQL/MySQL管理/MySQL数据目录.md) 
-
+   
    - InnoDB
    
    - 高可用MySQL
@@ -1102,6 +1122,8 @@ title: 日常工作记录
 
     [ZGC垃圾回收器文章收藏.md](编程语言/Java/JVM/ZGC垃圾回收器文章收藏.md) 
 
+    [年轻代大小调节.md](编程语言/Java/JVM/年轻代大小调节.md) 
+  
   - Nacos
   
     [NacOS部署.md](编程语言/Java/NacOS/NacOS部署.md) 

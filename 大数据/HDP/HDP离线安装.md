@@ -16,7 +16,7 @@ Ambari 安装大神教程：[https://www.sysit.cn/blog/post/sysit/CentOS7.3%E5%A
 
 ----
 
-
+官网：https://docs.cloudera.com/HDPDocuments/index.html
 
 ## 安装 MySQL
 
