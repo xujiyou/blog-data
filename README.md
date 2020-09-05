@@ -925,6 +925,16 @@ title: 日常工作记录
      [添加或去掉OSD.md](数据存储/Ceph/管理 Ceph/添加或去掉OSD.md) 
      
      [设备管理.md](数据存储/Ceph/管理 Ceph/设备管理.md) 
+     
+     [管理CurshMap.md](数据存储/Ceph/管理 Ceph/管理CurshMap.md) 
+   
+   - MGR
+   
+     [MGR介绍.md](数据存储/Ceph/MGR/MGR介绍.md) 
+   
+     [RESTFUL模块.md](数据存储/Ceph/MGR/RESTFUL模块.md) 
+   
+   
 
 
 

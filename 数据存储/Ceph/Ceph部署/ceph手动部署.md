@@ -5,6 +5,8 @@ date: 2020-06-21 18:34:57
 
 为了能够完整了解 Ceph 集群部署过程，我这里不采用 ceph-deploy 和 cephadm，而是采用手工通过 RPM 包管理工具进行部署。
 
+另外，相比使用工具，更喜欢使用手动部署，因为各方面都更可控。
+
 参考：https://ceph.readthedocs.io/en/latest/install/install-storage-cluster/
 
 参考：https://ceph.readthedocs.io/en/latest/install/manual-deployment/
@@ -284,9 +286,11 @@ $ ceph auth get client.bootstrap-osd
 
 mgr 即 manager，该组件的主要作用是分担和扩展monitor的部分功能，减轻monitor的负担。
 
-ceph-mgr 不是必须的。
+ceph 12.x 版本之后，ceph-mgr 必须要安装。
 
-下面只在 ceph-1 之上安装 ceph-mgr。
+可以在有 ceph-mon 的节点上都装一个 ceph-mgr 来保证高可用性，ceph-mgr 自己不实现选举，全靠 ceph-mon 指定主节点，其他节点作为备份数据库。 
+
+下面以 ceph-1 为例安装 ceph-mgr。
 
 参考：https://ceph.readthedocs.io/en/latest/mgr/administrator/#mgr-administrator-guide
 
@@ -302,7 +306,7 @@ $ sudo -u ceph mkdir /var/lib/ceph/mgr/ceph-ceph-1
 $ ceph auth get-or-create mgr.ceph-1 mon 'allow profile mgr' osd 'allow *' mds 'allow *' > /var/lib/ceph/mgr/ceph-ceph-1/keyring
 ```
 
-设置 ceph-mgr：
+安装 ceph-mgr：
 
 ```bash
 $ ceph-mgr -i ceph-1
