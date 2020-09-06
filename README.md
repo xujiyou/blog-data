@@ -852,13 +852,13 @@ title: 日常工作记录
    
    - Ceph 架构
    
+     [Ceph架构.md](数据存储/Ceph/Ceph架构/Ceph架构.md) 
+   
      [CRUSH算法详解.md](数据存储/Ceph/Ceph架构/CRUSH算法详解.md) 
    
      [Ceph储存引擎BlueStore.md](数据存储/Ceph/Ceph架构/Ceph储存引擎BlueStore.md) 
    
      [Monitor详解.md](数据存储/Ceph/Ceph架构/Monitor详解.md) 
-   
-     [Ceph新版本PG自动扩展.md](数据存储/Ceph/Ceph架构/Ceph新版本PG自动扩展.md) 
    
    - Ceph 命令
    
@@ -933,6 +933,12 @@ title: 日常工作记录
      [MGR介绍.md](数据存储/Ceph/MGR/MGR介绍.md) 
    
      [RESTFUL模块.md](数据存储/Ceph/MGR/RESTFUL模块.md) 
+   
+     [Prometheus模块.md](数据存储/Ceph/MGR/Prometheus模块.md) 
+   
+   - Dashboard
+   
+     [Dashboard介绍.md](数据存储/Ceph/Dashboard/Dashboard介绍.md) 
    
    
 
