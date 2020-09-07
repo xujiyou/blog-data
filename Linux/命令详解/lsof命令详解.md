@@ -111,7 +111,7 @@ lsof打开的文件可以是：
 #### 查看某个文件相关的进程
 
 ```
-$ $ lsof -R /bin/bash
+$ lsof -R /bin/bash
 COMMAND     PID  PPID  USER  FD   TYPE DEVICE SIZE/OFF     NODE NAME
 domain.sh 11689     1 admin txt    REG  253,2   964600 12583347 /usr/bin/bash
 launch.sh 23250     1 admin txt    REG  253,2   964600 12583347 /usr/bin/bash

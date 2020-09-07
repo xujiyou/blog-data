@@ -58,7 +58,7 @@ $ ceph crash archive-all #清除所有 crash
 
 ## wipefs 报错
 
-![3115498e-590c-4e97-9e44-d518c40e0822](../../resource/3115498e-590c-4e97-9e44-d518c40e0822.png)
+![3115498e-590c-4e97-9e44-d518c40e0822](../../../resource/3115498e-590c-4e97-9e44-d518c40e0822.png)
 
 
 

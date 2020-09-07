@@ -100,7 +100,11 @@ source /etc/profile
 $ start-hbase.sh 
 ```
 
-
+>如果在 `hbase shell` 中出现 `hbase Server is not running yet` 的异常，可以执行：
+>
+>```bash
+>$ hadoop dfsadmin -safemode leave 
+>```
 
 ## 检查
 

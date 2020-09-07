@@ -626,6 +626,8 @@ title: 日常工作记录
 
    [HBase架构.md](大数据/HBase/HBase架构.md) 
    
+   [HBase单机部署.md](大数据/HBase/HBase单机部署.md) 
+   
    - HBase配置
    
      [HBase配置概述.md](大数据/HBase/HBase配置/HBase配置概述.md) 
@@ -814,14 +816,12 @@ title: 日常工作记录
 
 - Ceph
 
-   [ceph注意事项.md](数据存储/Ceph/ceph注意事项.md) 
-
    - Ceph 部署
 
      [ceph-deploy安装集群.md](数据存储/Ceph/Ceph部署/ceph-deploy安装集群.md) 
 
      [cephadm安装集群.md](数据存储/Ceph/Ceph部署/cephadm安装集群.md) 
-   
+
      [ceph手动部署.md](数据存储/Ceph/Ceph部署/ceph手动部署.md) 
    
    - Ceph 对象储存
@@ -846,10 +846,6 @@ title: 日常工作记录
    
      [Ceph文件系统入门.md](数据存储/Ceph/Ceph文件系统/Ceph文件系统入门.md) 
    
-   - Ceph 深入学习
-   
-     [cephx认证机制.md](数据存储/Ceph/Ceph深入学习/cephx认证机制.md) 
-   
    - Ceph 架构
    
      [Ceph架构.md](数据存储/Ceph/Ceph架构/Ceph架构.md) 
@@ -859,6 +855,8 @@ title: 日常工作记录
      [Ceph储存引擎BlueStore.md](数据存储/Ceph/Ceph架构/Ceph储存引擎BlueStore.md) 
    
      [Monitor详解.md](数据存储/Ceph/Ceph架构/Monitor详解.md) 
+   
+     [cephx认证机制.md](数据存储/Ceph/Ceph架构/cephx认证机制.md) 
    
    - Ceph 命令
    
@@ -936,9 +934,13 @@ title: 日常工作记录
    
      [Prometheus模块.md](数据存储/Ceph/MGR/Prometheus模块.md) 
    
-   - Dashboard
+     [Dashboard介绍.md](数据存储/Ceph/MGR/Dashboard介绍.md) 
    
-     [Dashboard介绍.md](数据存储/Ceph/Dashboard/Dashboard介绍.md) 
+   - Ceph 工具
+   
+   - 错误排查与记录
+   
+     [ceph错误记录.md](数据存储/Ceph/错误排查与记录/ceph错误记录.md) 
    
    
 
