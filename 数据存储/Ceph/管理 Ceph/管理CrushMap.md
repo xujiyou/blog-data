@@ -1,4 +1,4 @@
-# 管理 Cursh Map
+# 管理 CRUSH Map
 
 官方文档：https://ceph.readthedocs.io/en/latest/rados/operations/crush-map/
 
@@ -182,7 +182,63 @@ $ ceph osd crush tree --show-shadow
 
 
 
-## 修改 CRUSH Map
+# 修改 CRUSH Map
+
+## 添加 OSD
+
+在一个运行中的集群中，添加 OSD 到 CRUSH Map：
+
+```bash
+$ ceph osd crush set {name} {weight} root={root} [{bucket-type}={bucket-name} ...]
+```
+
+name 是 osd 的名字，weight 表示权重，root 指定根节点，默认是 default，bucket-type 桶类型，上边有说明，比如机架、主机等。
+
+例如：
+
+```bash
+$ ceph osd crush set osd.0 1.0 root=default datacenter=dc1 room=room1 row=foo rack=bar host=foo-bar-1
+```
+
+
+
+## 修改 OSD 的权重
+
+```bash
+$ ceph osd crush reweight {name} {weight}
+```
+
+
+
+## 删除 OSD
+
+```bash
+$ ceph osd crush remove {name}
+```
+
+
+
+## 添加一个桶
+
+```bash
+$ ceph osd crush add-bucket {bucket-name} {bucket-type}
+```
+
+例如：
+
+```bash
+$ ceph osd crush add-bucket rack12 rack
+```
+
+
+
+## 删除桶
+
+```bash
+$ ceph osd crush remove {bucket-name}
+```
+
+
 
 
 

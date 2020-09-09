@@ -899,32 +899,34 @@ title: 日常工作记录
    - 管理 Ceph
    
      [Ceph服务的启动与停止.md](数据存储/Ceph/管理 Ceph/Ceph服务的启动与停止.md) 
-     
+   
      [Ceph健康检查.md](数据存储/Ceph/管理 Ceph/Ceph健康检查.md) 
-     
+   
      [监控Ceph集群.md](数据存储/Ceph/管理 Ceph/监控Ceph集群.md) 
-     
+   
      [监控OSD与PG.md](数据存储/Ceph/管理 Ceph/监控OSD与PG.md) 
-     
+   
      [Ceph用户管理.md](数据存储/Ceph/管理 Ceph/Ceph用户管理.md) 
-     
+   
      [修复PG.md](数据存储/Ceph/管理 Ceph/修复PG.md) 
-     
+   
      [Pool管理.md](数据存储/Ceph/管理 Ceph/Pool管理.md) 
-     
+   
      [纠删码.md](数据存储/Ceph/管理 Ceph/纠删码.md) 
-     
+   
      [缓存层.md](数据存储/Ceph/管理 Ceph/缓存层.md) 
-     
+   
      [PG管理.md](数据存储/Ceph/管理 Ceph/PG管理.md) 
-     
+   
      [数据平衡.md](数据存储/Ceph/管理 Ceph/数据平衡.md) 
-     
+   
      [添加或去掉OSD.md](数据存储/Ceph/管理 Ceph/添加或去掉OSD.md) 
-     
+   
      [设备管理.md](数据存储/Ceph/管理 Ceph/设备管理.md) 
-     
-     [管理CurshMap.md](数据存储/Ceph/管理 Ceph/管理CurshMap.md) 
+   
+     [管理CrushMap.md](数据存储/Ceph/管理 Ceph/管理CrushMap.md) 
+   
+     [手动编辑CrushMap.md](数据存储/Ceph/管理 Ceph/手动编辑CrushMap.md) 
    
    - MGR
    
