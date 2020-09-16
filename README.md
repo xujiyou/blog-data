@@ -1572,15 +1572,7 @@ title: 日常工作记录
 
 [IDEA插件开发之 K8s-Client.md](项目/IDEA插件开发之K8s-Client.md) 
 
-- 日志收集
 
-  [机器配置.md](项目/BBD日志收集系统/机器配置.md) 
-
-  [ELK安装.md](项目/BBD日志收集系统/ELK安装.md) 
-
-  [日志系统配置.md](项目/BBD日志收集系统/日志系统配置.md) 
-
-  
 
 
 
