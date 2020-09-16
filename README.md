@@ -943,6 +943,8 @@ title: 日常工作记录
    - 错误排查与记录
    
      [ceph错误记录.md](数据存储/Ceph/错误排查与记录/ceph错误记录.md) 
+     
+     [Monitor错误排查.md](数据存储/Ceph/错误排查与记录/Monitor错误排查.md) 
    
    
 

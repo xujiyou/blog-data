@@ -166,3 +166,10 @@ $ sudo ambari-server stop
 $ sudo ambari-agent stop
 ```
 
+
+
+## 错误记录
+
+https://community.cloudera.com/t5/Support-Questions/Cannot-install-Hive-clients/td-p/228135
+
+https://www.daimajiaoliu.com/daima/47976a3f2100400

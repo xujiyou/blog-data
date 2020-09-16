@@ -120,7 +120,7 @@ $ systemctl status cloudera-scm-agent
 
 
 
-
+![image-20200915171714006](/Users/jiyouxu/Library/Application Support/typora-user-images/image-20200915171714006.png)
 
 
 

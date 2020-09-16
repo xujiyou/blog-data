@@ -41,8 +41,9 @@ ulimit -n
 在 `/etc/security/limits.conf` 最后添加如下两行：
 
 ```
-* soft nofile 605536
-* hard nofile 605536
+* hard nproc  65535
+* soft nofile 65535
+* hard nofile 65535
 ```
 
 重启当前命令行生效
