@@ -64,5 +64,17 @@ $ sysctl kernel.hostname
 
 
 
+## 关闭 Swap 
+
+添加内核参数：
+
+```
+vm.swappiness = 0
+```
+
+
+
+
+
 
 

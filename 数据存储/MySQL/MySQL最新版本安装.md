@@ -75,6 +75,16 @@ mysql> flush privileges;
 mysql> select user,host from user;
 ```
 
+mysql8 创建数据库及用户步骤：
+
+```mysql
+create database ambari  default character set utf8mb4;
+CREATE USER 'ambari'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON ambari.* TO 'ambari'@'%'; 
+```
+
+
+
 这样外部就可以连接了。
 
 经常数据密码很烦人，这里做一下免密登录：

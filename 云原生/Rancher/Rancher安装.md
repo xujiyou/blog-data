@@ -52,6 +52,7 @@ $ sudo docker ps
 $ sudo docker images
 $ sudo docker volume ls
 $ sudo docker stop $(sudo docker ps -q)  # 停止全部容器
+$ sudo docker rm `docker ps -a|grep Exited|awk '{print $1}'` # 删除所有停止的容器
 $ # sudo docker volume rm $(sudo docker volume ls -q) #删除所有的数据卷
 $ #sudo docker rmi --force $(sudo docker images -q) # 删除全部镜像,可不做
 ```
@@ -539,9 +540,9 @@ kubectl -n cattle-system patch  deployments cattle-cluster-agent --patch '{
                     {
                         "hostnames":
                         [
-                            "rancher.prod.bbdops.com"
+                            "rancher.s1.com"
                         ],
-                            "ip": "192.168.112.151"
+                            "ip": "192.168.6.200"
                     }
                 ]
             }
@@ -557,9 +558,9 @@ kubectl -n cattle-system patch  daemonsets cattle-node-agent --patch '{
                  {
                      "hostnames":
                         [
-                            "rancher.prod.bbdops.com"
+                            "rancher.s1.com"
                         ],
-                            "ip": "192.168.225.2"
+                            "ip": "192.168.6.200"
                  }
              ]
          }

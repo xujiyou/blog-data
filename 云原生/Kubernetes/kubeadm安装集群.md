@@ -148,6 +148,7 @@ nodeRegistration:
 ---
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: ClusterConfiguration
+controlPlaneEndpoint: 10.28.63.16:6443
 apiServer:
   timeoutForControlPlane: 4m0s
 certificatesDir: /etc/kubernetes/pki
@@ -167,7 +168,7 @@ networking:
 scheduler: {}
 ```
 
-
+`controlPlaneEndpoint` 在需要做高可用时必须要加入。
 
 ---
 
@@ -264,12 +265,22 @@ $ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 ## kubeadm join
 
-其他节点也执行上面的操作，只不过这里是 `join`，而不是 `init`。
+把其他节点当作工作节点加入集群：
 
 ```bash
 $ sudo kubeadm join 172.20.20.162:6443 --token abcdef.0123456789abcdef \
     --discovery-token-ca-cert-hash sha256:bb97cc772a836dd7125365218dbd9b1e7f58373c20daf0948b703f35ff8b4cbe
 ```
+
+把其他节点当作控制节点加入集群：
+
+```bash
+$ sudo kubeadm join 172.20.20.162:6443 --token abcdef.0123456789abcdef --discovery-token-ca-cert-hash sha256:bb97cc772a836dd7125365218dbd9b1e7f58373c20daf0948b703f35ff8b4cbe --control-plane --certificate-key f8902e114ef118304e561c3ecd4d0b543adc226b7a07f675f56564185ffe0c07
+```
+
+
+
+
 
 怎么查看这里的 token 值那，可以这样：
 
@@ -282,6 +293,14 @@ $ kubeadm token list
 ```bash
 $ openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
 ```
+
+--certificate-key 获取方式：
+
+```bash
+$ kubeadm init phase upload-certs --upload-certs
+```
+
+
 
 默认token的有效期为24小时，当过期之后，该token就不可用了。怎么办那：
 

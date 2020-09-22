@@ -150,6 +150,14 @@ title: 日常工作记录
    
       [在Pod中的容器之间共享进程命名空间.md](云原生/Kubernetes/动手操作/在Pod中的容器之间共享进程命名空间.md) 
 
+
+
+- CRI-O
+
+  [CRI-O安装使用.md](云原生/CRI-O/CRI-O安装使用.md) 
+
+  [使用CRI-O和Kubeadm搭建高可用 Kubernetes 集群.md](云原生/CRI-O/使用CRI-O和Kubeadm搭建高可用 Kubernetes 集群.md) 
+
   
 
 - Docker
