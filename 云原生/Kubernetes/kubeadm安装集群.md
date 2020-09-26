@@ -312,7 +312,7 @@ join 完成后，查看信息：
 
 ```bash
 $ kubectl get nodes
-$ kubectl get pods --all-namespaces
+$ kubectl get pods -A
 ```
 
 这时候看到 CoreDNS 一直在创建中，没关系，后面装好网络插件就自动变好了。

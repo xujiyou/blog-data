@@ -749,6 +749,10 @@ title: 日常工作记录
 - HDP
 
    [HDP离线安装.md](大数据/HDP/HDP离线安装.md) 
+   
+   [Ambari.md](大数据/HDP/Ambari.md) 
+   
+   [HDF及NiFi部署.md](大数据/HDP/HDF及NiFi部署.md) 
 
 
 

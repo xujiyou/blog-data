@@ -542,7 +542,7 @@ kubectl -n cattle-system patch  deployments cattle-cluster-agent --patch '{
                         [
                             "rancher.s1.com"
                         ],
-                            "ip": "192.168.6.200"
+                            "ip": "192.168.6.121"
                     }
                 ]
             }
@@ -560,7 +560,7 @@ kubectl -n cattle-system patch  daemonsets cattle-node-agent --patch '{
                         [
                             "rancher.s1.com"
                         ],
-                            "ip": "192.168.6.200"
+                            "ip": "192.168.6.121"
                  }
              ]
          }
