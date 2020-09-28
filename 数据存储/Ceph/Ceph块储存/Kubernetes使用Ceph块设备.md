@@ -180,7 +180,7 @@ $ kubectl apply -f kms-config.yaml
 等待 Pod 创建完成：
 
 ```bash
-$ kubectl get pods --watch
+$ kubectl get pods -n ceph --watch
 ```
 
 我这里 pod 全部创建完成！

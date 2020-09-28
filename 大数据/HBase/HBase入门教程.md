@@ -126,3 +126,57 @@ public class HBaseDemo {
 </dependency>
 ```
 
+
+
+## 删除表
+
+```
+disable 'wanxiang:test'
+drop 'wanxiang:test'
+```
+
+
+
+## 权限控制
+
+权限类型有：
+
+- READ("R")
+- WRITE("W")
+- EXEC("X")
+- CREATE("C")
+- ADMIN("A")
+
+赋予权限：
+
+```
+$ sudo -u hbase hbase shell
+hbase(main)> grant 'user1', 'RWXCA', 'table1'
+```
+
+查看权限：
+
+```
+hbase(main)> user_permission 'table1'
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

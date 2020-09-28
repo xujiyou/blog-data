@@ -57,7 +57,7 @@ $ sudo yum install ceph -y
 
 会安装以下软件：
 
-![image-20200528141052464](../../resource/image-20200528141052464.png)
+![image-20200528141052464](../../../resource/image-20200528141052464.png)
 
 这里面没有对象网关，需单独安装：
 
@@ -234,15 +234,15 @@ $ systemctl enable ceph-mon@ceph-1
 ceph-2节点
 
 ```bash
-$ systemctl start ceph-mon@ceph-1
-$ systemctl enable ceph-mon@ceph-1
+$ systemctl start ceph-mon@ceph-2
+$ systemctl enable ceph-mon@ceph-2
 ```
 
 ceph-3 节点
 
 ```bash
-$ systemctl start ceph-mon@ceph-1
-$ systemctl enable ceph-mon@ceph-1
+$ systemctl start ceph-mon@ceph-3
+$ systemctl enable ceph-mon@ceph-3
 ```
 
 其他节点按照同样的套路进行启动。注意，上边生成的文件都要拷贝一份到其他节点，然后**同时启动**三个节点。
@@ -363,7 +363,7 @@ $ sudo ceph-volume lvm list
 
 添加完成后，集群就搭建完成了！
 
-![image-20200621183207519](../../resource/image-20200621183207519.png)
+![image-20200621183207519](../../../resource/image-20200621183207519.png)
 
 
 

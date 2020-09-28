@@ -186,6 +186,81 @@ options ndots:5
 
 
 
+## 修改时区
+
+Dockerfile 中加入以下命令可以让容器时区和宿主机时区同步：
+
+```dockerfile
+RUN rm -f /etc/localtime \
+    && ln -sv /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo "Asia/Shanghai" > /etc/timezone
+```
+
+同时，部署文件要这么写：
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: s1-system
+  namespace: s1-test
+  labels:
+    app: s1-system
+    version: v1.0
+spec:
+  ports:
+    - port: 8891
+      name: http
+  selector:
+    app: s1-system
+    version: v1.0
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: s1-system
+  namespace: s1-test
+  labels:
+    app: s1-system
+    version: v1.0
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: s1-system
+      version: v1.0
+  template:
+    metadata:
+      labels:
+        app: s1-system
+        version: v1.0
+    spec:
+      imagePullSecrets:
+        - name: aliyun-secret
+      containers:
+        - name: s1-system
+          image: registry.cn-shanghai.aliyuncs.com/bbd-s1/s1-system:1.7
+          ports:
+            - containerPort: 8891
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+          volumeMounts:
+          - name: host-time
+            mountPath: /etc/localtime
+            readOnly: true
+      volumes:
+      - name: host-time
+        hostPath:
+          path: /etc/localtime
+```
+
+
+
+
+
 
 
 

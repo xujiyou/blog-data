@@ -99,9 +99,7 @@ systemctl enable molochviewer.service
 
 防火墙开启 8005 端口
 
-浏览器访问：http://10.28.93.11:8005
-
-输入用户名 admin，密码 bbders@bbdops.com
+浏览器访问：http://10.10.10.10:8005
 
 
 
