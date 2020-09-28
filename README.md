@@ -698,6 +698,8 @@ CNCF 好多项目。
 
 [spark-submit详解.md](大数据/Spark/spark-submit详解.md) 
 
+[编译安装Spark并外挂到HDP.md](大数据/Spark/编译安装Spark并外挂到HDP.md) 
+
 [在Kubernetes上运行Spark.md](大数据/Spark/在Kubernetes上运行Spark.md) 
 
 - Spark 编程
