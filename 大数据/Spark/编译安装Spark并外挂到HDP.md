@@ -123,8 +123,8 @@ $ vim conf/spark-defaults.conf
 ```
 spark.eventLog.enabled  true
 spark.eventLog.compress true
-spark.eventLog.dir      hdfs://hdp1.prod.bbdops.com:8020/user/spark3-history
-spark.history.fs.logDirectory   hdfs://hdp1.prod.bbdops.com:8020/user/spark3-history
+spark.eventLog.dir      hdfs://hdp1.testing.com:8020/user/spark3-history
+spark.history.fs.logDirectory   hdfs://hdp1.testing.com:8020/user/spark3-history
 #若是HDP，增加
 spark.driver.extraJavaOptions -Dhdp.version=3.1.1.3.1.5.0-152
 spark.yarn.am.extraJavaOptions -Dhdp.version=3.1.1.3.1.5.0-152
@@ -141,7 +141,7 @@ $ vim conf/spark-env.sh
 
 ```
 HADOOP_CONF_DIR=/etc/hadoop/conf/
-SPARK_HISTORY_OPTS="-Dspark.history.fs.logDirectory=hdfs://hdp1.prod.bbdops.com:8020/user/spark3-history"
+SPARK_HISTORY_OPTS="-Dspark.history.fs.logDirectory=hdfs://hdp1.testing.com:8020/user/spark3-history"
 SPARK_DAEMON_CLASSPATH=$(hadoop classpath)
 SPARK_DIST_CLASSPATH=$(hadoop classpath)
 ```
