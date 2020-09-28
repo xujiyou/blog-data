@@ -141,7 +141,7 @@ $ vim conf/spark-env.sh
 
 ```
 HADOOP_CONF_DIR=/etc/hadoop/conf/
-SPARK_HISTORY_OPTS="-Dspark.history.fs.logDirectory=hdfs://hdp1.testing.com:8020/user/spark3-history"
+SPARK_HISTORY_OPTS="-Dspark.yarn.historyServer.address=hdp1.testing.com:18080 -Dspark.history.fs.logDirectory=hdfs://hdp1.testing.com:8020/user/spark3-history"
 SPARK_DAEMON_CLASSPATH=$(hadoop classpath)
 SPARK_DIST_CLASSPATH=$(hadoop classpath)
 ```
@@ -159,7 +159,7 @@ $ sudo -u hdfs hdfs dfs -chmod -R 775 /user/spark3-history
 启动 spark history server：
 
 ```bash
-$ sudo -u spark /opt/spark-3.0.1/sbin/start-history-server.sh
+$ sudo -u hdfs /opt/spark-3.0.1/sbin/start-history-server.sh
 ```
 
 
