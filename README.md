@@ -6,6 +6,8 @@ title: 日常工作记录
 
 ## 云原生
 
+CNCF 好多项目。
+
 #### Kubernetes
 
 [Kubernetes二进制安装.md](云原生/Kubernetes/Kubernetes二进制安装.md) 
