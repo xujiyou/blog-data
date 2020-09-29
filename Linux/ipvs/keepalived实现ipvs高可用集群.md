@@ -267,7 +267,7 @@ Keepalived 在 IPVS 的基础上，增加了 VIP 和健康检查，实现了高�
 
 
 
-
+参考：https://tuonioooo-notebook.gitbook.io/high-concurent-load/lvs/lvsshi-zhan
 
 
 

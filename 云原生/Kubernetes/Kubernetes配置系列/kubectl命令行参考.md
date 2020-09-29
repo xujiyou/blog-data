@@ -189,6 +189,12 @@ $ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 
 
+## 给 node 打标签
+
+```
+kubectl label nodes node1 key1=val1
+```
+
 
 
 
