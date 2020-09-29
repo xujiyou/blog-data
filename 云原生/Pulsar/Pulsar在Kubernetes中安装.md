@@ -22,12 +22,6 @@ $ helm install pulsar-prod pulsar -n pulsar
 $ kubectl get pods -n pulsar
 ```
 
-卸载：
-
-```bash
-$ helm uninstall pulsar-prod -n pulsar
-```
-
 修改 `deployment/kubernetes/helm/pulsar/values.yaml` 将其中的 LoadBalancer 改为 ClusterIP，
 
 然后再从这个文件中加入 ingress。
@@ -69,4 +63,10 @@ spec:
 ![image-20200929160040470](../../resource/image-20200929160040470.png)
 
 
+
+## 卸载
+
+```bash
+$ helm uninstall pulsar-prod -n pulsar
+```
 
