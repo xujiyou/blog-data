@@ -648,6 +648,10 @@ CNCF 好多项目。
 
 [HDFS原理详解.md](大数据/HDFS/HDFS原理详解.md) 
 
+[HDFS架构.md](大数据/HDFS/HDFS架构.md) 
+
+[HDFS用户手册.md](大数据/HDFS/HDFS用户手册.md) 
+
 
 
 #### Hive
