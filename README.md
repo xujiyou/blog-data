@@ -652,6 +652,12 @@ CNCF 好多项目。
 
 [HDFS用户手册.md](大数据/HDFS/HDFS用户手册.md) 
 
+[HDFS命令参考.md](大数据/HDFS/HDFS命令参考.md) 
+
+[使用QJM实现HDFS高可用.md](大数据/HDFS/使用QJM实现HDFS高可用.md) 
+
+[NFSGateway.md](大数据/HDFS/NFSGateway.md) 
+
 
 
 #### Hive
@@ -763,6 +769,8 @@ CNCF 好多项目。
 [Ambari.md](大数据/HDP/Ambari.md) 
 
 [HDF及NiFi部署.md](大数据/HDP/HDF及NiFi部署.md) 
+
+[HDP之上的HDFS启动HA.md](大数据/HDP/HDP之上的HDFS启动HA.md) 
 
 
 

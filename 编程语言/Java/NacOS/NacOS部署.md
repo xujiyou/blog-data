@@ -10,7 +10,7 @@
 
 ```
 $ docker exec -i -t 54542b63ff3a mysql -uroot -p
-mysql> create database nacos_devtest default character set utf8;
+mysql> create database nacos_devtest default character set utf8mb4;
 mysql> grant all on nacos_devtest.* to 'nacos_devtest'@'%' identified by 'slcrawler';
 mysql> grant all on nacos_devtest.* to 'nacos_devtest'@'localhost' identified by 'slcrawler';
 ```
