@@ -628,8 +628,6 @@ CNCF 好多项目。
 
 [HBase入门教程.md](大数据/HBase/HBase入门教程.md) 
 
-[HBase架构.md](大数据/HBase/HBase架构.md) 
-
 [HBase单机部署.md](大数据/HBase/HBase单机部署.md) 
 
 - HBase配置
@@ -637,6 +635,12 @@ CNCF 好多项目。
   [HBase配置概述.md](大数据/HBase/HBase配置/HBase配置概述.md) 
 
   [HBase默认配置.md](大数据/HBase/HBase配置/HBase默认配置.md) 
+
+- 架构
+
+  [HBase架构.md](大数据/HBase/架构/HBase架构.md) 
+
+  [HBase官方架构.md](大数据/HBase/架构/HBase官方架构.md) 
 
 
 
@@ -657,6 +661,8 @@ CNCF 好多项目。
 [使用QJM实现HDFS高可用.md](大数据/HDFS/使用QJM实现HDFS高可用.md) 
 
 [NFSGateway.md](大数据/HDFS/NFSGateway.md) 
+
+[Observer-NameNode.md](大数据/HDFS/Observer-NameNode.md) 
 
 
 
@@ -1337,6 +1343,8 @@ CNCF 好多项目。
 [Linux路由.md](Linux/网络/Linux路由.md) 
 
 [DHCP服务器搭建.md](Linux/网络/DHCP服务器搭建.md) 
+
+[双网卡冗余.md](Linux/网络/双网卡冗余.md) 
 
 
 
