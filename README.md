@@ -664,6 +664,10 @@ CNCF 好多项目。
 
 [Observer-NameNode.md](大数据/HDFS/Observer-NameNode.md) 
 
+[HDFS配额.md](大数据/HDFS/HDFS配额.md) 
+
+[HDFS快照.md](大数据/HDFS/HDFS快照.md) 
+
 
 
 #### Hive
