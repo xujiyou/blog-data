@@ -668,6 +668,10 @@ CNCF 好多项目。
 
 [HDFS快照.md](大数据/HDFS/HDFS快照.md) 
 
+[HDFS离线日志查看工具.md](大数据/HDFS/HDFS离线日志查看工具.md) 
+
+[HDFS离线Image查看工具.md](大数据/HDFS/HDFS离线Image查看工具.md) 
+
 
 
 #### Hive
@@ -781,6 +785,10 @@ CNCF 好多项目。
 [HDF及NiFi部署.md](大数据/HDP/HDF及NiFi部署.md) 
 
 [HDP之上的HDFS启动HA.md](大数据/HDP/HDP之上的HDFS启动HA.md) 
+
+[HDP恢复配置.md](大数据/HDP/HDP恢复配置.md) 
+
+[HDP集成Kerberos.md](大数据/HDP/HDP集成Kerberos.md) 
 
 
 

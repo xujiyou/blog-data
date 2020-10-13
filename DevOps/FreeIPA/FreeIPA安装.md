@@ -12,13 +12,13 @@
 
 ```bash
 $ sudo yum -y install @idm:DL1
-$ sudo yum -y install freeipa-server
+$ yum install ipa-server bind bind-dyndb-ldap ipa-server-dns 
 ```
 
 配置：
 
 ```bash
-$ sudo ipa-server-install
+$ sudo ipa-server-install --setup-dns --forwarder=10.10.10.10
 ```
 
 过程如下：
@@ -27,19 +27,17 @@ $ sudo ipa-server-install
 The log file for this installation can be found in /var/log/ipaserver-install.log
 ==============================================================================
 This program will set up the IPA Server.
-Version 4.8.4
 
 This includes:
   * Configure a stand-alone CA (dogtag) for certificate management
-  * Configure the NTP client (chronyd)
+  * Configure the Network Time Daemon (ntpd)
   * Create and configure an instance of Directory Server
   * Create and configure a Kerberos Key Distribution Center (KDC)
   * Configure Apache (httpd)
+  * Configure DNS (bind)
   * Configure the KDC to enable PKINIT
 
 To accept the default shown in brackets, press the Enter key.
-
-Do you want to configure integrated DNS (BIND)? [no]: 
 
 Enter the fully qualified domain name of the computer
 on which you're setting up server software. Using the form
@@ -47,16 +45,17 @@ on which you're setting up server software. Using the form
 Example: master.example.com.
 
 
-Server host name [node1.testing.com]: 
+Server host name [freeipa-1.hdp.testing.com]: 
 
+Warning: skipping DNS resolution of host freeipa-1.hdp.testing.com
 The domain name has been determined based on the host name.
 
-Please confirm the domain name [testing.com]: 
+Please confirm the domain name [hdp.testing.com]: 
 
 The kerberos protocol requires a Realm name to be defined.
 This is typically the domain name converted to uppercase.
 
-Please provide a realm name [TESTING.COM]: 
+Please provide a realm name [HDP.TESTING.COM]: 
 Certain directory server operations require an administrative user.
 This user is referred to as the Directory Manager and has full access
 to the Directory for system management tasks and will be added to the
@@ -72,77 +71,86 @@ This user is a regular system account used for IPA server administration.
 IPA admin password: 
 Password (confirm): 
 
-Do you want to configure chrony with NTP server or pool address? [no]: yes
-Enter NTP source server addresses separated by comma, or press Enter to skip: 
-Enter a NTP source pool address, or press Enter to skip: 
+Checking DNS domain hdp.testing.com., please wait ...
+WARNING: No network interface matches the IP address 10.10.10.29
+Checking DNS forwarders, please wait ...
+DNS server 10.10.10.10: answer to query '. SOA' is missing DNSSEC signatures (no RRSIG data)
+Please fix forwarder configuration to enable DNSSEC support.
+(For BIND 9 add directive "dnssec-enable yes;" to "options {}")
+WARNING: DNSSEC validation will be disabled
+Do you want to search for missing reverse zones? [yes]: yes
+Do you want to create reverse zone for IP 10.28.109.29 [yes]: yes
+Please specify the reverse zone name [10.10.10.in-addr.arpa.]: 
+Using reverse zone(s) 10.10.10.in-addr.arpa.
 
 The IPA Master Server will be configured with:
-Hostname:       node1.testing.com
-IP address(es): 10.10.10.16
-Domain name:    testing.com
-Realm name:     TESTING.COM
+Hostname:       freeipa-1.hdp.testing.com
+IP address(es): 10.28.109.29
+Domain name:    hdp.testing.com
+Realm name:     HDP.TESTING.COM
 
-The CA will be configured with:
-Subject DN:   CN=Certificate Authority,O=PROD.BBDOPS.COM
-Subject base: O=TESTING.COM
-Chaining:     self-signed
+BIND DNS server will be configured to serve IPA domain with:
+Forwarders:       10.10.10.10
+Forward policy:   only
+Reverse zone(s):  10.10.10.in-addr.arpa.
 
 Continue to configure the system with these values? [no]: yes
 
 The following operations may take some minutes to complete.
 Please wait until the prompt is returned.
 
-Disabled p11-kit-proxy
-Synchronizing time
-No SRV records of NTP servers found and no NTP server or pool address was provided.
-Using default chrony configuration.
-Attempting to sync time with chronyc.
-Time synchronization was successful.
+Configuring NTP daemon (ntpd)
+  [1/4]: stopping ntpd
+  [2/4]: writing configuration
+  [3/4]: configuring ntpd to start on boot
+  [4/4]: starting ntpd
+Done configuring NTP daemon (ntpd).
 Configuring directory server (dirsrv). Estimated time: 30 seconds
-  [1/44]: creating directory server instance
-  [2/44]: configure autobind for root
-  [3/44]: stopping directory server
-  [4/44]: updating configuration in dse.ldif
-  [5/44]: starting directory server
-  [6/44]: adding default schema
-  [7/44]: enabling memberof plugin
-  [8/44]: enabling winsync plugin
-  [9/44]: configure password logging
-  [10/44]: configuring replication version plugin
-  [11/44]: enabling IPA enrollment plugin
-  [12/44]: configuring uniqueness plugin
-  [13/44]: configuring uuid plugin
-  [14/44]: configuring modrdn plugin
-  [15/44]: configuring DNS plugin
-  [16/44]: enabling entryUSN plugin
-  [17/44]: configuring lockout plugin
-  [18/44]: configuring topology plugin
-  [19/44]: creating indices
-  [20/44]: enabling referential integrity plugin
-  [21/44]: configuring certmap.conf
-  [22/44]: configure new location for managed entries
-  [23/44]: configure dirsrv ccache and keytab
-  [24/44]: enabling SASL mapping fallback
-  [25/44]: restarting directory server
-  [26/44]: adding sasl mappings to the directory
-  [27/44]: adding default layout
-  [28/44]: adding delegation layout
-  [29/44]: creating container for managed entries
-  [30/44]: configuring user private groups
-  [31/44]: configuring netgroups from hostgroups
-  [32/44]: creating default Sudo bind user
-  [33/44]: creating default Auto Member layout
-  [34/44]: adding range check plugin
-  [35/44]: creating default HBAC rule allow_all
-  [36/44]: adding entries for topology management
-  [37/44]: initializing group membership
-  [38/44]: adding master entry
-  [39/44]: initializing domain level
-  [40/44]: configuring Posix uid/gid generation
-  [41/44]: adding replication acis
-  [42/44]: activating sidgen plugin
-  [43/44]: activating extdom plugin
-  [44/44]: configuring directory to start on boot
+  [1/45]: creating directory server instance
+  [2/45]: enabling ldapi
+  [3/45]: configure autobind for root
+  [4/45]: stopping directory server
+  [5/45]: updating configuration in dse.ldif
+  [6/45]: starting directory server
+  [7/45]: adding default schema
+  [8/45]: enabling memberof plugin
+  [9/45]: enabling winsync plugin
+  [10/45]: configure password logging
+  [11/45]: configuring replication version plugin
+  [12/45]: enabling IPA enrollment plugin
+  [13/45]: configuring uniqueness plugin
+  [14/45]: configuring uuid plugin
+  [15/45]: configuring modrdn plugin
+  [16/45]: configuring DNS plugin
+  [17/45]: enabling entryUSN plugin
+  [18/45]: configuring lockout plugin
+  [19/45]: configuring topology plugin
+  [20/45]: creating indices
+  [21/45]: enabling referential integrity plugin
+  [22/45]: configuring certmap.conf
+  [23/45]: configure new location for managed entries
+  [24/45]: configure dirsrv ccache
+  [25/45]: enabling SASL mapping fallback
+  [26/45]: restarting directory server
+  [27/45]: adding sasl mappings to the directory
+  [28/45]: adding default layout
+  [29/45]: adding delegation layout
+  [30/45]: creating container for managed entries
+  [31/45]: configuring user private groups
+  [32/45]: configuring netgroups from hostgroups
+  [33/45]: creating default Sudo bind user
+  [34/45]: creating default Auto Member layout
+  [35/45]: adding range check plugin
+  [36/45]: creating default HBAC rule allow_all
+  [37/45]: adding entries for topology management
+  [38/45]: initializing group membership
+  [39/45]: adding master entry
+  [40/45]: initializing domain level
+  [41/45]: configuring Posix uid/gid generation
+  [42/45]: adding replication acis
+  [43/45]: activating sidgen plugin
+  [44/45]: activating extdom plugin
+  [45/45]: configuring directory to start on boot
 Done configuring directory server (dirsrv).
 Configuring Kerberos KDC (krb5kdc)
   [1/10]: adding kerberos container to the directory
@@ -169,25 +177,25 @@ Configuring ipa-custodia
 Done configuring ipa-custodia.
 Configuring certificate server (pki-tomcatd). Estimated time: 3 minutes
   [1/29]: configuring certificate server instance
-  [2/29]: Add ipa-pki-wait-running
-  [3/29]: reindex attributes
-  [4/29]: exporting Dogtag certificate store pin
-  [5/29]: stopping certificate server instance to update CS.cfg
-  [6/29]: backing up CS.cfg
-  [7/29]: disabling nonces
-  [8/29]: set up CRL publishing
-  [9/29]: enable PKIX certificate path discovery and validation
-  [10/29]: starting certificate server instance
-  [11/29]: configure certmonger for renewals
-  [12/29]: requesting RA certificate from CA
-  [13/29]: setting audit signing renewal to 2 years
-  [14/29]: restarting certificate server
-  [15/29]: publishing the CA certificate
-  [16/29]: adding RA agent as a trusted user
-  [17/29]: authorizing RA to modify profiles
-  [18/29]: authorizing RA to manage lightweight CAs
-  [19/29]: Ensure lightweight CAs container exists
-  [20/29]: configure certificate renewals
+  [2/29]: reindex attributes
+  [3/29]: exporting Dogtag certificate store pin
+  [4/29]: stopping certificate server instance to update CS.cfg
+  [5/29]: backing up CS.cfg
+  [6/29]: disabling nonces
+  [7/29]: set up CRL publishing
+  [8/29]: enable PKIX certificate path discovery and validation
+  [9/29]: starting certificate server instance
+  [10/29]: configure certmonger for renewals
+  [11/29]: requesting RA certificate from CA
+  [12/29]: setting audit signing renewal to 2 years
+  [13/29]: restarting certificate server
+  [14/29]: publishing the CA certificate
+  [15/29]: adding RA agent as a trusted user
+  [16/29]: authorizing RA to modify profiles
+  [17/29]: authorizing RA to manage lightweight CAs
+  [18/29]: Ensure lightweight CAs container exists
+  [19/29]: configure certificate renewals
+  [20/29]: configure Server-Cert certificate renewal
   [21/29]: Configure HTTP to proxy connections
   [22/29]: restarting certificate server
   [23/29]: updating IPA configuration
@@ -208,28 +216,28 @@ Configuring ipa-otpd
   [2/2]: configuring ipa-otpd to start on boot
 Done configuring ipa-otpd.
 Configuring the web interface (httpd)
-  [1/21]: stopping httpd
-  [2/21]: backing up ssl.conf
-  [3/21]: disabling nss.conf
-  [4/21]: configuring mod_ssl certificate paths
-  [5/21]: setting mod_ssl protocol list
-  [6/21]: configuring mod_ssl log directory
-  [7/21]: disabling mod_ssl OCSP
-  [8/21]: adding URL rewriting rules
-  [9/21]: configuring httpd
-Nothing to do for configure_httpd_wsgi_conf
-  [10/21]: setting up httpd keytab
-  [11/21]: configuring Gssproxy
-  [12/21]: setting up ssl
-  [13/21]: configure certmonger for renewals
-  [14/21]: publish CA cert
-  [15/21]: clean up any existing httpd ccaches
-  [16/21]: configuring SELinux for httpd
-  [17/21]: create KDC proxy config
-  [18/21]: enable KDC proxy
-  [19/21]: starting httpd
-  [20/21]: configuring httpd to start on boot
-  [21/21]: enabling oddjobd
+  [1/22]: stopping httpd
+  [2/22]: setting mod_nss port to 443
+  [3/22]: setting mod_nss cipher suite
+  [4/22]: setting mod_nss protocol list to TLSv1.2
+  [5/22]: setting mod_nss password file
+  [6/22]: enabling mod_nss renegotiate
+  [7/22]: disabling mod_nss OCSP
+  [8/22]: adding URL rewriting rules
+  [9/22]: configuring httpd
+  [10/22]: setting up httpd keytab
+  [11/22]: configuring Gssproxy
+  [12/22]: setting up ssl
+  [13/22]: configure certmonger for renewals
+  [14/22]: importing CA certificates from LDAP
+  [15/22]: publish CA cert
+  [16/22]: clean up any existing httpd ccaches
+  [17/22]: configuring SELinux for httpd
+  [18/22]: create KDC proxy config
+  [19/22]: enable KDC proxy
+  [20/22]: starting httpd
+  [21/22]: configuring httpd to start on boot
+  [22/22]: enabling oddjobd
 Done configuring the web interface (httpd).
 Configuring Kerberos KDC (krb5kdc)
   [1/1]: installing X509 Certificate for PKINIT
@@ -248,33 +256,63 @@ Upgrading IPA:. Estimated time: 1 minute 30 seconds
   [10/10]: starting directory server
 Done.
 Restarting the KDC
+Configuring DNS (named)
+  [1/12]: generating rndc key file
+  [2/12]: adding DNS container
+  [3/12]: setting up our zone
+  [4/12]: setting up reverse zone
+  [5/12]: setting up our own record
+  [6/12]: setting up records for other masters
+  [7/12]: adding NS record to the zones
+  [8/12]: setting up kerberos principal
+  [9/12]: setting up named.conf
+  [10/12]: setting up server configuration
+  [11/12]: configuring named to start on boot
+  [12/12]: changing resolv.conf to point to ourselves
+Done configuring DNS (named).
+Restarting the web server to pick up resolv.conf changes
+Configuring DNS key synchronization service (ipa-dnskeysyncd)
+  [1/7]: checking status
+  [2/7]: setting up bind-dyndb-ldap working directory
+  [3/7]: setting up kerberos principal
+  [4/7]: setting up SoftHSM
+  [5/7]: adding DNSSEC containers
+  [6/7]: creating replica keys
+  [7/7]: configuring ipa-dnskeysyncd to start on boot
+Done configuring DNS key synchronization service (ipa-dnskeysyncd).
+Restarting ipa-dnskeysyncd
+Restarting named
+Updating DNS system records
 Configuring client side components
-This program will set up IPA client.
-Version 4.8.4
-
 Using existing certificate '/etc/ipa/ca.crt'.
-Client hostname: kubenode1.prod.bbdops.com
-Realm: PROD.BBDOPS.COM
-DNS Domain: prod.bbdops.com
-IPA Server: kubenode1.prod.bbdops.com
-BaseDN: dc=prod,dc=bbdops,dc=com
+Client hostname: freeipa-1.hdp.testing.com
+Realm: HDP.TESTING.COM
+DNS Domain: hdp.testing.com
+IPA Server: freeipa-1.hdp.testing.com
+BaseDN: dc=hdp,dc=testing,dc=com
 
-Configured sudoers in /etc/authselect/user-nsswitch.conf
+Skipping synchronizing time with NTP server.
+New SSSD config will be created
+Configured sudoers in /etc/nsswitch.conf
 Configured /etc/sssd/sssd.conf
+trying https://freeipa-1.hdp.testing.com/ipa/json
+[try 1]: Forwarding 'schema' to json server 'https://freeipa-1.hdp.testing.com/ipa/json'
+trying https://freeipa-1.hdp.testing.com/ipa/session/json
+[try 1]: Forwarding 'ping' to json server 'https://freeipa-1.hdp.testing.com/ipa/session/json'
+[try 1]: Forwarding 'ca_is_enabled' to json server 'https://freeipa-1.hdp.testing.com/ipa/session/json'
 Systemwide CA database updated.
-Adding SSH public key from /etc/ssh/ssh_host_ed25519_key.pub
-Adding SSH public key from /etc/ssh/ssh_host_ecdsa_key.pub
 Adding SSH public key from /etc/ssh/ssh_host_rsa_key.pub
-Could not update DNS SSHFP records.
+Adding SSH public key from /etc/ssh/ssh_host_ecdsa_key.pub
+Adding SSH public key from /etc/ssh/ssh_host_ed25519_key.pub
+[try 1]: Forwarding 'host_mod' to json server 'https://freeipa-1.hdp.testing.com/ipa/session/json'
 SSSD enabled
 Configured /etc/openldap/ldap.conf
 Configured /etc/ssh/ssh_config
 Configured /etc/ssh/sshd_config
-Configuring prod.bbdops.com as NIS domain.
+Configuring hdp.testing.com as NIS domain.
 Client configuration complete.
 The ipa-client-install command was successful
 
-Please add records in this file to your DNS system: /tmp/ipa.system.records.i8prjg8l.db
 ==============================================================================
 Setup complete
 
@@ -284,8 +322,10 @@ Next steps:
                   * 80, 443: HTTP/HTTPS
                   * 389, 636: LDAP/LDAPS
                   * 88, 464: kerberos
+                  * 53: bind
                 UDP Ports:
                   * 88, 464: kerberos
+                  * 53: bind
                   * 123: ntp
 
         2. You can now obtain a kerberos ticket using the command: 'kinit admin'
@@ -295,8 +335,9 @@ Next steps:
 Be sure to back up the CA certificates stored in /root/cacert.p12
 These files are required to create replicas. The password for these
 files is the Directory Manager password
-The ipa-server-install command was successful
 ```
+
+示例密码：admin@password
 
 查看用户信息，需要先认证：
 
@@ -324,6 +365,70 @@ ipa: INFO: The ipactl command was successful
 
 
 
+## 安装replica
+
+在 freeipa-1 上执行：
+
+```bash
+$ sudo kinit admin
+$ sudo ipa host-add --force --ip-address=10.10.10.28 freeipa-2.hdp.testing.com
+$ sudo ipa host-find
+$ sudo ipa host-find |grep "Host name"
+```
+
+查看当前所有 Zone：
+
+```bash
+$ sudo ipa dnszone-find | grep "Zone name" 
+```
+
+设置`dnszone` 的 `allow-sync-ptr` 属性 ( 注意：先执行以下命令，再去执行添加或删除机器操作 )
+
+```bash
+$ sudo ipa dnszone-mod hdp.testing.com. --allow-sync-ptr=true
+$ sudo ipa dnszone-mod 10.10.10.in-addr.arpa. --allow-sync-ptr=true
+```
+
+
+
+在 freeipa-2 修改 `/etc/resolv.conf`
+
+```
+search hdp.testing.com
+nameserver 10.28.109.29
+```
+
+```bash
+$ sudo ipa-client-install --force-join
+```
+
+在 freeipa-2 上安装 freeipa ：
+
+```bash
+$ sudo kinit admin
+$ sudo klist
+$ sudo ipa-replica-install --setup-dns --forwarder 10.10.10.29
+```
+
+
+
+在 freeipa-1 上查看是否成功：
+
+```bash
+$ sudo ipa-replica-manage list
+$ sudo ipa host-find
+```
+
+> 上述执行完成之后，执行`ipactl status`检查发现`ipa2` 比 `ipa1` 少了`pki-tomcatd`这组件。执行ipa-ca-install安装即可
+>
+> 在 freeipa-2 上执行：
+>
+> ```bash
+> $ sudo ipa-ca-install
+> ```
+
+
+
 ## 用户管理
 
 FreeIPA 可以管理 Linux 主机内的用户，在 FreeIPA 界面内点点点添加一个用户，设定初始密码，也可以添加 sudo 权限，默认 shell 选 /bin/bash 即可。
@@ -339,6 +444,86 @@ export PS1='[\u@\h \W]\$ '
 ```
 
 
+
+## Kerberos 测试
+
+创建一个用户：
+
+```bash
+$ sudo ipa user-add xujiyou --first=xujiyou --last=xujiyou --password
+```
+
+使用 kinit 登录用户：
+
+```bash
+$ sudo kinit xujiyou
+```
+
+第一次登录需要修改密码，我改的密码是 xujiyou@password
+
+显示当前用户：
+
+```bash
+$ sudo klist
+```
+
+这样创建完用户后，在 freeipa 的 web 界面上也可以看到用户了！
+
+
+
+#### 本地管理员模式
+
+登录：
+
+```bash
+$ sudo kinit admin
+```
+
+进入：
+
+```bash
+$ sudo kadmin.local
+```
+
+输入 ? 可以查看命令列表。
+
+
+
+#### 创建 keytab 文件
+
+除了使用明文密码之外，Kerberos 还允许使用 keytab 密码文件进行登录，在 kadmin.local 中创建 keytab 密码文件：
+
+```
+kadmin.local:  xst -norandkey -k /home/admin/xujiyou.keytab xujiyou@HDP.TESTING.COM
+```
+
+使用密钥文件进行登录：
+
+```bash
+$ sudo kinit -kt /home/admin/xujiyou.keytab xujiyou
+```
+
+
+
+## 卸载
+
+在 freeipa-1 上执行：
+
+```bash
+$ ipa-replica-manage del freeipa-2.hdp.testing.com
+```
+
+在 freeipa-2 上执行：
+
+```bash
+$ ipa-server-install --uninstall
+```
+
+在 freeipa-1 上执行：
+
+```bash
+$ ipa-server-install --uninstall
+```
 
 
 

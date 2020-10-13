@@ -44,3 +44,13 @@ x509: certificate signed by unknown authority
 
 
 
+
+
+## 磁盘容量
+
+docker 启动一个容器后默认根分区大小为10GB，通过docker info可以看见默认大小为10G,有时会不够用需要扩展。
+
+```
+
+```
+
