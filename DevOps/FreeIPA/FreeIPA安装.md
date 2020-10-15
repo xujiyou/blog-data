@@ -2,7 +2,7 @@
 
 参考：https://www.sysit.cn/blog/post/sysit/FreeIPA-HA%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE
 
-`FreeIPA`建立在著名的开源组件和标准协议之上，是一个集成的安全信息管理解决方案，具有易于管理、安装和配置任务自动化的特点。它整合了`389-ds（LDAP）`、`Kerberos`、`NTP`、`bind`、`apache`、`tomcat`核心软件包，形成一个以`389-ds（LDAP）`为数据存储后端，`Kerberos`为验证前端，`bind`为主机识别，并且具有统一的命令行管理工具及`apache+tomcat`提供的`web`管理界面的集成信息管理系统。
+`FreeIPA`建立在著名的开源组件和标准协议之上，是一个集成的安全信息管理解决方案，具有易于管理、安装和配置任务自动化的特点。它整合了`389-ds（LDAP）`、`Kerberos`、`NTP`、`bind`、`apache httpd`、`tomcat`核心软件包，形成一个以`389-ds（LDAP）`为数据存储后端，`Kerberos`为验证前端，`bind`为主机识别，并且具有统一的命令行管理工具及`apache+tomcat`提供的`web`管理界面的集成信息管理系统。
 
 
 
@@ -12,7 +12,7 @@
 
 ```bash
 $ sudo yum -y install @idm:DL1
-$ yum install ipa-server bind bind-dyndb-ldap ipa-server-dns 
+$ sudo yum install ipa-server bind bind-dyndb-ldap ipa-server-dns 
 ```
 
 配置：
@@ -510,19 +510,19 @@ $ sudo kinit -kt /home/admin/xujiyou.keytab xujiyou
 在 freeipa-1 上执行：
 
 ```bash
-$ ipa-replica-manage del freeipa-2.hdp.testing.com
+$ sudo ipa-replica-manage del freeipa-2.hdp.testing.com
 ```
 
 在 freeipa-2 上执行：
 
 ```bash
-$ ipa-server-install --uninstall
+$ sudo ipa-server-install --uninstall
 ```
 
 在 freeipa-1 上执行：
 
 ```bash
-$ ipa-server-install --uninstall
+$ sudo ipa-server-install --uninstall
 ```
 
 

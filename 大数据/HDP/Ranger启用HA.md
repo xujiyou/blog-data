@@ -1,0 +1,170 @@
+# Ranger 启用 HA
+
+Ranger 管理着 HDP 各个组件的权限，还是比较关键的，启用 HA 保证服务可用。
+
+官方文档：https://docs.cloudera.com/HDPDocuments/HDP3/HDP-3.1.5/fault-tolerance/content/configuring_ranger_admin_ha.html
+
+
+
+## 编译安装 httpd
+
+在 ct3.testing.com 中执行。
+
+依次执行：
+
+```
+cd /usr/local
+wget https://archive.apache.org/dist/httpd/httpd-2.4.16.tar.gz
+wget https://archive.apache.org/dist/apr/apr-1.5.2.tar.gz 
+wget https://archive.apache.org/dist/apr/apr-util-1.5.4.tar.gz
+tar -xvf httpd-2.4.16.tar.gz
+tar -xvf apr-1.5.2.tar.gz 
+tar -xvf apr-util-1.5.4.tar.gz
+mv apr-1.5.2/ apr
+mv apr httpd-2.4.16/srclib/ 
+mv apr-util-1.5.4/ apr-util
+mv apr-util httpd-2.4.16/srclib/
+```
+
+安装编译工具：
+
+```
+yum install pcre pcre-devel
+yum install gcc
+```
+
+编译并安装：
+
+```
+cd /usr/local/httpd-2.4.16
+./configure
+make
+make install
+```
+
+启动：
+
+```
+cd /usr/local/apache2/bin
+./apachectl start
+curl localhost
+```
+
+修改配置：
+
+```
+cd /usr/local/apache2/conf
+cp httpd.conf ~/httpd.conf.backup
+vi /usr/local/apache2/conf/httpd.conf
+```
+
+在配置文件中去掉以下代码的注释：
+
+```
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_http_module modules/mod_proxy_http.so
+LoadModule proxy_ajp_module modules/mod_proxy_ajp.so
+LoadModule proxy_balancer_module modules/mod_proxy_balancer.so
+LoadModule slotmem_shm_module modules/mod_slotmem_shm.so
+LoadModule lbmethod_byrequests_module modules/mod_lbmethod_byrequests.so
+LoadModule lbmethod_bytraffic_module modules/mod_lbmethod_bytraffic.so
+LoadModule lbmethod_bybusyness_module modules/mod_lbmethod_bybusyness.so
+```
+
+然后在文件末尾，加入以下行：
+
+```
+Include conf/ranger-cluster.conf
+```
+
+再创建配置文件：
+
+```
+vi ranger-cluster.conf
+```
+
+内容如下：
+
+```
+#
+# This is the Apache server configuration file providing SSL support.
+# It contains the configuration directives to instruct the server how to
+# serve pages over an https connection. For detailing information about these
+# directives see <URL:http://httpd.apache.org/docs/2.2/mod/mod_ssl.html>
+#
+# Do NOT simply read the instructions in here without understanding
+# what they do.  They're here only as hints or reminders.  If you are unsure
+# consult the online docs. You have been warned.
+
+#Listen 80
+<VirtualHost *:80>
+        ProxyRequests off
+        ProxyPreserveHost on
+
+        Header add Set-Cookie "ROUTEID=.%{BALANCER_WORKER_ROUTE}e; path=/" env=BALANCER_ROUTE_CHANGED
+
+        <Proxy balancer://rangercluster>
+                BalancerMember http://ct3.testing.com:6080 loadfactor=1 route=1
+                BalancerMember http://ct4.testing.com:6080 loadfactor=1 route=2
+
+                Order Deny,Allow
+                Deny from none
+                Allow from all
+
+                ProxySet lbmethod=byrequests scolonpathdelim=On stickysession=ROUTEID maxattempts=1 failonstatus=500,501,502,503 nofailover=Off
+        </Proxy>
+
+        # balancer-manager
+        # This tool is built into the mod_proxy_balancer
+        # module and will allow you to do some simple
+        # modifications to the balanced group via a gui
+        # web interface.
+        <Location /balancer-manager>
+                SetHandler balancer-manager
+                Order deny,allow
+                Allow from all
+        </Location>
+
+
+       ProxyPass /balancer-manager !
+       ProxyPass / balancer://rangercluster/
+       ProxyPassReverse / balancer://rangercluster/
+
+</VirtualHost>
+```
+
+重启：
+
+```
+cd /usr/local/apache2/bin
+./apachectl restart
+```
+
+
+
+## 启用 Ranger Admin HA
+
+在 ranger 界面右上角点击 enable ranger admin ha按钮。
+
+负载均衡地址填以下地址，主机是上面配置 httpd 的主机，端口是 80（这里官方网站弄错了）。
+
+完成后，访问：http://ct3.testing.com/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

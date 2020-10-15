@@ -35,6 +35,20 @@ $ mc ls myminio
 $ mc ls myminio/one-backup
 ```
 
+查看桶列表：
+
+```bash
+$ mc ls myminio
+```
+
+删除桶中的全部文件：
+
+```bash
+$ mc rm --recursive --force myminio/one-backup
+```
+
+
+
 删除桶：
 
 ```bash

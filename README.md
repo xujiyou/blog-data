@@ -672,6 +672,8 @@ CNCF 好多项目。
 
 [HDFS离线Image查看工具.md](大数据/HDFS/HDFS离线Image查看工具.md) 
 
+[直接读取本地数据.md](大数据/HDFS/直接读取本地数据.md) 
+
 
 
 #### Hive
@@ -764,18 +766,6 @@ CNCF 好多项目。
 
 
 
-- Sqoop
-
-
-
-- Knox
-
-
-
-- Ranger
-
-
-
 #### HDP
 
 [HDP离线安装.md](大数据/HDP/HDP离线安装.md) 
@@ -789,6 +779,8 @@ CNCF 好多项目。
 [HDP恢复配置.md](大数据/HDP/HDP恢复配置.md) 
 
 [HDP集成Kerberos.md](大数据/HDP/HDP集成Kerberos.md) 
+
+[Ranger启用HA.md](大数据/HDP/Ranger启用HA.md) 
 
 
 

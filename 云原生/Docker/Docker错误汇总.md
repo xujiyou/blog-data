@@ -50,7 +50,29 @@ x509: certificate signed by unknown authority
 
 docker 启动一个容器后默认根分区大小为10GB，通过docker info可以看见默认大小为10G,有时会不够用需要扩展。
 
+```bash
+$ docker info | grep Base
 ```
 
+
+
+## driver 错误
+
+错误：
+
+```
+time="2020-10-15T15:57:02.691043891+08:00" level=error msg="[graphdriver] prior storage driver overlay2 failed: driver not supported"
+Oct 15 15:57:02 ct1.test.bbdops.com dockerd[20860]: Error starting daemon: error initializing graphdriver: driver not supported
+```
+
+解决方案，在 `/etc/docker/daemon.json` 中添加：
+
+```json
+{
+  "storage-driver": "overlay2",
+  "storage-opts": [
+    "overlay2.override_kernel_check=true"
+  ]
+}
 ```
 
