@@ -497,6 +497,14 @@ $ sudo kadmin.local
 kadmin.local:  xst -norandkey -k /home/admin/xujiyou.keytab xujiyou@HDP.TESTING.COM
 ```
 
+查看 keytab 文件：
+
+```bash
+$ sudo klist -t -k /home/admin/xujiyou.keytab
+```
+
+
+
 使用密钥文件进行登录：
 
 ```bash

@@ -146,9 +146,32 @@ cd /usr/local/apache2/bin
 
 在 ranger 界面右上角点击 enable ranger admin ha按钮。
 
-负载均衡地址填以下地址，主机是上面配置 httpd 的主机，端口是 80（这里官方网站弄错了）。
+负载均衡地址填 http://ct3.testing.com ，主机是上面配置 httpd 的主机，端口是 80（这里官方网站弄错了）。
 
-完成后，访问：http://ct3.testing.com/
+完成后，访问：http://ct3.testing.com
+
+
+
+## 在有 Kerberos 的环境中配置 Ranger HA
+
+```
+cd /tmp
+openssl genrsa -out server.key 2048
+openssl req -new -key server.key -out server.csr
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+openssl pkcs12 -export -passout pass:ranger -in server.crt -inkey server.key -out lbkeystore.p12 -name httpd.lb.server.alias
+
+keytool -importkeystore -deststorepass ranger -destkeypass ranger -destkeystore httpd_lb_keystore.jks -srckeystore lbkeystore.p12 -srcstoretype PKCS12 -srcstorepass ranger -alias httpd.lb.server.alias
+
+keytool -export -keystore httpd_lb_keystore.jks -alias httpd.lb.server.alias -file httpd-lb-trust.cer
+```
+
+
+
+```
+cp server.crt /usr/local/apache2/conf/
+cp server.key /usr/local/apache2/conf/
+```
 
 
 

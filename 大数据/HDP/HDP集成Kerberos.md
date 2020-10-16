@@ -97,7 +97,37 @@ $ sudo kinit -kt /etc/security/keytabs/hdfs.headless.keytab hdfs-test@HDP.TESTIN
 $ sudo hdfs dfs -ls /
 ```
 
+---
 
+MacOS 浏览器访问有 Kerberos 认证的 WebUI：https://docs.cloudera.com/HDPDocuments/HDP3/HDP-3.1.5/authentication-with-kerberos/content/authe_spnego_enabling_browser_access_to_a_spnego_enabled_web_ui.html
+
+MacOS 自带 kinit 工具。
+
+将集群任意节点的 `/etc/krb5.conf` 文件拷贝到 MacOS 的相同位置。
+
+拷贝集群任意节点的 `/etc/security/keytabs/smokeuser.headless.keytab` 到本地电脑。
+
+在集群节点查看 smokeuser.headless.keytab 中的 principals：
+
+```bash
+$ sudo klist -t -k smokeuser.headless.keytab 
+```
+
+在 MacOS 上进行认证：
+
+```bash
+$ sudo kinit -kt smokeuser.headless.keytab ambari-qa-test@HDP.TESTING.COM
+```
+
+在 MacOS 上执行：
+
+```bash
+$ sudo /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --auth-server-whitelist="*.hdp.testing.com"
+```
+
+记住一定加 sudo。
+
+在自动打开的 Chrome 中就打开带有 Kerberos 认证的 WebUI 了。
 
 
 
