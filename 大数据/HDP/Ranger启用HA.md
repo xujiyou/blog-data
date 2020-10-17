@@ -2,6 +2,8 @@
 
 Ranger 管理着 HDP 各个组件的权限，还是比较关键的，启用 HA 保证服务可用。
 
+因为集群开启了 Kerberos，所以这里使用带 SSL 版本的 HA。
+
 官方文档：https://docs.cloudera.com/HDPDocuments/HDP3/HDP-3.1.5/fault-tolerance/content/configuring_ranger_admin_ha.html
 
 
@@ -50,6 +52,8 @@ cd /usr/local/apache2/bin
 curl localhost
 ```
 
+## 配置
+
 修改配置：
 
 ```
@@ -61,6 +65,7 @@ vi /usr/local/apache2/conf/httpd.conf
 在配置文件中去掉以下代码的注释：
 
 ```
+Listen 443
 LoadModule proxy_module modules/mod_proxy.so
 LoadModule proxy_http_module modules/mod_proxy_http.so
 LoadModule proxy_ajp_module modules/mod_proxy_ajp.so
@@ -69,35 +74,26 @@ LoadModule slotmem_shm_module modules/mod_slotmem_shm.so
 LoadModule lbmethod_byrequests_module modules/mod_lbmethod_byrequests.so
 LoadModule lbmethod_bytraffic_module modules/mod_lbmethod_bytraffic.so
 LoadModule lbmethod_bybusyness_module modules/mod_lbmethod_bybusyness.so
+LoadModule ssl_module modules/mod_ssl.so
 ```
 
 然后在文件末尾，加入以下行：
 
 ```
-Include conf/ranger-cluster.conf
+Include /usr/local/apache2/conf/ranger-lb-ssl.conf
 ```
 
 再创建配置文件：
 
 ```
-vi ranger-cluster.conf
+vi ranger-lb-ssl.conf
 ```
 
 内容如下：
 
 ```
-#
-# This is the Apache server configuration file providing SSL support.
-# It contains the configuration directives to instruct the server how to
-# serve pages over an https connection. For detailing information about these
-# directives see <URL:http://httpd.apache.org/docs/2.2/mod/mod_ssl.html>
-#
-# Do NOT simply read the instructions in here without understanding
-# what they do.  They're here only as hints or reminders.  If you are unsure
-# consult the online docs. You have been warned.
-
-#Listen 80
-<VirtualHost *:80>
+Listen 443
+<VirtualHost *:443>
         ProxyRequests off
         ProxyPreserveHost on
 
@@ -133,26 +129,9 @@ vi ranger-cluster.conf
 </VirtualHost>
 ```
 
-重启：
-
-```
-cd /usr/local/apache2/bin
-./apachectl restart
-```
 
 
-
-## 启用 Ranger Admin HA
-
-在 ranger 界面右上角点击 enable ranger admin ha按钮。
-
-负载均衡地址填 http://ct3.testing.com ，主机是上面配置 httpd 的主机，端口是 80（这里官方网站弄错了）。
-
-完成后，访问：http://ct3.testing.com
-
-
-
-## 在有 Kerberos 的环境中配置 Ranger HA
+## 准备证书
 
 ```
 cd /tmp
@@ -175,9 +154,46 @@ cp server.key /usr/local/apache2/conf/
 
 
 
+## 重启
+
+所有东西准备好之后重启 httpd：
+
+```
+cd /usr/local/apache2/bin
+./apachectl restart
+```
 
 
 
+## 在有 Kerberos 的环境中配置 Ranger HA
+
+将上面的 `/tmp/httpd-lb-trust.cer` 拷贝至各个机器。
+
+在每个机器上执行：
+
+```bash
+$ keytool -import -file /tmp/httpd-lb-trust.cer -alias httpd.lb.server.alias -keystore /etc/ranger/usersync/conf/mytruststore.jks -storepass changeit
+```
+
+添加以下 HTTP Principal Ranger Admin 和负载均衡节点的 `/etc/security/keytabs/spnego.service.keytab`
+
+```
+kadmin.local: ktadd -norandkey -kt /etc/security/keytabs/spnego.service.keytab HTTP/ <host3>@EXAMPLE.COM
+kadmin.local: ktadd -norandkey -kt /etc/security/keytabs/spnego.service.keytab HTTP/ <host2>@EXAMPLE.COM
+kadmin.local: ktadd -norandkey -kt /etc/security/keytabs/spnego.service.keytab HTTP/ <host1>@EXAMPLE.COM
+```
+
+
+
+
+
+## 启用 Ranger Admin HA
+
+在 ranger 界面右上角点击 enable ranger admin ha按钮。
+
+负载均衡地址填 http://ct3.testing.com ，主机是上面配置 httpd 的主机，端口是 80（这里官方网站弄错了）。
+
+完成后，访问：http://ct3.testing.com
 
 
 

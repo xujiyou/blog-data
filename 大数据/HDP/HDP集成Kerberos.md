@@ -85,6 +85,14 @@ $ tail -f /var/log/ambari-server/ambari-server.log
 
 这时应该先进行登录再进行查询：
 
+先查看 keytab 中的 principals:
+
+```bash
+$ klist -t -k /etc/security/keytabs/hdfs.headless.keytab
+```
+
+再进行认证：
+
 ```bash
 $ sudo kinit -kt /etc/security/keytabs/hdfs.headless.keytab hdfs-test@HDP.TESTING.COM
 ```

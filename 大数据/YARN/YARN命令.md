@@ -1,5 +1,7 @@
 # YARN 命令
 
+官方文档：https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YarnCommands.html
+
 YARN 有用户命令和管理命令，命令结构：
 
 ```

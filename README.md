@@ -746,6 +746,10 @@ CNCF 好多项目。
 
 [YARN架构.md](大数据/YARN/YARN架构.md) 
 
+[ResourceManager重启.md](大数据/YARN/ResourceManager重启.md) 
+
+[ResourceManager启用HA.md](大数据/YARN/ResourceManager启用HA.md) 
+
 
 
 #### ZooKeeper
@@ -781,6 +785,8 @@ CNCF 好多项目。
 [HDP集成Kerberos.md](大数据/HDP/HDP集成Kerberos.md) 
 
 [Ranger启用HA.md](大数据/HDP/Ranger启用HA.md) 
+
+[Knox使用FreeIPA中的LDAP服务.md](大数据/HDP/Knox使用FreeIPA中的LDAP服务.md) 
 
 
 
