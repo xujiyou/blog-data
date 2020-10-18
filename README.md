@@ -750,6 +750,10 @@ CNCF 好多项目。
 
 [ResourceManager启用HA.md](大数据/YARN/ResourceManager启用HA.md) 
 
+[YARN资源配置.md](大数据/YARN/YARN资源配置.md) 
+
+[NodeManager.md](大数据/YARN/NodeManager.md) 
+
 
 
 #### ZooKeeper
