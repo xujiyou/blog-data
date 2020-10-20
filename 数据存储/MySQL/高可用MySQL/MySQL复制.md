@@ -12,7 +12,7 @@
 2. 配置一个服务器为 slave。
 3. 将 slave 连接到 master。
 
-关于单价搭建MySQL： [MySQL最新版本安装.md](MySQL最新版本安装.md) 
+关于单价搭建MySQL： [MySQL最新版本安装.md](../MySQL最新版本安装.md) 
 
 
 

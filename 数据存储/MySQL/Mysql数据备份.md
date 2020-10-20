@@ -12,7 +12,7 @@ DATE=`date +'%F-%T'`
 
 mysqldump -uroot -pMyPassword --all-databases --triggers --routines --events > $BACK_DIR/server05-mysql-CDH-$DATE.sql
 
-rsync -a --delete $BACK_DIR root@server01:/data1/server05-mysql-CDH-backup/
+rsync -a -e 'ssh -p 20000' --delete $BACK_DIR root@server01:/data1/server05-mysql-CDH-backup/
 
 find $BACK_DIR -name "*.sql" -mtime +7 | xargs rm -f
 
@@ -35,13 +35,10 @@ $ sudo yum install rsync -y
 0 0 * * * root /data1/mysql-backup/mysql-backup.sh
 ```
 
-
-
 重启定时任务后台进程：
 
 ```bash
 $ sudo systemctl restart crond
 ```
 
-
-
+因为文件中有 MySQL 密码，所以要注意文件权限，除了 root 之外不允许查看文件内容！备份目录也不能允许其他用户读取进入。

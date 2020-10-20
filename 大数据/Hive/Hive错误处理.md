@@ -30,7 +30,7 @@ $ locate *hive-hcatalog-core*.jar
 /opt/cloudera/parcels/CDH-6.1.1-1.cdh6.1.1.p0.875250/lib/sentry/lib/hive-hcatalog-core.jar
 ```
 
-随便学一个新版本的，然后进入hive后执行：
+随便选一个新版本的，然后进入hive后执行：
 
 ```
 ADD JAR /opt/cloudera/cm/cloudera-navigator-server/libs/cdh6/hive-hcatalog-core-2.1.1-cdh6.1.1.jar;

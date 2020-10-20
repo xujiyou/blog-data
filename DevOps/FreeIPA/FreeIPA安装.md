@@ -503,8 +503,6 @@ kadmin.local:  xst -norandkey -k /home/admin/xujiyou.keytab xujiyou@HDP.TESTING.
 $ sudo klist -t -k /home/admin/xujiyou.keytab
 ```
 
-
-
 使用密钥文件进行登录：
 
 ```bash

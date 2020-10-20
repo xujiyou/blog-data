@@ -540,9 +540,9 @@ kubectl -n cattle-system patch  deployments cattle-cluster-agent --patch '{
                     {
                         "hostnames":
                         [
-                            "myrancher.test.bbdops.com"
+                            "rancher.s1.com"
                         ],
-                            "ip": "10.28.102.29"
+                            "ip": "192.168.6.121"
                     }
                 ]
             }
@@ -558,9 +558,9 @@ kubectl -n cattle-system patch  daemonsets cattle-node-agent --patch '{
                  {
                      "hostnames":
                         [
-                            "myrancher.test.bbdops.com"
+                            "rancher.s1.com"
                         ],
-                            "ip": "10.28.102.29"
+                            "ip": "192.168.6.121"
                  }
              ]
          }

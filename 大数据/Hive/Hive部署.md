@@ -103,7 +103,7 @@ $ cp conf/hive-default.xml.template conf/hive-site.xml
   </property>
   <property>
     <name>javax.jdo.option.ConnectionPassword</name>
-    <value>BBDERS1@bbdops.com</value>
+    <value>password</value>
   </property>
   <property>
     <name>javax.jdo.option.ConnectionUserName</name>

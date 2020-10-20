@@ -682,6 +682,16 @@ CNCF 好多项目。
 
 [Hive错误处理.md](大数据/Hive/Hive错误处理.md) 
 
+[Hive命令.md](大数据/Hive/Hive命令.md) 
+
+[HiveServer2.md](大数据/Hive/HiveServer2.md) 
+
+[Hive架构.md](大数据/Hive/Hive架构.md) 
+
+[ORC文件格式.md](大数据/Hive/ORC文件格式.md) 
+
+[LLAP.md](大数据/Hive/LLAP.md) 
+
 
 
 #### Kafka
@@ -793,6 +803,8 @@ CNCF 好多项目。
 [Knox使用FreeIPA中的LDAP服务.md](大数据/HDP/Knox使用FreeIPA中的LDAP服务.md) 
 
 [RangerKMS.md](大数据/HDP/RangerKMS.md) 
+
+[Ranger与Kerberos结合.md](大数据/HDP/Ranger与Kerberos结合.md) 
 
 
 
