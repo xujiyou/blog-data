@@ -44,7 +44,17 @@ Yarn 容器只需要启动一次即可。
 
 
 
+## HDP 中启用 LLAP
 
+在 HDP 的 Hive 的 Config 界面中，可以启用 Interactive，HIVESERVER2 INTERACTIVE 启用后，Yarn 中会添加一个名为 llap 的分区，并且自动为它分配了一些资源，比如：
+
+![image-20201020101538117](../../resource/image-20201020101538117.png)
+
+![image-20201020101608337](../../resource/image-20201020101608337.png)
+
+Hive WebUI 中，关于 LLAP 的部分：
+
+![image-20201020102002684](../../resource/image-20201020102002684.png)
 
 
 

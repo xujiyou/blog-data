@@ -36,7 +36,7 @@ Salve启动一个客户端连接到 Master，请求 Mater 经所有的变更发�
 
 ```mysql
 mysql> CREATE USER repl_user IDENTIFIED BY 'BBDERS1@bbdops.com';
-mysql> GRANT REPLICATION SLAVE ON *.* TO repl_user;
+mysql> GRANT REPLICATION SLAVE,SUPER,RELOAD ON *.* TO repl_user;
 ```
 
 REPLICATION SLAVE 权限也没啥，只是拥有这个权限的用户能够获取 master 上的二进制文件，但是最好还是单独为一个用户赋予这个权限，之后如果想禁止某些 slave 连接，只要删除该用户就可以了。

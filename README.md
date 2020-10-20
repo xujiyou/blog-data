@@ -692,6 +692,10 @@ CNCF 好多项目。
 
 [LLAP.md](大数据/Hive/LLAP.md) 
 
+[Hive数据类型.md](大数据/Hive/Hive数据类型.md) 
+
+[Hive分区.md](大数据/Hive/Hive分区.md) 
+
 
 
 #### Kafka
@@ -763,6 +767,8 @@ CNCF 好多项目。
 [YARN资源配置.md](大数据/YARN/YARN资源配置.md) 
 
 [NodeManager.md](大数据/YARN/NodeManager.md) 
+
+[TimelineV2.md](大数据/YARN/TimelineV2.md) 
 
 
 
