@@ -696,6 +696,8 @@ CNCF 好多项目。
 
 [Hive分区.md](大数据/Hive/Hive分区.md) 
 
+[HCatalog.md](大数据/Hive/HCatalog.md) 
+
 
 
 #### Kafka
