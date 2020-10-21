@@ -698,6 +698,8 @@ CNCF 好多项目。
 
 [HCatalog.md](大数据/Hive/HCatalog.md) 
 
+[HCatalog.md](大数据/Hive/HCatalog.md) 
+
 
 
 #### Kafka
@@ -1069,6 +1071,8 @@ CNCF 好多项目。
 [MySQL性能优化.md](数据存储/MySQL/MySQL性能优化.md) 
 
 [MySQL配置.md](数据存储/MySQL/MySQL配置.md) 
+
+[SQL四种语言.md](数据存储/MySQL/SQL四种语言.md) 
 
 - MySQL 管理
 

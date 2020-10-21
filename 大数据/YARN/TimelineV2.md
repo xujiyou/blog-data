@@ -24,3 +24,28 @@ YARN Timeline Service v.2是Timeline Server的下一个主要版本，紧随v.1�
 
   
 
+## 架构
+
+YARN Timeline Server v.2使用一组收集器（写入器）将数据写入后端存储。收集器与专用的应用程序主机一起分布并位于同一位置。属于该应用程序的所有数据都将发送到应用程序级别的 timeline collector ，资源管理器timeline collector 除外。
+
+对于给定的应用程序，应用程序主机可以将应用程序的数据写入位于同一位置的timeline collector （在此版本中是NM辅助服务）。此外，其他正在运行应用程序容器的节点的节点管理器也将数据写入运行应用程序主机的节点上的timeline collector 。
+
+资源管理器还维护自己的 timeline 收集器。它仅发出YARN通用生命周期事件，以保持其合理的写入量。
+
+timeline readers 是与时间线收集器分开的单独的守护程序，它们专用于通过REST API提供查询。
+
+下图从高层次说明了该设计。
+
+![Timeline Service v.2  architecture](../../resource/timeline_v2.png)
+
+每个 ApplicationMaster 中都有一个收集器，收集器是直接将信息写入储存的。
+
+
+
+
+
+## Web UI
+
+Timeline Server 的 Web 界面如下：
+
+![image-20201021195916322](../../resource/image-20201021195916322.png)
