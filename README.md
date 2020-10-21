@@ -786,7 +786,15 @@ CNCF 好多项目。
 
 
 
-- Kerberos
+
+
+#### Kerberos
+
+
+
+#### Thrift
+
+[Thrift入门.md](大数据/Thrift/Thrift入门.md) 
 
 
 
