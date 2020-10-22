@@ -630,6 +630,8 @@ CNCF 好多项目。
 
 [HBase单机部署.md](大数据/HBase/HBase单机部署.md) 
 
+[HBase数据结构.md](大数据/HBase/HBase数据结构.md) 
+
 - HBase配置
 
   [HBase配置概述.md](大数据/HBase/HBase配置/HBase配置概述.md) 

@@ -14,3 +14,9 @@ $ nohup python -m SimpleHTTPServer 8001 &
 
 这个 http 服务是单线程的！
 
+如果是 python3：
+
+```bash
+$  nohup python3 -m http.server 8001 &
+```
+
