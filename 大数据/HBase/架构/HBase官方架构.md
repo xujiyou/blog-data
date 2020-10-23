@@ -66,6 +66,195 @@ hbase(main)> scan 'hbase:meta'
 
 
 
+## Client
+
+HBase客户端找到正在服务的特定行范围的RegionServer。它通过查询 hbase:meta 表来做到这一点。找到所需的 Region 后，客户端将联系服务该 Region 的RegionServer，而不是通过 Master，并发出读取或写入请求。此信息被缓存在客户端中，因此后续请求无需经过查找过程。如果由主负载平衡器重新分配了区域，或者由于RegionServer已经失效，则客户端将重新查询目录表以确定用户区域的新位置。
+
+有关主服务器对HBase客户端通信的影响的更多信息，请参见[Runtime Impact](https://hbase.apache.org/book.html#master.runtime) 。
+
+管理功能通过[Admin](https://hbase.apache.org/apidocs/org/apache/hadoop/hbase/client/Admin.html)实例完成
+
+
+
+#### 客户端连接
+
+参考：https://hbase.apache.org/book.html#client_dependencies
+
+如果以独立模式运行HBase，则无需配置任何内容即可让客户端正常工作，只要它们都在同一台计算机上即可。
+
+从版本3.0.0开始，默认的连接注册表已切换到基于 Master 的实现。参考 https://hbase.apache.org/book.html#client.masterregistry 。根据您的HBase版本，以下是预期的最小客户端配置。
+
+**在 2.x.y 版本之前**
+
+在2.x.y版本中，默认的连接注册表基于ZooKeeper作为真实的来源。这意味着客户端总是查找ZooKeeper znode来获取所需的元数据。例如，如果活动的主节点崩溃并且选择了新的主节点，则客户端会查找主znode来获取活动的主地址（类似于元位置）。这意味着客户端需要访问ZooKeeper，并且需要知道ZooKeeper集成信息，然后才能执行任何操作。可以在客户端配置xml中进行如下配置：
+
+```xml
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+  <property>
+    <name>hbase.zookeeper.quorum</name>
+    <value>example1,example2,example3</value>
+    <description> Zookeeper ensemble information</description>
+  </property>
+</configuration>
+```
+
+**3.0.0 标准版**
+
+在 Hbase 3.0 中，默认实现已切换到基于 Master 的连接注册表。通过此实现，客户端始终可以与活动或备用主RPC端点联系，以获取连接注册表信息。这意味着客户端在执行任何操作之前应该有权访问活动和主端点列表。可以在客户端配置xml中进行如下配置：
+
+```xml
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+  <property>
+    <name>hbase.masters</name>
+    <value>example1,example2,example3</value>
+    <description>List of master rpc end points for the hbase cluster.</description>
+  </property>
+</configuration>
+```
+
+hbase.masters的配置值是用逗号分隔的host:port值列表。如果未指定端口值，则默认为16000。
+
+通常，此配置保留在hbase-site.xml中，并由客户端从CLASSPATH中拾取。
+
+如果正在配置要运行HBase客户端的IDE，则应在类路径中包含 conf/ 目录，以便可以找到hbase-site.xml设置（或添加src/test/resources来选择使用的hbase-site.xml通过测试）。
+
+对于使用Maven的Java应用程序，建议在连接到集群时包括hbase-shaded-client模块依赖项：
+
+```xml
+<dependency>
+  <groupId>org.apache.hbase</groupId>
+  <artifactId>hbase-shaded-client</artifactId>
+  <version>2.0.0</version>
+</dependency>
+```
+
+
+
+#### Java 客户端连接
+
+例如，以编程方式为集群设置ZooKeeper集成，请执行以下操作：
+
+```java
+Configuration config = HBaseConfiguration.create();
+config.set("hbase.zookeeper.quorum", "localhost");  // Until 2.x.y versions
+// ---- or ----
+config.set("hbase.masters", "localhost:1234"); // Starting 3.0.0 version
+```
+
+
+
+## Client Request Filters
+
+可以使用在RegionServer上应用的筛选器来配置Get和Scan实例。
+
+过滤器可能会造成混乱，因为类型很多，最好通过了解过滤器功能组来进行过滤。
+
+
+
+## Master
+
+`HMaster` 是 Master 服务的实现，Master 服务器负责监视群集中的所有RegionServer实例，并且是所有元数据更改的接口。在分布式群集中，主服务器相当于NameNode。
+
+
+
+#### Startup
+
+如果在多 Master 服务器环境中运行，则所有 Master 服务器都将竞争运行集群。如果活动的主服务器失去了在ZooKeeper中的租约（或主服务器关闭），则剩余的主服务器将争夺主服务器角色。
+
+
+
+#### Runtime Impact
+
+常见的分发列表问题涉及当主服务器崩溃时，HBase群集会崩溃。此信息已在3.0中更改。
+
+
+
+#### 2.x.y 版本之前
+
+因为 HBase 客户端直接与 RegionServer 通信，所以群集仍可以在“稳定状态”下运行。此外，根据目录表，hbase:meta 作为 HBase 表存在，并且不驻留在 Master 数据库中。但是，Master 服务器控制着关键功能，例如 RegionServer 故障转移和完成区域划分。因此，尽管在没有 Master 的情况下群集仍可以短时间运行，但应该尽快重新启动Master。
+
+
+
+#### 3.0.0 版本之后
+
+- 建立连接至少需要一个活动 Master 服务器或备用 Mastter 服务器，而以前所需的所有客户端都是ZooKeeper集成。
+- 主机现在处于读/写操作的关键路径中。例如，如果元数据 region 调到了其他 region server，则客户端需要主服务器来获取新位置。之前，是通过直接从 ZooKeeper 获取此信息来完成的。
+- 现在，Master 将具有比以前更高的连接负载。因此，服务器端配置可能需要根据负载进行调整。
+
+总体而言，启用此功能后，Master 正常运行时间要求会更高，客户端操作才能通过。
+
+
+
+#### Interface
+
+HMasterInterface 公开的方法主要是面向元数据的方法：
+
+- Table (createTable, modifyTable, removeTable, enable, disable)
+- ColumnFamily (addColumn, modifyColumn, removeColumn)
+- Region (move, assign, unassign) 例如，当调用Admin方法disableTable时，它由主服务器提供服务。
+
+
+
+#### 进程
+
+Master 服务器运行几个后台线程：
+
+- **LoadBalancer**
+
+  周期性地，当没有过渡 regions 时，负载均衡器将运行并移动区域，以平衡集群的负载。请参阅[Balancer](https://hbase.apache.org/book.html#balancer_config)以配置此属性。
+
+  参考：[Region-RegionServer Assignment](https://hbase.apache.org/book.html#regions.arch.assignment) 
+
+- **CatalogJanitor**
+
+  定期检查并清理 hbase:meta 表。
+
+- **MasterProcWAL**
+
+  在hbase-2.3.0中，MasterProcWAL被过程存储实现替换；
+
+  HMaster 将管理操作及其运行状态（例如，崩溃服务器的处理，表创建和其他DDL）记录到过程存储中。WAL存储在MasterProcWALs目录下。Master WAL与RegionServer WAL不同。Master WAL保持不变，我们可以运行状态机，该状态机可在Master故障中保持弹性。例如，如果 HMaster 在创建表的过程中遇到问题并失败，则下一个活动的HMaster可以接管上一个中断的HMaster，并完成操作。从hbase-2.0.0开始，引入了新的AssignmentManager（AKA AMv2），HMaster处理区域分配操作，服务器崩溃处理，平衡等操作，全部通过AMv2保留所有状态并转换为MasterProcWAL，而不是ZooKeeper，例如我们在hbase-1.x中进行。
+
+  参考：https://hbase.apache.org/book.html#amv2
+
+
+
+## RegionServer
+
+HRegionServer是RegionServer实现。它负责服务和管理 regions。在分布式群集中，RegionServer相当于DataNode。
+
+#### 进程
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

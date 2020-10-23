@@ -796,6 +796,8 @@ CNCF 好多项目。
 
 #### Kerberos
 
+[HDP集成Kerberos.md](大数据/Kerberos/HDP集成Kerberos.md) 
+
 
 
 #### Thrift
@@ -815,8 +817,6 @@ CNCF 好多项目。
 [HDP之上的HDFS启动HA.md](大数据/HDP/HDP之上的HDFS启动HA.md) 
 
 [HDP恢复配置.md](大数据/HDP/HDP恢复配置.md) 
-
-[HDP集成Kerberos.md](大数据/HDP/HDP集成Kerberos.md) 
 
 [Ranger启用HA.md](大数据/HDP/Ranger启用HA.md) 
 
