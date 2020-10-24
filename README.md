@@ -614,7 +614,11 @@ CNCF 好多项目。
 
 #### Flink
 
-[Flink-Table教程.md](大数据/Flink/Flink-Table教程.md) 
+[Flink架构.md](大数据/Flink/Flink架构.md) 
+
+- 部署与运维
+
+  [在Kubernetes中部署Flink集群.md](大数据/Flink/部署与运维/在Kubernetes中部署Flink集群.md) 
 
 
 
