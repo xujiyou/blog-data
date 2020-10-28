@@ -30,3 +30,4 @@ $ systemctl start vsftpd.service
 SELinux 要关闭，防火墙要打开 21 端口。
 
 FileZilla 要用主动模式。
+
