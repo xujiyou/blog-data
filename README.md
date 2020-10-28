@@ -624,7 +624,7 @@ CNCF 好多项目。
 
 #### Flume
 
-[Flume入门教程.md](大数据/Flume/Flume入门教程.md) 
+[Flume部署.md](大数据/Flume/Flume部署.md) 
 
 
 
@@ -1137,6 +1137,12 @@ CNCF 好多项目。
 #### TiDB
 
 [TiDB部署.md](数据存储/TiDB/TiDB部署.md) 
+
+
+
+#### FastDFS
+
+[FastDFS 部署.md](数据存储/FastDFS/FastDFS 部署.md) 
 
 
 
