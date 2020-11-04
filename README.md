@@ -1328,6 +1328,8 @@ CNCF 好多项目。
 
 [Nginx编译安装.md](DevOps/Nginx/Nginx编译安装.md) 
 
+[Nginx进程模型.md](DevOps/Nginx/Nginx进程模型.md) 
+
 
 
 #### OpenStack
