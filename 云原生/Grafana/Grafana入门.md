@@ -55,3 +55,22 @@ $ brew reinstall grafana
 注意，这里的用户角色别选 admin，选 editor。选了 editor 之后，会出现 Dashboard，要是 admin 的话，还是出现 Configuration 界面。
 
 但总起来说，还是 admin 权限多。剩下的先熟悉下界面吧。
+
+
+
+## 重置密码
+
+```
+[root@local]# sqlite3 /var/lib/grafana/grafana.db
+#查看数据库中包含的表
+.tables
+
+#查看user表内容
+select * from user;
+
+#重置admin用户的密码为默认admin
+update user set password = '59acf18b94d7eb0694c61e60ce44c110c7a683ac6a8f09580d626f90f4a242000746579358d77dd9e570e83fa24faa88a8a6', salt = 'F3FAxVm33R' where login = 'admin';
+
+#退出sqlite3
+.exit
+```

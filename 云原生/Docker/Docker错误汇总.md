@@ -76,3 +76,14 @@ Oct 15 15:57:02 ct1.test.bbdops.com dockerd[20860]: Error starting daemon: error
 }
 ```
 
+
+
+## 多个账号使用同一个仓库
+
+默认的 config 是 ~/.config，可以使用另外一个目录来登录：
+
+```bash
+$ docker --config ~/.docker/wan login --username=wan registry.testing.com
+$ docker --config ~/.docker/wan push registry.testing.com/wan/test:0.1
+```
+

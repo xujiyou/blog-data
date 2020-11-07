@@ -1462,6 +1462,10 @@ CNCF 好多项目。
 
 [硬件信息查看.md](Linux/硬件信息/硬件信息查看.md) 
 
+[硬盘接口.md](Linux/硬件信息/硬盘接口.md) 
+
+[SSD磁盘开启Trim.md](Linux/硬件信息/SSD磁盘开启Trim.md) 
+
 
 
 #### 命令详解

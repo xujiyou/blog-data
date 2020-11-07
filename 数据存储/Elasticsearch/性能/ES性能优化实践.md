@@ -65,6 +65,14 @@ ES 进行查询时，返回的 total 数量即为命中数量。
 
 
 
+## ES写入优化
+
+https://www.easyice.cn/archives/207
+
+
+
+
+
 
 
 
