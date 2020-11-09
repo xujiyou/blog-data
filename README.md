@@ -1590,6 +1590,12 @@ CNCF 好多项目。
 
 [LVS的三种模式.md](Linux/ipvs/LVS的三种模式.md) 
 
+[LVS的8种调度算法.md](Linux/ipvs/LVS的8种调度算法.md) 
+
+[ipvsadm常用命令.md](Linux/ipvs/ipvsadm常用命令.md) 
+
+[lvs负载10w+并发的调优.md](Linux/ipvs/lvs负载10w+并发的调优.md) 
+
 
 
 #### Keepalived
