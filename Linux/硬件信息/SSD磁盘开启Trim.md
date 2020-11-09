@@ -56,10 +56,12 @@ TRIM是内置于ATA命令中的SSD命令，它是磁盘与计算机交互方式�
 修改 `/etc/fstab` 中的记录，加入 discard 选项。
 
 ```
-/dev/sdb1  /data1       ext4   defaults,noatime,discard   0  0
+/dev/sdb1  /data1       xfs   defaults,noatime,discard   0  0
 ```
 
 这里 ext4 和 xfs 都可以。
+
+xfs 的更多挂载选项请见：https://www.kernel.org/doc/html/latest/admin-guide/xfs.html?highlight=fstrim
 
 或者手动把磁盘 trim 一遍：
 

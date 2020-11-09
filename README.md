@@ -1588,6 +1588,8 @@ CNCF 好多项目。
 
 [keepalived实现ipvs高可用集群.md](Linux/ipvs/keepalived实现ipvs高可用集群.md) 
 
+[LVS的三种模式.md](Linux/ipvs/LVS的三种模式.md) 
+
 
 
 #### Keepalived
