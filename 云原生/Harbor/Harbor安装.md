@@ -12,10 +12,10 @@ harbor 默认以来 docker 与 docker-compose
 
 ```bash
 $ openssl genrsa -out ca.key 4096
-$ openssl req -x509 -new -nodes -sha512 -days 3650 -subj "/C=CN/ST=Chengdu/L=Chengdu/O=BBD/OU=Company/CN=registry.prod.bbdops.com" -key ca.key -out ca.crt
+$ openssl req -x509 -new -nodes -sha512 -days 3650 -subj "/C=CN/ST=Chengdu/L=Chengdu/O=BBD/OU=Company/CN=registry.prod.testing.com" -key ca.key -out ca.crt
 
-$ openssl genrsa -out registry.prod.bbdops.com.key 4096
-$ openssl req -sha512 -new -subj "/C=CN/ST=Chengdu/L=Chengdu/O=BBD/OU=Company/CN=registry.prod.bbdops.com" -key registry.prod.bbdops.com.key -out registry.prod.bbdops.com.csr
+$ openssl genrsa -out registry.prod.testing.com.key 4096
+$ openssl req -sha512 -new -subj "/C=CN/ST=Chengdu/L=Chengdu/O=BBD/OU=Company/CN=registry.prod.testing.com" -key registry.prod.testing.com.key -out registry.prod.testing.com.csr
 
 $ cat > v3.ext <<-EOF
 authorityKeyIdentifier=keyid,issuer
@@ -25,21 +25,21 @@ extendedKeyUsage = serverAuth
 subjectAltName = @alt_names
 
 [alt_names]
-DNS.1=registry.prod.bbdops.com
+DNS.1=registry.prod.testing.com
 DNS.2=server-04
 EOF
 
-$ openssl x509 -req -sha512 -days 3650 -extfile v3.ext -CA ca.crt -CAkey ca.key -CAcreateserial -in registry.prod.bbdops.com.csr -out registry.prod.bbdops.com.crt
+$ openssl x509 -req -sha512 -days 3650 -extfile v3.ext -CA ca.crt -CAkey ca.key -CAcreateserial -in registry.prod.testing.com.csr -out registry.prod.testing.com.crt
 ```
 
 导入到 docker：
 
 ```bash
-$ sudo mkdir -p /etc/docker/certs.d/registry.prod.bbdops.com:10443
-$ openssl x509 -inform PEM -in registry.prod.bbdops.com.crt -out registry.prod.bbdops.com.cert
-$ sudo cp registry.prod.bbdops.com.cert /etc/docker/certs.d/registry.prod.bbdops.com:10443/
-$ sudo cp registry.prod.bbdops.com.key /etc/docker/certs.d/registry.prod.bbdops.com:10443/
-$ sudo cp ca.crt /etc/docker/certs.d/registry.prod.bbdops.com:10443/
+$ sudo mkdir -p /etc/docker/certs.d/registry.prod.testing.com:10443
+$ openssl x509 -inform PEM -in registry.prod.testing.com.crt -out registry.prod.testing.com.cert
+$ sudo cp registry.prod.testing.com.cert /etc/docker/certs.d/registry.prod.testing.com:10443/
+$ sudo cp registry.prod.testing.com.key /etc/docker/certs.d/registry.prod.testing.com:10443/
+$ sudo cp ca.crt /etc/docker/certs.d/registry.prod.testing.com:10443/
 ```
 
 重启 docker：
@@ -55,7 +55,7 @@ $ systemctl restart docker
 编辑 harbor.yml 文件，内容如下：
 
 ```yaml
-hostname: registry.prod.bbdops.com
+hostname: registry.prod.testing.com
 
 # http related config
 http:
@@ -67,10 +67,10 @@ https:
   # https port for harbor, default is 443
   port: 10443
   # The path of cert and key files for nginx
-  certificate: /opt/harbor/cert/registry.prod.bbdops.com.crt
-  private_key: /opt/harbor/cert/registry.prod.bbdops.com.key
+  certificate: /opt/harbor/cert/registry.prod.testing.com.crt
+  private_key: /opt/harbor/cert/registry.prod.testing.com.key
   
-harbor_admin_password: BBDERS1@bbdops.com
+harbor_admin_password: testing@testing.com
 
 database:
   # The password for the root user of Harbor DB. Change this before any production use.
@@ -107,9 +107,9 @@ log:
 $ sudo ./install.sh
 ```
 
-完成后，浏览器访问：https://registry.prod.bbdops.com:10443
+完成后，浏览器访问：https://registry.prod.testing.com:10443
 
-用户名密码：admin/BBDERS1@bbdops.com
+用户名密码：admin/testing@testing.com
 
 
 
