@@ -52,6 +52,13 @@ http://118.1.2.3:8080/github-webhook/ 是一个固定的格式，替换 ip 地�
 
 这里要注意命令是不是在 Jenkins 的 PATH 中，可以在 Jenkins 中设置 PATH 的环境变量，将命令加入进去。这个 WORKSPACE 就是 Jenkins 下载到本地的代码地址。
 
+```
+echo $WORKSPACE
+generate-md --layout /opt/blog/my-layout --input $WORKSPACE --output /opt/blog/output
+```
+
+
+
 
 
 
