@@ -2,7 +2,7 @@
 
 ---
 
-```
+```bash
 # uname -r
 5.1.5-1.el7.elrepo.x86_64 # 要大于3.10
 # yum update
@@ -23,7 +23,7 @@ gpgkey=https://yum.dockerproject.org/gpg
 
 然后继续执行：
 
-```
+```bash
 # yum install docker-engine
 # service docker start #后台启动docker服务
 # docker version #查看docker版本
