@@ -57,7 +57,7 @@ echo $WORKSPACE
 generate-md --layout /opt/blog/my-layout --input $WORKSPACE --output /opt/blog/output
 ```
 
-
+默认 $WORKSPACE 是 `/var/lib/jenkins/workspace/`
 
 
 
