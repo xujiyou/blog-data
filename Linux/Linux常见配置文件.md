@@ -56,3 +56,10 @@ ulimit -n
 export PS1='[\u@\h \W]\$ '
 ```
 
+
+
+## CA 证书目录
+
+`/etc/pki/ca-trust/source/anchors/`
+
+把CA证书放到这个目录之后，执行 `update-ca-trust` 更新证书。

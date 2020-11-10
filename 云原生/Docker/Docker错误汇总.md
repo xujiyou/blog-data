@@ -36,6 +36,28 @@ x509: certificate signed by unknown authority
 
 重启docker后就没有错误了！！！
 
+或者 CentOS 下：
+
+将证书复制到系统存放证书目录
+
+```bash
+cp registry.prod.bbdops.com.crt /etc/pki/ca-trust/source/anchors
+```
+
+注册证书
+
+```bash
+update-ca-trust
+```
+
+重启docker
+
+```bash
+systemctl restart docker
+```
+
+------
+
 
 
 ## 删除docker 日志
