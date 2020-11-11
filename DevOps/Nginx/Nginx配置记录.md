@@ -114,8 +114,8 @@ server {
         server_name    www.S1.com;
         client_max_body_size 30M;
 
-        location /api {
-            proxy_pass http://127.0.0.1:8891;
+        location /api/ {
+            proxy_pass http://127.0.0.1:8891/;
             proxy_redirect off;
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
@@ -134,7 +134,7 @@ server {
     }
 ```
 
-
+如果 proxy_pass的结尾有`/`， 则会把`/api/*`后面的路径直接拼接到后面，即移除api.
 
 ## 404 重写
 
