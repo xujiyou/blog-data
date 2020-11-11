@@ -113,6 +113,12 @@ $ ip netns exec ns1 route -n
 
 我们可以把上面的 `ipip` 改成其他隧道模式，其他不变，同样可以完成不同隧道的实验。
 
+IP 隧道的用处：
+
+- VPN
+- IPVS 的 TUN 模式
+- k8s 中使用IP隧道的插件，包括 flnnal、calico 等
+
 
 
 

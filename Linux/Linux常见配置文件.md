@@ -63,3 +63,26 @@ export PS1='[\u@\h \W]\$ '
 `/etc/pki/ca-trust/source/anchors/`
 
 把CA证书放到这个目录之后，执行 `update-ca-trust` 更新证书。
+
+
+
+## SSH 默认配置
+
+ssh 连接设置默认端口配置文件：
+
+```
+$ cat ～/.ssh/config 
+Host node46
+    Hostname node46
+    User root
+    Port 22222
+Host node47
+    Hostname node47
+    User root
+    Port 22222
+Host node49
+    Hostname node49
+    User root
+    Port 22222
+```
+
