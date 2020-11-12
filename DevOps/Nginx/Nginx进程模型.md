@@ -6,6 +6,29 @@ Nginx的master-worker进程模型是其能够高性能的处理用户请求的�
 
 
 
+## 配置nginx绑定CPU
+
+刚才说nginx除外，是因为nginx提供了更精确的控制。
+
+在*conf/nginx.conf*中，有如下一行：
+
+```
+worker_processes  1;
+```
+
+这是用来配置nginx启动几个工作进程的，默认为1。而nginx还支持一个名为worker_cpu_affinity的配置项，也就是说，nginx可以为**每个工作进程绑定CPU**。我做了如下配置：
+
+```
+worker_processes  3;
+worker_cpu_affinity 0010 0100 1000;
+```
+
+这里0010 0100 1000是掩码，分别代表第2、3、4颗cpu核心。
+
+重启nginx后，3个工作进程就可以各自用各自的CPU了。
+
+
+
 ## 工作原理
 
 ![这里写图片描述](../../resource/SouthEast.png)
