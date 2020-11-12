@@ -1,12 +1,10 @@
 ---
-title: 日常工作记录
+title: 许吉友 - 运维
 ---
 
 
 
 ## 云原生
-
-CNCF 好多项目。
 
 #### Kubernetes
 
@@ -898,10 +896,6 @@ CNCF 好多项目。
 
   [ES之Mapping.md](数据存储/Elasticsearch/Mapping/ES之Mapping.md) 
 
-  
-
-
-
 
 
 
@@ -1040,12 +1034,6 @@ CNCF 好多项目。
 
 
 
-
-
-- GlusterFS
-
-
-
 #### MinIO
 
 [MinIO单机版启动.md](数据存储/MinIO/MinIO单机版启动.md) 
@@ -1136,10 +1124,6 @@ CNCF 好多项目。
 
 
 
-#### Neo4j
-
-
-
 #### TiDB
 
 [TiDB部署.md](数据存储/TiDB/TiDB部署.md) 
@@ -1174,18 +1158,6 @@ CNCF 好多项目。
 
 
 
-- Dart
-
-
-
-- JavaScript
-
-
-
-- TypeScript
-
-
-
 #### Golang
 
 [Golang协程入门.md](编程语言/Golang/Golang协程入门.md) 
@@ -1211,10 +1183,6 @@ CNCF 好多项目。
 - go-restful
 
    [go-restful入门.md](编程语言/Golang/go-restful/go-restful入门.md) 
-
-
-
-- Swift
 
 
 
@@ -1260,8 +1228,6 @@ CNCF 好多项目。
 
 ## DevOps
 
-
-
 #### Gitlab
 
 [Gitlab安装.md](DevOps/Gitlab/Gitlab安装.md) 
@@ -1301,10 +1267,6 @@ CNCF 好多项目。
 [设置并运行Logstash.md](DevOps/Logstash/设置并运行Logstash.md) 
 
 [LogStash配置详解.md](DevOps/Logstash/LogStash配置详解.md) 
-
-
-
-#### SlatStack
 
 
 
@@ -1360,7 +1322,7 @@ CNCF 好多项目。
 
 #### FreeIPA
 
-
+[FreeIPA安装.md](DevOps/FreeIPA/FreeIPA安装.md) 
 
 
 
