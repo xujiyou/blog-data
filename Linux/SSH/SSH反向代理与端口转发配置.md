@@ -1,5 +1,28 @@
 # SSH 反向代理与端口转发配置
 
+## sshd 服务端设置
+
+sshd 需要开启 X11-forwarding
+
+1. Ensure `xorg-x11-xauth` is installed
+2. /etc/ssh/sshd_config：
+
+```
+# AddressFamily any
+AddressFamily inet
+
+AllowTcpForwarding yes
+X11Forwarding yes
+X11DisplayOffset 10
+X11UseLocalhost yes
+```
+
+
+
+## 端口转发
+
+
+
 客户的6台机器处于内网，之前只能用向日葵访问，但是客户那里有一台处于公网的机器，可以用来做 SSH 反向代理。
 
 公网机器信息：

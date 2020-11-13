@@ -111,7 +111,8 @@
    [ v3_ext ]
    authorityKeyIdentifier=keyid,issuer:always
    basicConstraints=CA:FALSE
-   keyUsage=keyEncipherment,dataEncipherment
+   #keyUsage=keyEncipherment,dataEncipherment
+   keyUsage=digitalSignature,keyEncipherment,dataEncipherment
    extendedKeyUsage=serverAuth,clientAuth
    subjectAltName=@alt_names
    ```
@@ -152,3 +153,35 @@ $ cat ca.srl
 ```
 
 果然增长了 1。
+
+
+
+## 使用证书生成 secret
+
+```bash
+$ kubectl -n 	s1-search create secret tls tls-secret --cert=server.crt --key=server.key
+```
+
+在 ingress 里面这样使用：
+
+```
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: gateway
+  namespace: s1-search
+spec:
+  rules:
+    - host: gateway.s1-search.tech
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: cloud-gateway-server
+              servicePort: 8003
+  tls:
+    - hosts:
+        - gateway.s1-search.tech
+      secretName: tls-secret
+```
+
