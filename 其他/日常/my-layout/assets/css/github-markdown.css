@@ -20,7 +20,7 @@ body {
   line-height: 1.8;
   word-wrap: break-word;
     border-width: 1px;
-    border-style: dashed;
+    border-style: solid;
     border-color: rgb(211, 211, 211);
     border-image: initial;
     border-image-source: initial;
@@ -721,8 +721,11 @@ body {
     position: fixed;
     top: 70px;
     left: 20px;
+    bottom: 30px;
     border: 1px solid rgb(221, 221, 221);
     text-align: left;
+    overflow: scroll;
+    overflow-y: auto;
   }
 
   .main {
@@ -780,7 +783,7 @@ a::after {
 }
 
 .sidebar-header-2:before {
-  content:counter(sectioncounter) "、"; 
+  content:counter(sectioncounter) "、";
   counter-increment:  sectioncounter;
 }
 
@@ -813,4 +816,3 @@ a::after {
   content: counter(sectioncounter) "." counter(two) "、";
   counter-increment: two;
 }
-
