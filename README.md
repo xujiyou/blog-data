@@ -450,12 +450,6 @@ title: 许吉友 - 运维
 
 
 
-#### Knative
-
-[Knative安装.md](云原生/Knative/Knative安装.md) 
-
-
-
 #### Kubeless
 
 [Kubeless入门.md](云原生/Kubeless/Kubeless入门.md) 
@@ -573,12 +567,6 @@ title: 许吉友 - 运维
 #### Harbor
 
 [Harbor安装.md](云原生/Harbor/Harbor安装.md) 
-
-
-
-#### Pulsar
-
-[Pulsar在Kubernetes中安装.md](云原生/Pulsar/Pulsar在Kubernetes中安装.md) 
 
 
 
@@ -738,9 +726,9 @@ title: 许吉友 - 运维
 
 
 
-#### Oozie
+#### Pulsar
 
-[Oozie入门.md](大数据/Oozie/Oozie入门.md) 
+ [Pulsar在Kubernetes中安装.md](大数据/Pulsar/Pulsar在Kubernetes中安装.md) 
 
 
 
@@ -838,13 +826,7 @@ title: 许吉友 - 运维
 
 [CDH离线部署.md](大数据/CDH/CDH离线部署.md) 
 
-
-
-
-
 ---
-
-
 
 ## 数据储存
 
@@ -895,8 +877,6 @@ title: 许吉友 - 运维
 - Mapping
 
   [ES之Mapping.md](数据存储/Elasticsearch/Mapping/ES之Mapping.md) 
-
-
 
 
 
@@ -1138,8 +1118,6 @@ title: 许吉友 - 运维
 
 ---
 
-
-
 ## 编程语言
 
 #### Rust
@@ -1223,8 +1201,6 @@ title: 许吉友 - 运维
 
 
 ---
-
-
 
 ## DevOps
 
