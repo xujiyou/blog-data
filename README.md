@@ -1328,6 +1328,8 @@ title: 许吉友 - 运维
 
 [CentOS7系统权限被篡改后的恢复方法.md](Linux/日常运维/CentOS7系统权限被篡改后的恢复方法.md) 
 
+
+
 #### 网络
 
 [iproute2命令详解.md](Linux/网络/iproute2命令详解.md) 
@@ -1354,19 +1356,27 @@ title: 许吉友 - 运维
 
 
 
-#### 文件系统
+#### 内核
 
-[ext4文件系统详解.md](Linux/文件系统/ext4文件系统详解.md) 
+- 内核参数
 
-[xfs文件系统详解.md](Linux/文件系统/xfs文件系统详解.md) 
+   [Linux内核参数调优.md](Linux/内核/内核参数/Linux内核参数调优.md) 
 
-[btrfs文件系统详解.md](Linux/文件系统/btrfs文件系统详解.md) 
+   [IP转发.md](Linux/内核/内核参数/IP转发.md) 
+
+   [交换内存swap.md](Linux/内核/内核参数/交换内存swap.md) 
+
+- 文件系统
+
+  [xfs文件系统详解.md](Linux/内核/文件系统/xfs文件系统详解.md) 
+
+  [ext4文件系统详解.md](Linux/内核/文件系统/ext4文件系统详解.md) 
+
+  [btrfs文件系统详解.md](Linux/内核/文件系统/btrfs文件系统详解.md) 
+
+  
 
 
-
-#### 内核参数
-
-[Linux内核参数调优.md](Linux/内核参数/Linux内核参数调优.md) 
 
 
 
@@ -1507,12 +1517,6 @@ title: 许吉友 - 运维
 #### Firewalld
 
 [防火墙常用操作.md](Linux/Firewalld/防火墙常用操作.md) 
-
-
-
-#### OpenvSwitch
-
-[OpenvSwitch安装.md](Linux/OpenvSwitch/OpenvSwitch安装.md) 
 
 
 

@@ -11,7 +11,7 @@ $ vim ~/.git-credentials
 写入以下内容：
 
 ```
-https://xujiyou%40bbdservice.com:123456@git.bbdops.com
+https://xujiyou%40testing.com:123456@git.testing.com
 ```
 
 然后执行下面的命令：
