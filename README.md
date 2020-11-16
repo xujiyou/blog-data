@@ -46,6 +46,8 @@ title: 许吉友 - 运维
 
   [Kubernetes调度器调度流程与算法介绍.md](云原生/Kubernetes/架构及原理/Kubernetes调度器调度流程与算法介绍.md) 
 
+  [Kubernetes调度器性能调优.md](云原生/Kubernetes/架构及原理/Kubernetes调度器性能调优.md) 
+
   [kube-proxy作用及原理.md](云原生/Kubernetes/架构及原理/kube-proxy作用及原理.md) 
 
 - Kubernetes 配置系列
@@ -1582,6 +1584,12 @@ title: 许吉友 - 运维
 
   [FTP服务器安装.md](其他/计算机网络/FTP/FTP服务器安装.md) 
 
+- DNS
+
+  [DNS服务器修改记录.md](其他/计算机网络/DNS/DNS服务器修改记录.md) 
+
+  [DNS原理入门.md](其他/计算机网络/DNS/DNS原理入门.md) 
+
 - TCP
 
   [HTTP高并发场景下的TCP参数优化.md](其他/计算机网络/TCP/HTTP高并发场景下的TCP参数优化.md) 
@@ -1589,6 +1597,20 @@ title: 许吉友 - 运维
   [TCP协议详解.md](其他/计算机网络/TCP/TCP协议详解.md) 
 
 - TLS & SSL
+
+
+
+#### 面试题
+
+- Linux
+
+   [Linux处理僵尸进程.md](其他/面试题/Linux/Linux处理僵尸进程.md) 
+
+- Nginx
+
+  [Nginx性能优化.md](其他/面试题/Nginx/Nginx性能优化.md) 
+
+  [Nginx安全.md](其他/面试题/Nginx/Nginx安全.md) 
 
 
 
