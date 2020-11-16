@@ -46,6 +46,8 @@ title: 许吉友 - 运维
 
   [Kubernetes调度器调度流程与算法介绍.md](云原生/Kubernetes/架构及原理/Kubernetes调度器调度流程与算法介绍.md) 
 
+  [kube-proxy作用及原理.md](云原生/Kubernetes/架构及原理/kube-proxy作用及原理.md) 
+
 - Kubernetes 配置系列
 
    [kube-apiserver配置详解.md](云原生/Kubernetes/Kubernetes配置系列/kube-apiserver配置详解.md) 

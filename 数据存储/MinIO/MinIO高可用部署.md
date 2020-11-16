@@ -1,5 +1,9 @@
 # MinIO高可用部署
 
+
+
+## 高可用部署
+
 MinIO 的高可用模式最少为四块盘，并且这四块盘需要是空白的！！！
 
 把盘挂载到文件系统，然后在各主机下都执行以下脚本：
@@ -13,6 +17,27 @@ minio server http://fueltank-1:9000/data1 http://fueltank-1:9000/data2 http://fu
 ```
 
 
+
+## 添加 https 支持
+
+如果使用 root 账户启动的：
+
+```bash
+sudo cp server.crt /root/.minio/certs/public.crt
+sudo cp server.key /root/.minio/certs/private.key
+```
+
+然后启动脚本这样：
+
+```bash
+#!/bin/bash
+
+export MINIO_ACCESS_KEY=admin
+export MINIO_SECRET_KEY=********
+minio server https://fueltank-1:9000/data1 https://fueltank-1:9000/data2 https://fueltank-2:9000/data1 https://fueltank-3:9000/data1
+```
+
+## 坑点
 
 >掉点：
 >

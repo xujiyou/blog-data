@@ -109,3 +109,12 @@ $ docker --config ~/.docker/wan login --username=wan registry.testing.com
 $ docker --config ~/.docker/wan push registry.testing.com/wan/test:0.1
 ```
 
+
+
+## Dockerfile 添加根证书
+
+```dockerfile
+ADD ca.crt /usr/local/share/ca-certificates/ca.crt
+RUN update-ca-certificates
+```
+
