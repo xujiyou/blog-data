@@ -1602,6 +1602,8 @@ title: 许吉友 - 运维
 
 #### 面试题
 
+[概述.md](其他/面试题/概述.md) 
+
 - Linux
 
    [Linux处理僵尸进程.md](其他/面试题/Linux/Linux处理僵尸进程.md) 
@@ -1611,6 +1613,10 @@ title: 许吉友 - 运维
   [Nginx性能优化.md](其他/面试题/Nginx/Nginx性能优化.md) 
 
   [Nginx安全.md](其他/面试题/Nginx/Nginx安全.md) 
+
+- Redis
+
+  [Key过期策略与内存淘汰策略.md](其他/面试题/Redis/Key过期策略与内存淘汰策略.md) 
 
 
 
