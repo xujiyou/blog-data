@@ -32,7 +32,11 @@ Redis的内存淘汰策略是指在Redis的用于缓存的内存不足时，怎�
 
 一般都会使用 allkeys-lru。
 
+如果没有键满足回收的前提条件的话，策略**volatile-lru**, **volatile-random**以及**volatile-ttl**就和noeviction 差不多了。
+
 Redis的内存淘汰策略的选取并不会影响过期的key的处理。内存淘汰策略用于处理内存不足时的需要申请额外空间的数据；过期策略用于处理过期的缓存数据。
+
+
 
 
 
