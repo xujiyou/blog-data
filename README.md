@@ -1656,6 +1656,8 @@ title: 许吉友 - 运维
 
 [IDEA插件开发之 K8s-Client.md](项目/IDEA插件开发之K8s-Client.md) 
 
+[k8s上的CDH.md](项目/k8s上的CDH.md) 
+
 
 
 
