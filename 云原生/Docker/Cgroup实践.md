@@ -60,3 +60,43 @@ cat /sys/fs/cgroup/memory/cgroup.procs
 echo 64M > /sys/fs/cgroup/memory/test/memory.limit_in_bytes
 echo 64M > /sys/fs/cgroup/memory/test/memory.memsw.limit_in_bytes
 ```
+
+
+
+
+
+## cgconfig 服务
+
+在 centos7 中，可以安装一个 cgconfig 服务：
+
+```bash
+$ sudo yum install libcgroup-tools
+$ systemctl enable cgconfig
+$ systemctl start cgconfig
+$ systemctl status cgconfig
+```
+
+通过配置 `/etc/cgconfig.conf` 文件，再重启 cgconfig 服务就可以实现配置 cgroup 了。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
