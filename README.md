@@ -1614,6 +1614,8 @@ title: 许吉友 - 运维
 
    [Linux处理僵尸进程.md](其他/面试题/Linux/Linux处理僵尸进程.md) 
 
+   [CPU性能排查及调优.md](其他/面试题/Linux/CPU性能排查及调优.md) 
+
 - Nginx
 
   [Nginx性能优化.md](其他/面试题/Nginx/Nginx性能优化.md) 
