@@ -178,6 +178,8 @@ top 命令中关于 CPU 的由两块：
 - st    steal time
 ```
 
+us 和 sy 是相对的，us 越高越好，当然 sy 也不是不务正业，它是必须的。
+
 
 
 ## vmstat
