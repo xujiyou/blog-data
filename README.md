@@ -1176,9 +1176,15 @@ title: 许吉友 - 运维
 
 #### Python
 
+[Anaconda安装.md](编程语言/Python/Anaconda安装.md) 
+
 [Python教程.md](编程语言/Python/Python教程.md) 
 
 [Python源码安装.md](编程语言/Python/Python源码安装.md) 
+
+ [PIP教程.md](编程语言/Python/PIP教程.md) 
+
+
 
 
 
@@ -1203,6 +1209,8 @@ title: 许吉友 - 运维
   [ZGC垃圾回收器文章收藏.md](编程语言/Java/JVM/ZGC垃圾回收器文章收藏.md) 
 
   [年轻代大小调节.md](编程语言/Java/JVM/年轻代大小调节.md) 
+
+  [JVM参数详解.md](编程语言/Java/JVM/JVM参数详解.md) 
 
 - Nacos
 
@@ -1624,7 +1632,13 @@ title: 许吉友 - 运维
 
 - Redis
 
+  [Redis常见面试题.md](其他/面试题/Redis/Redis常见面试题.md) 
+  
   [Key过期策略与内存淘汰策略.md](其他/面试题/Redis/Key过期策略与内存淘汰策略.md) 
+  
+  [Redis持久化.md](其他/面试题/Redis/Redis持久化.md) 
+  
+  
 
 
 
