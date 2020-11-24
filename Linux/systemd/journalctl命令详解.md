@@ -42,9 +42,26 @@ $ sudo systemctl restart systemd-journald
 
 
 
+## 常用操作
+
+查看日志所占磁盘容量：
+
+```
+$ sudo journalctl --disk-usage
+$ sudo journalctl -n 20
+$ journalctl -u cron.service -n 3
+```
+
+只显示最新的 n 行
+
+```bash
+$ sudo journalctl -n 20
+$ journalctl -u cron.service -n 3
+```
+
+
+
 ## Flags
-
-
 
 #### --system
 

@@ -31,7 +31,7 @@ $ vim /usr/lib/systemd/system/minio.service
 
 内容如下：
 
-```
+```ini
 [Unit]
 Description=Minio service
 Documentation=https://docs.minio.io/

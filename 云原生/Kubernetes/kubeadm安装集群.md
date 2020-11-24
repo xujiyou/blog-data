@@ -358,9 +358,22 @@ $ kubectl apply -f calico.yaml
 
 下面来安装 ingress nginx controller，这里注意使用 hostNetwork 和 DaemonSet 的方式来安装，这样可以直接走宿主机的 80 和 443 端口，相当于给每个宿主机节点都装了一个 nginx，只不过这个 nginx 是通过 ingress 来配置的，并且具有直接访问 Pod 内服务的能力。
 
+安装方法一：
+
 ```bash
 $ helm install my-ic stable/nginx-ingress  --namespace kube-system --set rbac.create=true --set controller.kind=DaemonSet --set controller.hostNetwork=true --set controller.daemonset.useHostPort=true --set controller.daemonset.hostPorts.http=80 --set controller.daemonset.hostPorts.https=443 --set controller.service.type=ClusterIP
 ```
+
+安装方法二：
+
+```bash
+$ helm fetch stable/nginx-ingress
+$ tar -xvf nginx-ingress-1.41.3.tgz 
+$ vim nginx-ingress/values.yaml # 修改其中的变量
+$ helm install prod stable/nginx-ingress --namespace kube-system -f nginx-ingress/values.yaml
+```
+
+
 
 
 

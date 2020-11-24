@@ -109,7 +109,7 @@ $ crictl pull registry.prod.bbdops.com/common/kube-apiserver:v1.18.4 --creds use
 ```
 [kubernetes]
 name=Kubernetes
-baseurl=http://mirrors.bbdops.com/list/kubernetes/yum/repos/kubernetes-el7-x86_64
+baseurl=http://mirrors.testing.com/list/kubernetes/yum/repos/kubernetes-el7-x86_64
 enabled=1
 gpgcheck=0
 repo_gpgcheck=0
@@ -118,7 +118,7 @@ repo_gpgcheck=0
 安装：
 
 ```bash
-$ sudo yum install kubeadm-1.18.4 kubelet-1.18.4 kubectl-1.18.4 -y
+$ sudo yum install kubeadm kubelet kubectl -y
 ```
 
 修改 `/etc/sysconfig/kubelet`中的内容，这一步很关键：

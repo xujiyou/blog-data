@@ -1492,15 +1492,15 @@ title: 许吉友 - 运维
 
 #### Systemd
 
-[systemd入门.md](Linux/systemd/systemd入门.md) 
+[Systemd详解.md](Linux/Systemd/Systemd详解.md) 
 
-[systemctl命令详解.md](Linux/systemd/systemctl命令详解.md) 
+[service文件结构.md](Linux/Systemd/service文件结构.md) 
 
-[journalctl命令详解.md](Linux/systemd/journalctl命令详解.md) 
+[systemctl命令详解.md](Linux/Systemd/systemctl命令详解.md) 
 
-[其他命令.md](Linux/systemd/其他命令.md) 
+[journalctl命令详解.md](Linux/Systemd/journalctl命令详解.md) 
 
-[service文件结构.md](Linux/systemd/service文件结构.md) 
+[其他命令.md](Linux/Systemd/其他命令.md) 
 
 
 
