@@ -1628,6 +1628,10 @@ title: 许吉友 - 运维
 
    [对进程的理解.md](其他/面试题/Linux/对进程的理解.md) 
 
+   [du与df不一致的情况.md](其他/面试题/Linux/du与df不一致的情况.md) 
+
+   [让进程不能同时运行多份.md](其他/面试题/Linux/让进程不能同时运行多份.md) 
+
 - Nginx
 
   [Nginx性能优化.md](其他/面试题/Nginx/Nginx性能优化.md) 
