@@ -24,11 +24,21 @@ https://www.cnblogs.com/lvcisco/p/9836701.html
 
 2. 定位僵尸进程
 
-   使用命令ps -A -ostat,ppid,pid,cmd |grep -e '^[Zz]'定位僵尸进程以及该僵尸进程的父进程
+   使用命令`ps -A -ostat,ppid,pid,cmd |grep -e '^[Zz]'`定位僵尸进程以及该僵尸进程的父进程
 
    僵尸进程ID：3457，父进程ID：3425
 
    僵尸进程ID：3533，父进程ID：3511
+
+   > 参数解读
+   >
+   > ps -A -ostat,ppid,pid,cmd |grep -e '^[Zz]'
+   >
+   > -A 参数列出所有进程
+   >
+   > -o 自定义输出字段 stat（状态）、ppid（进程父id）、pid（进程id）、cmd（命令）
+   >
+   > 因为状态为z或者Z的进程为僵尸进程，所以我们使用grep抓取stat状态为zZ进程
 
 3. 使用Kill -HUP 僵尸进程ID来杀死僵尸进程，往往此种情况无法杀死僵尸进程，此时就需要杀死僵尸进程的父进程
 
@@ -36,15 +46,7 @@ https://www.cnblogs.com/lvcisco/p/9836701.html
 
    然后使用上面的语句查询该僵尸进程是否被杀死
 
-4. 参数解读
-
-   ps -A -ostat,ppid,pid,cmd |grep -e '^[Zz]'
-
-   -A 参数列出所有进程
-
-   -o 自定义输出字段 stat（状态）、ppid（进程父id）、pid（进程id）、cmd（命令）
-
-   因为状态为z或者Z的进程为僵尸进程，所以我们使用grep抓取stat状态为zZ进程
+4. 如果父进程也杀不死，就只能重启了。
 
 
 
