@@ -2,6 +2,10 @@
 
 配置文件的完整格式及语法，可见官方文档：https://www.freedesktop.org/software/systemd/man/systemd.unit.html
 
+中文版文档：http://www.jinbuguo.com/systemd/systemd.service.html#
+
+
+
 配置文件就是普通的文本文件，可以用文本编辑器打开。
 
 `systemctl cat`命令可以查看配置文件的内容。
