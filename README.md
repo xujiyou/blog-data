@@ -190,8 +190,6 @@ title: 许吉友 - 运维
 
 [Docker二进制部署.md](云原生/Docker/Docker二进制部署.md) 
 
-[Cgroup实践.md](云原生/Docker/Cgroup实践.md) 
-
 [Docker网络配置.md](云原生/Docker/Docker网络配置.md) 
 
 
@@ -1338,6 +1336,8 @@ title: 许吉友 - 运维
 
 [TTY与PTY设备.md](Linux/TTY与PTY设备.md) 
 
+[Cgroup详解.md](Linux/Cgroup详解.md) 
+
 #### 日常运维
 
 [CentOS7重置密码.md](Linux/日常运维/CentOS7重置密码.md) 
@@ -1386,12 +1386,14 @@ title: 许吉友 - 运维
 
 - 文件系统
 
+  [VFS.md](Linux/内核/文件系统/VFS.md) 
+
   [xfs文件系统详解.md](Linux/内核/文件系统/xfs文件系统详解.md) 
 
   [ext4文件系统详解.md](Linux/内核/文件系统/ext4文件系统详解.md) 
 
   [btrfs文件系统详解.md](Linux/内核/文件系统/btrfs文件系统详解.md) 
-
+  
   
 
 
