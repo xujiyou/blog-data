@@ -287,6 +287,20 @@ CRI-O 容器的内存限制放在了 `/sys/fs/cgroup/memory/kubepods.slice` 目�
 
 
 
+## cgroup 相关命令
+
+```bash
+$ cgreate -g  memory:/test # 命令行创建控制组群，运行后就会在memory挂载目录下/sys/fs/cgroup/memory/ 目录下看到一个新的目录test，这个就是新创建的memory子控制组群
+$ cgdelete -g memory:/test # 运行后就会删除memory的cgroup子控制组test
+$ cgset -r cpuset.cpus=0-1 test # 设置cgroup参数
+$ cgclassify -g cpuset:/test 871 # 将某个进程移动到cgroup中 
+$ cgexec -g subsystems:path_to_cgroup command arguments # 启动进程时绑定 cgroup
+```
+
+
+
+
+
 
 
 
