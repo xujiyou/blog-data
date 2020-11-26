@@ -283,6 +283,8 @@ CRI-O 容器的内存限制放在了 `/sys/fs/cgroup/memory/kubepods.slice` 目�
 
 可以看到依次又分了 Pod 和容器。
 
+关于 QoS ： [Kubernetes调度与资源管理.md](../云原生/Kubernetes/架构及原理/Kubernetes调度与资源管理.md) 
+
 
 
 
