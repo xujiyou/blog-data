@@ -248,6 +248,122 @@ $ systemctl status cgconfig
 
 
 
+## systemd 与 cgroup
+
+在系统的开机阶段，systemd 会把支持的 controllers (subsystem 子系统)挂载到默认的 `/sys/fs/cgroup/` 目录下面。
+
+`/sys/fs/cgroup/systemd` 目录是 systemd 维护的自己使用的非 subsystem 的 cgroups 层级结构。这玩意儿是 systemd 自己使用的，换句话说就是，并不允许其它的程序动这个目录下的内容。
+
+**通过将 cgroup 层级系统与 systemd unit 树绑定，systemd 可以把资源管理的设置从进程级别移至应用程序级别。因此，我们可以使用 systemctl 指令，或者通过修改 systemd unit 的配置文件来管理 unit 相关的资源。**
+
+默认情况下，systemd 会自动创建 **slice、scope 和 service** unit 的层级来为 cgroup 树提供统一的层级结构。
+
+系统中运行的所有进程，都是 systemd init 进程的子进程。在资源管控方面，systemd 提供了三种 unit 类型：
+
+- **service**： 一个或一组进程，由 systemd 依据 unit 配置文件启动。service 对指定进程进行封装，这样进程可以作为一个整体被启动或终止。
+- **scope**：一组外部创建的进程。由进程通过 fork() 函数启动和终止、之后被 systemd 在运行时注册的进程，scope 会将其封装。例如：用户会话、 容器和虚拟机被认为是 scope。
+- **slice**： 一组按层级排列的 unit。slice 并不包含进程，但会组建一个层级，并将 scope 和 service 都放置其中。真正的进程包含在 scope 或 service 中。在这一被划分层级的树中，每一个 slice 单位的名字对应通向层级中一个位置的路径。
+
+可以通过 `systemd-cgls` 命令来查看 cgroups 的层级结构。
+
+service、scope 和 slice unit 被直接映射到 cgroup 树中的对象。当这些 unit 被激活时，它们会直接一一映射到由 unit 名建立的 cgroup 路径中。例如，cron.service 属于 system.slice，会直接映射到 cgroup system.slice/cron.service/ 中。
+
+注意，所有的用户会话、虚拟机和容器进程会被自动放置在一个单独的 scope 单元中。
+
+默认情况下，系统会创建四种 slice：
+
+- **-.slice**：根 slice
+- **system.slice**：所有系统 service 的默认位置
+- **user.slice**：所有用户会话的默认位置
+- **machine.slice**：所有虚拟机和 Linux 容器的默认位置
+
+
+
+#### 创建临时的 cgroup
+
+对资源管理的设置可以是 transient(临时的)，也可以是 persistent (永久的)。我们先来介绍如何创建临时的 cgroup。
+需要使用 **systemd-run** 命令创建临时的 cgroup，它可以创建并启动临时的 service 或 scope unit，并在此 unit 中运行程序。systemd-run 命令默认创建 service 类型的 unit，比如我们创建名称为 toptest 的 service 运行 top 命令：
+
+```bash
+$ sudo systemd-run --unit=toptest --slice=test top -b
+```
+
+然后查看一下 test.slice 的状态
+
+```bash
+$ systemctl status test.slice
+```
+
+创建了一个 test.slice/toptest.service cgroup 层级关系。再看看 toptest.service 的状态：
+
+```bash
+$ systemctl status toptest.service
+```
+
+top 命令被包装成一个 service 运行在后台了！查看 group 信息：
+
+```bash
+$ cat /proc/1970562/cgroup
+```
+
+比如我们限制 toptest.service 的 CPUShares 为 600，可用内存的上限为 550M：
+
+```bash
+$ sudo systemctl set-property toptest.service CPUShares=600 MemoryLimit=500M
+```
+
+查看资源限制：
+
+```bash
+$ cat /sys/fs/cgroup/memory/test.slice/toptest.service/memory.limit_in_bytes
+$ cat /sys/fs/cgroup/cpu/test.slice/toptest.service/cpu.shares
+```
+
+临时 cgroup 的特征是，所包含的进程一旦结束，临时 cgroup 就会被自动释放。比如我们 kill 掉 top 进程，然后再查看 /sys/fs/cgroup/memory/test.slice 和 /sys/fs/cgroup/cpu/test.slice 目录，刚才的 toptest.service 目录已经不见了。
+
+
+
+#### 通过配置文件修改 cgroup
+
+在配置文件中修改资源限制很简单，只需在 service 文件中加入配置即可，比如编辑 `/usr/lib/systemd/system/crond.service`：
+
+```ini
+[Unit]
+Description=Command Scheduler
+After=auditd.service nss-user-lookup.target systemd-user-sessions.service time-sync.target ypbind.service
+
+[Service]
+CPUShares=600
+MemoryLimit=500M
+EnvironmentFile=/etc/sysconfig/crond
+ExecStart=/usr/sbin/crond -n $CRONDARGS
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+RestartSec=30s
+
+[Install]
+WantedBy=multi-user.target
+```
+
+重启生效：
+
+```bash
+$ sudo systemctl daemon-reload
+$ sudo systemctl restart crond.service
+```
+
+然后查看资源限制：
+
+```bash
+$ cat /sys/fs/cgroup/memory/system.slice/crond.service/memory.limit_in_bytes
+$ cat /sys/fs/cgroup/cpu/system.slice/crond.service/cpu.shares
+```
+
+> 类似于 top 命令，`systemd-cgtop` 命令显示 cgoups 的实时资源消耗情况。
+
+
+
 ## 容器是怎么使用 cgroup 的
 
 我这里有两种容器环境，一种是 Docker 的，一种是 CRI-O 的。下面以内存控制为例，来看下两种容器技术的实现效果。
