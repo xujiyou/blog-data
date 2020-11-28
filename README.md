@@ -1398,6 +1398,8 @@ title: 许吉友 - 运维
 
    [网络IO详解.md](Linux/内核/IO子系统/网络IO详解.md) 
 
+  [sendfile系统调用详解.md](Linux/内核/IO子系统/sendfile系统调用详解.md) 
+
 
 
 
