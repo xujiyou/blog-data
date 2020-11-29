@@ -1396,9 +1396,13 @@ title: 许吉友 - 运维
 
 - IO
 
-   [网络IO详解.md](Linux/内核/IO子系统/网络IO详解.md) 
+  [网络IO详解.md](Linux/内核/IO子系统/网络IO详解.md) 
+
+  [磁盘IO详解.md](Linux/内核/IO子系统/磁盘IO详解.md) 
 
   [sendfile系统调用详解.md](Linux/内核/IO子系统/sendfile系统调用详解.md) 
+
+  
 
 
 
@@ -1655,8 +1659,12 @@ title: 许吉友 - 运维
   [Key过期策略与内存淘汰策略.md](其他/面试题/Redis/Key过期策略与内存淘汰策略.md) 
   
   [Redis持久化.md](其他/面试题/Redis/Redis持久化.md) 
-  
-  
+
+- MySQL
+
+  [MySQL事务隔离级别详解.md](其他/面试题/MySQL/MySQL事务隔离级别详解.md) 
+
+
 
 
 
