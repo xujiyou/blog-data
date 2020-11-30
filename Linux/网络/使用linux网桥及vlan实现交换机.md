@@ -45,7 +45,7 @@ $ sudo modprobe 8021q
 
 创建 VLAN：
 
-```
+```bash
 $ vconfig add enp2s0 10
 $ vconfig add enp2s0 20
 $ ifconfig enp2s0.10 192.168.10.1 netmask 255.255.255.0 up

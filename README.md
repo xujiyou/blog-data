@@ -602,6 +602,8 @@ title: 许吉友 - 运维
 
 [Splash使用教程.md](大数据/爬虫/Splash使用教程.md) 
 
+[Linux安装无头Chrome.md](大数据/爬虫/Linux安装无头Chrome.md) 
+
 
 
 #### Flink
@@ -1352,15 +1354,11 @@ title: 许吉友 - 运维
 
 [iproute2命令详解.md](Linux/网络/iproute2命令详解.md) 
 
-[Linux安装无头Chrome.md](Linux/网络/Linux安装无头Chrome.md) 
-
 [一次网络命令实践.md](Linux/网络/一次网络命令实践.md) 
 
 [Linux虚拟网络设备之tun-tap.md](Linux/网络/Linux虚拟网络设备之tun-tap.md) 
 
 [Linux虚拟网络设备之Bridge.md](Linux/网络/Linux虚拟网络设备之Bridge.md) 
-
-[VLAN详解.md](Linux/网络/VLAN详解.md) 
 
 [使用linux网桥及vlan实现交换机.md](Linux/网络/使用linux网桥及vlan实现交换机.md) 
 
@@ -1601,6 +1599,8 @@ title: 许吉友 - 运维
 
 
 ## 其他
+
+[三级登保经验.md](其他/三级登保经验.md) 
 
 #### 计算机网络
 
