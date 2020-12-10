@@ -1478,6 +1478,8 @@ title: 许吉友 - 运维
 
 [vmstat命令详解.md](Linux/命令详解/vmstat命令详解.md) 
 
+[pidstat命令详解.md](Linux/命令详解/pidstat命令详解.md) 
+
 
 
 #### Syslog
