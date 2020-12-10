@@ -1476,6 +1476,8 @@ title: 许吉友 - 运维
 
 [Dmidecode命令详解.md](Linux/命令详解/Dmidecode命令详解.md) 
 
+[vmstat命令详解.md](Linux/命令详解/vmstat命令详解.md) 
+
 
 
 #### Syslog
