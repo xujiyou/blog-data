@@ -1474,6 +1474,8 @@ title: 许吉友 - 运维
 
 [man命令.md](Linux/命令详解/man命令.md) 
 
+[Dmidecode命令详解.md](Linux/命令详解/Dmidecode命令详解.md) 
+
 
 
 #### Syslog
