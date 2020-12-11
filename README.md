@@ -1480,6 +1480,8 @@ title: 许吉友 - 运维
 
 [pidstat命令详解.md](Linux/命令详解/pidstat命令详解.md) 
 
+[perf命令详解.md](Linux/命令详解/perf命令详解.md) 
+
 
 
 #### Syslog
