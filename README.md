@@ -1482,6 +1482,8 @@ title: 许吉友 - 运维
 
 [perf命令详解.md](Linux/命令详解/perf命令详解.md) 
 
+[sar命令详解.md](Linux/命令详解/sar命令详解.md) 
+
 
 
 #### Syslog
