@@ -630,6 +630,8 @@ title: 许吉友 - 运维
 
 [HBase数据结构.md](大数据/HBase/HBase数据结构.md) 
 
+[HBase数据的导出与导入.md](大数据/HBase/HBase数据的导出与导入.md) 
+
 - HBase配置
 
   [HBase配置概述.md](大数据/HBase/HBase配置/HBase配置概述.md) 
