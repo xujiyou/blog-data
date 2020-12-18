@@ -1192,31 +1192,33 @@ title: 许吉友 - 运维
 
 #### Java
 
-[ClassNotFoundException与NoClassDefFoundError.md](Java/ClassNotFoundException与NoClassDefFoundError.md) 
+ [ClassNotFoundException与NoClassDefFoundError.md](编程语言/Java/ClassNotFoundException与NoClassDefFoundError.md) 
 
-[package-info的作用.md](Java/package-info的作用.md) 
+[package-info的作用.md](编程语言/Java/package-info的作用.md) 
 
-[Linux查看Java线程状态.md](Java/Linux查看Java线程状态.md) 
+[Linux查看Java线程状态.md](编程语言/Java/Linux查看Java线程状态.md) 
 
 [java并发总结.md](编程语言/Java/java并发总结.md) 
 
+[类加载机制及ClassLoad.md](编程语言/Java/类加载机制及ClassLoad.md) 
+
 - Gradle
 
-  [Gradle生成src目录.md](Java/Gradle/Gradle生成src目录.md) 
+   [Gradle打包带依赖的jar.md](编程语言/Java/Gradle/Gradle打包带依赖的jar.md) 
 
-  [Gradle打包带依赖的jar.md](Java/Gradle/Gradle打包带依赖的jar.md) 
+   [Gradle生成src目录.md](编程语言/Java/Gradle/Gradle生成src目录.md) 
 
 - Maven
 
 - JVM
 
-  [ZGC垃圾回收器文章收藏.md](编程语言/Java/JVM/ZGC垃圾回收器文章收藏.md) 
+   [年轻代大小调节.md](编程语言/Java/JVM/年轻代大小调节.md) 
 
-  [年轻代大小调节.md](编程语言/Java/JVM/年轻代大小调节.md) 
+   [JVM参数详解.md](编程语言/Java/JVM/JVM参数详解.md) 
 
-  [JVM参数详解.md](编程语言/Java/JVM/JVM参数详解.md) 
+   [JVM自动内存管理机制.md](编程语言/Java/JVM/JVM自动内存管理机制.md) 
 
-  [JVM自动内存管理机制.md](编程语言/Java/JVM/JVM自动内存管理机制.md) 
+   [ZGC垃圾回收器文章收藏.md](编程语言/Java/JVM/ZGC垃圾回收器文章收藏.md) 
 
 - Nacos
 
