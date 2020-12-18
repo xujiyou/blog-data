@@ -1202,6 +1202,8 @@ title: 许吉友 - 运维
 
 [类加载机制及ClassLoad.md](编程语言/Java/类加载机制及ClassLoad.md) 
 
+[乐观锁与悲观锁.md](编程语言/Java/乐观锁与悲观锁.md) 
+
 - Gradle
 
    [Gradle打包带依赖的jar.md](编程语言/Java/Gradle/Gradle打包带依赖的jar.md) 
@@ -1219,6 +1221,8 @@ title: 许吉友 - 运维
    [JVM自动内存管理机制.md](编程语言/Java/JVM/JVM自动内存管理机制.md) 
 
    [ZGC垃圾回收器文章收藏.md](编程语言/Java/JVM/ZGC垃圾回收器文章收藏.md) 
+
+   [反射机制.md](编程语言/Java/JVM/反射机制.md) 
 
 - Nacos
 
@@ -1713,6 +1717,12 @@ title: 许吉友 - 运维
 [CAP理论.md](其他/分布式/CAP理论.md) 
 
 [Raft分布式一致性协议原理.md](其他/分布式/Raft分布式一致性协议原理.md) 
+
+
+
+#### 算法
+
+ [排序算法.md](其他/算法/排序算法.md) 
 
 
 
