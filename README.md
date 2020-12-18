@@ -1214,6 +1214,8 @@ title: 许吉友 - 运维
 
   [JVM参数详解.md](编程语言/Java/JVM/JVM参数详解.md) 
 
+  [JVM自动内存管理机制.md](编程语言/Java/JVM/JVM自动内存管理机制.md) 
+
 - Nacos
 
   [NacOS部署.md](编程语言/Java/NacOS/NacOS部署.md) 
@@ -1673,10 +1675,12 @@ title: 许吉友 - 运维
 - Redis
 
   [Redis常见面试题.md](其他/面试题/Redis/Redis常见面试题.md) 
-  
+
   [Key过期策略与内存淘汰策略.md](其他/面试题/Redis/Key过期策略与内存淘汰策略.md) 
-  
+
   [Redis持久化.md](其他/面试题/Redis/Redis持久化.md) 
+
+  [缓存常见问题.md](其他/面试题/Redis/缓存常见问题.md) 
 
 - MySQL
 
