@@ -1200,8 +1200,6 @@ title: 许吉友 - 运维
 
 [java并发总结.md](编程语言/Java/java并发总结.md) 
 
-[类加载机制及ClassLoad.md](编程语言/Java/类加载机制及ClassLoad.md) 
-
 [乐观锁与悲观锁.md](编程语言/Java/乐观锁与悲观锁.md) 
 
 - Gradle
@@ -1224,6 +1222,8 @@ title: 许吉友 - 运维
 
    [反射机制.md](编程语言/Java/JVM/反射机制.md) 
 
+  [类加载机制及ClassLoad.md](编程语言/Java/JVM/类加载机制及ClassLoad.md) 
+
 - Nacos
 
   [NacOS部署.md](编程语言/Java/NacOS/NacOS部署.md) 
@@ -1233,6 +1233,16 @@ title: 许吉友 - 运维
   [IoC详解.md](编程语言/Java/Spring/IoC详解.md) 
 
   [AOP详解.md](编程语言/Java/Spring/AOP详解.md) 
+
+- 线程与并发
+
+  [Java线程池的使用.md](编程语言/Java/线程与并发/Java线程池的使用.md) 
+
+  [Java并发包.md](编程语言/Java/线程与并发/Java并发包.md) 
+
+- 类库
+
+  [HashMap实现原理.md](编程语言/Java/类库/HashMap实现原理.md) 
 
 
 
@@ -1709,6 +1719,10 @@ title: 许吉友 - 运维
   [MySQL索引.md](其他/面试题/MySQL/MySQL索引.md) 
   
   [explain教程.md](其他/面试题/MySQL/explain教程.md) 
+
+- Java
+
+  [HashMap21连问.md](其他/面试题/Java/HashMap21连问.md) 
 
 
 

@@ -26,3 +26,19 @@ IOC其实有两种方式，一种就是DI，而另一种是DL，即Dependency Lo
 
 
 
+## 解决循环依赖
+
+配置信息如下：
+
+```
+<bean id="beanA" class="xyz.coolblog.BeanA">
+    <property name="beanB" ref="beanB"/>
+</bean>
+<bean id="beanB" class="xyz.coolblog.BeanB">
+    <property name="beanA" ref="beanA"/>
+</bean>
+```
+
+IOC 容器在读到上面的配置时，会按照顺序，先去实例化 beanA。然后发现 beanA 依赖于 beanB，接在又去实例化 beanB。实例化 beanB 时，发现 beanB 又依赖于 beanA。如果容器不处理循环依赖的话，容器会无限执行上面的流程，直到内存溢出，程序崩溃。当然，Spring 是不会让这种情况发生的。在容器再次发现 beanB 依赖于 beanA 时，容器会获取 beanA 对象的一个早期的引用（early reference），并把这个早期引用注入到 beanB 中，让 beanB 先完成实例化。beanB 完成实例化，beanA 就可以获取到 beanB 的引用，beanA 随之完成实例化。
+
+在才开始创建对象时，他内部的域都是 null。在填充域时将缓存中的对象填上即可。
