@@ -1692,7 +1692,17 @@ title: 许吉友 - 运维
 
 - MySQL
 
+  [MySQL常见面试题.md](其他/面试题/MySQL/MySQL常见面试题.md) 
+  
   [MySQL事务隔离级别详解.md](其他/面试题/MySQL/MySQL事务隔离级别详解.md) 
+  
+  [MySQL锁机制.md](其他/面试题/MySQL/MySQL锁机制.md) 
+  
+  [MVVC多版本并发控制.md](其他/面试题/MySQL/MVVC多版本并发控制.md) 
+  
+  [MySQL索引.md](其他/面试题/MySQL/MySQL索引.md) 
+  
+  [explain教程.md](其他/面试题/MySQL/explain教程.md) 
 
 
 
