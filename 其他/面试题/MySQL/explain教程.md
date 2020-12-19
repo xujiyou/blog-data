@@ -1,5 +1,7 @@
 # explain 教程
 
+参考：https://www.cnblogs.com/xuanzhi201111/p/4175635.html
+
 ![image-20201218233144339](../../../resource/image-20201218233144339.png)
 
 - **id** 可以理解为 SQL 的执行顺序
