@@ -1698,7 +1698,7 @@ title: 许吉友 - 运维
 
   [Nginx安全.md](其他/面试题/Nginx/Nginx安全.md) 
 
-  [Nginx防止DDos和cc等流量攻击.md](其他/面试题/Nginx/Nginx防止DDos和cc等流量攻击.md) 
+  [Nginx惊群效应.md](其他/面试题/Nginx/Nginx惊群效应.md) 
 
 - Redis
 
