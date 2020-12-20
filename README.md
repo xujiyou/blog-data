@@ -1700,6 +1700,10 @@ title: 许吉友 - 运维
 
   [Nginx惊群效应.md](其他/面试题/Nginx/Nginx惊群效应.md) 
 
+  [Nginx负载均衡.md](其他/面试题/Nginx/Nginx负载均衡.md) 
+
+  [Nginx缓存.md](其他/面试题/Nginx/Nginx缓存.md) 
+
 - Redis
 
   [Redis常见面试题.md](其他/面试题/Redis/Redis常见面试题.md) 
