@@ -1244,7 +1244,9 @@ title: 许吉友 - 运维
 
   [HashMap实现原理.md](编程语言/Java/类库/HashMap实现原理.md) 
 
+- 性能排查
 
+  [CPU占用高问题排查.md](编程语言/Java/性能排查/CPU占用高问题排查.md) 
 
 ---
 
@@ -1692,6 +1694,8 @@ title: 许吉友 - 运维
 
    [让进程不能同时运行多份.md](其他/面试题/Linux/让进程不能同时运行多份.md) 
 
+   [进程内存空间布局.md](其他/面试题/Linux/进程内存空间布局.md) 
+
 - Nginx
 
   [Nginx性能优化.md](其他/面试题/Nginx/Nginx性能优化.md) 
@@ -1703,6 +1707,8 @@ title: 许吉友 - 运维
   [Nginx负载均衡.md](其他/面试题/Nginx/Nginx负载均衡.md) 
 
   [Nginx缓存.md](其他/面试题/Nginx/Nginx缓存.md) 
+
+  [漏桶流算法和令牌桶算法.md](其他/面试题/Nginx/漏桶流算法和令牌桶算法.md) 
 
 - Redis
 
