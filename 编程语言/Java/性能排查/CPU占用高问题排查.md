@@ -17,6 +17,7 @@
 
 3. 使用 `jstack -l 3033 > ./3033.stack` 导出运行时堆栈（注意这里的ID是进程ID），然后 vim 读取这个文件，搜索 16 进制的 线程ID 即可。
 
-   
 
-   
+
+如果使用的是 Kubernetes ，可以使用 `kubectl top pod --all-namespaces --sort-by=cpu` 找到对应的 Pod，然后进入 Pod 进行操作！
+
