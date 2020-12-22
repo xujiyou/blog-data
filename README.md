@@ -1660,7 +1660,9 @@ title: 许吉友 - 运维
 
   [DNS服务器修改记录.md](其他/计算机网络/DNS/DNS服务器修改记录.md) 
 
-  [DNS原理入门.md](其他/计算机网络/DNS/DNS原理入门.md) 
+  [DNS查询.md](其他/计算机网络/DNS/DNS查询.md) 
+
+  [DNS协议详解.md](其他/计算机网络/DNS/DNS协议详解.md) 
 
 - TCP
 
@@ -1688,13 +1690,23 @@ title: 许吉友 - 运维
 
    [CPU性能排查及调优.md](其他/面试题/Linux/CPU性能排查及调优.md) 
 
+   [NUMA.md](其他/面试题/Linux/NUMA.md) 
+
    [对进程的理解.md](其他/面试题/Linux/对进程的理解.md) 
+
+   [进程间通信.md](其他/面试题/Linux/进程间通信.md) 
 
    [du与df不一致的情况.md](其他/面试题/Linux/du与df不一致的情况.md) 
 
    [让进程不能同时运行多份.md](其他/面试题/Linux/让进程不能同时运行多份.md) 
 
    [进程内存空间布局.md](其他/面试题/Linux/进程内存空间布局.md) 
+
+   [Linux内存页表管理.md](其他/面试题/Linux/Linux内存页表管理.md) 
+
+   [进程调度.md](其他/面试题/Linux/进程调度.md) 
+
+    [中断详解.md](其他/面试题/Linux/中断详解.md) 
 
 - Nginx
 
@@ -1763,6 +1775,8 @@ title: 许吉友 - 运维
 [树.md](其他/数据结构/树.md) 
 
 [图.md](其他/数据结构/图.md) 
+
+[LSM-tree.md](其他/数据结构/LSM-tree.md) 
 
 
 
