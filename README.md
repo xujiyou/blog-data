@@ -1648,6 +1648,16 @@ title: 许吉友 - 运维
 
 #### 计算机网络
 
+- IP
+
+   [IP协议详解.md](其他/计算机网络/IP/IP协议详解.md) 
+
+- TCP
+
+  [HTTP高并发场景下的TCP参数优化.md](其他/计算机网络/TCP/HTTP高并发场景下的TCP参数优化.md) 
+
+  [TCP协议详解.md](其他/计算机网络/TCP/TCP协议详解.md) 
+
 - NTP
 
   [NTP服务端及客户端部署.md](其他/计算机网络/NTP/NTP服务端及客户端部署.md) 
@@ -1663,12 +1673,6 @@ title: 许吉友 - 运维
   [DNS查询.md](其他/计算机网络/DNS/DNS查询.md) 
 
   [DNS协议详解.md](其他/计算机网络/DNS/DNS协议详解.md) 
-
-- TCP
-
-  [HTTP高并发场景下的TCP参数优化.md](其他/计算机网络/TCP/HTTP高并发场景下的TCP参数优化.md) 
-
-  [TCP协议详解.md](其他/计算机网络/TCP/TCP协议详解.md) 
 
 - TLS & SSL
 
