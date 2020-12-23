@@ -4,273 +4,7 @@ title: 许吉友 - 运维
 
 
 
-## Linux
 
-[Cgroup详解.md](Linux/Cgroup详解.md) 
-
-[Linux常见配置文件.md](Linux/Linux常见配置文件.md) 
-
-[Linux中的各种信号.md](Linux/Linux中的各种信号.md) 
-
-[RAID实践.md](Linux/RAID实践.md) 
-
-[LVM实践.md](Linux/LVM实践.md) 
-
-[TTY与PTY设备.md](Linux/TTY与PTY设备.md) 
-
-#### 日常运维
-
-[CentOS7重置密码.md](Linux/日常运维/CentOS7重置密码.md) 
-
-[Linux创建用户并配置免密登录.md](Linux/日常运维/Linux创建用户并配置免密登录.md) 
-
-[CentOS7系统权限被篡改后的恢复方法.md](Linux/日常运维/CentOS7系统权限被篡改后的恢复方法.md) 
-
-#### 网络
-
-[一次网络命令实践.md](Linux/网络/一次网络命令实践.md) 
-
-[iproute2命令详解.md](Linux/网络/iproute2命令详解.md) 
-
-[Linux虚拟网络设备之tun-tap.md](Linux/网络/Linux虚拟网络设备之tun-tap.md) 
-
-[Linux虚拟网络设备之Bridge.md](Linux/网络/Linux虚拟网络设备之Bridge.md) 
-
-[Linux下VxLAN实践.md](Linux/网络/Linux下VxLAN实践.md) 
-
-[使用linux网桥及vlan实现交换机.md](Linux/网络/使用linux网桥及vlan实现交换机.md) 
-
-[IP隧道.md](Linux/网络/IP隧道.md) 
-
-[Linux路由.md](Linux/网络/Linux路由.md) 
-
-[DHCP服务器搭建.md](Linux/网络/DHCP服务器搭建.md) 
-
-[双网卡冗余.md](Linux/网络/双网卡冗余.md) 
-
-#### 内核
-
-[内核升级.md](Linux/内核/内核升级.md) 
-
-- 内核参数
-
-  [Linux内核参数调优.md](Linux/内核/内核参数/Linux内核参数调优.md) 
-
-  [IP转发.md](Linux/内核/内核参数/IP转发.md) 
-
-  [交换内存swap.md](Linux/内核/内核参数/交换内存swap.md) 
-
-- 文件系统
-
-  [VFS虚拟文件系统.md](Linux/内核/文件系统/VFS虚拟文件系统.md) 
-
-  [xfs文件系统详解.md](Linux/内核/文件系统/xfs文件系统详解.md) 
-
-- IO
-
-  [网络IO详解.md](Linux/内核/IO子系统/网络IO详解.md) 
-
-  [磁盘IO详解.md](Linux/内核/IO子系统/磁盘IO详解.md) 
-
-  [sendfile系统调用详解.md](Linux/内核/IO子系统/sendfile系统调用详解.md) 
-
-#### 性能分析
-
-[Linux性能分析.md](Linux/性能分析/Linux性能分析.md) 
-
-[移动文件提示没有空间排错.md](Linux/性能分析/移动文件提示没有空间排错.md) 
-
-[CPU性能分析.md](Linux/性能分析/CPU性能分析.md) 
-
-[内存性能分析.md](Linux/性能分析/内存性能分析.md) 
-
-[IO性能分析.md](Linux/性能分析/IO性能分析.md) 
-
-[网络性能分析.md](Linux/性能分析/网络性能分析.md) 
-
-[磁盘4k随机写测试.md](Linux/性能分析/磁盘4k随机写测试.md) 
-
-[随机读写与顺序读写.md](Linux/性能分析/随机读写与顺序读写.md) 
-
-
-
-#### 常用脚本
-
-[CentOS系统初始化脚本.md](Linux/常用脚本/CentOS系统初始化脚本.md) 
-
-[Linux自动挂载脚本.md](Linux/常用脚本/Linux自动挂载脚本.md) 
-
-[删除脚本.md](Linux/常用脚本/删除脚本.md) 
-
-
-
-#### 硬件信息
-
-[硬件信息查看.md](Linux/硬件信息/硬件信息查看.md) 
-
-[硬盘接口.md](Linux/硬件信息/硬盘接口.md) 
-
-[SSD磁盘开启Trim.md](Linux/硬件信息/SSD磁盘开启Trim.md) 
-
-
-
-#### 命令详解
-
-[常用命令.md](Linux/命令详解/常用命令.md) 
-
-[top命令详解.md](Linux/命令详解/top命令详解.md) 
-
-[lsof命令详解.md](Linux/命令详解/lsof命令详解.md) 
-
-[ps命令详解.md](Linux/命令详解/ps命令详解.md) 
-
-[netstat命令详解.md](Linux/命令详解/netstat命令详解.md) 
-
-[iostat命令详解.md](Linux/命令详解/iostat命令详解.md) 
-
-[screen命令详解.md](Linux/命令详解/screen命令详解.md) 
-
-[demsg命令.md](Linux/命令详解/demsg命令.md) 
-
-[xargs命令.md](Linux/命令详解/xargs命令.md) 
-
-[tcpdump命令详解.md](Linux/命令详解/tcpdump命令详解.md) 
-
-[man命令.md](Linux/命令详解/man命令.md) 
-
-[Dmidecode命令详解.md](Linux/命令详解/Dmidecode命令详解.md) 
-
-[vmstat命令详解.md](Linux/命令详解/vmstat命令详解.md) 
-
-[pidstat命令详解.md](Linux/命令详解/pidstat命令详解.md) 
-
-[perf命令详解.md](Linux/命令详解/perf命令详解.md) 
-
-[sar命令详解.md](Linux/命令详解/sar命令详解.md) 
-
-
-
-#### Syslog
-
-[syslog-ng使用教程.md](Linux/syslog/syslog-ng使用教程.md) 
-
-
-
-#### Iptables
-
-[iptables教程.md](Linux/iptables/iptables教程.md) 
-
-[Iptables使用实例.md](Linux/iptables/Iptables使用实例.md) 
-
-
-
-#### Shell
-
-[Shell脚本语法记录.md](Linux/Shell/Shell脚本语法记录.md) 
-
-[错误记录.md](Linux/Shell/错误记录.md) 
-
-[IPMI教程.md](Linux/Shell/IPMI教程.md) 
-
-
-
-#### Systemd
-
-[Systemd详解.md](Linux/Systemd/Systemd详解.md) 
-
-[service文件结构.md](Linux/Systemd/service文件结构.md) 
-
-[systemctl命令详解.md](Linux/Systemd/systemctl命令详解.md) 
-
-[journalctl命令详解.md](Linux/Systemd/journalctl命令详解.md) 
-
-[其他命令.md](Linux/Systemd/其他命令.md) 
-
-
-
-#### SELinux
-
-[SELinux入门.md](Linux/SELinux/SELinux入门.md) 
-
-
-
-#### YUM
-
-[yum命令详解.md](Linux/yum/yum命令详解.md) 
-
-[rpm命令详解.md](Linux/yum/rpm命令详解.md) 
-
-[repo文件格式.md](Linux/yum/repo文件格式.md) 
-
-[yum离线源的配置.md](Linux/yum/yum离线源的配置.md) 
-
-[yum配置文件.md](Linux/yum/yum配置文件.md) 
-
-[epel软件库的使用.md](Linux/yum/epel软件库的使用.md) 
-
-
-
-#### OpenSSL
-
-[openssl常用命令.md](Linux/OpenSSL/openssl常用命令.md) 
-
-[证书各个字段的含义.md](Linux/OpenSSL/证书各个字段的含义.md) 
-
-
-
-#### Firewalld
-
-[防火墙常用操作.md](Linux/Firewalld/防火墙常用操作.md) 
-
-
-
-#### KVM
-
-[KVM安装.md](Linux/KVM/KVM安装.md) 
-
-[自定义CentOS镜像.md](Linux/KVM/自定义CentOS镜像.md) 
-
-
-
-#### IPVS & LVS
-
-[ipvs使用实例.md](Linux/ipvs/ipvs使用实例.md) 
-
-[keepalived实现ipvs高可用集群.md](Linux/ipvs/keepalived实现ipvs高可用集群.md) 
-
-[LVS的三种模式.md](Linux/ipvs/LVS的三种模式.md) 
-
-[LVS的8种调度算法.md](Linux/ipvs/LVS的8种调度算法.md) 
-
-[ipvsadm常用命令.md](Linux/ipvs/ipvsadm常用命令.md) 
-
-[lvs负载10w+并发的调优.md](Linux/ipvs/lvs负载10w+并发的调优.md) 
-
-
-
-#### Keepalived
-
-[Keepalived入门教程.md](Linux/Keepalived/Keepalived入门教程.md) 
-
-[Keepalived配置.md](Linux/Keepalived/Keepalived配置.md) 
-
-
-
-#### HAProxy
-
-[HAProxy安装及入门.md](Linux/HAPorxy/HAProxy安装及入门.md) 
-
-
-
-#### SSH
-
-[SSH反向代理与端口转发配置.md](Linux/SSH/SSH反向代理与端口转发配置.md) 
-
-[漏洞实验.md](Linux/SSH/漏洞实验.md) 
-
-
-
----
 
 ## 云原生
 
@@ -844,7 +578,273 @@ title: 许吉友 - 运维
 
 ---
 
+## Linux
 
+[Cgroup详解.md](Linux/Cgroup详解.md) 
+
+[Linux常见配置文件.md](Linux/Linux常见配置文件.md) 
+
+[Linux中的各种信号.md](Linux/Linux中的各种信号.md) 
+
+[RAID实践.md](Linux/RAID实践.md) 
+
+[LVM实践.md](Linux/LVM实践.md) 
+
+[TTY与PTY设备.md](Linux/TTY与PTY设备.md) 
+
+#### 日常运维
+
+[CentOS7重置密码.md](Linux/日常运维/CentOS7重置密码.md) 
+
+[Linux创建用户并配置免密登录.md](Linux/日常运维/Linux创建用户并配置免密登录.md) 
+
+[CentOS7系统权限被篡改后的恢复方法.md](Linux/日常运维/CentOS7系统权限被篡改后的恢复方法.md) 
+
+#### 网络
+
+[一次网络命令实践.md](Linux/网络/一次网络命令实践.md) 
+
+[iproute2命令详解.md](Linux/网络/iproute2命令详解.md) 
+
+[Linux虚拟网络设备之tun-tap.md](Linux/网络/Linux虚拟网络设备之tun-tap.md) 
+
+[Linux虚拟网络设备之Bridge.md](Linux/网络/Linux虚拟网络设备之Bridge.md) 
+
+[Linux下VxLAN实践.md](Linux/网络/Linux下VxLAN实践.md) 
+
+[使用linux网桥及vlan实现交换机.md](Linux/网络/使用linux网桥及vlan实现交换机.md) 
+
+[IP隧道.md](Linux/网络/IP隧道.md) 
+
+[Linux路由.md](Linux/网络/Linux路由.md) 
+
+[DHCP服务器搭建.md](Linux/网络/DHCP服务器搭建.md) 
+
+[双网卡冗余.md](Linux/网络/双网卡冗余.md) 
+
+#### 内核
+
+[内核升级.md](Linux/内核/内核升级.md) 
+
+- 内核参数
+
+  [Linux内核参数调优.md](Linux/内核/内核参数/Linux内核参数调优.md) 
+
+  [IP转发.md](Linux/内核/内核参数/IP转发.md) 
+
+  [交换内存swap.md](Linux/内核/内核参数/交换内存swap.md) 
+
+- 文件系统
+
+  [VFS虚拟文件系统.md](Linux/内核/文件系统/VFS虚拟文件系统.md) 
+
+  [xfs文件系统详解.md](Linux/内核/文件系统/xfs文件系统详解.md) 
+
+- IO
+
+  [网络IO详解.md](Linux/内核/IO子系统/网络IO详解.md) 
+
+  [磁盘IO详解.md](Linux/内核/IO子系统/磁盘IO详解.md) 
+
+  [sendfile系统调用详解.md](Linux/内核/IO子系统/sendfile系统调用详解.md) 
+
+#### 性能分析
+
+[Linux性能分析.md](Linux/性能分析/Linux性能分析.md) 
+
+[移动文件提示没有空间排错.md](Linux/性能分析/移动文件提示没有空间排错.md) 
+
+[CPU性能分析.md](Linux/性能分析/CPU性能分析.md) 
+
+[内存性能分析.md](Linux/性能分析/内存性能分析.md) 
+
+[IO性能分析.md](Linux/性能分析/IO性能分析.md) 
+
+[网络性能分析.md](Linux/性能分析/网络性能分析.md) 
+
+[磁盘4k随机写测试.md](Linux/性能分析/磁盘4k随机写测试.md) 
+
+[随机读写与顺序读写.md](Linux/性能分析/随机读写与顺序读写.md) 
+
+
+
+#### 常用脚本
+
+[CentOS系统初始化脚本.md](Linux/常用脚本/CentOS系统初始化脚本.md) 
+
+[Linux自动挂载脚本.md](Linux/常用脚本/Linux自动挂载脚本.md) 
+
+[删除脚本.md](Linux/常用脚本/删除脚本.md) 
+
+
+
+#### 硬件信息
+
+[硬件信息查看.md](Linux/硬件信息/硬件信息查看.md) 
+
+[硬盘接口.md](Linux/硬件信息/硬盘接口.md) 
+
+[SSD磁盘开启Trim.md](Linux/硬件信息/SSD磁盘开启Trim.md) 
+
+
+
+#### 命令详解
+
+[常用命令.md](Linux/命令详解/常用命令.md) 
+
+[top命令详解.md](Linux/命令详解/top命令详解.md) 
+
+[lsof命令详解.md](Linux/命令详解/lsof命令详解.md) 
+
+[ps命令详解.md](Linux/命令详解/ps命令详解.md) 
+
+[netstat命令详解.md](Linux/命令详解/netstat命令详解.md) 
+
+[iostat命令详解.md](Linux/命令详解/iostat命令详解.md) 
+
+[screen命令详解.md](Linux/命令详解/screen命令详解.md) 
+
+[demsg命令.md](Linux/命令详解/demsg命令.md) 
+
+[xargs命令.md](Linux/命令详解/xargs命令.md) 
+
+[tcpdump命令详解.md](Linux/命令详解/tcpdump命令详解.md) 
+
+[man命令.md](Linux/命令详解/man命令.md) 
+
+[Dmidecode命令详解.md](Linux/命令详解/Dmidecode命令详解.md) 
+
+[vmstat命令详解.md](Linux/命令详解/vmstat命令详解.md) 
+
+[pidstat命令详解.md](Linux/命令详解/pidstat命令详解.md) 
+
+[perf命令详解.md](Linux/命令详解/perf命令详解.md) 
+
+[sar命令详解.md](Linux/命令详解/sar命令详解.md) 
+
+
+
+#### Syslog
+
+[syslog-ng使用教程.md](Linux/syslog/syslog-ng使用教程.md) 
+
+
+
+#### Iptables
+
+[iptables教程.md](Linux/iptables/iptables教程.md) 
+
+[Iptables使用实例.md](Linux/iptables/Iptables使用实例.md) 
+
+
+
+#### Shell
+
+[Shell脚本语法记录.md](Linux/Shell/Shell脚本语法记录.md) 
+
+[错误记录.md](Linux/Shell/错误记录.md) 
+
+[IPMI教程.md](Linux/Shell/IPMI教程.md) 
+
+
+
+#### Systemd
+
+[Systemd详解.md](Linux/Systemd/Systemd详解.md) 
+
+[service文件结构.md](Linux/Systemd/service文件结构.md) 
+
+[systemctl命令详解.md](Linux/Systemd/systemctl命令详解.md) 
+
+[journalctl命令详解.md](Linux/Systemd/journalctl命令详解.md) 
+
+[其他命令.md](Linux/Systemd/其他命令.md) 
+
+
+
+#### SELinux
+
+[SELinux入门.md](Linux/SELinux/SELinux入门.md) 
+
+
+
+#### YUM
+
+[yum命令详解.md](Linux/yum/yum命令详解.md) 
+
+[rpm命令详解.md](Linux/yum/rpm命令详解.md) 
+
+[repo文件格式.md](Linux/yum/repo文件格式.md) 
+
+[yum离线源的配置.md](Linux/yum/yum离线源的配置.md) 
+
+[yum配置文件.md](Linux/yum/yum配置文件.md) 
+
+[epel软件库的使用.md](Linux/yum/epel软件库的使用.md) 
+
+
+
+#### OpenSSL
+
+[openssl常用命令.md](Linux/OpenSSL/openssl常用命令.md) 
+
+[证书各个字段的含义.md](Linux/OpenSSL/证书各个字段的含义.md) 
+
+
+
+#### Firewalld
+
+[防火墙常用操作.md](Linux/Firewalld/防火墙常用操作.md) 
+
+
+
+#### KVM
+
+[KVM安装.md](Linux/KVM/KVM安装.md) 
+
+[自定义CentOS镜像.md](Linux/KVM/自定义CentOS镜像.md) 
+
+
+
+#### IPVS & LVS
+
+[ipvs使用实例.md](Linux/ipvs/ipvs使用实例.md) 
+
+[keepalived实现ipvs高可用集群.md](Linux/ipvs/keepalived实现ipvs高可用集群.md) 
+
+[LVS的三种模式.md](Linux/ipvs/LVS的三种模式.md) 
+
+[LVS的8种调度算法.md](Linux/ipvs/LVS的8种调度算法.md) 
+
+[ipvsadm常用命令.md](Linux/ipvs/ipvsadm常用命令.md) 
+
+[lvs负载10w+并发的调优.md](Linux/ipvs/lvs负载10w+并发的调优.md) 
+
+
+
+#### Keepalived
+
+[Keepalived入门教程.md](Linux/Keepalived/Keepalived入门教程.md) 
+
+[Keepalived配置.md](Linux/Keepalived/Keepalived配置.md) 
+
+
+
+#### HAProxy
+
+[HAProxy安装及入门.md](Linux/HAPorxy/HAProxy安装及入门.md) 
+
+
+
+#### SSH
+
+[SSH反向代理与端口转发配置.md](Linux/SSH/SSH反向代理与端口转发配置.md) 
+
+[漏洞实验.md](Linux/SSH/漏洞实验.md) 
+
+
+
+---
 
 ## 大数据
 
