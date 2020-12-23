@@ -38,7 +38,9 @@ $ kubectl -n kube-system describe endpoints kube-scheduler
 
 scheduler, controller-manager 能自己保证高可用，kubelet 和 kube-proxy 是运行在每个机器上的，单个机器挂了也不会出问题。剩下的只有 kube-apiserver 的高可用了。
 
-官方并没有给出 kube-apiserver 的高可用解决方案，只是依赖 etcd 实现了并发安全。
+在 k8s 集群内部，kube-apiserver 有负载均衡能保证高可用。
+
+官方并没有给出外部调用 kube-apiserver 的高可用解决方案，只是依赖 etcd 实现了并发安全。
 
 如何实现 kube-apiserver  的高可用那，可以使用外部负载均衡，也可以使用 keepalived 实现内部的负载均衡，也可以使用 nginx 做反向代理。
 

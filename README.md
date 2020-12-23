@@ -274,6 +274,8 @@ title: 许吉友 - 运维
 
 ## 云原生
 
+[云原生十二要素.md](云原生/云原生十二要素.md) 
+
 #### Kubernetes
 
 [Kubernetes二进制安装.md](云原生/Kubernetes/Kubernetes二进制安装.md) 

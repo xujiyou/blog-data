@@ -6,7 +6,7 @@
 
 SELinux 和防火墙都是关闭的。
 
-每个节点下， proxychains4 代理都可以使用，
+每个节点下， proxychains4 代理都可以使用。
 
 ---
 
@@ -50,8 +50,6 @@ Docker version 19.03.5, build 633a0ea
 kuberntes 集群使用 etcd 存储所有数据，是最重要的组件之一，注意 etcd集群需要奇数个节点(1,3,5...)，本文档使用3个节点做集群。
 
 关于 etcd 的配置，可以看我的翻译：  [etcd配置详解.md](../Etcd/etcd配置详解.md) 
-
----
 
  
 
