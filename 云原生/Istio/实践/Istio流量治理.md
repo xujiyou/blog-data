@@ -448,6 +448,22 @@ $ curl http://fueltank-1/api/he
 
 限流是一种预防措施，在发生灾难发生前就对并发访问进行限制。Istio的速率限制特性可以实现常见 的限流功能，即防止来自外部服务的过度调用。衡量指标主要是QPS（每秒请求量），实现方式是计数器 方式。Istio 支持 Memquota 适配器和 Redisquota 适配器。
 
+原理：https://istio.io/latest/zh/docs/tasks/policy-enforcement/rate-limiting/#understanding-rate-limits
+
+先前的例子中你已经看到了 Mixer 是怎么通过匹配特定的条件对请求应用速率限制的。
+
+每个具名的 quota 实例比如 `requestcount` 会提供一组计数器。 这组计数器用所有 quota 维度的笛卡尔积来定义。如果最后一个`有效期`内的请求数超出 `maxAmount`, Mixer 返回一个 `RESOURCE_EXHAUSTED` 消息给 Envoy 代理，然后 Envoy 返回状态码 `HTTP 429` 给调用者。
+
+`memquota` 适配器使用一个亚秒级的滑动窗口来执行速率限制。
+
+`redisquota` 适配器可以配置使用 [`ROLLING_WINDOW` 或 `FIXED_WINDOW`](https://istio.io/latest/zh/docs/reference/config/policy-and-telemetry/adapters/redisquota/#Params-QuotaAlgorithm) 算法之一来执行速率限制。
+
+适配器配置内的 `maxAmount` 为所有关联到 quota 实例的计数器设置了默认限制。这个默认限制应用在其他优先规则没有被匹配到的时候。 `memquota/redisquota` 适配器会选择第一个与请求相匹配的优先规则。一个优先规则不能指明所有的 quota 维度。 在这个例子里，0.2 qps 的规则被选择到通过只匹配了四分之三的 quota 维度。
+
+如果您想要策略在给定的命名空间上执行而非整个 Istio 网格，可以把前面所有出现的 `istio-system` 替换为您想要的命名空间。
+
+限流算法： [三种限流算法.md](../../../其他/算法/三种限流算法.md) 
+
 ## 服务隔离
 
 即 Sidecar 资源的使用方式。
