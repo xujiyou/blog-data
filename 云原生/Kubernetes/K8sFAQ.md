@@ -172,17 +172,28 @@ search default.svc.cluster.local svc.cluster.local cluster.local test.bbdops.com
 options ndots:5
 ```
 
-这个配置文件中 `options ndots:5` 的意思是：如果查询的域名中逗号的数量小于 5 ，就会依次在域名后面带上 `default.svc.cluster.local`、`svc.cluster.local`、`cluster.local`、`test.bbdops.com` 来查询。
+这个配置文件中 `options ndots:5` 的意思是：如果查询的域名中点号的数量小于 5 ，就会依次在域名后面带上 `default.svc.cluster.local`、`svc.cluster.local`、`cluster.local`、`test.bbdops.com` 来查询。
 
 其中，`test.bbdops.com` 是宿主机的域名，可通过 `hostname -d` 查询宿主机的域名。
 
-但偏偏在内网的 DNS 解析中，为 `test.bbdops.com`配置了泛域名解析，所以查询一般的公网域名时，其中的逗号数量都小于 5，所以都被泛域名解析了。
+但偏偏在内网的 DNS 解析中，为 `test.bbdops.com`配置了泛域名解析，所以查询一般的公网域名时，其中的点号数量都小于 5，所以都被泛域名解析了。
 
 解决方案：
 
-方案一：去掉DNS服务器的泛域名解析
+1. 去掉DNS服务器的泛域名解析
 
-方案二：修改宿主机的 domain，然后重启宿主机。
+2. 修改宿主机的 domain，然后重启宿主机。
+
+3. Pod 中修改 DNS 配置，参考：https://kubernetes.io/zh/docs/concepts/services-networking/dns-pod-service/#pod-dns-config
+
+   ```yaml
+     dnsConfig:
+       options:
+         - name: ndots
+           value: "3"
+   ```
+
+   
 
 
 

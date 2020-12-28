@@ -28,7 +28,7 @@ group.id=group1
 
 创建两个消费者：
 
-```
+```bash
 $ kafka-console-consumer.sh --bootstrap-server drift-1:9092,drift-2:9092,drfit-3:9092 --topic my-test --consumer.config config/consumer.properties
 $ kafka-console-consumer.sh --bootstrap-server drift-1:9092,drift-2:9092,drfit-3:9092 --topic my-test --consumer.config config/consumer.properties
 ```

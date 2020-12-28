@@ -152,6 +152,8 @@ $ python -m SimpleHTTPServer 80
 
 在具体操作时，发现了两个错误。
 
+
+
 #### VIP ping 不通
 
 发现 VIP ping 不通，发送 VIP 的 Mac 地址：
