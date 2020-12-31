@@ -27,7 +27,7 @@ TCP 会精准记录哪些数据发送了，哪些数据被对方接收了，哪�
 
 ## TCP 报文头部格式
 
-![image-20201114150125631](/Users/jiyouxu/Documents/me/blog/resource/image-20201114150125631.png)
+![image-20201114150125631](../../../resource/image-20201114150125631.png)
 
 TCP 报文头部最小有 20 个字节，最大有 60个字节。
 
